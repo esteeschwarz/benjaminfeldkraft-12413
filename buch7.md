@@ -2,7 +2,7 @@
 # 12393.2
 ## buch7
 ## title:"first content"
-@vektor: 6.81
+@vektor: 5.79
 @begin
 # 12393.2
 nur input, mehr nicht. versuchen, die konstante aufrechtzuerhalten, vielleicht gelingt es uns diesmal.

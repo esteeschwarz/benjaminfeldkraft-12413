@@ -1,8 +1,6 @@
 run = "R -s -f 12042.chitest_essai.R"
-#run = "R -s -f 12371b12393.R"
 
 entrypoint = "12042.chitest_essai.R"
-#entrypoint = "12371b12393.R"
 
 onBoot = """
 [ -d "~/.config/R" ] || mkdir -p ~/.config/R

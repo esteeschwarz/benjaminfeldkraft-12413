@@ -3,7 +3,11 @@
 ##von hier der reihe nach:
 
 ##begin
-library(lme4)
+install.packages("lme4")
+#install.packages("lmerTest")
+#install.packages("stringi")
+
+#library(lme4)
 library(lmerTest)
 library(stringi)
 

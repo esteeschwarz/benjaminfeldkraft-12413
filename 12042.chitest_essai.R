@@ -13,17 +13,17 @@ a<-230
 b<-70
 c<-70
 d<-30
-a2<-100
-b2<-100
-c2<-100
-d2<-100
+#a2<-100
+#b2<-100
+#c2<-100
+#d2<-100
 pa<-0.25
 pb<-0.25
 pc<-0.25
 pd<-0.25
 e<-c(a,b,c,d)
 #em<-matrix(e)
-f<-c(a2,b2,c2,d2)
+#f<-c(a2,b2,c2,d2)
 f<-c(pa,pb,pc,pd)
 #fm<-matrix(f)
 #jm<-matrix(e,f)
@@ -34,19 +34,24 @@ f<-c(pa,pb,pc,pd)
 #m<-matrix(1:4,2)
 #n<-matrix(e,4)
 #o<-matrix(f,4)
-print("meindl uebung")
+print("12042.corpusLX")
+
+print("-------------------------")
+print("(1) meindl uebung")
 ch<-cbind(e)
 chisq.test(ch,p=f,correct=FALSE)
+print("-------------------------")
 
 #übung meindl vierfeldertest, daten rosemeyer
 sgen<-c(10,30)
 ofgen<-c(40,20)
 liv<-c("animate","inanimate")
-print("rosemeyer uebung")
+print("(2) rosemeyer uebung")
 chi2<-cbind(sgen,ofgen)
 f2<-c(0.4,0.6)
 chisq.test(chi2,p=f2,correct=FALSE)
 
+print("-------------------------")
 ##meindl uebung U test, set C
 cst1<-c(22, 22, 29, 30, 32, 30, 21, 29, 28, 29, 25)
 cst2<-c(21, 25, 20, 22, 20, 22, 20, 23, 25, 28, 23)
@@ -112,7 +117,7 @@ Ucpt<-c(u1,u2)
 usort<-sort(Ucpt)
 umin<-usort[1]
 
-print("U-test according to set")
+print("(3) U-test according to set")
 print("stichproben:")
 print(a1)
 print (a2)

@@ -1,3 +1,7 @@
+#12042.chitest_essai
+#20220123(21.08)
+#corpus LX
+
 fbj<-c(230,70,70,30)
 fej<-c(100,100,100,100)
 x<-fbj-fej

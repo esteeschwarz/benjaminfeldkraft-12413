@@ -83,11 +83,38 @@ print("-------------------------")
 #stichprobe meindl u-test übung
 cst1<-c(22, 22, 29, 30, 32, 30, 21, 29, 28, 29, 25)
 cst2<-c(21, 25, 20, 22, 20, 22, 20, 23, 25, 28, 23)
+n1<-length(cst1)
+n2<-length(cst2)
 
-
-mn3<-mean(c3)
 c3<-c(cst1,cst2)
-sqrt(sd(c3)/22)
+#sqrt(sd(c3)/(n1+n2))
+
+#cf. p. 182 "die quadrierten abweichungen
+#durch n-1 teilen
+sdc1sig<-sd(cst1)^2/(n1-1)
+#1.46 != 3.82 > not sigma dach
+mnc1<-mean(cst1)
+#27 == 27 > check
+mnc2<-mean(cst2)
+#22.636 == 22.636
+sdc1<-sd(cst1)
+#3.82 == 3.82 > is sigma dach
+sdc2<-sd(cst2)
+#2.54
+#t-test cf. p.183
+sqrt((n1-1)*sdc1+(n2-1)*sdc2)/(n1-1+(n2-1))*(sqrt(1/n1+1/n2))
+difmn1<-(n1-1)*sdc1^2
+#38.209 != 64.54 > mit ^2 geht
+difmn2<-(n2-1)*sdc2^2
+#25.4058 != 146  > mit ^2 geht
+#nochmal
+#standardfehler der differenz der mittelwerte
+stdifmn<-sqrt((difmn1+difmn2)/((n1-1)+(n2-1)))*sqrt((1/n1)+(1/n2))
+#1.383 == 1.383
+#t-wert
+tc1<-(mnc1-mnc2)/stdifmn
+dfc1<-(n1+n2-2)/2
+
 csd<-sd(c3)
 (sum(c3-mn3)^2)/21
 sd3<-(c3-mn3)^2

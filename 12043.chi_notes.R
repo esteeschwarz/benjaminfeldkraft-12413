@@ -104,7 +104,7 @@ sdc2<-sd(cst2)
 #t-test cf. p.183
 sqrt((n1-1)*sdc1+(n2-1)*sdc2)/(n1-1+(n2-1))*(sqrt(1/n1+1/n2))
 difmn1<-(n1-1)*sdc1^2
-#38.209 != 64.54 > mit ^2 geht
+#38.209 != 64.54 > mit ^2 geht, p.183 steht sigma ohne ^2
 difmn2<-(n2-1)*sdc2^2
 #25.4058 != 146  > mit ^2 geht
 #nochmal

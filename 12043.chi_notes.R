@@ -28,7 +28,7 @@ paa<-sum (pra[1:2])
 pbb<-sum (pra[3:4])
 p3<-c(paa,pbb)
 chi1<-cbind(e)
-chisq.test(chi1,p=pra,correct=FALSE)
+chisq.test(chi1,correct=FALSE)
 print("-------------------------")
 57.5+17.5+17.5+7.5
 #sqrt(11*12)
@@ -182,5 +182,20 @@ print(z1o<-(umin-((n1*n1))/2))
 print(z1u<-sqrt(((n1*n1)*(n1+n1+1))/12))
 print(z1<-z1o/z1u)
 
+###########
+#12045.
+#p.175
+z2u<-(umin-(n1*n2/2))/(sqrt(n1*n2*(n1+n2+1)/12))
+print(d5)
+#verbundene rangplätze finden
+for (l in pos1:length(d5)) {
+ # print(d5[l])
+pos1<-1
+  ifelse (d5[pos1]== d5[l],pos1+1,pos1)
+  tie1<-d5[l]
+  print (tie1)
+print (pos1)
 
+}
+for
 

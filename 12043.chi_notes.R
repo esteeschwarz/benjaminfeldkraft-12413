@@ -55,16 +55,16 @@ ofgen<-c(69,145) #spalte 2
 #pofgen<-28+32
 #liv<-c("animate","inanimate") # zeilen
 chi2<-cbind(sgen,ofgen)
-pr1<-round(prop.table(chi2)*100)
-psgen<-sum (pr1[1:2])
-pofgen<-sum (pr1[3:4])
+#pr1<-round(prop.table(chi2)*100)
+#psgen<-sum (pr1[1:2])
+#pofgen<-sum (pr1[3:4])
 
 #spaltensumme * zeilensumme/ n
 #22-18o 28-32u
 #wahrscheinlichkeiten summe 40/60
 # p (sgen, fgen)
 f2<-c(psgen,pofgen)
-chisq.test(chi2,p=f2,correct=FALSE)
+chisq.test(chi2,correct=FALSE)
 #ohne probability angabe -f2- auch möglich
 print("-------------------------")
 
@@ -154,15 +154,15 @@ d7<-sum(d5[16:30])
 
 #change values according to stichproben set C or D by add/remove comment (#)
 #chose set C (meindl daten)
-#a1<-cst1
-#a2<-cst2
-#r1<-c6
-#r2<-c7
+a1<-cst1
+a2<-cst2
+r1<-c6
+r2<-c7
 #choose set D (rosemeyer daten)
-a1<-d1
-a2<-d2
-r1<-d6
-r2<-d7
+#a1<-d1
+#a2<-d2
+#r1<-d6
+#r2<-d7
 #################
 n1<-length(a1)
 n2<-n1+1
@@ -181,5 +181,6 @@ print (a2)
 print(z1o<-(umin-((n1*n1))/2))
 print(z1u<-sqrt(((n1*n1)*(n1+n1+1))/12))
 print(z1<-z1o/z1u)
+
 
 

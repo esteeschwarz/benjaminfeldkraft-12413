@@ -237,8 +237,50 @@ for (x in pos:length(d6)){
 print (d6)
 print (d5)
 print(posd6-posd7)
-ties<-posd6-posd7
+d8<-posd6-posd7
+#fälle vorkommen ties: 3-1-4-5-6-4-2-1-1-1-1-1 cvd. 1*3,2*4,1*5,1*6,1*2,6*1
+(3^3-3)+6*(1^3-1)+2*(4^3-4)+(5^3-5)+(6^3-6)+(2^3-2)
+#480
 
+#####
+d9<-unique(d8)
+posd8<-d8
+posd9<-d8
+x<-1
+pos<-1
+for (x in pos:length(d9)){
+  # print (x)
+  #print(d6[x])
+  for (l in pos:length(d8)){
+    # print(l)
+    ifelse (d9[x]==d8[l],posd9[x]<-posd9[x]+1,posd9[x])
+    
+  }
+}
+print (d8)
+print (d9)
+print(posd9-posd8)
+d10<-posd9-posd8
+(3^3-3)+6*(1^3-1)+2*(4^3-4)+(5^3-5)+(6^3-6)+(2^3-2)
+for(l in 1:length(d10)){
+tie<-(d10[l]*(d9[l]^3-d9[l]))
+}
+tie<-(d10*(d9^3-d9))
+print (tie)
+sum(tie) ####YES!
+(3^3-3)
+6*(1^3-1)
+2*(4^3-4)
+(5^3-5)
+(6^3-6)
+  (2^3-2)
+
+print (d10)
+print(d8)
+d10[6]*(d9[6]^3-d9[6])
+
+
+3*(3*3*3-3)
 #schema
 #1. look at pos1
 #2. compare pos1 pos2

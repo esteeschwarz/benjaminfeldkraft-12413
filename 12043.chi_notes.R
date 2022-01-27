@@ -188,14 +188,61 @@ print(z1<-z1o/z1u)
 z2u<-(umin-(n1*n2/2))/(sqrt(n1*n2*(n1+n2+1)/12))
 print(d5)
 #verbundene rangplätze finden
-for (l in pos1:length(d5)) {
- # print(d5[l])
-pos1<-1
-  ifelse (d5[pos1]== d5[l],pos1+1,pos1)
-  tie1<-d5[l]
-  print (tie1)
-print (pos1)
+ for (l in pos1:length(d5)) {
+  # print(d5[l])
+ pos1<-1
+   ifelse (d5[pos1]== d5[l],pos1+1,pos1)
+   tie1<-d5[l]
+   print (tie1)
+  print (pos1)
 
+ }
+posd5<-d5
+pos<-1
+for (l in pos:length(d5)) {
+  posd5[l]<-1
 }
-for
+for (l in pos:length(d5)) {
+    ifelse (d5[pos]== d5[l],posd5[l]<-posd5[l]+1,posd5[l]<-0)
+#    ifelse (posd5[l]>=1,pos<-pos+1,pos<-0)
+  
+}
+countpos<-0
+for (x in pos:length(d5)){
+  ifelse (posd5[x]>=0,countpos<-countpos+1)
+}
+print (posd5)
+print(d5)
+d6<-unique(d5)
+posd6<-d6
+for (l in pos:length(d6)) {
+  posd6[l]<-1
+}
 
+#this counting vorkommen of rank
+d6<-unique(d5)
+posd6<-d6
+posd7<-d6
+x<-1
+pos<-1
+for (x in pos:length(d6)){
+ # print (x)
+  #print(d6[x])
+  for (l in pos:length(d5)){
+   # print(l)
+ ifelse (d6[x]==d5[l],posd6[x]<-posd6[x]+1,posd6[x])
+
+ }
+}
+print (d6)
+print (d5)
+print(posd6-posd7)
+ties<-posd6-posd7
+
+#schema
+#1. look at pos1
+#2. compare pos1 pos2
+#3. if pos2 == pos1 set counter pos1+1
+#   2.1  -create counter/pos, set to 1
+#4. set counter pos2<-0
+#   1.1 check if counter pos !=0

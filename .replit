@@ -1,0 +1,16 @@
+run = "R -s -f 12042.chitest_essai.R"
+
+entrypoint = "12042.chitest_essai.R"
+
+onBoot = """
+[ -d "~/.config/R" ] || mkdir -p ~/.config/R
+"""
+
+[env]
+R_LIBS_USER = "~/.config/R"
+
+[packager]
+language = "rlang"
+
+[packager.features]
+packageSearch = true

@@ -2,11 +2,13 @@
 #GR spanisch
 
 d5<-c(1,2,3,4,5,6,7,8,9,1,2,3,4,6,7,1,2,3,6,7,8,3)
+d12<-c(1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,2,3,4)
 #d5<-c("doof","schlau","dd","ee","ee","doof","blöd")
 d11<-d5[1:7]
 d6<-unique(d5)
-posd6<-
-posd7<-
+d6<-d12
+posd6<-length(d5)
+posd7<-length(d5)
 x<-1
 pos<-1
 
@@ -15,7 +17,7 @@ for (x in pos:length(d6)){
 #   print (x)
  # print(d6[x])
   for (l in pos:length(d5)){
-     print(l)
+   #  print(l)
     ifelse (d6[x]==d5[l],posd6[x]<-posd6[x]+1,posd6[x])
     
   }

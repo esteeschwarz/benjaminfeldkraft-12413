@@ -22,6 +22,9 @@ print (sim2)
 sim<-0
 }
 print(sim2)
+
+###############
+##works halfway
 i<-0
 b<-1
 b1<-c(1:3)
@@ -34,6 +37,7 @@ print (b1)
 }
 }
 b3(4)
+################
   #b6<-b3(1:2)
 b4<-function(x) append(b3(x),b2,after=x)
 f1<-function(f) c(b1,b3(b))

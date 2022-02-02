@@ -23,18 +23,31 @@ sim<-0
 }
 print(sim2)
 i<-0
-b<-
+b<-1
 b1<-c(1:3)
 b2<-c("aa","bb")
-b3<-function(b) append(b1,b2,b)
-b6<-b3(1:2)
-b4<-append(b3(b),b2)
-print(b3)
-print(b4)
-print (b6)
-for (i in 1:3){
+b5<-c(b1,b2)
+b3<-function(b) {
+for (k in 1:b){
+print (b1)
+  
+}
+}
+b3(4)
+  #b6<-b3(1:2)
+b4<-function(x) append(b3(x),b2,after=x)
+f1<-function(f) c(b1,b3(b))
+f1(2)
+print(b1)
+print(b2)
+x1<-2
+print(b3(x1))
+x2<-2
+print(b4(x2))
+#print (b6)
+for (i in 1:5){
 #  b3(b)
   print(i)
-  b5<-b3(i)
-  print(b5)
+  b6<-b4(i)
+  print(b6)
 }

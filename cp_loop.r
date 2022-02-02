@@ -22,3 +22,19 @@ print (sim2)
 sim<-0
 }
 print(sim2)
+i<-0
+b<-
+b1<-c(1:3)
+b2<-c("aa","bb")
+b3<-function(b) append(b1,b2,b)
+b6<-b3(1:2)
+b4<-append(b3(b),b2)
+print(b3)
+print(b4)
+print (b6)
+for (i in 1:3){
+#  b3(b)
+  print(i)
+  b5<-b3(i)
+  print(b5)
+}

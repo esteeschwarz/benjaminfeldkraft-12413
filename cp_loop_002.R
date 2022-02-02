@@ -65,7 +65,7 @@ for(k in in1){                             ###########loop 1
       print(k)
       ar1<-c(1:k)
   print (ar1)
-  ifelse(a1[k]==a2[k],pos1<-k,pos1<-0)
+##noch  ifelse(a1[k]==a2[k],pos1<-k,pos1<-0)
   
          }
     k<-1

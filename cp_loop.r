@@ -1,3 +1,5 @@
+#12055.loop essai
+#try to compare two string arrays and put out siblings within
 a1<-c("aa","bb","cc","dd","ee","kk","mm")
 a2<-c("ff","gg","hh","aa","bb","kk","ll")
 print(a1)

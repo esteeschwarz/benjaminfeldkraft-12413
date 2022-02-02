@@ -28,20 +28,33 @@ print(sim2)
 ###############
 ##works halfway
 i<-0
-b<-1
+b<-5
 b1<-c(1:3)
 b2<-c("aa","bb")
 b5<-c(b1,b2)
+
 b3<-function(b) {
 for (k in 1:b){
 print (b1)
-  
+b9<-append(b1,b5,after=6)
+print(b9)  
+
 }
-}
+  }
+
+
+
+
 b3(4)
 ################
-  #b6<-b3(1:2)
-b4<-function(x) append(b3(x),b2,after=x)
+c0<-1:8
+lc0<-length(c0)
+#append after end
+append(c0, 1:4, after=lc0)
+  
+
+
+#b6<-b3(1:2)
 f1<-function(f) c(b1,b3(b))
 f1(2)
 print(b1)

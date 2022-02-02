@@ -71,8 +71,9 @@ for(k in in1){                             ###########loop 1
     k<-1
     return (ar1)
   }  
+  #creates new array get1 with values in call
   get1<-  out3(1:20)
-    
+######### til here
     
   #with single run on pos 6 == 1
 print(y)

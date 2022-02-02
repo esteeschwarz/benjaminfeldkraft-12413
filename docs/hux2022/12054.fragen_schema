@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified"
+    vc:minVersion="1.0" vc:maxVersion="1.1">
+
+    <xs:group name="fragen">
+        <xs:sequence>
+            <xs:element name="item"/>
+            <xs:element name="target"/>
+            <xs:element name="kontext"/>
+            <xs:element name="frage"/>
+            <xs:element name="A1"/>
+            <xs:element name="A2"/>
+            <xs:element name="A3"/>
+            <xs:element name="A4"/>
+            <xs:element name="A5"/>
+            <xs:element name="A6"/>
+        </xs:sequence>
+    </xs:group>
+</xs:schema>

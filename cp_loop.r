@@ -11,6 +11,7 @@ simv<-c()
 sim1<-a1[k]
 aempty<-c(1:la)
 aempty<-aempty*0
+print (aempty)
 #sim2<-c(append(simv,sim1))
 #sim3<-function(k) {print("k") 
 #print(a1[k])}
@@ -19,13 +20,22 @@ pos1<-0
 for(k in 1:la){
 	ifelse(a1[k]==a2[k],pos1<-k,pos1<-0)
 	#sim1<-c(a1[sim])
-print (pos1)
-print("siblins")
-print (a1[pos1])
-#sim2<-append(simv,sim1,after=k)
+z<-function(x,posz){
+  ifelse(x!=0,y<-1,y<-0)
+  aempty[k]<-y
+  print(aempty)
+  
+  }
+z(pos1,k)
+#  print (pos1)
+#print("siblins")
+#print (a1[pos1])
+#sim2<-append(aempty,pos1,after=k)
+#print(aempty)
 pos1<-0
 }
 print(sim2)
+print(aempty[k])
 
 ###############
 ##works halfway

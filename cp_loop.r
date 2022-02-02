@@ -17,25 +17,33 @@ print (aempty)
 #print(a1[k])}
 #print(sim2)
 pos1<-0
+#loop over length of array
 for(k in 1:la){
-	ifelse(a1[k]==a2[k],pos1<-k,pos1<-0)
+  #if string(a1)==string(a2) markiere position mit 1
+	#ifelse(a1[k]==a2[k],pos1<-1,pos1<-0)
 	#sim1<-c(a1[sim])
-z<-function(x,posz){
-  ifelse(x!=0,y<-1,y<-0)
-  aempty[k]<-y
+  #function: if marker!=0, 
+  z(pos1,k)
+  
+    z<-function(x,posz){
+    ifelse(a1[k]==a2[k],pos1<-1,pos1<-0)
+    
+    postrue<-aempty[posz]<-1
+    posfalse<-aempty[posz]<-0
+    ifelse(x!=0,postrue,posfalse)
+  
+#  aempty[posz]<-y
   print(aempty)
   
   }
-z(pos1,k)
-#  print (pos1)
-#print("siblins")
-#print (a1[pos1])
-#sim2<-append(aempty,pos1,after=k)
-#print(aempty)
+  #call z with position, marker of position
 pos1<-0
 }
+
+
+
 print(sim2)
-print(aempty[k])
+print(aempty[pos1])
 
 ###############
 ##works halfway

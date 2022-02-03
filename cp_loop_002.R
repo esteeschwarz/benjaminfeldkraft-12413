@@ -68,7 +68,10 @@
   #get1<-  out3(1:7,a1,a2)
 
   la<-(length(a1)+length(a2))/2
- # print(la)
+ #print(la)
+  #   create empty array, in function call übergeben
+  aempty<-c(1:la)
+  aempty<-aempty*2
   
   out3<-function(in2,a1,a2)
   {
@@ -87,10 +90,6 @@
   pos1<-0
   pos0<-0
       la<-(length(a1)+length(a2))/2
-      #create empty array, in function call übergeben
-    #  aempty<-c(1:la)
-     # aempty<-aempty*2
-      #print (aempty)
       print("-------------------")
       print("runs to go:")
       

@@ -71,12 +71,14 @@ out2<- function(in1){
   
   out3<-function(in2,a1,a2)
   {
-  out1<-  output<-function(t)
+    
+    output<-function(t,aempty)
     {
       print("match")
       print(t)
-      out1<-"found match on"
+    #  out1<-"found match on"
       print(a1[k])
+      aempty[k]<-1
     }
   match<-function(t,a1,a2){
     return(c(a1[t],a2[t]))
@@ -84,7 +86,12 @@ out2<- function(in1){
   pos1<-0
   pos0<-0
       la<-(length(a1)+length(a2))/2
-    print(la)    
+      #create empty array, in function call übergeben
+      aempty<-c(1:la)
+      aempty<-aempty*2
+      print (aempty)
+      
+      print(la)    
     for (k in in2){
       print(k)
       ar1<-c(1:k)
@@ -96,7 +103,7 @@ print(a2[k])
   ifelse(a1[k]==a2[k],pos1<-1,pos1<-0)
 
 ifelse (pos1==1,print(a1[k]),print("nomatch"))
-ifelse (pos1==1,output(pos1),print("no output"))
+ifelse (pos1==1,output(pos1,aempty),print("no output"))
 #ifelse (pos1==1,match(k,a1,a2),print("no return"))
 
 ####### 12056.1: works this way ################
@@ -117,21 +124,26 @@ ifelse (pos1==1,match(t,a1,a2),print("no return"))
   
   
   #creates new array get1 with values in call
-  get1<-  out3(3,a1,a2) #range not important, will be defined within function
+  get1<-  out3(2,a1,a2) #range not important, will be defined within function
 ######### til here
 ########################
   ########12056############
   #there is no variable with match in global environment cvd its not callable
   #now get the match out function call
-  
+  #works on specific positions
   #print(get1)
   #now with comparing specific positions
-  
-  
-  
-      
-  #with single run on pos 6 == 1
-print(y)
+  #call function within loop of array length
+  #with single run on pos 6 == match
+  get1<-  out3(6,a1,a2)
+  #return "kk"
+  #loop 2
+  for (k in 1:7){
+  get2<-  out3(k,a1,a2)
+  getout<-aempty
+  aempty[k]<-get2
+    }
+print(aempty)  
 #if function == true
 }
 #print(y)

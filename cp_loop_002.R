@@ -35,7 +35,10 @@ print (aempty)
 ##
 #pos1<-0
 out2<- function(in1){
-for(k in in1){                             ###########loop 1
+
+  
+  
+  for(k in in1){                             ###########loop 1
   ##if loop position a1==position a2
   ##let positionmarker <-1, else marker <-0
  ifelse(a1[k]==a2[k],pos1<-k,pos1<-0)
@@ -55,34 +58,63 @@ for(k in in1){                             ###########loop 1
   
  #z(pos1,k)
 }
-  out2(1)
-  
+  #out2(1)
+  #########12054####################
   ############ this routine works calling loop defined in function call
-  out3<-function(in2)
-  {
+  a1<-c("aa","bb","cc","dd","ee","kk","mm")
+  a2<-c("ff","bb","hh","aa","bb","kk","ll")
   
-    for (k in in2){
+  get1<-  out3(1:7,a1,a2)
+  ##
+  la<-(length(a1)+length(a2))/2
+  print(la)
+  
+  out3<-function(in2,a1,a2)
+  {
+  pos1<-0
+  pos0<-0
+      la<-(length(a1)+length(a2))/2
+    print(la)    
+    for (k in 1:la){
       print(k)
       ar1<-c(1:k)
   print (ar1)
-##noch  ifelse(a1[k]==a2[k],pos1<-k,pos1<-0)
-  
+  print(a1)
+  print(a2)
+print (a1[k])
+print(a2[k])
+  ifelse(a1[k]==a2[k],pos1<-1,pos1<-0)
+#output<-function(t)
+#{
+#  print(a1[t])
+#}
+
+ifelse (pos1==1,print(a1[k]),print("nomatch"))
+####### 12056.1: works this way ################
          }
     k<-1
     return (ar1)
   }  
   #creates new array get1 with values in call
-  get1<-  out3(1:20)
+  get1<-  out3(1:7,a1,a2) #range not important, will be defined within function
 ######### til here
-    
+########################
+  ########12056############
+  
+  
+  
+  
+  
+  
+      
   #with single run on pos 6 == 1
-print(y)
+#print(y)
 #if function == true
 }
-print(y)
-print(k)
-chkposit<-append(aempty,amod,after=0)
-ifelse (y==1,chkposit,0)
+#print(y)
+#print(k)
+#chkposit<-append(aempty,amod,after=0)
+#ifelse (y==1,chkposit,0)
 #print(y[k])
 #no access to amod within function
 #print(z(amod))
@@ -95,8 +127,8 @@ print(aempty)
 
 
 
-print(sim2)
-print(aempty[k])
+#print(sim2)
+#print(aempty[k])
 
 ###############
 ##works halfway

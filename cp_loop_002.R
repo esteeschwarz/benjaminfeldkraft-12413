@@ -64,7 +64,7 @@
   a1<-c("aa","bb","cc","dd","ee","kk","mm")
   a2<-c("ff","bb","hh","aa","bb","kk","ll")
   
-  get1<-  out3(1:7,a1,a2)
+  #get1<-  out3(1:7,a1,a2)
 
   la<-(length(a1)+length(a2))/2
  # print(la)
@@ -90,6 +90,7 @@
     #  aempty<-c(1:la)
      # aempty<-aempty*2
       #print (aempty)
+      print("-------------------")
       print("runs to go:")
       
     print(la-k)    
@@ -128,7 +129,7 @@ ifelse (pos1==1,match(t,a1,a2),0)
   
   
   #creates new array get1 with values in call
-  get1<-  out3(2,a1,a2) #range not important, will be defined within function
+ # get1<-  out3(2,a1,a2) #range not important, will be defined within function
 ######### til here
 ########################
   ########12056############
@@ -139,7 +140,7 @@ ifelse (pos1==1,match(t,a1,a2),0)
   #now with comparing specific positions
   #call function within loop of array length
   #with single run on pos 6 == match
-  get1<-  out3(6,a1,a2)
+ # get1<-  out3(6,a1,a2)
   #return "kk"
   #loop 2
   for (k in 1:la){

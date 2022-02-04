@@ -131,8 +131,13 @@ print(xml_text(children1[[28]]))
 print(xml_text(children1))
 newscheme1[[27]]<-"weil ich keine ahnung habe"
 print(xml_text(newscheme1[28]))
-write_xml(scheme,"scheme_essai.xml")
+
+
+
+write_xml(sroot,"scheme_essai.xml")
 #writes, but no changes
+
+
 xml_child(sroot$doc)
 
 sroot<-scheme
@@ -142,11 +147,20 @@ pos<-"dummy" #text within tags
 #print(xml_chsroot[8])
 #children 3, replace works but content shit
 #print(xml_children(xml_children(xml_children(xml_children(sroot))))[19[1]])
-xml_replace(xml_children(xml_children(xml_children(xml_children(sroot))))[19], val, pos)
+xml_replace(xml_children(xml_children(xml_children(xml_children(sroot))))[29], val, pos)
 #i cant get replacement without / at the end of string... try vector
 #works. with first tag, then text within tag
+print(xml_children(xml_children(xml_children(xml_children(sroot))))[33])
 print(xml_children(xml_children(xml_children(xml_children(sroot)))))
+print(xml_children(xml_children(xml_children(sroot))))
 
+pos1<-xml_children(xml_children(xml_children(sroot)))
+#vector geht bis 28
+#now try append after usage: set, value, position
+xml_add_parent(xml_children(xml_children(xml_children(xml_children(sroot)))), val, .where="after")
+xml_add_child(xml_children(xml_children(sroot)), pos1, .where="after")
+ xml_add_sibling(xml_children(xml_children(xml_children(sroot))), pos1, .where="after")
+ pos1[62]
 print(xml_children(xml_children(xml_children(xml_children(sroot)))))
 print(xml_children(sroot)[2])
 
@@ -156,35 +170,6 @@ print(sroot$doc)
 xml_replace(newscheme1[28],.value="BOUNCE")
 
 ############################################# from here earlier state #######################
-
-
-x <- read_xml('
- <root>
-   <doc1 xmlns = "http://foo.com"><baz /></doc1>
-   <doc2 xmlns = "http://bar.com"><baz /></doc2>
- </root>
-')
-xml_ns(x)
-
-# When there are default namespaces, it's a good idea to rename
-# them to give informative names:
-ns <- xml_ns_rename(xml_ns(x), d1 = "foo", d2 = "bar")
-ns
-
-# Now we can pass ns to other xml function to use fully qualified names
-baz <- xml_children(xml_children(x))
-xml_name(baz)
-xml_name(baz, ns)
-
-xml_find_all(x, "//baz")
-xml_find_all(x, "//foo:baz", ns)
-
-str(as_list(x))
-str(as_list(x, ns))
-
-
-
-
 
 
 

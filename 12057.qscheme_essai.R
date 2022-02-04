@@ -47,7 +47,8 @@ a2<-xml_text(scheme,2)
 a2<-xml_text(scheme,2)
 #modify
 #a1[7]<-"testing" #works
-##now try append rows, first compare csv data with xml fields
+#4 now try append rows
+#4.1  first compare csv data with xml fields
 item01<-items$target[1]
 print(item01)
 #try change content
@@ -65,6 +66,8 @@ print(a0[7])
 ### > (a0[1+(1*2)*7-8])
 print(a0[1+(1*2)*7-8])
 
+##4.2 append in a0 itemnr, question + kontext
+##4.3 append in a1 questions * 2
 
 
 ############################################# from here earlier state #######################

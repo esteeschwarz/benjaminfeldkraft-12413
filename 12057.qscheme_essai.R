@@ -32,6 +32,7 @@ xml_text(scheme)
 children1<-(xml_children(xml_children(xml_children(xml_contents(scheme)))))
 children2<-(xml_children(xml_children(xml_children(xml_children(xml_contents(scheme))))))
 children0<-(xml_children(xml_children(xml_contents(scheme))))
+children3<-(xml_children(xml_contents(scheme)))
 
 #a1_cases<-(xml_text(xml_children(xml_children(xml_children(xml_children(xml_contents(scheme)))))))
 #a1<-(xml_text(xml_children(xml_children(xml_children(xml_contents(scheme))))))
@@ -42,9 +43,10 @@ print (a0)
 print (a1)
 
 
+items3<-a3<-(xml_text(children3))
 
 a2<-xml_text(scheme,2)
-a2<-xml_text(scheme,2)
+#a2<-xml_text(children0[[3]])
 #modify
 #a1[7]<-"testing" #works
 #4 now try append rows
@@ -69,6 +71,67 @@ print(a0[1+(1*2)*7-8])
 ##4.2 append in a0 itemnr, question + kontext
 ##4.3 append in a1 questions * 2
 
+print(a0)
+print(a1)
+###4.2.1
+#create new array with modifiying values
+#get values of csv
+newitem<-c()
+itx<-newitemwitch<-3
+newitem[1]<-items$item[itx]
+newitem[2]<-"select"
+newitem[3]<-items$kontext[itx]
+newitem[4]<-"Weisen Sie der Frage die richtige Antwort zu."
+newitem[5]<-"right"
+newitem[6]<-items$frage[itx]
+newitem[7]<-"default"
+
+newopt<-c()
+newopt[1]<-itx
+newopt[2]<-itx
+newopt[3]<-items$A1.[itx]
+newopt[4]<-11
+newopt[5]<-items$A2[itx]
+newopt[6]<-22
+newopt[7]<-items$A3[itx]
+newopt[8]<-33
+newopt[9]<-items$A4[itx]
+newopt[10]<-44
+newopt[11]<-items$A5[itx]
+newopt[12]<-55
+newopt[13]<-items$A6[itx]
+newopt[14]<-66
+
+#newitem[8]<-newopt[4]
+
+print(newscheme_top[38])
+
+print(newitem)
+print(newopt)
+#####
+itemx<-c()
+itemx[1]<-"item"
+itemx[2]<-itx
+print (itemx)
+
+##4.2.2 append newitem
+newscheme0<-a0
+lscheme0<-length(a0)
+newscheme_top<-append (newscheme0,newitem,after=lscheme0)
+print(newscheme_top)
+newscheme1<-a1
+lscheme1<-length(a1)
+newscheme_opt<- append (newscheme1,newopt,after=lscheme1)
+print(newscheme_opt)
+
+newscheme_0<-children0
+newscheme1<-children1
+#get positions within xml
+print(xml_text(children1[[28]]))
+print(xml_text(children1))
+newscheme1[[1]]<-
+xml_text(newscheme1)
+write.xml
 
 ############################################# from here earlier state #######################
 #qscheme <- read.csv("qscheme.csv", sep=";")

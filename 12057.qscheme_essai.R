@@ -13,14 +13,15 @@
 #xmlschema
 library(Hmisc)
 #clowess()
-download_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml","template.xml")
+#download_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml","template.xml")
 #getRS()
 #getRS(guser="esteeschwarz",grepo="essais",gdir="main")
 #getRs(file=NULL, guser='harrelfe', grepo='rscripts', gdir='raw/master',
  #     dir=NULL, browse=c('local', 'browser'), cats=FALSE,
   #    put=c('rstudio', 'source'))
-#download.file("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/master/hux2022/proverbs/Kopie%20von%20package_fragen_2022-02-01_mod.xlsx","tempmod.xlsx")
-scheme<-read_xml("template.xml")
+#download.file("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv","items.csv")
+scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
+items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
 xml_text(scheme)
 #library(tidyverse)
 #print(a1<-xml_text(xml_node(scheme,8)))
@@ -45,8 +46,24 @@ print (a1)
 a2<-xml_text(scheme,2)
 a2<-xml_text(scheme,2)
 #modify
-a1[7]<-"testing" #works
-
+#a1[7]<-"testing" #works
+##now try append rows, first compare csv data with xml fields
+item01<-items$target[1]
+print(item01)
+#try change content
+item01<-items$frage[1]
+item_mod<-"warum gerad hunde?"
+items$frage[1]<-item_mod
+item01<-items$frage[1]
+print(item01)
+#display question in xml
+print(a0[7])
+#regular: 1+15=item02 start, 14positions per item, frage auf pos 6
+#1+15 = 1+ 2*6 + y
+#001: 1+1*14-  (6=14-x)
+#formula to adress question: 1(first row) + itemnr*2*7-8
+### > (a0[1+(1*2)*7-8])
+print(a0[1+(1*2)*7-8])
 
 
 

@@ -11,7 +11,13 @@
 #3.2 
 #import data
 #xmlschema
+<<<<<<< HEAD
 library(xml2)
+=======
+#install.packages("xml2")
+library(xml2)
+#library(Hmisc)
+>>>>>>> b7a69c006458cb5851efb5d13599180794b81eb0
 #clowess()
 #download_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml","template.xml")
 #getRS()
@@ -104,7 +110,7 @@ newopt[14]<-66
 
 #newitem[8]<-newopt[4]
 
-print(newscheme_top[38])
+#print(newscheme_top[38])
 
 print(newitem)
 print(newopt)
@@ -117,8 +123,8 @@ print (itemx)
 ##4.2.2 append newitem
 newscheme0<-a0
 lscheme0<-length(a0)
-newscheme_top<-append (newscheme0,newitem,after=lscheme0)
-print(newscheme_top)
+#newscheme_top<-append (newscheme0,newitem,after=lscheme0)
+#print(newscheme_top)
 newscheme1<-a1
 lscheme1<-length(a1)
 newscheme_opt<- append (newscheme1,newopt,after=lscheme1)
@@ -129,6 +135,7 @@ newscheme1<-children1
 #get positions within xml
 print(xml_text(children1[[28]]))
 print(xml_text(children1))
+<<<<<<< HEAD
 newscheme1[[27]]<-"weil ich keine ahnung habe"
 print(xml_text(newscheme1[28]))
 
@@ -147,18 +154,33 @@ print (pos0s)
 print (pos00)
 posm<-xml_children(xml_children(sroot))
 print(posm)
+=======
+#newscheme1[[27]]<-"weil ich keine ahnung habe"
+#print(xml_text(newscheme1[28]))
+
+sroot<-scheme
+
+####write_xml(sroot,"scheme_essai.xml")
+#writes, but no changes
+
+
+#xml_child(sroot$doc)
+
+sroot<-scheme
+>>>>>>> b7a69c006458cb5851efb5d13599180794b81eb0
 #val<-"text>because"
 val<-"text" #tag
 pos<-"dummy" #text within tags
 #print(xml_chsroot[8])
 #children 3, replace works but content shit
 #print(xml_children(xml_children(xml_children(xml_children(sroot))))[19[1]])
-xml_replace(xml_children(xml_children(xml_children(xml_children(sroot))))[29], val, pos)
+###xml_replace(xml_children(xml_children(xml_children(xml_children(sroot))))[29], val, pos)
 #i cant get replacement without / at the end of string... try vector
 #works. with first tag, then text within tag
-print(xml_children(xml_children(xml_children(xml_children(sroot))))[33])
+print(xml_children(xml_children(xml_children(xml_children(sroot))))[28])
 print(xml_children(xml_children(xml_children(xml_children(sroot)))))
 print(xml_children(xml_children(xml_children(sroot))))
+<<<<<<< HEAD
 
 #think to replicate the whole from root?
 
@@ -182,6 +204,31 @@ print(xml_attr(sroot,"character",ns="section"))
 print(sroot$doc)
 
 xml_replace(newscheme1[28],.value="BOUNCE")
+=======
+pos1<-xml_children(sroot)
+pos2<-xml_children(xml_children(sroot))
+pos3<-xml_children(xml_children(xml_children(sroot)))
+#vector geht bis 28
+#now try append after usage: set, value, position
+####xml_add_parent(xml_children(xml_children(xml_children(xml_children(sroot)))), val, .where="after")
+###xml_add_child(xml_children(xml_children(sroot)), pos1, .where="after")
+print("append essai")
+print(pos2)
+print(xml_text(pos2))
+#pos0
+ xml_add_child(pos3, pos2[4], .where="after")
+# pos1[62]
+#print(xml_children(xml_children(xml_children(xml_children(sroot)))))
+#print(xml_children(sroot)[2])
+print("after append")
+print(pos2)
+#print(pos2[6])
+print(xml_text(pos2))
+#print(xml_attr(sroot,"character",ns="section"))
+#print(sroot$doc)
+
+###xml_replace(newscheme1[28],.value="BOUNCE")
+>>>>>>> b7a69c006458cb5851efb5d13599180794b81eb0
 
 ############################################# from here earlier state #######################
 

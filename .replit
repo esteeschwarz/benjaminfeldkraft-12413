@@ -1,7 +1,8 @@
 #12056.vs
-run = "R -s -f cp_loop_002.R"
 
-entrypoint = "cp_loop_002.R"
+run = "R -s -f 12057.qscheme_essai.R"
+
+entrypoint = "12057.qscheme_essai.R"
 
 onBoot = """
 [ -d "~/.config/R" ] || mkdir -p ~/.config/R

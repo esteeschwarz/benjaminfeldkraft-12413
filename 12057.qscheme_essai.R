@@ -147,8 +147,8 @@ sroot<-scheme
 pos1<-xml_children(sroot)
 pos2<-xml_children(xml_children(sroot))
 pos3<-xml_children(xml_children(xml_children(sroot)))
-
-
+pos4<-xml_children(xml_children(xml_children(xml_children(sroot))))
+print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sroot))))))
 
 #val<-"text>because"
 val<-"text" #tag
@@ -174,7 +174,7 @@ print(pos1)
 print(pos2)
 print(pos3) #pos 3 (child of question containing items) musz verdoppelt werden
 #xml_add
-
+xml_parents(pos4)
 #pos0
  #xml_add_child(pos3, pos2[4], .where="after") #this hangs up
 # pos1[62]
@@ -189,10 +189,14 @@ print(pos1[8])
 
 print(qpath0<-xml_find_all(sroot,"/*/*/*")) #question node
 print(qpath<-xml_find_all(sroot,"/*/*/*/*")) #question node
-
+print(par4<-xml_parents(pos4)) #these to duplicate childs, now 18, each item 9 rows
+print(item002<-(par4))
 #n<-print(nodes(qpath))
- xml_add_parent(qpath,qpath) # parent qpath0,qpath / child,0,p,after / ch,0,p,0
- #ch,0,p,0 > fügt <item><text>...(qpath[10]11... direkt nach dem ersten tag ein)
+xml_contents(pos4)
+ xml_add_parent(par4,item002) # parent qpath0,qpath / child,0,p,after / ch,0,p,0
+print(par4)[item]
+ 
+  #ch,0,p,0 > fügt <item><text>...(qpath[10]11... direkt nach dem ersten tag ein)
  # s,0,p,after: hat 28 pos zu 0 und p hinzugefügt und 
 #first child in p is ab 9 / p,p,after: no warnung, hat qpath verdoppelt: könnte klappen
 #c,0,0,after: xml_add_child(qpath0,qpath0, .where=0: 5 in p dazugekommen nach attr

@@ -141,8 +141,15 @@ sroot<-scheme
 
 
 #xml_child(sroot$doc)
-
+#########################################################
+scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
 sroot<-scheme
+pos1<-xml_children(sroot)
+pos2<-xml_children(xml_children(sroot))
+pos3<-xml_children(xml_children(xml_children(sroot)))
+
+
+
 #val<-"text>because"
 val<-"text" #tag
 pos<-"dummy" #text within tags
@@ -155,9 +162,6 @@ pos<-"dummy" #text within tags
 print(xml_children(xml_children(xml_children(xml_children(sroot))))[28])
 print(xml_children(xml_children(xml_children(xml_children(sroot)))))
 print(xml_children(xml_children(xml_children(sroot))))
-pos1<-xml_children(sroot)
-pos2<-xml_children(xml_children(sroot))
-pos3<-xml_children(xml_children(xml_children(sroot)))
 #vector geht bis 28
 #now try append after usage: set, value, position
 ####xml_add_parent(xml_children(xml_children(xml_children(xml_children(sroot)))), val, .where="after")
@@ -165,15 +169,49 @@ pos3<-xml_children(xml_children(xml_children(sroot)))
 print("append essai")
 print(pos2)
 print(xml_text(pos2))
+#print(pos0)
+print(pos1)
+print(pos2)
+print(pos3) #pos 3 (child of question containing items) musz verdoppelt werden
+#xml_add
+
 #pos0
- xml_add_child(pos3, pos2[4], .where="after")
+ #xml_add_child(pos3, pos2[4], .where="after") #this hangs up
 # pos1[62]
 #print(xml_children(xml_children(xml_children(xml_children(sroot)))))
 #print(xml_children(sroot)[2])
 print("after append")
+print(pos2[5])
+print(pos1)
 print(pos2)
-#print(pos2[6])
+print(pos1[8])
+########################################
+
+print(qpath0<-xml_find_all(sroot,"/*/*/*")) #question node
+print(qpath<-xml_find_all(sroot,"/*/*/*/*")) #question node
+
+#n<-print(nodes(qpath))
+ xml_add_parent(qpath,qpath) # parent qpath0,qpath / child,0,p,after / ch,0,p,0
+ #ch,0,p,0 > fügt <item><text>...(qpath[10]11... direkt nach dem ersten tag ein)
+ # s,0,p,after: hat 28 pos zu 0 und p hinzugefügt und 
+#first child in p is ab 9 / p,p,after: no warnung, hat qpath verdoppelt: könnte klappen
+#c,0,0,after: xml_add_child(qpath0,qpath0, .where=0: 5 in p dazugekommen nach attr
+#xml_add_child(qpath0,qpath, .where=length(xml_children(qpath0)))
+ #xml_add_parent(qpath0,qpath, .where=length(xml_children(qpath0)))
+#xml_add_parent(qpath,qpath) nothing happens
+ #print(pos2[6])
+print(xml_text(pos3))
+print(xml_text(pos2[5]))
+
 print(xml_text(pos2))
+
+print(xml_attrs(pos2)[5])  
+
+frset5<-(xml_attrs(pos2)[5])
+print(frset5)
+
+
+
 #print(xml_attr(sroot,"character",ns="section"))
 #print(sroot$doc)
 

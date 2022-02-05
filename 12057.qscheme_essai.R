@@ -11,7 +11,7 @@
 #3.2 
 #import data
 #xmlschema
-library(Hmisc)
+library(xml2)
 #clowess()
 #download_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml","template.xml")
 #getRS()
@@ -132,15 +132,21 @@ print(xml_text(children1))
 newscheme1[[27]]<-"weil ich keine ahnung habe"
 print(xml_text(newscheme1[28]))
 
-
-
 write_xml(sroot,"scheme_essai.xml")
 #writes, but no changes
 
 
 xml_child(sroot$doc)
+pos0<-
 
-sroot<-scheme
+  
+  sroot<-scheme
+pos0s<-xml_children(xml_children(sroot))
+pos00<-xml_children(sroot)
+print (pos0s)  
+print (pos00)
+posm<-xml_children(xml_children(sroot))
+print(posm)
 #val<-"text>because"
 val<-"text" #tag
 pos<-"dummy" #text within tags
@@ -154,11 +160,19 @@ print(xml_children(xml_children(xml_children(xml_children(sroot))))[33])
 print(xml_children(xml_children(xml_children(xml_children(sroot)))))
 print(xml_children(xml_children(xml_children(sroot))))
 
+#think to replicate the whole from root?
+
+
 pos1<-xml_children(xml_children(xml_children(sroot)))
+print(pos1)
 #vector geht bis 28
 #now try append after usage: set, value, position
 xml_add_parent(xml_children(xml_children(xml_children(xml_children(sroot)))), val, .where="after")
-xml_add_child(xml_children(xml_children(sroot)), pos1, .where="after")
+
+
+xml_add_sibling(pos00, pos0s)
+print(pos0s[6])
+
  xml_add_sibling(xml_children(xml_children(xml_children(sroot))), pos1, .where="after")
  pos1[62]
 print(xml_children(xml_children(xml_children(xml_children(sroot)))))

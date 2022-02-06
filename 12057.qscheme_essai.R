@@ -31,104 +31,54 @@ xml_text(scheme)
 #xml_name(scheme)
 #xml_attr.xml_node(scheme,lead)
 #xml_attrs(scheme)
-children1<-(xml_children(xml_children(xml_children(xml_contents(scheme)))))
-children2<-(xml_children(xml_children(xml_children(xml_children(xml_contents(scheme))))))
-children0<-(xml_children(xml_children(xml_contents(scheme))))
-children3<-(xml_children(xml_contents(scheme)))
+#children1<-(xml_children(xml_children(xml_children(xml_contents(scheme)))))
+#children2<-(xml_children(xml_children(xml_children(xml_children(xml_contents(scheme))))))
+#children0<-(xml_children(xml_children(xml_contents(scheme))))
+#children3<-(xml_children(xml_contents(scheme)))
 
 #a1_cases<-(xml_text(xml_children(xml_children(xml_children(xml_children(xml_contents(scheme)))))))
 #a1<-(xml_text(xml_children(xml_children(xml_children(xml_contents(scheme))))))
 
-a1<-antworten<-(xml_text(children1))
-items_complete<-a0<-(xml_text(children0))
-print (a0)
-print (a1)
+#a1<-antworten<-(xml_text(children1))
+#items_complete<-a0<-(xml_text(children0))
+#print (a0)
+#print (a1)
 
 
-items3<-a3<-(xml_text(children3))
+#items3<-a3<-(xml_text(children3))
 
-a2<-xml_text(scheme,2)
+#a2<-xml_text(scheme,2)
 #a2<-xml_text(children0[[3]])
 #modify
 #a1[7]<-"testing" #works
 #4 now try append rows
 #4.1  first compare csv data with xml fields
-item01<-items$target[1]
-print(item01)
+#item01<-items$target[1]
+#print(item01)
 #try change content
-item01<-items$frage[1]
-item_mod<-"warum gerad hunde?"
-items$frage[1]<-item_mod
-item01<-items$frage[1]
-print(item01)
+#item01<-items$frage[1]
+#item_mod<-"warum gerad hunde?"
+#items$frage[1]<-item_mod
+#item01<-items$frage[1]
+#print(item01)
 #display question in xml
-print(a0[7])
+#print(a0[7])
 #regular: 1+15=item02 start, 14positions per item, frage auf pos 6
 #1+15 = 1+ 2*6 + y
 #001: 1+1*14-  (6=14-x)
 #formula to adress question: 1(first row) + itemnr*2*7-8
 ### > (a0[1+(1*2)*7-8])
-itemnr<-3
+#itemnr<-3
 #itemadress<-1+(2*2)*7-8
-itemadress<-1+(itemnr*2)*7-8
+#itemadress<-1+(itemnr*2)*7-8
 
-print(a0[itemadress])
+#print(a0[itemadress])
 
 ##4.2 append in a0 itemnr, question + kontext
 ##4.3 append in a1 questions * 2
 
-print(a0)
-print(a1)
-#############################################
-get_question <- function(itemwitch,option){
-  
-###4.2.1
-#create new array with modifiying values
-#get new values of group items .csv
-newitem<-c()
-itx<-itemwitch
-
-newitem[1]<-items$item[itx] #description
-#newitem[2]<-"select"
-newitem[2]<-items$kontext[itx] #kontext
-newitem[3]<-"Weisen Sie der Frage die richtige Antwort zu." #explanation
-#newitem[5]<-"right"
-newitem[4]<-items$frage[itx] #fragetext
-#newitem[7]<-"default"
-return (newitem[option])
-
-
-}
-
-print(get_question(1,4))
-####works
-#########################
-get_item<-function (item,option){
-  
-itx<-item
-  
-newopt<-c()
-#newopt[1]<-itx
-#newopt[2]<-itx
-newopt[1]<-items$A1.[itx]
-#newopt[4]<-11
-newopt[2]<-items$A2[itx]
-#newopt[6]<-22
-newopt[3]<-items$A3[itx]
-#newopt[8]<-33
-newopt[4]<-items$A4[itx]
-#newopt[10]<-44
-newopt[5]<-items$A5[itx]
-#newopt[12]<-55
-newopt[6]<-items$A6[itx]
-#newopt[14]<-66
-
-return(newopt[option])
-}
-
-
-get_item(1,4)
-#works
+#print(a0)
+#print(a1)
 ###########################################
 #print(newitem)
 #print(newopt)
@@ -169,25 +119,40 @@ get_item(1,4)
 
 #scheme<-read_xml("docs/w3school/qtemplate.xml")
 #actualise:
-scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
-scheme<-read_xml("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
 
+refresh_data <- function(){
+#old scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
+items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
+  
+#scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
+scheme<-read_xml("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
 sroot<-scheme
-pos1<-xml_children(sroot)
-pos2<-xml_children(xml_children(sroot))
-pos3<-xml_children(xml_children(xml_children(sroot)))
-pos4<-xml_children(xml_children(xml_children(xml_children(sroot))))
-print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sroot))))))
+}
+
+refresh_data()
+
+refresh_base <- function(){
+  
+#pos1<-xml_children(sroot)
+#pos2<-xml_children(xml_children(sroot))
+setq<-pos3<-xml_children(xml_children(xml_children(sroot)))
+seta<-pos4<-xml_children(xml_children(xml_children(xml_children(sroot))))
+#print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sroot))))))
 set_answers<-pos4
 set_question<-pos3
+print(set_question)
+print(set_answers)
+}
+
+refresh_base()
 #val<-"text>because"
-val<-"text" #tag
-pos<-"test antwort replace" #text within tags
+#val<-"text" #tag
+#pos<-"test antwort replace" #text within tags
 #print(xml_chsroot[8])
 #children 3, replace works but content shit
-print(pos4)
+#print(pos4)
 #testreplace
-xml_replace(pos4[19], val, pos)
+#xml_replace(pos4[19], val, pos)
 #i cant get replacement without / at the end of string... try vector
 #works. with first tag, then text within tag
 #works. but to proof have to actualise pos4
@@ -198,6 +163,60 @@ xml_replace(pos4[19], val, pos)
 #4,6,8,10,12 meta all same
 #formel: ax = antwortoption
 #######################################################
+#############################################
+
+get_question <- function(dataset,itemwitch,option){
+  
+  ###4.2.1
+  #create new array with modifiying values
+  #get new values of group items .csv
+  newitem<-c()
+  itx<-itemwitch
+  items<-dataset
+  
+  newitem[1]<-items$item[itx] #description
+  #newitem[2]<-"select"
+  newitem[2]<-items$kontext[itx] #kontext
+  newitem[4]<-"Weisen Sie der Frage die richtige Antwort zu." #explanation
+  #newitem[5]<-"right"
+  newitem[3]<-items$frage[itx] #fragetext
+  #newitem[7]<-"default"
+  return (newitem[option])
+  
+  
+}
+
+#print(get_question(1,4))
+####works
+#########################
+get_item<-function (dataset,item,option){
+  items<-dataset
+  itx<-item
+  
+  newopt<-c()
+  #newopt[1]<-itx
+  #newopt[2]<-itx
+  newopt[1]<-items$A1.[itx]
+  #newopt[4]<-11
+  newopt[2]<-items$A2[itx]
+  #newopt[6]<-22
+  newopt[3]<-items$A3[itx]
+  #newopt[8]<-33
+  newopt[4]<-items$A4[itx]
+  #newopt[10]<-44
+  newopt[5]<-items$A5[itx]
+  #newopt[12]<-55
+  newopt[6]<-items$A6[itx]
+  #newopt[14]<-66
+  
+  return(newopt[option])
+}
+
+
+#get_item(1,4)
+#works
+
+
 adress_answer<- function (set,itemnr,item_opt) {
 pos4<-set
 ax<-item_opt #antwortoption A1-A6
@@ -236,81 +255,107 @@ lquest<-length(pos3)
 
 quest_cpt<-64*14+1
 questionx<-c(2,4,7) #itemdescription,kontext,question
-question_adress_last<-(item_cpt/64*itemnr)
+question_adress_last<-(quest_cpt/64*itemnr)
 
 question_adress_0<-question_adress_last-14
 questpos<-(question_adressx<-question_adress_0+questionx[qx])
 
 print(pos3[questpos])
+return(pos3[questpos])
 }
 ############################################################
-print(question_replace(pos3,1,3))
+print(adress_question(pos3,4,3))
 
 
 #works 12062.14.17
 ##################
 #now replace content
 #itemdescription
-item_sample_content<-c()
-print(newitem)
-item_pos<-
-print(itemreplace(itemnr,item_pos))
-
-val<-"text" #tag
-pos<-"test antwort replace" #text within tags
+#item_sample_content<-c()
+#print(newitem)
+#item_pos<-
+#print(itemreplace(itemnr,item_pos))
+replace_content<-function(dataset,seta,setq,item,pos_a,pos_q){
+  
+val_text<-"text" #tag, item
+val_lead<-"lead" #tag, fragetext
+val_descr<-"description" #tag, itemnumber
+val_context<-"title" #tag, kontext
+#pos<-"test antwort replace" #text within tags
 #children 3, replace works but content shit
-print(pos4)
-#testreplace
-xml_replace(tst2,val ,tst_r )
+#print(pos4)
 
 set_answers<-pos4
 set_question<-pos3
+dataset<-dataset
 
-get_question(1,1)
-tst_r<-get_item(1,6)
-print(tst2<-adress_answer(set_answers,1,6))
+#get_question(dataset,item,pos_q)
+tst_ra<-get_item(dataset,item,pos_a)
+tst_rq<-get_question(dataset,item,pos_q)
+print(tst_aa<-adress_answer(set_answers,item,pos_a))
 #works
-tst1<-adress_question(set_question,1,3)
+tst_aq<-adress_question(set_question,item,pos_q)
 #works
+#muster: xml_replace(adress_[answer|question](options),val,get_[item|question](options))
+#testreplace xml_replace(tst2,val ,tst_r )
+
+xml_replace(tst_aq,val_lead ,tst_rq )
+
+#works
+}
+replace_content(items,seta,setq,4,6,1)
+
+seta<-pos4
+setq<-pos3
+
+print(adress_answer(seta,4,1:6))
+refresh_base()
+refresh_xml()
+#works
+
 print(pos4)
-
+print(pos3)
 ###############################
-print(xml_children(xml_children(xml_children(xml_children(sroot))))[28])
-print(xml_children(xml_children(xml_children(xml_children(sroot)))))
-print(xml_children(xml_children(xml_children(sroot))))
-#vector geht bis 28
-#now try append after usage: set, value, position
-####xml_add_parent(xml_children(xml_children(xml_children(xml_children(sroot)))), val, .where="after")
-###xml_add_child(xml_children(xml_children(sroot)), pos1, .where="after")
-print("append essai")
-print(pos2)
-print(xml_text(pos2))
-#print(pos0)
-print(pos1)
-print(pos2)
-print(pos3) #pos 3 (child of question containing items) musz verdoppelt werden
-#xml_add
-xml_parents(pos4)
-#pos0
- #xml_add_child(pos3, pos2[4], .where="after") #this hangs up
-# pos1[62]
-#print(xml_children(xml_children(xml_children(xml_children(sroot)))))
-#print(xml_children(sroot)[2])
-print("after append")
-print(pos2[5])
-print(pos1)
-print(pos2)
-print(pos1[8])
-########################################
+#5.now loop through the items and replace according to table actualise
 
-print(qpath0<-xml_find_all(sroot,"/*/*/*")) #question node
-print(qpath<-xml_find_all(sroot,"/*/*/*/*")) #question node
-print(par4<-xml_parents(pos4)) #these to duplicate childs, now 18, each item 9 rows
-print(item002<-(par4))
-#n<-print(nodes(qpath))
-xml_contents(pos4)
- xml_add_parent(par4,item002) # parent qpath0,qpath / child,0,p,after / ch,0,p,0
-print(par4)[item]
+# 
+# 
+# print(xml_children(xml_children(xml_children(xml_children(sroot))))[28])
+# print(xml_children(xml_children(xml_children(xml_children(sroot)))))
+# print(xml_children(xml_children(xml_children(sroot))))
+# #vector geht bis 28
+# #now try append after usage: set, value, position
+# ####xml_add_parent(xml_children(xml_children(xml_children(xml_children(sroot)))), val, .where="after")
+# ###xml_add_child(xml_children(xml_children(sroot)), pos1, .where="after")
+# print("append essai")
+# print(pos2)
+# print(xml_text(pos2))
+# #print(pos0)
+# print(pos1)
+# print(pos2)
+# print(pos3) #pos 3 (child of question containing items) musz verdoppelt werden
+# #xml_add
+# xml_parents(pos4)
+# #pos0
+#  #xml_add_child(pos3, pos2[4], .where="after") #this hangs up
+# # pos1[62]
+# #print(xml_children(xml_children(xml_children(xml_children(sroot)))))
+# #print(xml_children(sroot)[2])
+# print("after append")
+# print(pos2[5])
+# print(pos1)
+# print(pos2)
+# print(pos1[8])
+# ########################################
+# 
+# print(qpath0<-xml_find_all(sroot,"/*/*/*")) #question node
+# print(qpath<-xml_find_all(sroot,"/*/*/*/*")) #question node
+# print(par4<-xml_parents(pos4)) #these to duplicate childs, now 18, each item 9 rows
+# print(item002<-(par4))
+# #n<-print(nodes(qpath))
+# xml_contents(pos4)
+#  xml_add_parent(par4,item002) # parent qpath0,qpath / child,0,p,after / ch,0,p,0
+# print(par4)[item]
  
   #ch,0,p,0 > fügt <item><text>...(qpath[10]11... direkt nach dem ersten tag ein)
  # s,0,p,after: hat 28 pos zu 0 und p hinzugefügt und 
@@ -320,16 +365,16 @@ print(par4)[item]
  #xml_add_parent(qpath0,qpath, .where=length(xml_children(qpath0)))
 #xml_add_parent(qpath,qpath) nothing happens
  #print(pos2[6])
-print(xml_text(pos3))
-print(xml_text(pos2[5]))
-
-print(xml_text(pos2))
-
-print(xml_attrs(pos2)[5])  
-
-frset5<-(xml_attrs(pos2)[5])
-print(frset5)
-
+# print(xml_text(pos3))
+# print(xml_text(pos2[5]))
+# 
+# print(xml_text(pos2))
+# 
+# print(xml_attrs(pos2)[5])  
+# 
+# frset5<-(xml_attrs(pos2)[5])
+# print(frset5)
+# 
 
 
 #print(xml_attr(sroot,"character",ns="section"))

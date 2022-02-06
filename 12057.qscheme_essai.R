@@ -178,7 +178,8 @@ pos2<-xml_children(xml_children(sroot))
 pos3<-xml_children(xml_children(xml_children(sroot)))
 pos4<-xml_children(xml_children(xml_children(xml_children(sroot))))
 print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sroot))))))
-
+set_answers<-pos4
+set_question<-pos3
 #val<-"text>because"
 val<-"text" #tag
 pos<-"test antwort replace" #text within tags
@@ -197,10 +198,9 @@ xml_replace(pos4[19], val, pos)
 #4,6,8,10,12 meta all same
 #formel: ax = antwortoption
 #######################################################
-answer_replace<- function (set,itemnr_i,item_opt_i) {
+adress_answer<- function (set,itemnr,item_opt) {
 pos4<-set
-itemnr<-itemnr_i
-ax<-item_opt_i #antwortoption A1-A6
+ax<-item_opt #antwortoption A1-A6
 lquest<-length(pos4)
 item_cpt<-64*14
 antwort_adress<-
@@ -210,16 +210,16 @@ item_adress_last<-(item_cpt/64*itemnr)
   item_adress_0<-item_adress_last-14
 itempos<-(item_adressx<-item_adress_0+optionx[ax])
 
-print(pos4[itempos])
-
+#print(pos4[itempos])
+out_answer<-(set[itempos])
 }
 #######################################################
-print (answer_replace (pos4,2,3))
 #works as function
+print (a1<-(adress_answer (pos4,2,1)))
 
 ###now for parent section (question, kontext) 
 ######################################################
-question_replace<- function(set,itemnr,questionid){
+adress_question<- function(set,itemnr,questionid){
 pos3<-set
 qx<-questionid
 #print(pos3)
@@ -261,9 +261,18 @@ pos<-"test antwort replace" #text within tags
 #children 3, replace works but content shit
 print(pos4)
 #testreplace
-xml_replace(pos4[19], val, pos)
-item_replace()
+xml_replace(tst2,val ,tst_r )
 
+set_answers<-pos4
+set_question<-pos3
+
+get_question(1,1)
+tst_r<-get_item(1,6)
+print(tst2<-adress_answer(set_answers,1,6))
+#works
+tst1<-adress_question(set_question,1,3)
+#works
+print(pos4)
 
 ###############################
 print(xml_children(xml_children(xml_children(xml_children(sroot))))[28])

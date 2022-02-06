@@ -172,7 +172,7 @@ xml_replace(pos4[19], val, pos)
 #works. with first tag, then text within tag
 #works. but to proof have to actualise pos4
 #now adress items generale
-#lines formula:
+#lines formula in section (element) <items> (antwortoptionen)
 #3,5,7,9,11,13 option A1-A6
 #1,2 item id and position
 #4,6,8,10,12 meta all same
@@ -182,14 +182,40 @@ ax<-1 #antwortoption A1-A6
 lquest<-length(pos4)
 item_cpt<-64*14
 antwort_adress<-
-  optionx<-c(3,5,7,9,11,13)
+  optionx<-c(3,5,7,9,11,13) #A1-A6
 item_adress_last<-(item_cpt/64*itemnr)
 
   item_adress_0<-item_adress_last-14
 itempos<-(item_adressx<-item_adress_0+optionx[ax])
 
 print(pos4[itempos])
+###now for parent section (question, kontext) 
 
+print(pos3)
+itemnr<-4
+qdescription<-1
+kontext<-2
+question<-3
+#discomment to modify view
+qx<-qdescription
+qx<-kontext
+qx<-question
+  
+  lquest<-length(pos3)
+#formel adress line: 1+14 each
+
+quest_cpt<-64*14+1
+questionx<-c(2,4,7) #itemdescription,kontext,question
+question_adress_last<-(item_cpt/64*itemnr)
+
+question_adress_0<-question_adress_last-14
+questpos<-(question_adressx<-question_adress_0+questionx[qx])
+
+print(pos3[questpos])
+
+#works 12062.14.17
+
+###############################
 print(xml_children(xml_children(xml_children(xml_children(sroot))))[28])
 print(xml_children(xml_children(xml_children(xml_children(sroot)))))
 print(xml_children(xml_children(xml_children(sroot))))

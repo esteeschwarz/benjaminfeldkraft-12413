@@ -79,39 +79,38 @@ print(a0[itemadress])
 
 print(a0)
 print(a1)
+itemreplace <- function(itemwitch){
+  
 ###4.2.1
 #create new array with modifiying values
-#get values of csv
+#get new values of group items .csv
 newitem<-c()
-itx<-newitemwitch<-3
-newitem[1]<-items$item[itx]
-newitem[2]<-"select"
-newitem[3]<-items$kontext[itx]
-newitem[4]<-"Weisen Sie der Frage die richtige Antwort zu."
-newitem[5]<-"right"
-newitem[6]<-items$frage[itx]
-newitem[7]<-"default"
+itx<-newitemwitch
+newitem[1]<-items$item[itx] #description
+#newitem[2]<-"select"
+newitem[2]<-items$kontext[itx] #kontext
+newitem[3]<-"Weisen Sie der Frage die richtige Antwort zu." #explanation
+#newitem[5]<-"right"
+newitem[4]<-items$frage[itx] #fragetext
+#newitem[7]<-"default"
 
 newopt<-c()
-newopt[1]<-itx
-newopt[2]<-itx
-newopt[3]<-items$A1.[itx]
-newopt[4]<-11
-newopt[5]<-items$A2[itx]
-newopt[6]<-22
-newopt[7]<-items$A3[itx]
-newopt[8]<-33
-newopt[9]<-items$A4[itx]
-newopt[10]<-44
-newopt[11]<-items$A5[itx]
-newopt[12]<-55
-newopt[13]<-items$A6[itx]
-newopt[14]<-66
+#newopt[1]<-itx
+#newopt[2]<-itx
+newopt[1]<-items$A1.[itx]
+#newopt[4]<-11
+newopt[2]<-items$A2[itx]
+#newopt[6]<-22
+newopt[3]<-items$A3[itx]
+#newopt[8]<-33
+newopt[4]<-items$A4[itx]
+#newopt[10]<-44
+newopt[5]<-items$A5[itx]
+#newopt[12]<-55
+newopt[6]<-items$A6[itx]
+#newopt[14]<-66
 
-#newitem[8]<-newopt[4]
-
-#print(newscheme_top[38])
-
+}
 print(newitem)
 print(newopt)
 #####
@@ -121,24 +120,24 @@ itemx[2]<-itx
 print (itemx)
 
 ##4.2.2 append newitem
-newscheme0<-a0
-lscheme0<-length(a0)
+#newscheme0<-a0
+#lscheme0<-length(a0)
 #newscheme_top<-append (newscheme0,newitem,after=lscheme0)
 #print(newscheme_top)
-newscheme1<-a1
-lscheme1<-length(a1)
+#newscheme1<-a1
+#lscheme1<-length(a1)
 #newscheme_opt<- append (newscheme1,newopt,after=lscheme1)
 #print(newscheme_opt)
 
-newscheme_0<-children0
-newscheme1<-children1
+#newscheme_0<-children0
+#newscheme1<-children1
 #get positions within xml
-print(xml_text(children1[[28]]))
-print(xml_text(children1))
+#print(xml_text(children1[[28]]))
+#print(xml_text(children1))
 #newscheme1[[27]]<-"weil ich keine ahnung habe"
 #print(xml_text(newscheme1[28]))
 
-sroot<-scheme
+#sroot<-scheme
 
 ####write_xml(sroot,"scheme_essai.xml")
 #writes, but no changes
@@ -167,6 +166,7 @@ pos<-"test antwort replace" #text within tags
 #print(xml_chsroot[8])
 #children 3, replace works but content shit
 print(pos4)
+#testreplace
 xml_replace(pos4[19], val, pos)
 #i cant get replacement without / at the end of string... try vector
 #works. with first tag, then text within tag
@@ -177,8 +177,11 @@ xml_replace(pos4[19], val, pos)
 #1,2 item id and position
 #4,6,8,10,12 meta all same
 #formel: ax = antwortoption
-itemnr<-3
-ax<-1 #antwortoption A1-A6
+
+answer_replace<- function (set,itemnr_i,item_opt_i) {
+pos4<-set
+itemnr<-itemnr_i
+ax<-item_opt_i #antwortoption A1-A6
 lquest<-length(pos4)
 item_cpt<-64*14
 antwort_adress<-
@@ -189,6 +192,12 @@ item_adress_last<-(item_cpt/64*itemnr)
 itempos<-(item_adressx<-item_adress_0+optionx[ax])
 
 print(pos4[itempos])
+
+}
+
+print (answer_replace (pos4,2,3))
+#works as function
+
 ###now for parent section (question, kontext) 
 
 print(pos3)
@@ -200,8 +209,7 @@ question<-3
 qx<-qdescription
 qx<-kontext
 qx<-question
-  
-  lquest<-length(pos3)
+lquest<-length(pos3)
 #formel adress line: 1+14 each
 
 quest_cpt<-64*14+1
@@ -214,6 +222,22 @@ questpos<-(question_adressx<-question_adress_0+questionx[qx])
 print(pos3[questpos])
 
 #works 12062.14.17
+##################
+#now replace content
+#itemdescription
+item_sample_content<-c()
+print(newitem)
+item_pos<-
+print(itemreplace(itemnr,item_pos))
+
+val<-"text" #tag
+pos<-"test antwort replace" #text within tags
+#children 3, replace works but content shit
+print(pos4)
+#testreplace
+xml_replace(pos4[19], val, pos)
+
+
 
 ###############################
 print(xml_children(xml_children(xml_children(xml_children(sroot))))[28])

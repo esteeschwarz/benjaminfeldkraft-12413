@@ -79,13 +79,15 @@ print(a0[itemadress])
 
 print(a0)
 print(a1)
-itemreplace <- function(itemwitch){
+#############################################
+get_question <- function(itemwitch,option){
   
 ###4.2.1
 #create new array with modifiying values
 #get new values of group items .csv
 newitem<-c()
-itx<-newitemwitch
+itx<-itemwitch
+
 newitem[1]<-items$item[itx] #description
 #newitem[2]<-"select"
 newitem[2]<-items$kontext[itx] #kontext
@@ -93,7 +95,18 @@ newitem[3]<-"Weisen Sie der Frage die richtige Antwort zu." #explanation
 #newitem[5]<-"right"
 newitem[4]<-items$frage[itx] #fragetext
 #newitem[7]<-"default"
+return (newitem[option])
 
+
+}
+
+print(get_question(1,4))
+####works
+#########################
+get_item<-function (item,option){
+  
+itx<-item
+  
 newopt<-c()
 #newopt[1]<-itx
 #newopt[2]<-itx
@@ -110,14 +123,20 @@ newopt[5]<-items$A5[itx]
 newopt[6]<-items$A6[itx]
 #newopt[14]<-66
 
+return(newopt[option])
 }
-print(newitem)
-print(newopt)
+
+
+get_item(1,4)
+#works
+###########################################
+#print(newitem)
+#print(newopt)
 #####
-itemx<-c()
-itemx[1]<-"item"
-itemx[2]<-itx
-print (itemx)
+#itemx<-c()
+#itemx[1]<-"item"
+#itemx[2]<-itx
+#print (itemx)
 
 ##4.2.2 append newitem
 #newscheme0<-a0
@@ -177,7 +196,7 @@ xml_replace(pos4[19], val, pos)
 #1,2 item id and position
 #4,6,8,10,12 meta all same
 #formel: ax = antwortoption
-
+#######################################################
 answer_replace<- function (set,itemnr_i,item_opt_i) {
 pos4<-set
 itemnr<-itemnr_i
@@ -194,21 +213,24 @@ itempos<-(item_adressx<-item_adress_0+optionx[ax])
 print(pos4[itempos])
 
 }
-
+#######################################################
 print (answer_replace (pos4,2,3))
 #works as function
 
 ###now for parent section (question, kontext) 
-
-print(pos3)
-itemnr<-4
-qdescription<-1
-kontext<-2
-question<-3
+######################################################
+question_replace<- function(set,itemnr,questionid){
+pos3<-set
+qx<-questionid
+#print(pos3)
+#qdescription<-1
+#kontext<-2
+#question<-3
 #discomment to modify view
-qx<-qdescription
-qx<-kontext
-qx<-question
+#qx<-qdescription
+#qx<-kontext
+#qx<-question
+
 lquest<-length(pos3)
 #formel adress line: 1+14 each
 
@@ -220,6 +242,10 @@ question_adress_0<-question_adress_last-14
 questpos<-(question_adressx<-question_adress_0+questionx[qx])
 
 print(pos3[questpos])
+}
+############################################################
+print(question_replace(pos3,1,3))
+
 
 #works 12062.14.17
 ##################
@@ -236,7 +262,7 @@ pos<-"test antwort replace" #text within tags
 print(pos4)
 #testreplace
 xml_replace(pos4[19], val, pos)
-
+item_replace()
 
 
 ###############################

@@ -22,9 +22,13 @@ library(xml2)
  #     dir=NULL, browse=c('local', 'browser'), cats=FALSE,
   #    put=c('rstudio', 'source'))
 #download.file("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv","items.csv")
-scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
-items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
-xml_text(scheme)
+
+
+#scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
+#items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
+
+
+#xml_text(scheme)
 #library(tidyverse)
 #print(a1<-xml_text(xml_node(scheme,8)))
 #html_element()
@@ -120,19 +124,25 @@ xml_text(scheme)
 #scheme<-read_xml("docs/w3school/qtemplate.xml")
 #actualise:
 
-refresh_data <- function(){
+refresh_scheme <- function(ret_file){
 #old scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
-items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
+#items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
   
 #scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
-scheme<-read_xml("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
+#scheme<-read_xml("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
+scheme<-read_xml(ret_file)
+
 sroot<-scheme
 }
+refresh_data <- function(ret_file){
+  items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
+}
 
-refresh_data()
 
-refresh_base <- function(){
-  
+#refresh_data(xmlmod)
+
+refresh_base_q <- function(schemeset){
+sroot<-schemeset  
 #pos1<-xml_children(sroot)
 #pos2<-xml_children(xml_children(sroot))
 setq<-pos3<-xml_children(xml_children(xml_children(sroot)))
@@ -142,9 +152,23 @@ set_answers<-pos4
 set_question<-pos3
 print(set_question)
 print(set_answers)
+return(setq)
+}
+refresh_base_a <- function(schemeset){
+  sroot<-schemeset  
+  #pos1<-xml_children(sroot)
+  #pos2<-xml_children(xml_children(sroot))
+  setq<-xml_children(xml_children(xml_children(sroot)))
+  seta<-xml_children(xml_children(xml_children(xml_children(sroot))))
+  #print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sroot))))))
+  #set_answers<-pos4
+  #set_question<-pos3
+  #print(set_question)
+  #print(set_answers)
+  return(seta)
 }
 
-refresh_base()
+#refresh_base()
 #val<-"text>because"
 #val<-"text" #tag
 #pos<-"test antwort replace" #text within tags
@@ -234,7 +258,10 @@ out_answer<-(set[itempos])
 }
 #######################################################
 #works as function
-print (a1<-(adress_answer (pos4,2,1)))
+
+
+#print (a1<-(adress_answer (pos4,2,1)))
+
 
 ###now for parent section (question, kontext) 
 ######################################################
@@ -264,7 +291,9 @@ print(pos3[questpos])
 return(pos3[questpos])
 }
 ############################################################
-print(adress_question(pos3,4,3))
+
+
+#print(adress_question(pos3,4,3))
 
 
 #works 12062.14.17
@@ -281,12 +310,15 @@ val_text<-"text" #tag, item
 val_lead<-"lead" #tag, fragetext
 val_descr<-"description" #tag, itemnumber
 val_context<-"title" #tag, kontext
+val_fail<-"tagfail"
+
+ifelse(posq==1,tag<-val_descr,ifelse(posq==2,tag<-val_lead,ifelse(pos_q==3,tag<-val_context,ifelse(pos_q!=1:3,tag<-val_fail))))
 #pos<-"test antwort replace" #text within tags
 #children 3, replace works but content shit
 #print(pos4)
 
-set_answers<-pos4
-set_question<-pos3
+set_answers<-seta
+set_question<-setq
 dataset<-dataset
 
 #get_question(dataset,item,pos_q)
@@ -298,23 +330,59 @@ tst_aq<-adress_question(set_question,item,pos_q)
 #works
 #muster: xml_replace(adress_[answer|question](options),val,get_[item|question](options))
 #testreplace xml_replace(tst2,val ,tst_r )
-
-xml_replace(tst_aq,val_lead ,tst_rq )
-
+####
+xml_replace(tst_aq,tag ,tst_rq )
+####
 #works
 }
-replace_content(items,seta,setq,4,6,1)
+####################
+#################
+#check replacement
+#qscheme_output<-c()
 
-seta<-pos4
-setq<-pos3
+#call data
+#refresh_base_a(scheme)
 
-print(adress_answer(seta,4,1:6))
-refresh_base()
-refresh_xml()
+#seta<-pos4
+#setq<-pos3
+
+
+
+#refresh_base()
 #works
+##################
 
-print(pos4)
-print(pos3)
+xmlorigin<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
+xmlmod<-("qscheme_output.xml")
+
+datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv")
+
+schemeset<-refresh_scheme(xmlmod)
+#schemeset<-refresh_data(xmlorigin)
+seta<-refresh_base_a(schemeset)
+setq<-refresh_base_q(schemeset)
+
+
+items<-refresh_data(datenset)
+
+get_item(items,4,6)
+get_question(items,4,3)
+print(adress_answer(seta,4,1:6))
+print(adress_question(setq,4,3))
+
+
+#####call replacement
+replace_content(items,seta,setq,4,6,3)
+
+
+#write_xml(schemeset,"qscheme_output.xml")
+#read_xml("qscheme_output.xml")
+
+
+
+
+#print(pos4)
+#print(pos3)
 ###############################
 #5.now loop through the items and replace according to table actualise
 

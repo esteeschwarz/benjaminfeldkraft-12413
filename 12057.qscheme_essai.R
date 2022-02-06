@@ -140,6 +140,7 @@ refresh_data <- function(ret_file){
 
 
 #refresh_data(xmlmod)
+#setq<-refresh_base_q(schemeset)
 
 refresh_base_q <- function(schemeset){
 sroot<-schemeset  
@@ -165,8 +166,9 @@ refresh_base_a <- function(schemeset){
   #set_question<-pos3
   #print(set_question)
   #print(set_answers)
-  return(seta)
-}
+return(seta)
+  
+  }
 
 #refresh_base()
 #val<-"text>because"
@@ -240,7 +242,7 @@ get_item<-function (dataset,item,option){
 #get_item(1,4)
 #works
 
-
+#################
 adress_answer<- function (set,itemnr,item_opt) {
 pos4<-set
 ax<-item_opt #antwortoption A1-A6
@@ -304,6 +306,8 @@ return(pos3[questpos])
 #print(newitem)
 #item_pos<-
 #print(itemreplace(itemnr,item_pos))
+
+
 replace_content<-function(dataset,seta,setq,item,pos_a,pos_q){
   
 val_text<-"text" #tag, item
@@ -312,7 +316,7 @@ val_descr<-"description" #tag, itemnumber
 val_context<-"title" #tag, kontext
 val_fail<-"tagfail"
 
-ifelse(posq==1,tag<-val_descr,ifelse(posq==2,tag<-val_lead,ifelse(pos_q==3,tag<-val_context,ifelse(pos_q!=1:3,tag<-val_fail))))
+ifelse(pos_q==1,tag<-val_descr,ifelse(pos_q==2,tag<-val_lead,ifelse(pos_q==3,tag<-val_context,ifelse(pos_q!=1:3,tag<-val_fail))))
 #pos<-"test antwort replace" #text within tags
 #children 3, replace works but content shit
 #print(pos4)
@@ -322,19 +326,21 @@ set_question<-setq
 dataset<-dataset
 
 #get_question(dataset,item,pos_q)
-tst_ra<-get_item(dataset,item,pos_a)
-tst_rq<-get_question(dataset,item,pos_q)
+print(tst_aq<-adress_question(set_question,item,pos_q))
 print(tst_aa<-adress_answer(set_answers,item,pos_a))
+print(tst_rq<-get_question(dataset,item,pos_q))
+print(tst_ra<-get_item(dataset,item,pos_a))
 #works
-tst_aq<-adress_question(set_question,item,pos_q)
 #works
 #muster: xml_replace(adress_[answer|question](options),val,get_[item|question](options))
 #testreplace xml_replace(tst2,val ,tst_r )
 ####
 xml_replace(tst_aq,tag ,tst_rq )
+xml_replace(tst_aa,val_text,tst_ra)
 ####
 #works
 }
+
 ####################
 #################
 #check replacement
@@ -350,7 +356,7 @@ xml_replace(tst_aq,tag ,tst_rq )
 
 #refresh_base()
 #works
-##################
+########################################### THIS GLOBAL
 
 xmlorigin<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
 xmlmod<-("qscheme_output.xml")
@@ -362,25 +368,34 @@ schemeset<-refresh_scheme(xmlmod)
 seta<-refresh_base_a(schemeset)
 setq<-refresh_base_q(schemeset)
 
+print(seta)
 
 items<-refresh_data(datenset)
 
-get_item(items,4,6)
-get_question(items,4,3)
-print(adress_answer(seta,4,1:6))
-print(adress_question(setq,4,3))
+print(get_question(items,6,3))
+print(get_item(items,6,6))
+print(adress_question(setq,6,1:3))
+print(adress_answer(seta,6,1:6))
 
 
 #####call replacement
-replace_content(items,seta,setq,4,6,3)
+replace_content(items,seta,setq,6,6,3)
 
+#####proof
 
+proof_scheme<-function(scheme_mod){
+#initiate seta,setq
+  sroot<-scheme_mod
+  setq<-xml_children(xml_children(xml_children(sroot)))
+  seta<-xml_children(xml_children(xml_children(xml_children(sroot))))
+  set_mod<-c(seta,setq)
+}
 #write_xml(schemeset,"qscheme_output.xml")
 #read_xml("qscheme_output.xml")
 
 
 
-
+############################################## works 12062(23.54)
 #print(pos4)
 #print(pos3)
 ###############################

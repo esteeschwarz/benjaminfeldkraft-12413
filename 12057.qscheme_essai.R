@@ -142,7 +142,11 @@ sroot<-scheme
 
 #xml_child(sroot$doc)
 #########################################################
-scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
+
+#local:
+scheme<-read_xml("docs/w3school/qtemplate.xml")
+#actualise:
+#scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
 sroot<-scheme
 pos1<-xml_children(sroot)
 pos2<-xml_children(xml_children(sroot))

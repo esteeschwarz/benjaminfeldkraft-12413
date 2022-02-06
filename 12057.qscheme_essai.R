@@ -68,7 +68,11 @@ print(a0[7])
 #001: 1+1*14-  (6=14-x)
 #formula to adress question: 1(first row) + itemnr*2*7-8
 ### > (a0[1+(1*2)*7-8])
-print(a0[1+(1*2)*7-8])
+itemnr<-3
+#itemadress<-1+(2*2)*7-8
+itemadress<-1+(itemnr*2)*7-8
+
+print(a0[itemadress])
 
 ##4.2 append in a0 itemnr, question + kontext
 ##4.3 append in a1 questions * 2
@@ -123,8 +127,8 @@ lscheme0<-length(a0)
 #print(newscheme_top)
 newscheme1<-a1
 lscheme1<-length(a1)
-newscheme_opt<- append (newscheme1,newopt,after=lscheme1)
-print(newscheme_opt)
+#newscheme_opt<- append (newscheme1,newopt,after=lscheme1)
+#print(newscheme_opt)
 
 newscheme_0<-children0
 newscheme1<-children1
@@ -144,9 +148,12 @@ sroot<-scheme
 #########################################################
 
 #local:
-scheme<-read_xml("docs/w3school/qtemplate.xml")
+
+#scheme<-read_xml("docs/w3school/qtemplate.xml")
 #actualise:
-#scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
+scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
+scheme<-read_xml("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
+
 sroot<-scheme
 pos1<-xml_children(sroot)
 pos2<-xml_children(xml_children(sroot))
@@ -156,13 +163,33 @@ print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sro
 
 #val<-"text>because"
 val<-"text" #tag
-pos<-"dummy" #text within tags
+pos<-"test antwort replace" #text within tags
 #print(xml_chsroot[8])
 #children 3, replace works but content shit
-#print(xml_children(xml_children(xml_children(xml_children(sroot))))[19[1]])
-###xml_replace(xml_children(xml_children(xml_children(xml_children(sroot))))[29], val, pos)
+print(pos4)
+xml_replace(pos4[19], val, pos)
 #i cant get replacement without / at the end of string... try vector
 #works. with first tag, then text within tag
+#works. but to proof have to actualise pos4
+#now adress items generale
+#lines formula:
+#3,5,7,9,11,13 option A1-A6
+#1,2 item id and position
+#4,6,8,10,12 meta all same
+#formel: ax = antwortoption
+itemnr<-3
+ax<-1 #antwortoption A1-A6
+lquest<-length(pos4)
+item_cpt<-64*14
+antwort_adress<-
+  optionx<-c(3,5,7,9,11,13)
+item_adress_last<-(item_cpt/64*itemnr)
+
+  item_adress_0<-item_adress_last-14
+itempos<-(item_adressx<-item_adress_0+optionx[ax])
+
+print(pos4[itempos])
+
 print(xml_children(xml_children(xml_children(xml_children(sroot))))[28])
 print(xml_children(xml_children(xml_children(xml_children(sroot)))))
 print(xml_children(xml_children(xml_children(sroot))))

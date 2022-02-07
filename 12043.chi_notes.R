@@ -68,6 +68,21 @@ chisq.test(chi2,correct=FALSE)
 #ohne probability angabe -f2- auch möglich
 print("-------------------------")
 
+
+###12063.gruppe konzeptuelle metaphern
+#englisch,spanisch up
+#anzahl verben, anzahl adjektive
+eng<-c(15,20)
+span<-c(11,18)
+
+#anzahl verben die entsprechen: 15
+#2. spalte:
+#anzahl v. nicht entsprechen 55
+#dann chisquare sinnvoll
+#auch type/token treffer (perspektive) sinnvoll zu vergleichen
+
+
+
 ##meindl uebung U test, set C
 #################
 #################
@@ -276,3 +291,24 @@ d10<-posd9-posd8
 tie<-(d10*(d9^3-d9))
 print (tie)
 print(sum(tie)) ####YES!
+
+c(types,tokens,korpus)
+#entsprechen=
+totaleng<-73
+totalspan<-86
+eng<-c(8,61)
+span<-c(6,80)
+eng_c<-c(eng,73)
+span_c<-c(span,80)
+a1<-cbind(eng,span)
+chisq.test(a1,pe)
+pe1<-100/totaleng*eng[1]
+pe2<-100/totaleng*eng[2]
+pe3<-100/totalspan*span[1]
+pe4<-100/totalspan*span[2]
+pe<-c(pe1,pe2,pe3,pe4)
+
+
+#normalisieren: datenmenge durch korpusgrösze
+
+

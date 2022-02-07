@@ -188,7 +188,7 @@ replace_loop <- function(){
 #init variables
 init<- function(set,opt,base_xml){
   items<-refresh_data(datenset)
-  ifelse(set=="new",return(read_xml(base_xml)),ifelse(set=="mod",scheme<-read_xml(xmlmod),ifelse(set=="old",return(scheme<-read_xml(xmlorigin)),return(items))))
+  ifelse(set=="new",return(read_xml(base_xml)),ifelse(set=="mod",return(scheme<-read_xml(xmlmod)),ifelse(set=="old",return(scheme<-read_xml(xmlorigin)),return(items))))
 #seta<-refresh_base_a(base_xml)
 #setq<-refresh_base_q(base_xml)
 #ifelse(set=="items",return(items))
@@ -214,7 +214,7 @@ base_xml<-xmlorigin
 #1
 items<-init("items",1,1)
 #2
-scheme<-init("old",1,base_xml) #values: old=original scheme, mod=modified scheme
+scheme<-init("mod",1,base_xml) #values: old=original scheme, mod=modified scheme
 #3
  
 #replace_loop()
@@ -242,7 +242,7 @@ scheme<-init("old",1,base_xml) #values: old=original scheme, mod=modified scheme
  print(adress_answer(refresh_base_a(scheme),item,ax))
  
  }
-#proof(1,1,3)
+#proof(8,1,3)
 #get_item(items,1,2)
 ###############################################################
 # proof_scheme<-function(scheme_mod){

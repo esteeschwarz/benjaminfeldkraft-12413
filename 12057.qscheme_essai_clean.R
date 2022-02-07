@@ -41,8 +41,8 @@ library(xml2)
 #}# > not needed
 #########################################################
 refresh_data <- function(ret_file){
-  items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
-}# > not needed
+  items<-read.csv(datenset,skip=1,sep=";")
+}
 #########################################################
 refresh_base_q <- function(origin){
 sroot<-origin  
@@ -172,9 +172,11 @@ xml_replace(tst_aa,val_text,tst_ra)
 #works
 }
 #################
-###########################################
+########################################
+
 replace_loop <- function(){
-  for (k1 in 1:16){
+  la<-length(items$item)
+    for (k1 in 1:la){
     for (k2 in 1:3){
       replace_content(items,scheme,k1,1:6,k2)
     }
@@ -193,19 +195,26 @@ init<- function(set,opt,base_xml){
 
 xmlorigin<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
 xmlmod<-("qscheme_output.xml")
-datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv")
+
+#to retrieve modified xml-scheme for integrating in soscisurvey.de set next 2 lines 
+xmlmod_git<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/qscheme_output.xml")
+xmlmod<-xmlmod_git
+
+datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR01_GR04.csv")
+#datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR04.csv")
 
 #schemeset<-xmlorigin
 schemeset<-xmlmod
+base_xml<-xmlorigin
 #seta<-refresh_base_a(schemeset)
 #setq<-refresh_base_q(schemeset)
 ######## run routine: ############################## 
 #1
 items<-init("items",1,1)
 #2
-scheme<-init("old",1,xmlorigin)
+#scheme<-init("old",1,base_xml) #values: old=original scheme, mod=modified scheme
 #3
-replace_loop()
+#replace_loop()
 #4
 #write_xml(scheme,"qscheme_output.xml")
 

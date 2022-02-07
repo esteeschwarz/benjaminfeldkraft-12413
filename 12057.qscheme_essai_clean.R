@@ -129,7 +129,6 @@ pos4<-set
 ax<-item_opt #antwortoption A1-A6
 lquest<-length(pos4)
 item_cpt<-64*14
-antwort_adress<-
 optionx<-c(3,5,7,9,11,13) #A1-A6
 item_adress_last<-(item_cpt/64*itemnr)
 item_adress_0<-item_adress_last-14

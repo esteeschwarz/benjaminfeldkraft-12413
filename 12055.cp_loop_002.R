@@ -99,11 +99,14 @@
       ar1<-c(1:k)
       print("running")
   print (ar1)
-  print("to compare:")
-  print("set A")
-  print(a1)
-  print("set B")
-  print(a2)
+  #comment next lines to prevent output of sets
+  #  print("to compare:")
+  #print("set A")
+
+   #print(a1)
+  #print("set B")
+  #print(a2)
+  ###############
 print (a1[k])
 print(a2[k])
   ifelse(a1[k]==a2[k],pos1<-1,pos1<-0)

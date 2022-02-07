@@ -44,9 +44,9 @@ refresh_data <- function(ret_file){
 #refresh_data(xmlmod)
 #setq<-refresh_base_q(schemeset)
 #########################################################
-refresh_base_q <- function(schemeset){
-sroot<-schemeset  
-setq<-read_xml(-xml_children(xml_children(xml_children(sroot))))
+refresh_base_q <- function(origin){
+sroot<-origin  
+setq<-(xml_children(xml_children(xml_children(sroot))))
 #seta<-pos4<-xml_children(xml_children(xml_children(xml_children(sroot))))
 #print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sroot))))))
 #print(set_question)
@@ -54,10 +54,11 @@ setq<-read_xml(-xml_children(xml_children(xml_children(sroot))))
 return(setq)
 }
 #########################################################
-refresh_base_a <- function(schemeset){
-  sroot<-schemeset  
+refresh_base_a <- function(origin){
+  
+  sroot<-origin  
  # setq<-xml_children(xml_children(xml_children(sroot)))
-  seta<-read_xml(xml_children(xml_children(xml_children(xml_children(sroot)))))
+  seta<-(xml_children(xml_children(xml_children(xml_children(sroot)))))
   #print(set_question)
   #print(set_answers)
 return(seta)
@@ -172,7 +173,7 @@ val_title<-"title" #tag, kontext
 val_fail<-"tagfail"
 
 #check flag 1:3
-ifelse(pos_q==1,tag<-val_descr,ifelse(pos_q==2,tag<-val_lead,ifelse(pos_q==3,tag<-val_title,ifelse(pos_q!=1:3,tag<-val_fail))))
+ifelse(pos_q==1,tag<-val_descr,ifelse(pos_q==2,tag<-val_title,ifelse(pos_q==3,tag<-val_lead,ifelse(pos_q!=1:3,tag<-val_fail))))
 set_answers<-refresh_base_a(scheme_n)
 set_question<-refresh_base_q(scheme_n)
 #dataset<-dataset
@@ -209,11 +210,11 @@ xml_replace(tst_aa,val_text,tst_ra)
 #init variables
 init<- function(set,opt,base_xml){
   items<-refresh_data(datenset)
-  ifelse(set=="new",return(read_xml(base_xml)),ifelse(set=="mod",scheme<-read_xml(xmlmod),ifelse(set=="old",scheme<-read_xml(xmlorigin),return(items))))
-seta<-refresh_base_a(scheme)
-setq<-refresh_base_q(scheme)
+  ifelse(set=="new",return(read_xml(base_xml)),ifelse(set=="mod",scheme<-read_xml(xmlmod),ifelse(set=="old",return(scheme<-read_xml(xmlorigin)),return(items))))
+#seta<-refresh_base_a(base_xml)
+#setq<-refresh_base_q(base_xml)
 #ifelse(set=="items",return(items))
-ifelse(opt=="a",return(seta),ifelse(opt=="q",return(setq),return(items)))
+#ifelse(opt=="a",return(seta),ifelse(opt=="q",return(setq),return(items)))
 }
 
 xmlorigin<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
@@ -237,7 +238,9 @@ scheme<-init("old",1,xmlorigin)
 
 #####call replacement #################################
 # discomment and rerun
-replace_content(items,scheme,6,1:6,3)
+replace_content(items,scheme,6,6,3)
+
+write_xml(scheme,"qscheme_output.xml")
 
 # display 
 #proof(6,1:6,3)
@@ -272,7 +275,6 @@ proof_scheme<-function(scheme_mod){
   seta<-xml_children(xml_children(xml_children(xml_children(sroot))))
   set_mod<-c(seta,setq)
 }
-write_xml(scheme,"qscheme_output.xml")
 #read_xml("qscheme_output.xml")
 
 

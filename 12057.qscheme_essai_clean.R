@@ -24,7 +24,7 @@ library(xml2)
 
 #scheme<-read_xml("docs/w3school/qtemplate.xml")
 #actualise:
-
+##########################################
 refresh_scheme <- function(ret_file){
 #old scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
 #items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
@@ -35,6 +35,7 @@ scheme<-read_xml(ret_file)
 
 sroot<-scheme
 }
+#########################################################
 refresh_data <- function(ret_file){
   items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
 }
@@ -42,20 +43,21 @@ refresh_data <- function(ret_file){
 
 #refresh_data(xmlmod)
 #setq<-refresh_base_q(schemeset)
-
+#########################################################
 refresh_base_q <- function(schemeset){
 sroot<-schemeset  
-setq<-pos3<-xml_children(xml_children(xml_children(sroot)))
+setq<-read_xml(-xml_children(xml_children(xml_children(sroot))))
 #seta<-pos4<-xml_children(xml_children(xml_children(xml_children(sroot))))
 #print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sroot))))))
 #print(set_question)
 #print(set_answers)
 return(setq)
 }
+#########################################################
 refresh_base_a <- function(schemeset){
   sroot<-schemeset  
  # setq<-xml_children(xml_children(xml_children(sroot)))
-  seta<-xml_children(xml_children(xml_children(xml_children(sroot))))
+  seta<-read_xml(xml_children(xml_children(xml_children(xml_children(sroot)))))
   #print(set_question)
   #print(set_answers)
 return(seta)
@@ -70,8 +72,6 @@ return(seta)
 #4,6,8,10,12 meta all same
 #formel: ax = antwortoption
 #######################################################
-#############################################
-
 get_question <- function(dataset,itemwitch,option){
   
   ###4.2.1
@@ -95,7 +95,7 @@ get_question <- function(dataset,itemwitch,option){
 
 #print(get_question(1,4))
 ####works
-#########################
+#####################################################
 get_item<-function (dataset,item,option){
   items<-dataset
   itx<-item
@@ -123,7 +123,7 @@ get_item<-function (dataset,item,option){
 #get_item(1,4)
 #works
 
-#################
+#######################################################
 adress_answer<- function (set,itemnr,item_opt) {
 pos4<-set
 ax<-item_opt #antwortoption A1-A6
@@ -135,7 +135,6 @@ item_adress_0<-item_adress_last-14
 itempos<-(item_adressx<-item_adress_0+optionx[ax])
 out_answer<-(set[itempos])
 }
-#######################################################
 #works as function
 
 #print (a1<-(adress_answer (pos4,2,1)))
@@ -156,7 +155,6 @@ questpos<-(question_adressx<-question_adress_0+questionx[qx])
 #print(pos3[questpos])
 return(pos3[questpos])
 }
-############################################################
 
 #print(adress_question(pos3,4,3))
 
@@ -164,20 +162,20 @@ return(pos3[questpos])
 ##################
 #now replace content
 #itemdescription
-
-replace_content<-function(dataset,seta,setq,item,pos_a,pos_q){
+##############################################################
+replace_content<-function(dataset,scheme_n,item,pos_a,pos_q){
   
 val_text<-"text" #tag, item
 val_lead<-"lead" #tag, fragetext
 val_descr<-"description" #tag, itemnumber
-val_context<-"title" #tag, kontext
+val_title<-"title" #tag, kontext
 val_fail<-"tagfail"
 
 #check flag 1:3
-ifelse(pos_q==1,tag<-val_descr,ifelse(pos_q==2,tag<-val_lead,ifelse(pos_q==3,tag<-val_context,ifelse(pos_q!=1:3,tag<-val_fail))))
-set_answers<-seta
-set_question<-setq
-dataset<-dataset
+ifelse(pos_q==1,tag<-val_descr,ifelse(pos_q==2,tag<-val_lead,ifelse(pos_q==3,tag<-val_title,ifelse(pos_q!=1:3,tag<-val_fail))))
+set_answers<-refresh_base_a(scheme_n)
+set_question<-refresh_base_q(scheme_n)
+#dataset<-dataset
 
 print(tst_aq<-adress_question(set_question,item,pos_q))
 print(tst_aa<-adress_answer(set_answers,item,pos_a))
@@ -205,10 +203,13 @@ xml_replace(tst_aa,val_text,tst_ra)
 #works
 ########################################### THIS GLOBAL
 
+
+
+##########################################################
 #init variables
-init<- function(set,opt){
+init<- function(set,opt,base_xml){
   items<-refresh_data(datenset)
-  ifelse(set=="mod",scheme<-refresh_scheme(xmlmod),ifelse(set=="old",scheme<-refresh_scheme(xmlorigin),return(items)))
+  ifelse(set=="new",return(read_xml(base_xml)),ifelse(set=="mod",scheme<-read_xml(xmlmod),ifelse(set=="old",scheme<-read_xml(xmlorigin),return(items))))
 seta<-refresh_base_a(scheme)
 setq<-refresh_base_q(scheme)
 #ifelse(set=="items",return(items))
@@ -227,10 +228,19 @@ schemeset<-xmlmod
 
 #print(seta)
 ####
- 
-items<-init("items",1)
-seta<-init("old","a")
-setq<-init("old","q")
+######## CALL VAIRIABLES ############################## 
+items<-init("items",1,1)
+scheme<-init("old",1,xmlorigin)
+#seta<-init("mod","a",1)
+#setq<-init("mod","q",1)
+
+
+#####call replacement #################################
+# discomment and rerun
+replace_content(items,scheme,6,1:6,3)
+
+# display 
+#proof(6,1:6,3)
 
 #sets original
 #seta<-init(xmlorigin,2)
@@ -240,18 +250,21 @@ setq<-init("old","q")
 #setq<-init(xmlmod,3)
 
 
-proof<-function(items,item,qx,ax){
-print(get_question(items,item,qx))
+proof<-function(item,ax,qx){
+print("in dataset")
+  print(get_question(items,item,qx))
 print(get_item(items,item,ax))
+print("#############################################")
+print("in scheme")
 print(adress_question(setq,item,qx))
 print(adress_answer(seta,item,ax))
 
 }
-#####call replacement
-#replace_content(items,seta,setq,6,6,3)
 
 #####proof
 
+
+###############################################################
 proof_scheme<-function(scheme_mod){
 #initiate seta,setq
   sroot<-scheme_mod
@@ -259,7 +272,7 @@ proof_scheme<-function(scheme_mod){
   seta<-xml_children(xml_children(xml_children(xml_children(sroot))))
   set_mod<-c(seta,setq)
 }
-#write_xml(schemeset,"qscheme_output.xml")
+write_xml(scheme,"qscheme_output.xml")
 #read_xml("qscheme_output.xml")
 
 

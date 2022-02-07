@@ -206,28 +206,50 @@ xml_replace(tst_aa,val_text,tst_ra)
 #works
 ########################################### THIS GLOBAL
 
+#init variables
+init<- function(set,opt){
+  items<-refresh_data(datenset)
+  ifelse(set=="mod",scheme<-refresh_scheme(xmlmod),ifelse(set=="old",scheme<-refresh_scheme(xmlorigin),return(items)))
+seta<-refresh_base_a(scheme)
+setq<-refresh_base_q(scheme)
+#ifelse(set=="items",return(items))
+ifelse(opt=="a",return(seta),ifelse(opt=="q",return(setq),return(items)))
+}
+
 xmlorigin<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
 xmlmod<-("qscheme_output.xml")
 
 datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv")
 
-schemeset<-refresh_scheme(xmlmod)
-#schemeset<-refresh_data(xmlorigin)
-seta<-refresh_base_a(schemeset)
-setq<-refresh_base_q(schemeset)
+#schemeset<-xmlorigin
+schemeset<-xmlmod
+#seta<-refresh_base_a(schemeset)
+#setq<-refresh_base_q(schemeset)
 
-print(seta)
+#print(seta)
+####
+ 
+items<-init("items",1)
+seta<-init("old","a")
+setq<-init("old","q")
 
-items<-refresh_data(datenset)
+#sets original
+#seta<-init(xmlorigin,2)
+#setq<-init(xmlorigin,3)
+#sets modified proof
+#seta<-init(xmlmod,2)
+#setq<-init(xmlmod,3)
 
-print(get_question(items,6,3))
-print(get_item(items,6,6))
-print(adress_question(setq,6,1:3))
-print(adress_answer(seta,6,1:6))
 
+proof<-function(items,item,qx,ax){
+print(get_question(items,item,qx))
+print(get_item(items,item,ax))
+print(adress_question(setq,item,qx))
+print(adress_answer(seta,item,ax))
 
+}
 #####call replacement
-replace_content(items,seta,setq,6,6,3)
+#replace_content(items,seta,setq,6,6,3)
 
 #####proof
 

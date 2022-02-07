@@ -5,7 +5,7 @@
   <version>3.2.49</version>
   <timestamp>2022-02-04 14:24:08</timestamp>
   <title>fragen_hux2022_templateB</title>
-  <description>modifed 12063.</description>
+  <description/>
   <language>ger</language>
   <attributes.specific program="ofb">
     <attr id="language">ger</attr>
@@ -28,7 +28,7 @@
         <attr id="pos">1</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Oskar glaubt, dass Pauls Vorgesetzter seinem Wunsch zustimmen wird.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -83,7 +83,7 @@
         <attr id="pos">2</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Lulu weiß, dass Katja ihren Mann ebenfalls betrogen hat.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -138,7 +138,7 @@
         <attr id="pos">3</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Anna glaubt, dass Tom sich mehr anstrengen sollte.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -193,7 +193,7 @@
         <attr id="pos">4</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Karla glaubt, dass Andreas das Geld nicht verdient hat.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -248,7 +248,7 @@
         <attr id="pos">5</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Max und Moritz sich nicht an die Regeln halten, wenn die Eltern nicht da sind.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -303,7 +303,7 @@
         <attr id="pos">6</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Paula glaubt, dass die Kolleginnen  zusammenhalten und sich nicht gegenseitig bei ihrer Vorgesetzten verraten.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -358,7 +358,7 @@
         <attr id="pos">7</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil die Straße erst sicher gemacht wurde, nachdem der Unfall passiert ist.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -413,7 +413,7 @@
         <attr id="pos">8</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Lotta findet, dass Anton selber Schuld ist, dass er gestürzt ist.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -468,7 +468,7 @@
         <attr id="pos">9</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil auch ***A*** denkt, dass der Stadt die Millionen wichtiger sind, als unabhängig zu bleiben.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -523,7 +523,7 @@
         <attr id="pos">3</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil sie nicht erwarten konnte, gerade zufällig einen dicken Umschlag Scheine in der Tasche zu haben, als sie den Zauberberg im Fenster sieht?</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -578,7 +578,7 @@
         <attr id="pos">4</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Mike mit seiner Aussage zu verstehen gibt, älter werden zu wollen.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -633,7 +633,7 @@
         <attr id="pos">5</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil sie denkt, dass bis man ernten kann, noch eine Menge zu tun sein wird.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -688,7 +688,7 @@
         <attr id="pos">6</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil ***A*** glaubte frei zu haben und nun doch arbeiten gehen muss.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -743,7 +743,7 @@
         <attr id="pos">7</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil ***B*** meint, dass Attraktivität oft blenden (täuschen) kann.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -798,7 +798,7 @@
         <attr id="pos">8</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil ***B*** den Disput mit ***A*** beenden möchte.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -853,7 +853,7 @@
         <attr id="pos">3</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil ***B*** möchte, dass ***A*** ihr Geld für schlechte Zeiten bewahrt. (weil ***B*** nicht möchte, dass ***A*** ihr Geld unnötig ausgibt)</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -908,7 +908,7 @@
         <attr id="pos">4</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Lisa denkt, dass sie sich voreilig in den Reihen umgestellt haben und deswegen nun mehr Zeit brauchen. </text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -963,7 +963,7 @@
         <attr id="pos">5</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Maria glaubt, dass Susi besser auf ihre Wertsachen aufpassen müsste.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1018,7 +1018,7 @@
         <attr id="pos">6</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Luis glaubt, dass die Tomaten Lasagne eine liebe Idee war, die dennoch negative Auswirkungen hatte.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1073,7 +1073,7 @@
         <attr id="pos">7</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Moritz denkt, dass Hans selbst seinen Diebstahl ausgleichen muss. </text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1128,7 +1128,7 @@
         <attr id="pos">8</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Maja meint, dass Laura gesiegt hat, weil Laura überzeugt von ihren Leistungen ist.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1183,7 +1183,7 @@
         <attr id="pos">3</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Sebastian der Meinung ist, dass die Ursache des Gerüchts die tatsächliche Auflösung des Geschäfts war.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1238,7 +1238,7 @@
         <attr id="pos">4</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Lukas denkt, dass ein paar gute Schuhe länger halten, als zwei Paar billigere Schuhe.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1293,7 +1293,7 @@
         <attr id="pos">5</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Linda glaubt, dass auch die Rechenschritte von Hannah zu dem richtigen Ergebnis führen können.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1348,7 +1348,7 @@
         <attr id="pos">6</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Björn glaubt, dass Marcs Streben nach Erfolg bestimmen wird, ob er ein guter Tänzer wird.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1403,7 +1403,7 @@
         <attr id="pos">7</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Birgit denkt, dass Luisa eine gute Note erhalten wird, solang sie weiterhin viel lernt.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1458,7 +1458,7 @@
         <attr id="pos">8</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Franz denkt, dass es gut ist, dass das Tor am Ende des Spiels die Partie noch aufgewertet hat.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>
@@ -1513,7 +1513,7 @@
         <attr id="pos">9</attr>
       </attributes.specific>
       <item>
-        <text>NA</text>
+        <text>Weil Richard denkt, dass oft schlechte Resultate entstehen, wenn zahlreiche Angestellte zusammenarbeiten.</text>
         <attributes.specific program="ofb">
           <attr id="id">1</attr>
           <attr id="pos">1</attr>

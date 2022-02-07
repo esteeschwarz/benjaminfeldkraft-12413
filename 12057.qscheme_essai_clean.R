@@ -86,6 +86,7 @@ get_question <- function(dataset,itemwitch,option){
   #newitem[7]<-"default"
   return (newitem[option])
 }
+
 ####works
 #####################################################
 get_item<-function (dataset,item,option){
@@ -94,7 +95,7 @@ get_item<-function (dataset,item,option){
   newopt<-c()
   #newopt[1]<-itx
   #newopt[2]<-itx
-  newopt[1]<-items$A1.[itx]
+  newopt[1]<-items$A1[itx]
   #newopt[4]<-11
   newopt[2]<-items$A2[itx]
   #newopt[6]<-22
@@ -108,6 +109,7 @@ get_item<-function (dataset,item,option){
   #newopt[14]<-66
   return(newopt[option])
 }
+
 #works
 #######################################################
 adress_answer<- function (set,itemnr,item_opt) {
@@ -198,7 +200,7 @@ xmlmod<-("qscheme_output.xml")
 
 #to retrieve modified xml-scheme for integrating in soscisurvey.de set next 2 lines 
 xmlmod_git<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/qscheme_output.xml")
-xmlmod<-xmlmod_git
+#xmlmod<-xmlmod_git
 
 datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR01_GR04.csv")
 #datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR04.csv")
@@ -212,8 +214,9 @@ base_xml<-xmlorigin
 #1
 items<-init("items",1,1)
 #2
-#scheme<-init("old",1,base_xml) #values: old=original scheme, mod=modified scheme
+scheme<-init("old",1,base_xml) #values: old=original scheme, mod=modified scheme
 #3
+ 
 #replace_loop()
 #4
 #write_xml(scheme,"qscheme_output.xml")
@@ -227,18 +230,20 @@ items<-init("items",1,1)
 #save substitutions in new scheme
 ## >>>>>>> obsolete, called in replace_loop above, only run for single replacements
 #6. ######## TODO: ############
-#
+# proof: the modified scheme is not of the same structure, is list(1) object instead of list(2)
 ###########################################################
-# proof<-function(item,ax,qx){
-# print("in dataset")
-#   print(get_question(items,item,qx))
-# print(get_item(items,item,ax))
-# print("#############################################")
-# print("in scheme")
-# print(adress_question(setq,item,qx))
-# print(adress_answer(seta,item,ax))
-# 
-# }
+ proof<-function(item,ax,qx){
+ print("in dataset")
+ print(get_question(items,item,qx))
+ print(get_item(items,item,ax))
+ print("#############################################")
+ print("in scheme")
+ print(adress_question(refresh_base_q(scheme),item,qx))
+ print(adress_answer(refresh_base_a(scheme),item,ax))
+ 
+ }
+#proof(1,1,3)
+#get_item(items,1,2)
 ###############################################################
 # proof_scheme<-function(scheme_mod){
 # #initiate seta,setq

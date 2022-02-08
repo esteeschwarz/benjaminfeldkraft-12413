@@ -149,7 +149,7 @@ adress_question<- function(set,itemnr,questionid){
   qx<-questionid
   lquest<-length(pos3)
   #formel adress line: 1+14 each
-  quest_cpt<-64*14+1
+  quest_cpt<-64*14 #del+1
   questionx<-c(2,4,7) #itemdescription,kontext,question
   question_adress_last<-(quest_cpt/64*itemnr)
   question_adress_0<-question_adress_last-14
@@ -157,6 +157,9 @@ adress_question<- function(set,itemnr,questionid){
   #print(pos3[questpos])
   return(pos3[questpos])
 }
+#print(adress_question(scheme,63,2))
+#print(adress_question(refresh_base_q(scheme),62,1))
+
 #works 12062.14.17
 ##################
 #now replace content
@@ -228,8 +231,13 @@ proof<-function(item,ax,qx){
   
 }
 #proof(8,1,3)
-#get_item(items,1,2)
+#get_item(items,64,1)
+#get_question(items,64,1)
+#proof(28,1:6,1:3)
 ###############################################################
+####################################################
+### in this section the variables have to be adapted
+
 # declare scheme & dataset
 xmlorigin<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
 #xmlmod<-("qscheme_output.xml")
@@ -243,14 +251,14 @@ datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/
 
 #schemeset<-xmlorigin
 schemeset<-xmlmod
-base_xml<-xmlorigin
+base_xml<-xmlmod_git
 #seta<-refresh_base_a(schemeset)
 #setq<-refresh_base_q(schemeset)
 ######## run routine: ############################## 
 #1
 items<-init("items",x,x)
 #2
-scheme<-init("mod",x,base_xml) #values: old=original scheme, mod=modified scheme
+scheme<-init("old",x,base_xml) #values: old=original scheme, mod=modified scheme
 #3############################
 #replaces all according to itemvorlagen .csv as specified in datenset 
 replace_loop()
@@ -259,7 +267,8 @@ replace_loop()
 ##############################
 #6.proof: call item/antwort/question in modified scheme
 # call: proof([item],[antwortoption 1-6],[questionfield 1-3])
-#proof(27,1,3)
+#proof(64,1,1)
+#call csv content
 
 #####call replacement #################################
 # discomment and rerun for single replacement

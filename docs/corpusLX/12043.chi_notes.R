@@ -69,19 +69,6 @@ chisq.test(chi2,correct=FALSE)
 print("-------------------------")
 
 
-###12063.gruppe konzeptuelle metaphern
-#englisch,spanisch up
-#anzahl verben, anzahl adjektive
-eng<-c(15,20)
-span<-c(11,18)
-
-#anzahl verben die entsprechen: 15
-#2. spalte:
-#anzahl v. nicht entsprechen 55
-#dann chisquare sinnvoll
-#auch type/token treffer (perspektive) sinnvoll zu vergleichen
-
-
 
 ##meindl uebung U test, set C
 #################
@@ -291,6 +278,21 @@ d10<-posd9-posd8
 tie<-(d10*(d9^3-d9))
 print (tie)
 print(sum(tie)) ####YES!
+
+
+###12063.gruppe konzeptuelle metaphern
+#englisch,spanisch up
+#anzahl verben, anzahl adjektive
+eng<-c(15,20)
+span<-c(11,18)
+
+#anzahl verben die entsprechen: 15
+#2. spalte:
+#anzahl v. nicht entsprechen 55
+#dann chisquare sinnvoll
+#auch type/token treffer (perspektive) sinnvoll zu vergleichen
+
+
 
 c(types,tokens,korpus)
 #entsprechen=

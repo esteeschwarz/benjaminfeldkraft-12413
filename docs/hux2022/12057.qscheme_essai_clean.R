@@ -27,6 +27,7 @@
 #xmlschema
 #install.packages("xml2")
 library(xml2)
+library(stringi)
 #download_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml","template.xml")
 #download.file("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv","items.csv")
 #scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
@@ -90,16 +91,27 @@ get_question <- function(dataset,itemwitch,option){
   newitem<-c()
   itx<-itemwitch
   items<-dataset
-  newitem[1]<-items$item[itx] #description
+  newitem[8]<-items$item[itx] #description
+  itemd<-newitem[8]
   #newitem[2]<-"select"
   newitem[2]<-items$kontext[itx] #kontext
   newitem[4]<-"Weisen Sie der Frage die richtige Antwort zu." #explanation
   #newitem[5]<-"right"
   newitem[3]<-items$frage[itx] #fragetext
   #newitem[7]<-"default"
+  
+  itemdescr<- function(item) {
+    nr2<-as.integer(item)/100+setversion
+    nr3<-as.character(nr2)
+    nr4<-"item"%s+%nr3 #need to integrate library(stringi)
+  
+  
+  }
+  newitem[1]<-itemdescr(itemd)
   return (newitem[option])
 }
-
+#print(get_question(items,22,1))
+#item<-4
 ####works
 #####################################################
 #1.2.4 fetch answers data in item table
@@ -248,7 +260,8 @@ xmlmod<-xmlmod_git
 
 datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR01_GR04_mod_cpt.csv")
 #datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR04.csv")
-
+#set dataset version
+setversion<-5
 #schemeset<-xmlorigin
 schemeset<-xmlmod
 base_xml<-xmlmod_git
@@ -259,9 +272,9 @@ base_xml<-xmlmod_git
 items<-init("items",x,x)
 #2
 scheme<-init("old",x,base_xml) #values: old=original scheme, mod=modified scheme
-#3############################
+#3############################ discomment the following two commands
 #replaces all according to itemvorlagen .csv as specified in datenset 
-replace_loop()
+#replace_loop()
 #4############################
 #write_xml(scheme,"qscheme_output.xml")
 ##############################
@@ -282,6 +295,15 @@ replace_loop()
 #6. ######## TODO: ############
 #1.and to make the whole thing safe das beste zum schlusz: fehlerroutinen einbauen...
 #2.adapt script to changing number of items. now: 16x4=64, maybe: 12x3+16 in the end. 
+#3.finetuning: the itemnumbers in the table are numbered 1-64 and appear in the scheme with
+#that description in the description element. for sorting reason in the survey it would be fine to have it descripted
+#as ["item"]+[setnumber according to state of actualisation e.g. 04][itemnumber/10] >
+#result ca: item04.0.12
+
+#itemnr<-get_question(items,3,1)
+#nr2<-as.integer(itemnr)/100+4
+#nr3<-as.character(nr2)
+#nr4<-"item"%s+%nr3 #need to integrate library(stringi)
 
 ###############################
 # proof_scheme<-function(scheme_mod){

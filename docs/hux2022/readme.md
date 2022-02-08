@@ -1,0 +1,3 @@
+# info
+#### 12064. > ivan
+- 12057.qscheme_essai_clean.R ist ein script zur automatisierten aktualisierung eines xml schemas zum import in: [soscisurvey](https://soscisurvey.de), einer platform zur erstellung von umfragen, fragebögen, studien. either ihr könnt euch ja das mal ankucken und einen account machen & eine akademische studie erstellen (umsonst) in der dann das aktualisierte schema mit den neuen items als grundlage zur erstellung einer kategorie! fragen benutzt werden kann either ich mach das über meinen account, jenach bedingungen. das schema neue schema ist dann jdfs. für jeden benutzbar, um damit dort (sosci) zumindest auf einfache weise einen fragebogen zu erstellen/aktualisieren, solange sich noch der content unserer items ändert.

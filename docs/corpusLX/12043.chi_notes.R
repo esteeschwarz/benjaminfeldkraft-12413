@@ -294,7 +294,7 @@ span<-c(11,18)
 
 
 
-c(types,tokens,korpus)
+#c(types,tokens,korpus)
 #entsprechen=
 totaleng<-73
 totalspan<-86

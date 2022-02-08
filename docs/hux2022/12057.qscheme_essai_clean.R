@@ -238,7 +238,7 @@ xmlorigin<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/packag
 xmlmod_git<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/qscheme_output.xml")
 xmlmod<-xmlmod_git
 
-datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR01_GR04.csv")
+datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR01_GR04_mod_cpt.csv")
 #datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR04.csv")
 
 #schemeset<-xmlorigin
@@ -253,7 +253,7 @@ items<-init("items",x,x)
 scheme<-init("mod",x,base_xml) #values: old=original scheme, mod=modified scheme
 #3############################
 #replaces all according to itemvorlagen .csv as specified in datenset 
-#replace_loop()
+replace_loop()
 #4############################
 #write_xml(scheme,"qscheme_output.xml")
 ##############################

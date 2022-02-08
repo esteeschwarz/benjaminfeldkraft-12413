@@ -1,0 +1,2 @@
+language = "rlang"
+run = "R -s -f docs/corpusLX/12043.chi_notes.R"

@@ -48,10 +48,13 @@ library(xml2)
 #sroot<-scheme
 #}# > not needed
 #########################################################
+#1.1 fetch item data of still to refresh table
 refresh_data <- function(ret_file){
   items<-read.csv(datenset,skip=1,sep=";")
 }
 #########################################################
+#1.2. fetch xml scheme to modify or proof
+#1.2.1 fetch elements of questions
 refresh_base_q <- function(origin){
   sroot<-origin  
   setq<-(xml_children(xml_children(xml_children(sroot))))
@@ -62,6 +65,7 @@ refresh_base_q <- function(origin){
   return(setq)
 }
 #########################################################
+#1.2.1 fetch elements of answers
 refresh_base_a <- function(origin){
   sroot<-origin  
   # setq<-xml_children(xml_children(xml_children(sroot)))
@@ -78,6 +82,7 @@ refresh_base_a <- function(origin){
 #4,6,8,10,12 meta all same
 #formel: ax = antwortoption
 #######################################################
+#1.2.3. fetch questions data in itemtable
 get_question <- function(dataset,itemwitch,option){
   ###4.2.1
   #create new array with modifiying values
@@ -97,6 +102,7 @@ get_question <- function(dataset,itemwitch,option){
 
 ####works
 #####################################################
+#1.2.4 fetch answers data in item table
 get_item<-function (dataset,item,option){
   items<-dataset
   itx<-item
@@ -120,6 +126,8 @@ get_item<-function (dataset,item,option){
 
 #works
 #######################################################
+#2. adress specific element to replace
+#2.1. adress asnwers element
 adress_answer<- function (set,itemnr,item_opt) {
   pos4<-set
   ax<-item_opt #antwortoption A1-A6
@@ -133,7 +141,9 @@ adress_answer<- function (set,itemnr,item_opt) {
 }
 #works as function
 ###now for parent section (question, kontext) 
+#TODO: adapt formula to new amount of items
 ######################################################
+#2.2. adress questions element
 adress_question<- function(set,itemnr,questionid){
   pos3<-set
   qx<-questionid
@@ -152,7 +162,8 @@ adress_question<- function(set,itemnr,questionid){
 #now replace content
 #itemdescription
 ##############################################################
-# the main function
+#3. replace function. substitutes old elements content with retrieved content
+#3.1. the main function
 replace_content<-function(dataset,scheme_n,item,pos_a,pos_q){
   
   # element tags in xml scheme as in original
@@ -183,7 +194,7 @@ replace_content<-function(dataset,scheme_n,item,pos_a,pos_q){
 }
 #################
 ########################################
-
+#3.2 looping replacement over number of items, questions, answers
 replace_loop <- function(){
   la<-length(items$item)
   for (k1 in 1:la){
@@ -193,7 +204,7 @@ replace_loop <- function(){
   }
 }
 ##########################################################
-#init variables
+#4. init variables
 init<- function(set,opt,base_xml){
   items<-refresh_data(datenset)
   ifelse(set=="new",return(read_xml(base_xml)),ifelse(set=="mod",return(scheme<-read_xml(xmlmod)),ifelse(set=="old",return(scheme<-read_xml(xmlorigin)),return(items))))
@@ -205,6 +216,7 @@ init<- function(set,opt,base_xml){
 #################################################################
 # proof:
 ###########################################################
+#5.proof substitution
 proof<-function(item,ax,qx){
   print("in dataset")
   print(get_question(items,item,qx))
@@ -259,7 +271,10 @@ scheme<-init("mod",x,base_xml) #values: old=original scheme, mod=modified scheme
 #save substitutions in new scheme
 ## >>>>>>> obsolete, called in replace_loop above, only run for single replacements
 #6. ######## TODO: ############
+#1.and to make the whole thing safe das beste zum schlusz: fehlerroutinen einbauen...
+#2.adapt script to changing number of items. now: 16x4=64, maybe: 12x3+16 in the end. 
 
+###############################
 # proof_scheme<-function(scheme_mod){
 # #initiate seta,setq
 #   sroot<-scheme_mod

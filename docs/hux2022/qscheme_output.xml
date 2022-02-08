@@ -3481,7 +3481,7 @@
       </item>
     </question>
     <question>
-      <description>64xxx_critical</description>
+      <description>64</description>
       <class>select</class>
       <title>lorem ipsum KONTEXT</title>
       <explanation>weisen die der frage die richtige antwort zu</explanation>
@@ -3489,8 +3489,8 @@
       <lead>lorem ipsum FRAGE</lead>
       <order>default</order>
       <attributes.specific program="ofb">
-        <attr id="id">8</attr>
-        <attr id="pos">8</attr>
+        <attr id="id">9</attr>
+        <attr id="pos">9</attr>
       </attributes.specific>
       <item>
         <text>lorem ipsum A1</text>
@@ -3534,6 +3534,6 @@
           <attr id="pos">6</attr>
         </attributes.specific>
       </item>
-    </question>  
+    </question>
   </section>
 </surveyContent>

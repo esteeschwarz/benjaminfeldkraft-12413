@@ -8,7 +8,15 @@
 #future import of modified scheme into survey platform
 #to automatize survey building / building of survey content
 #which consitst of 16x (context,question, 6 fold mc test)
-#steps:
+#comments:
+#ivan: 20220308(12.21) dieses script läuft jetzt zufriedenstellend und ersetzt
+#in einem muster xml-schema, das ich von soscisurvey importiert habe die dort 
+#gespeicherten fragen (item 1, item 2, + 62 leere items) durch die in der itemvorlage
+#als .csv gespeicherten bisher zur verfügung stehenden 26 items aus GR01, GR04.
+#die modifizierte scheme datei wird zur überprüfung am ende nochmal importiert und gibt
+#bei einer abfrage die aktualisierten fragen aus. es klappt.
+
+#task steps:
 #1. build musteritems in https://soscisurvey.de
 #1.1 2 items using kontext, question, mc test 6 options
 #2. export template to .xml
@@ -32,7 +40,7 @@ library(xml2)
 #refresh_scheme <- function(ret_file){
 #old scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_2022-02-04.xml")
 #items<-read.csv("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/items/GR1/context2022_items_GR01.csv",skip=1)
-  
+
 #scheme<-read_xml("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
 #scheme<-read_xml("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
 #scheme<-read_xml(ret_file)
@@ -45,23 +53,23 @@ refresh_data <- function(ret_file){
 }
 #########################################################
 refresh_base_q <- function(origin){
-sroot<-origin  
-setq<-(xml_children(xml_children(xml_children(sroot))))
-#seta<-pos4<-xml_children(xml_children(xml_children(xml_children(sroot))))
-#print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sroot))))))
-#print(set_question)
-#print(set_answers)
-return(setq)
+  sroot<-origin  
+  setq<-(xml_children(xml_children(xml_children(sroot))))
+  #seta<-pos4<-xml_children(xml_children(xml_children(xml_children(sroot))))
+  #print(pos5<-xml_children(xml_children(xml_children(xml_children(xml_children(sroot))))))
+  #print(set_question)
+  #print(set_answers)
+  return(setq)
 }
 #########################################################
 refresh_base_a <- function(origin){
   sroot<-origin  
- # setq<-xml_children(xml_children(xml_children(sroot)))
+  # setq<-xml_children(xml_children(xml_children(sroot)))
   seta<-(xml_children(xml_children(xml_children(xml_children(sroot)))))
   #print(set_question)
   #print(set_answers)
-return(seta)
-  }
+  return(seta)
+}
 ##########################
 #now adress items generale
 #lines formula in section (element) <items> (antwortoptionen)
@@ -113,31 +121,31 @@ get_item<-function (dataset,item,option){
 #works
 #######################################################
 adress_answer<- function (set,itemnr,item_opt) {
-pos4<-set
-ax<-item_opt #antwortoption A1-A6
-lquest<-length(pos4)
-item_cpt<-64*14
-optionx<-c(3,5,7,9,11,13) #A1-A6
-item_adress_last<-(item_cpt/64*itemnr)
-item_adress_0<-item_adress_last-14
-itempos<-(item_adressx<-item_adress_0+optionx[ax])
-out_answer<-(set[itempos])
+  pos4<-set
+  ax<-item_opt #antwortoption A1-A6
+  lquest<-length(pos4)
+  item_cpt<-64*14
+  optionx<-c(3,5,7,9,11,13) #A1-A6
+  item_adress_last<-(item_cpt/64*itemnr)
+  item_adress_0<-item_adress_last-14
+  itempos<-(item_adressx<-item_adress_0+optionx[ax])
+  out_answer<-(set[itempos])
 }
 #works as function
 ###now for parent section (question, kontext) 
 ######################################################
 adress_question<- function(set,itemnr,questionid){
-pos3<-set
-qx<-questionid
-lquest<-length(pos3)
-#formel adress line: 1+14 each
-quest_cpt<-64*14+1
-questionx<-c(2,4,7) #itemdescription,kontext,question
-question_adress_last<-(quest_cpt/64*itemnr)
-question_adress_0<-question_adress_last-14
-questpos<-(question_adressx<-question_adress_0+questionx[qx])
-#print(pos3[questpos])
-return(pos3[questpos])
+  pos3<-set
+  qx<-questionid
+  lquest<-length(pos3)
+  #formel adress line: 1+14 each
+  quest_cpt<-64*14+1
+  questionx<-c(2,4,7) #itemdescription,kontext,question
+  question_adress_last<-(quest_cpt/64*itemnr)
+  question_adress_0<-question_adress_last-14
+  questpos<-(question_adressx<-question_adress_0+questionx[qx])
+  #print(pos3[questpos])
+  return(pos3[questpos])
 }
 #works 12062.14.17
 ##################
@@ -146,39 +154,39 @@ return(pos3[questpos])
 ##############################################################
 # the main function
 replace_content<-function(dataset,scheme_n,item,pos_a,pos_q){
-
-# element tags in xml scheme as in original
-val_text<-"text"         #tag, item
-val_lead<-"lead"         #tag, fragetext
-val_descr<-"description" #tag, itemnumber
-val_title<-"title"       #tag, kontext
-val_fail<-"tagfail"
-
-ifelse(pos_q==1,tag<-val_descr,ifelse(pos_q==2,tag<-val_title,ifelse(pos_q==3,tag<-val_lead,ifelse(pos_q==1:3,tag<-val_fail))))
-set_answers<-refresh_base_a(scheme_n)
-set_question<-refresh_base_q(scheme_n)
-
-print(tst_aq<-adress_question(set_question,item,pos_q))
-print(tst_aa<-adress_answer(set_answers,item,pos_a))
-print(tst_rq<-get_question(dataset,item,pos_q))
-print(tst_ra<-get_item(dataset,item,pos_a))
-#works
-#works
-#muster: xml_replace(adress_[answer|question](options),val,get_[item|question](options))
-#testreplace xml_replace(tst2,val ,tst_r )
-
-#### here happening the replacement according to above parameters
-xml_replace(tst_aq,tag ,tst_rq )
-xml_replace(tst_aa,val_text,tst_ra)
-####
-#works
+  
+  # element tags in xml scheme as in original
+  val_text<-"text"         #tag, item
+  val_lead<-"lead"         #tag, fragetext
+  val_descr<-"description" #tag, itemnumber
+  val_title<-"title"       #tag, kontext
+  val_fail<-"tagfail"
+  
+  ifelse(pos_q==1,tag<-val_descr,ifelse(pos_q==2,tag<-val_title,ifelse(pos_q==3,tag<-val_lead,ifelse(pos_q==1:3,tag<-val_fail))))
+  set_answers<-refresh_base_a(scheme_n)
+  set_question<-refresh_base_q(scheme_n)
+  
+  print(tst_aq<-adress_question(set_question,item,pos_q))
+  print(tst_aa<-adress_answer(set_answers,item,pos_a))
+  print(tst_rq<-get_question(dataset,item,pos_q))
+  print(tst_ra<-get_item(dataset,item,pos_a))
+  #works
+  #works
+  #muster: xml_replace(adress_[answer|question](options),val,get_[item|question](options))
+  #testreplace xml_replace(tst2,val ,tst_r )
+  
+  #### here happening the replacement according to above parameters
+  xml_replace(tst_aq,tag ,tst_rq )
+  xml_replace(tst_aa,val_text,tst_ra)
+  ####
+  #works
 }
 #################
 ########################################
 
 replace_loop <- function(){
   la<-length(items$item)
-    for (k1 in 1:la){
+  for (k1 in 1:la){
     for (k2 in 1:3){
       replace_content(items,scheme,k1,1:6,k2)
     }
@@ -189,18 +197,34 @@ replace_loop <- function(){
 init<- function(set,opt,base_xml){
   items<-refresh_data(datenset)
   ifelse(set=="new",return(read_xml(base_xml)),ifelse(set=="mod",return(scheme<-read_xml(xmlmod)),ifelse(set=="old",return(scheme<-read_xml(xmlorigin)),return(items))))
-#seta<-refresh_base_a(base_xml)
-#setq<-refresh_base_q(base_xml)
-#ifelse(set=="items",return(items))
-#ifelse(opt=="a",return(seta),ifelse(opt=="q",return(setq),return(items)))
+  #seta<-refresh_base_a(base_xml)
+  #setq<-refresh_base_q(base_xml)
+  #ifelse(set=="items",return(items))
+  #ifelse(opt=="a",return(seta),ifelse(opt=="q",return(setq),return(items)))
 }
-
+#################################################################
+# proof:
+###########################################################
+proof<-function(item,ax,qx){
+  print("in dataset")
+  print(get_question(items,item,qx))
+  print(get_item(items,item,ax))
+  print("#############################################")
+  print("in scheme")
+  print(adress_question(refresh_base_q(scheme),item,qx))
+  print(adress_answer(refresh_base_a(scheme),item,ax))
+  
+}
+#proof(8,1,3)
+#get_item(items,1,2)
+###############################################################
+# declare scheme & dataset
 xmlorigin<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/package_hux2022_fragen_templateB_mod_12061.2022-02-04.xml")
-xmlmod<-("qscheme_output.xml")
+#xmlmod<-("qscheme_output.xml")
 
 #to retrieve modified xml-scheme for integrating in soscisurvey.de set next 2 lines 
 xmlmod_git<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/qscheme_output.xml")
-#xmlmod<-xmlmod_git
+xmlmod<-xmlmod_git
 
 datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR01_GR04.csv")
 #datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR04.csv")
@@ -212,17 +236,22 @@ base_xml<-xmlorigin
 #setq<-refresh_base_q(schemeset)
 ######## run routine: ############################## 
 #1
-items<-init("items",1,1)
+items<-init("items",x,x)
 #2
-scheme<-init("mod",1,base_xml) #values: old=original scheme, mod=modified scheme
-#3
- 
+scheme<-init("mod",x,base_xml) #values: old=original scheme, mod=modified scheme
+#3############################
+#replaces all according to itemvorlagen .csv as specified in datenset 
 #replace_loop()
-#4
+#4############################
 #write_xml(scheme,"qscheme_output.xml")
+##############################
+#6.proof: call item/antwort/question in modified scheme
+# call: proof([item],[antwortoption 1-6],[questionfield 1-3])
+#proof(27,1,3)
 
 #####call replacement #################################
-# discomment and rerun
+# discomment and rerun for single replacement
+# call: replace_content([datenset itemvorlage],[schemeset],[item],[antwortoption],[questionoption])
 #replace_content(items,scheme,6,1:6,1)
 
 #5.now loop through the items and replace according to table actualise
@@ -230,21 +259,7 @@ scheme<-init("mod",1,base_xml) #values: old=original scheme, mod=modified scheme
 #save substitutions in new scheme
 ## >>>>>>> obsolete, called in replace_loop above, only run for single replacements
 #6. ######## TODO: ############
-# proof: the modified scheme is not of the same structure, is list(1) object instead of list(2)
-###########################################################
- proof<-function(item,ax,qx){
- print("in dataset")
- print(get_question(items,item,qx))
- print(get_item(items,item,ax))
- print("#############################################")
- print("in scheme")
- print(adress_question(refresh_base_q(scheme),item,qx))
- print(adress_answer(refresh_base_a(scheme),item,ax))
- 
- }
-#proof(8,1,3)
-#get_item(items,1,2)
-###############################################################
+
 # proof_scheme<-function(scheme_mod){
 # #initiate seta,setq
 #   sroot<-scheme_mod

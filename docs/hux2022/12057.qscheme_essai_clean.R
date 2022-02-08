@@ -75,6 +75,13 @@ refresh_base_a <- function(origin){
   #print(set_answers)
   return(seta)
 }
+#########################################
+#6.actualise layout scheme
+refresh_base_top <- function(origin){
+  sroot<-origin  
+  set_top<-read_xml(sroot)
+  return(set_top)
+}
 ##########################
 #now adress items generale
 #lines formula in section (element) <items> (antwortoptionen)
@@ -208,6 +215,29 @@ replace_content<-function(dataset,scheme_n,item,pos_a,pos_q){
   #works
 }
 #################
+#6.2 replacement in top scheme
+refresh_top <- function(scheme,tx,version) {
+  scheme_top<-(xml_children(xml_children(layout_top)))
+  tag<-"question"
+  (stri_sub(xml_attr(xml_children(xml_children(layout_top)[7]),"id"),1,25))
+  (stri_sub(xml_attr(xml_children(xml_children(layout_top)[2]),"id"),1,1)<-version)
+#  (stri_sub(string,2,2)<-version)
+  #print(set_old)
+  #set new value
+ # id_top<-"F"%s+%4
+  #print(xml_attr(scheme_top[tx],"id"))
+#   nr3<-as.character(nr2)
+ #nr4<-"item"%s+%nr3 #need to integrate library(stringi)
+ 
+ #(xml_attr(scheme_top[tx],"id"))
+}
+
+replace_top<- function(id_top){
+  xml_attr()
+}
+
+#  id_top<-refresh_top(layout_top,7,"A")
+ # print(stri_sub(id_top,2,2))
 ########################################
 #3.2 looping replacement over number of items, questions, answers
 replace_loop <- function(){
@@ -257,7 +287,7 @@ xmlorigin<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/packag
 #to retrieve modified xml-scheme for integrating in soscisurvey.de set next 2 lines 
 xmlmod_git<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/qscheme_output.xml")
 xmlmod<-xmlmod_git
-
+xmltop_scheme<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/qscheme_surveylayout_top.xml")
 datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR01_GR04_mod_cpt.csv")
 #datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR04.csv")
 #set dataset version
@@ -298,7 +328,10 @@ scheme<-init("old",x,base_xml) #values: old=original scheme, mod=modified scheme
 #3.finetuning: the itemnumbers in the table are numbered 1-64 and appear in the scheme with
 #that description in the description element. for sorting reason in the survey it would be fine to have it descripted
 #as ["item"]+[setnumber according to state of actualisation e.g. 04][itemnumber/10] >
-#result ca: item04.0.12
+#result ca: item04.0.12 CHECK
+#4.new functions to refresh top study layout: another xml scheme which builds the final questionaire
+#has to be adapted to the set(version)number of the questions set automatically. this could be done 
+#by simple replace "F4" with "F[setversionnr.] but also automatically should be fine
 
 #itemnr<-get_question(items,3,1)
 #nr2<-as.integer(itemnr)/100+4

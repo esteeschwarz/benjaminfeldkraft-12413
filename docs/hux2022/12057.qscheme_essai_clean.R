@@ -332,6 +332,7 @@ scheme<-init("old",x,base_xml) #values: old=original scheme, mod=modified scheme
 #4.new functions to refresh top study layout: another xml scheme which builds the final questionaire
 #has to be adapted to the set(version)number of the questions set automatically. this could be done 
 #by simple replace "F4" with "F[setversionnr.] but also automatically should be fine
+#5.make get_item() put out items according to item number, not row...; in case could be the rownumber doesnt correspond with itemcounting 1-64...
 
 #itemnr<-get_question(items,3,1)
 #nr2<-as.integer(itemnr)/100+4

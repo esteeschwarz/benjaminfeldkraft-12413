@@ -216,28 +216,19 @@ replace_content<-function(dataset,scheme_n,item,pos_a,pos_q){
 }
 #################
 #6.2 replacement in top scheme
-refresh_top <- function(scheme,tx,version) {
-  scheme_top<-(xml_children(xml_children(layout_top)))
-  tag<-"question"
-  (stri_sub(xml_attr(xml_children(xml_children(layout_top)[7]),"id"),1,25))
-  (stri_sub(xml_attr(xml_children(xml_children(layout_top)[2]),"id"),1,1)<-version)
-#  (stri_sub(string,2,2)<-version)
-  #print(set_old)
-  #set new value
- # id_top<-"F"%s+%4
-  #print(xml_attr(scheme_top[tx],"id"))
-#   nr3<-as.character(nr2)
- #nr4<-"item"%s+%nr3 #need to integrate library(stringi)
- 
- #(xml_attr(scheme_top[tx],"id"))
+refresh_top <- function(scheme,version) {
+scheme_top_2<-(xml_children(xml_children(scheme_top)))
+tst1<-xml_attr(xml_children(xml_children(scheme_top_2)),"id")
+pos<-scheme_top_2[1:length(scheme_top_2)]
+txt<-    stri_sub_replace((xml_attr(pos,"id")),2,2,replacement=version)
+ifelse(stri_sub((xml_attr(pos,"id")),2,2)=="F",flag<-1,flag<-0)
+(xml_attr(pos,"id")<-txt)
 }
-
-replace_top<- function(id_top){
-  xml_attr()
-}
-
-#  id_top<-refresh_top(layout_top,7,"A")
- # print(stri_sub(id_top,2,2))
+####
+#refresh_top(xmltop_scheme,6)
+#print(xml_children(xml_children(scheme_top)))
+####works for row replacement
+#replace_top_id_q
 ########################################
 #3.2 looping replacement over number of items, questions, answers
 replace_loop <- function(){
@@ -302,6 +293,7 @@ base_xml<-xmlmod_git
 items<-init("items",x,x)
 #2
 scheme<-init("old",x,base_xml) #values: old=original scheme, mod=modified scheme
+scheme_top<-init("new",x,xmltop_scheme) #values: old=original scheme, mod=modified scheme
 #3############################ discomment the following two commands
 #replaces all according to itemvorlagen .csv as specified in datenset 
 #replace_loop()

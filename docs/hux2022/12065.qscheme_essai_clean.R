@@ -2,8 +2,8 @@
 #hux2022 sprichworttest charite
 #20220304(13.23)
 #20220307(19.17) working state
-#20220309(20.14) this script is executable. continue scripting in:
-################ 12065.qscheme_essai_clean.R
+#20220309(20.14) this script is in progress. continue scripting from:
+################ 12057.qscheme_essai_clean.R
 ##################################################################
 #abstract
 #script procedure to substitute itemset in xml-scheme for
@@ -225,9 +225,22 @@ pos<-scheme_top_2[1:length(scheme_top_2)]
 txt<-    stri_sub_replace((xml_attr(pos,"id")),2,2,replacement=version)
 ifelse(stri_sub((xml_attr(pos,"id")),2,2)=="F",flag<-1,flag<-0)
 (xml_attr(pos,"id")<-txt)
+
+}
+#################
+#7.1 try add elements to scheme
+add_question <- function(scheme_l){
+  scheme_l<-print(xml_children(xml_children(scheme_top)))
+  tag<-"testtag"
+  values="TEST"
+xml_add_sibling(xml_children(xml_children(scheme_top))[5],tag,value)
+
+xml_set_attr(xml_children(xml_children(scheme_top)[[4]]),"id","NEUER")
+
+print(xml_children(xml_children(scheme_top)))
 }
 ####
-#refresh_top(xmltop_scheme,6)
+#refresh_top(xmltop_scheme)
 #print(xml_children(xml_children(scheme_top)))
 ####works for row replacement
 #replace_top_id_q

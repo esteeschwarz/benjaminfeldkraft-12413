@@ -28,9 +28,12 @@ h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {margin:0;}
 img {max-width: 100%;}
 
 /*12066*/
-.buttons {
-    a:focus, a:hover {color:#09f;}    
-    a {color:#06c;text-decoration:underline;}
+.buttons a:focus, a:hover {color:#09f;}
+
+.buttons a {
+    color:#06c;
+    text-decoration:underline; 
+    cursor:pointer;
 
 }
 

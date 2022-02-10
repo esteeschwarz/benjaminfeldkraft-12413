@@ -14,8 +14,9 @@
  * https://www.tutorialspoint.com/javascript/array_some.htm
  */
 
-//----------modified esteeschwarz 12393 for saving the results output--------- see raw split view for changes made to original script jespr-lib.js 
-//----------saving routine from line 1281 ff.---------------------------------
+//----------
+
+//-----------------------
 
 if (! Array.prototype.some) {
     Array.prototype.some = function (fun /*, thisp*/) {
@@ -1277,29 +1278,6 @@ Experiment.prototype.getData = function () {
     for (var j = 0; j < this.screens.length; j++) {
         result = result + this.screens[j].getData(this.participant, this.maxTags);
     }
- /////////////////////////esteeschwarz modified 12393/////////////////   
- //this is a result saving routine, you will have to call a php script like the following, which has to be running and saving results from and to the same server as the experiment:
- /* 
-<?php
-
-$myfile = fopen("saveddata.csv", "a+") or die("Unable to open file!");
-$txt = $_POST["data"]; 
-fwrite($myfile, $txt);
-fclose($myfile);
-
-
-?> 
-*/
-////to handle php by [$.post] you have to additionally load the jquery library in the header, either by downloading it or via:
-////<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  const saved = result;
-  $.post("write1005es01.php",
-  {
-    q: "Donald Duck",
-    data: saved
-  },)
-    
- ////////////////////////////////////THIS WORKS FINE//////////////////////////////   
     return result;
 };
 

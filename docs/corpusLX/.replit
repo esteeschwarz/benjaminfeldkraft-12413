@@ -16,3 +16,6 @@ language = "rlang"
 
 [packager.features]
 packageSearch = true
+
+# 12043.chi_notes.R
+# 12055.cp_loop_002.R

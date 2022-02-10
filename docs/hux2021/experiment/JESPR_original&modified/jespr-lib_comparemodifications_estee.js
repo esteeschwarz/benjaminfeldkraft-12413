@@ -15,7 +15,7 @@
  */
 
 //----------
-
+////////////////////////////////////////////////SEARCH FOR [11272] TO FIND LINE WHERE TO INCLUDE ITEMS /////11252 for save routine///////////////////////////////////////
 //-----------------------
 
 if (! Array.prototype.some) {
@@ -163,7 +163,7 @@ function Item(id, text, orientation, fixationChar, maskChar, display, prompt, op
     this.prompt = prompt;
     this.options = options;
     // Right now the following is overridden by experiment-wide setting
-    this.optionOrder = "random";
+    this.optionOrder = "fixed"; ///-random
     // TODO: Implement a way for this to be set per item in json file
     this.showFeedback = false;
     this.setName = setName;
@@ -285,6 +285,7 @@ Item.prototype.processKeydown = function (keyCode, elapsedTime) {
         break;
         // Option 2 buttons (on right-hand side of keyboard)
         case 48: // digit 0
+        case 98, 66: //b, B
         case 112, 80: // p,P
         case 108, 76: // l,L
         case 109, 77: // m,M
@@ -856,7 +857,7 @@ Instructions.prototype.processKeydown = function (keyCode, elapsedTime, minTime)
 };
 
 Instructions.prototype.processNextButtonClick = function (elapsedTime, minTime) {
-    var result = "continue";
+
     if (elapsedTime - this.showTime > minTime) {
         this.elapsedTime = elapsedTime;
         this.keyCode = "NEXT_BTN";
@@ -961,7 +962,7 @@ function Experiment(design, form) {
     this.showProgressBar = typeof design[ "show-progress-bar"] !== 'undefined' ? design[ "show-progress-bar"]: false;
     this.inputMethod = typeof design[ "input-method"] !== 'undefined' ? design[ "input-method"]: "keyboard";
     this.quoteMark = typeof design[ "quote-mark"] !== 'undefined' ? design[ "quote-mark"]: "double_quote";
-    this.optionOrder = typeof design[ "option-order"] !== 'undefined' ? design[ "option-order"]: "random";
+    this.optionOrder = typeof design[ "option-order"] !== 'undefined' ? design[ "option-order"]: "fixed"; //-random
     
     // Info about json object containing experimental design
     this.design = design;
@@ -1108,11 +1109,13 @@ Experiment.prototype.startExperiment = function (callback) {
     this.screens[ this.curScreenIndex].object.show(this.frame, 0);
     this.jesprLog("Starting screen: " + this.screens[ this.curScreenIndex].object.id);
     // prevent spacebar from engaging page scroll actions (default action in some browsers)
-    //    window.onkeydown = function(e) {
-    //        if (e.keyCode === 32 && e.target === document.body) {
-    //            e.preventDefault();
-    //        }
-    //    };
+    ///////////////well thanks for this really tiny message and desperate hours of trying to fix that MINOR issue til finding this passage///////////////
+       window.onkeydown = function(e) {
+           if (e.keyCode === 32 && e.target === document.body) {
+               e.preventDefault();
+           }
+       };
+       /////////////this should help prevent verzweiflung//////////////////////////////////////////////////////////////////////////////////////////////
     document.addEventListener("keydown", function (e) {
         if (e.keyCode === 13) {
             if (! document.fullscreenElement && ! document.webkitFullscreenElement && ! document.msFullscreenElement && ! document.mozFullScreenElement) {
@@ -1204,9 +1207,18 @@ Experiment.prototype.endExperiment = function () {
     document.body.removeChild(this.frame);
     this.createResults();
     this.createLog();
-    if (typeof this.callbackFunction === "function") {
-        this.callbackFunction();
-    }
+/////////////////////////////////////////////////////////////////////endscreen////////////////////////////////////
+//document.getElementById("btnStartKeyboardDemo").innerHTML = "Danke. Klicken Sie jetzt auf weiter.";
+
+//  if (typeof this.callbackFunction === "function") {     //this shows buttons again at end, removed to prevent repeating of experiment
+    //    this.callbackFunction();
+   // }
+    /* 
+///////////////////////////// entferne buttons?     
+document.getElementById("leavemsg").style.display = "block";
+document.getElementById("entry").style.display = "none";
+*/
+    
 };
 
 Experiment.prototype.updateProgressBar = function () {
@@ -1270,14 +1282,52 @@ Experiment.prototype.getData = function () {
         lhq = "{";
         rhq = "}";
     }
-    var result = lhq + "participant" + rhq + "," + lhq + "itemId" + rhq + "," + lhq + "regionId" + rhq + "," + lhq + "roiRelPosition" + rhq + "," + lhq + "elapsedTime" + rhq + "," + lhq + "timeInterval" + rhq + "," + lhq + "keyCode" + rhq + "," + lhq + "string" + rhq + "," + lhq + "setName" + rhq + "," + lhq + "groupName" + rhq;
-    for (var i = 1; i <= this.maxTags; i++) {
+    var result /* = lhq + "participant" + rhq + "," + lhq + "itemId" + rhq + "," + lhq + "regionId" + rhq + "," + lhq + "roiRelPosition" + rhq + "," + lhq + "elapsedTime" + rhq + "," + lhq + "timeInterval" + rhq + "," + lhq + "keyCode" + rhq + "," + lhq + "string" + rhq + "," + lhq + "setName" + rhq + "," + lhq + "groupName" + rhq;*/
+  /*   for (var i = 1; i <= this.maxTags; i++) {
         result = result + "," + lhq + "tag" + i + rhq;
-    }
-    result = result + "\n";
+    }*/  //this includes a header line for each dataset. removed for evaluating reasons
+    result = ""; // -result=result+"\n" del "\n" (leerzeile nach datensatz entfernt. oben musz aber einmal die zeile
     for (var j = 0; j < this.screens.length; j++) {
         result = result + this.screens[j].getData(this.participant, this.maxTags);
     }
+    
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    
+      //----------> look like nothing, nestcepas? to figure this routine out took me about 80 SWS. i am no geek. all trial&error method
+      ///// its just for saving the experiment results in a file on server, but without it, what would be the use of an experiment?
+///////////////////////////////////////////////////////////////////////////11252/////////////////////////////////////////////////// this works /////////////////////////
+const saved = result;
+
+//12393.
+/* 
+const xmlhttp = new XMLHttpRequest();
+   
+  xmlhttp.open("POST", "write1005es01.php?data=" + saved);
+  xmlhttp.send();
+*/
+
+ 
+ $.post("write1005es01.php",
+  {
+    q: "Donald Duck",
+    data: saved
+  },)
+  
+ /////////////////////////////////////// remove buttons after experiment 
+ // $("#btnStartKeyboardDemo").remove();  
+  
+ // document.getElementById("btnStartKeyboardDemo").innerHTML = "Danke. Klicken Sie jetzt auf weiter.";
+
+
+///////////////////////////////////////////////////////////////////// MIND
+    
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
     return result;
 };
 
@@ -1411,7 +1461,7 @@ Experiment.prototype.loadStimuliGroups = function (design, ord, mrg) {
     }
     return set;
 };
-
+/* 
 Experiment.prototype.loadStimuliGroup = function (design, setName, ord) {
     var screens =[];
     var groupName = typeof design[ "name"] !== 'undefined' ? design[ "name"]: "NA";
@@ -1429,17 +1479,45 @@ Experiment.prototype.loadStimuliGroup = function (design, setName, ord) {
         //        var orientation = typeof item["orientation"] !== 'undefined' ? design["items"][i]["item"]["orientation"] : this.orientation;
         var prompt = item[ "prompt"];
         var options = item[ "options"];
-        var item = new Item(id, text, this.orientation, this.fixationchar, this.maskchar, this.display, prompt, options, this.feedbackOptions, setName, groupName, tags, this);
+        ///////////////////11272.//////this part is setup in an external script ///to setup original script include object/////////////////////////////////////////// filler: filler[em01 lc03 em04 lc07 sm08 em09 lc13 em14 lc16 em17 em19 em20 lc21 em22 lc23 sm25   fix
+////// items: 2 5 6 10 11 12 18 26      rekursiv alternierend
+  
+  //  let itemchoice = (id=="fillerem01"||id=="fillerlc03"||id=="fillerem04"||id=="fillerlc07"||id=="fillersm08"||id=="fillerem09"||id=="fillerlc13"||id=="fillerem14"||id=="fillerlc16"||id=="fillerem17"||id=="fillerem19"||id=="fillerem20"||id=="fillerlc21"||id=="fillerem22"||id=="fillerlc23"||id=="fillersm25"||id=="practice01"||id=="practice02"||id=="practice03"||id =="EM2" || id=="SM5" || id=="LC6" || id=="MM10"|| id=="EM11" || id=="SM12"|| id=="LC18" || id=="MM26") ? 1:0;   //here to include items einfügen
+ 
+ //let itemchoice = (id=="fillerem01"||id=="fillerlc03"||id=="fillerem04"||id=="fillerlc07"||id=="fillersm08"||id=="fillerem09"||id=="fillerlc13"||id=="fillerem14"||id=="fillerlc16"||id=="fillerem17"||id=="fillerem19"||id=="fillerem20"||id=="fillerlc21"||id=="fillerem22"||id=="fillerlc23"||id=="fillersm25"||id=="practice01"||id=="practice02"||id=="practice03"||id =="EM5" || id=="SM6" || id=="LC10" || id=="MM11"|| id=="EM12" || id=="SM18"|| id=="LC126" || id=="MM2") ? 1:0;   //here to include items einfügen
+
+//let itemchoice = (id=="fillerem01"||id=="fillerlc03"||id=="fillerem04"||id=="fillerlc07"||id=="fillersm08"||id=="fillerem09"||id=="fillerlc13"||id=="fillerem14"||id=="fillerlc16"||id=="fillerem17"||id=="fillerem19"||id=="fillerem20"||id=="fillerlc21"||id=="fillerem22"||id=="fillerlc23"||id=="fillersm25"||id=="practice01"||id=="practice02"||id=="practice03"||id =="EM6" || id=="SM10" || id=="LC11" || id=="MM12"|| id=="EM18" || id=="SM26"|| id=="LC2" || id=="MM5") ? 1:0;   //here to include items einfügen
+
+ // let itemchoice = (id=="fillerem01"||id=="fillerlc03"||id=="fillerem04"||id=="fillerlc07"||id=="fillersm08"||id=="fillerem09"||id=="fillerlc13"||id=="fillerem14"||id=="fillerlc16"||id=="fillerem17"||id=="fillerem19"||id=="fillerem20"||id=="fillerlc21"||id=="fillerem22"||id=="fillerlc23"||id=="fillersm25"||id=="practice01"||id=="practice02"||id=="practice03"||id =="EM10" || id=="SM11" || id=="LC12" || id=="MM18"|| id=="EM26" || id=="SM2"|| id=="LC5" || id=="MM6") ? 1:0;   //here to include items einfügen
+
+
+ //let itemchoice =(id=="fillerem01"||id=="fillerlc03"||id=="fillerem04"||id=="fillerlc07"||id=="fillersm08"||id=="fillerem09"||id=="fillerlc13"||id=="fillerem14"||id=="fillerlc16"||id=="fillerem17"||id=="fillerem19"||id=="fillerem20"||id=="fillerlc21"||id=="fillerem22"||id=="fillerlc23"||id=="fillersm25"||id=="practice01"||id=="practice02"||id=="practice03"||id =="EM11" || id=="SM12" || id=="LC18" || id=="MM26"|| id=="EM2" || id=="SM5"|| id=="LC6" || id=="MM10") ? 1:0;   //here to include items einfügen
+
+//let itemchoice =(id=="fillerem01"||id=="fillerlc03"||id=="fillerem04"||id=="fillerlc07"||id=="fillersm08"||id=="fillerem09"||id=="fillerlc13"||id=="fillerem14"||id=="fillerlc16"||id=="fillerem17"||id=="fillerem19"||id=="fillerem20"||id=="fillerlc21"||id=="fillerem22"||id=="fillerlc23"||id=="fillersm25"||id=="practice01"||id=="practice02"||id=="practice03"||id =="EM12" || id=="SM18" || id=="LC26" || id=="MM2"|| id=="EM5" || id=="SM6"|| id=="LC10" || id=="MM11") ? 1:0;   //here to include items einfügen
+
+
+// let itemchoice =(id=="fillerem01"||id=="fillerlc03"||id=="fillerem04"||id=="fillerlc07"||id=="fillersm08"||id=="fillerem09"||id=="fillerlc13"||id=="fillerem14"||id=="fillerlc16"||id=="fillerem17"||id=="fillerem19"||id=="fillerem20"||id=="fillerlc21"||id=="fillerem22"||id=="fillerlc23"||id=="fillersm25"||id=="practice01"||id=="practice02"||id=="practice03"||id =="EM18" || id=="SM26" || id=="LC2" || id=="MM5"|| id=="EM6" || id=="SM10"|| id=="LC11" || id=="MM12") ? 1:0;   //here to include items einfügen
+
+
+let itemchoice =(id=="fillerem01"||id=="fillerlc03"||id=="fillerem04"||id=="fillerlc07"||id=="fillersm08"||id=="fillerem09"||id=="fillerlc13"||id=="fillerem14"||id=="fillerlc16"||id=="fillerem17"||id=="fillerem19"||id=="fillerem20"||id=="fillerlc21"||id=="fillerem22"||id=="fillerlc23"||id=="fillersm25"||id=="practice01"||id=="practice02"||id=="practice03"||id =="EM26" || id=="SM2" || id=="LC5" || id=="MM6"|| id=="EM10" || id=="SM11"|| id=="LC12" || id=="MM18") ? 1:0;   //here to include items einfügen
+
+       
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //   if (itemchoice == 1) { //include items
+     /////////////////////////////////////////////////////////////////////
+        var item = new Item(id, text, this.orientation, this.fixationchar, this.maskchar, this.display, prompt, options, this.feedbackOptions, setName, groupName, tags, this); 
         // Create the Screen object and push it to the sceens array
-        var screen = new Screen("stimuli", item);
+
+        var screen = new Screen("stimuli", item); //  } ///essai
         screens.push(screen);
     }
+  // } //this include again if stimuli set inside this script
     if (order === "random") {
         shuffle(screens);
     }
     return screens;
 };
-
+*/ ////////////////////////////////////til here in external simuli script//////////////////////////////////
 /*
  * Determines the "order" value or defaults to "fixed" if undefined
  * @param   object containing "order" key-value pair
@@ -1479,7 +1557,7 @@ Experiment.prototype.getMerge = function (merge, fallbackValue) {
     }
     return result;
 };
-
+///////////////////////////////////////////////////////////////SCREEN ELEMENTS///////////////////////////////////////////////////////////////////
 /*
  *
  * @returns A <div> object representing the main experiment frame
@@ -1505,15 +1583,15 @@ Experiment.prototype.createFrame = function () {
         kbdHelp.className = "keyboardHelp";
         var kbdHelpLeft = document.createElement("div");
         kbdHelpLeft.className = "keyboardHelpLeft";
-        kbdHelpLeft.textContent = "Left option: 1/Q/A/Z";
+        kbdHelpLeft.textContent = "";
         kbdHelp.appendChild(kbdHelpLeft);
         var kbdHelpCenter = document.createElement("div");
         kbdHelpCenter.className = "keyboardHelpCenter";
-        kbdHelpCenter.textContent = "[space] bar to continue";
+        kbdHelpCenter.textContent = "weiter mit [LEERTASTE]";
         kbdHelp.appendChild(kbdHelpCenter);
         var kbdHelpRight = document.createElement("div");
         kbdHelpRight.className = "keyboardHelpRight";
-        kbdHelpRight.textContent = "Right option: 0/P/L/M";
+        kbdHelpRight.textContent = "";
         kbdHelp.appendChild(kbdHelpRight);
         frame.appendChild(kbdHelp);
     }

@@ -1300,11 +1300,18 @@ Experiment.prototype.getData = function () {
 const saved = result;
 
 //12393.
-/* 
-const xmlhttp = new XMLHttpRequest();
-   
-  xmlhttp.open("POST", "write1005es01.php?data=" + saved);
-  xmlhttp.send();
+/*  /////////////////////////esteeschwarz modified 12393/////////////////   
+ //this is a result saving routine, you will have to call a php script like the following (here called: "write1005es01.php") which has to be running and saving results from and to the same server as the experiment:
+ 
+<?php
+$myfile = fopen("saveddata.csv", "a+") or die("FUCT! i forgot to tie my shoes!");
+$txt = $_POST["data"]; 
+fwrite($myfile, $txt);
+fclose($myfile);
+?> 
+
+////to handle php by [$.post] you have to additionally load the jquery library in the header, either by downloading it or via:
+////<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 */
 
  
@@ -1517,7 +1524,7 @@ let itemchoice =(id=="fillerem01"||id=="fillerlc03"||id=="fillerem04"||id=="fill
     }
     return screens;
 };
-*/ ////////////////////////////////////til here in external simuli script//////////////////////////////////
+*/ ////////////////////////////////////til here in external stimuli script, but you will not have luck with our stimuli... //////////////////////////////////
 /*
  * Determines the "order" value or defaults to "fixed" if undefined
  * @param   object containing "order" key-value pair

@@ -1,51 +1,139 @@
 ## sippur
-# 10 sfr belima
-# herkunft
-## himmel
+## sefer
+## sefar
+##### 10 sfr belima
+geist
+wind
+wasser
 feuer
 oben
-## luft
-wind
-## erde
-wasser
 unten
-## geist
-geist
-## wind
-wind
-### wind
-feuchtigkeit
 osten
 westen
 norden
 süden
-## wasser
-### wasser
-kälte
+###### geist
+####### des
+gott
+###### wind
+####### aus
+geist
+####### in
+osten
+westen
+norden
+süden
+###### wasser
+####### aus
+wind
+####### in
 tohu
-bohu
-## feuer
-hitze
+######## aus 
+substanz
 feuer
-oben
-### feuer
+####### in
+bohu
+###### feuer 
+####### aus
+wasser
+####### in
 ofannim
 serafim
-hajjot ha qodesh
-## oben
+hajjot ha-qodesh
+dienstengel
+###### oben
 jod
 he
 waw
-## verbindung
-### 1
+###### unten
+jod
+waw
+he
+###### osten
+he
+jod
+waw
+###### westen
+he
+waw
+jod
+###### süden
+waw
+jod
+he
+###### norden
+waw
+he
+jod
+# HK
+## HK
 himmel
+### aus
 feuer
-
-## unten
-## osten
-## westen
-## norden
-## süden
+### wo
+oben
+## HK
+hitze
+### aus
+feuer
+#### kopf
+shin
+#### bildung
+himmel
+hitze
+kopf
+männlich
+weiblich
+## HK
+kälte
+### aus
+wasser
+#### kopf
+mem
+##### bildung
+erde
+kälte
+bauch
+männlich
+weiblich
+## HK
+feuchtigkeit
+### aus
+wind
+#### kopf
+alef
+##### bildung
+luft
+feuchtigkeit
+brust
+männlich
+###### aus
+alef
+mem
+schin
+weiblich
+###### aus
+alef
+schin
+mem
+## HK
+kopf
+### aus
+feuer
+## HK
+bauch
+### aus
+wasser
+## HK
+brust
+### aus
+wind
+## luft
+### aus
+wind
+## erde
+wasser
+unten
 # 22 buchstaben
 alef
 het

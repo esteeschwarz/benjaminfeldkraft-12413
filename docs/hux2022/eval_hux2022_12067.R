@@ -83,15 +83,21 @@ acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
  #arary obs over options
  #u test arrays / observation
  tn_array_count<-obs*6
+ tna<-tn_array_count
 # tnid<-c(1,2,3) 
  #tncpt<-matrix(1:18,3)
 tncptr<-matrix(1:tn_array_count,6)
+tncpt_obs<-matrix(1:tna,obs)*0
   tncptr<-tncptr*0
   tncpt<-tncptr
+  tncpt_sk<-tncpt
 # tn<-2
 # rm(tn)
   qcount<-26
- for (tn in 1:obs){
+  
+  #start looping
+  for (tn in 1:obs){
+    # matrix 6 options over 26 questions
    acp<-cbind(1:qcount,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
    
    for(k in 1:qcount){
@@ -123,37 +129,45 @@ tncptr<-matrix(1:tn_array_count,6)
    print ("ACP")
 	  print(acp)
 	 # tn_table<-cbind(tnoparray[tn])
-	  #tncpt[tn,op]<-
-	  # tncpt[tn,1]<-sum(  print(acp[1:26,2]))
-	  # tncpt[tn,2]<-sum(  print(acp[1:26,3]))
-	  # tncpt[tn,3]<-sum(  print(acp[1:26,4]))
-	  # tncpt[tn,4]<-sum(  print(acp[1:26,5]))
-	  # tncpt[tn,5]<-sum(  print(acp[1:26,6]))
-	  # tncpt[tn,6]<-sum(  print(acp[1:26,7]))
-	  # 
+	 # rows observations
+	  tncpt_obs[tn,1]<-sum(  print(acp[1:26,2]))
+	  tncpt_obs[tn,2]<-sum(  print(acp[1:26,3]))
+	  tncpt_obs[tn,3]<-sum(  print(acp[1:26,4]))
+	  tncpt_obs[tn,4]<-sum(  print(acp[1:26,5]))
+	  tncpt_obs[tn,5]<-sum(  print(acp[1:26,6]))
+	  tncpt_obs[tn,6]<-sum(  print(acp[1:26,7]))
+	  # colums observations
 	  tncpt[1,tn]<-sum(  print(acp[1:26,2]))
 	  tncpt[2,tn]<-sum(  print(acp[1:26,3]))
 	  tncpt[3,tn]<-sum(  print(acp[1:26,4]))
 	  tncpt[4,tn]<-sum(  print(acp[1:26,5]))
 	  tncpt[5,tn]<-sum(  print(acp[1:26,6]))
 	  tncpt[6,tn]<-sum(  print(acp[1:26,7]))
-	  ###
+	  # skaliertes array
+	  tncpt_sk[1,tn]<-sum(  print(acp[1:26,2]*2))
+	  tncpt_sk[2,tn]<-sum(  print(acp[1:26,3]*3))
+	  tncpt_sk[3,tn]<-sum(  print(acp[1:26,4]*5))
+	  tncpt_sk[4,tn]<-sum(  print(acp[1:26,5]*5))
+	  tncpt_sk[5,tn]<-sum(  print(acp[1:26,6]*1))
+	  tncpt_sk[6,tn]<-sum(  print(acp[1:26,7]*1))
+	  
+	  ##
 #	  tncptr[6,2]<-1
-	  a<-c(c(1:6))
-	  b<-c(a,a)
-	  b<-c(c(1:3),c(1:3))
-	  b<-append(b,a,after=length(b))
-	  c<-c(tnop_array(tn,acp))
-	  d_arr<-qcount*obs
-	  d<-d_arr*0
-	  d<-append(d,c,after=length(d))
-	  c<-0
-	  e<-append(c(tnop_array(tn,acp)),c(tnop_array(tn,acp)),after=length(c))
-	  e<-append(c(tnop_array(tn,acp)),c(tnop_array(tn,acp)),after=length(c))
+	 # a<-c(c(1:6))
+	 # b<-c(a,a)
+	 # b<-c(c(1:3),c(1:3))
+	 # b<-append(b,a,after=length(b))
+	 # c<-c(tnop_array(tn,acp))
+	 # d_arr<-qcount*obs
+	 # d<-d_arr*0
+	 # d<-append(d,c,after=length(d))
+	 # c<-0
+	 # e<-append(c(tnop_array(tn,acp)),c(tnop_array(tn,acp)),after=length(c))
+	 # e<-append(c(tnop_array(tn,acp)),c(tnop_array(tn,acp)),after=length(c))
 	  
 	  
 	   } # end tn loop
- print(e)
+# print(e)
 tnop_array<-function(tn,acp){
 tnopsum1<-sum((acp[1:26,2]))
 tnopsum2<-sum((acp[1:26,3]))
@@ -170,24 +184,59 @@ tnopsum6<-sum((acp[1:26,7]))
 a<-c(c(1:6))
 b<-cbind(a,a)
 tn_arrayx<-c(1:6)*0
+#rows oure
 tn1op<-tncpt[1:6]
 tn2op<-tncpt[7:12]
 tn3op<-tncpt[13:18]
+#rows skaliert
+tn1op_sk<-tncpt_sk[1:6]
+tn2op_sk<-tncpt_sk[7:12]
+tn3op_sk<-tncpt_sk[13:18]
+
 #print(tncpt[1:6])
 chisq.test(tn2op,tn3op)
 wilcox.test(tn2op,tn3op)
+chisq.test(tn2op_sk,tn3op_sk)
+wilcox.test(tn2op_sk,tn3op_sk)
+
+levels(ds$F401)
 #print(tncpt)
 #cbind(tncpt[1:6])
 #rm(tnoparray)
 ########################################################
 ####################### U TEST #########################
 ################## VLG 12043.chi_notes #################
+# WHAT is the goal? #####
+#1. find out if there is significant difference between the
+#answers between observations
+#2.linear lmer if theres sig. dif. at target
+#dependent on (random effect of) other chosen options 
+#hux2021 sample formel: 
+#lme1<-lme1.formula.1<-(timeinterval ~ charsA + (1|participant)+(1+charsA:participant))
+## again array topdown observations
+### die werte müssen ordinalskaliert werden, um gewichte pro option vergeben zu können?
+
+
+linetest<- function(tncpt){
+  library(lme4)
+  library(lmerTest)
+  random2<-tncpt_obs[4:6]
+  random3<-tncpt_obs[7:9]
+  random4<-tncpt_obs[10:12]
+  random5<-tncpt_obs[13:15]
+  random6<-tncpt_obs[16:18]
+    lme1<-(tncpt_obs[1:3]~random3+(1|random2))
+    lmer(lme1)
+}
 
 
 
 d1<-tn1op
 d2<-tn2op
-#wilcox test
+d3<-tn3op
+d1<-
+chisq.test(d1,d2)
+wilcox.test(d1,d2,correct = FALSE)
 #wilcox.test(d1,d2,alternative="greater")
 
 d3<-c(d1,d2)

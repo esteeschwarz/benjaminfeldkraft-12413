@@ -144,7 +144,8 @@ c8<-cbind(c5,c3)
 #stichproben 1,2
 d1<-c(7, 10, 12, 12, 18,  6 , 6, 18, 18, 12,  7 ,17,  9,  6 ,16)
 d2<-c(17,  5, 13, 20,  6,  6,  9, 12, 18,  7, 14, 17, 17,  6, 18)
-
+#d1<-tn1op
+#d2<-tn2op
 #wilcox test
 #wilcox.test(d1,d2,alternative="greater")
 
@@ -152,7 +153,7 @@ d3<-c(d1,d2)
 #wilcox.test(d3)
 
 ##insert first set C ///comment line for further set D
-d3<-c(cst1,cst2)
+#d3<-c(cst1,cst2)
 
 d5<-rank(d3)
 d4<-cbind(d5,d3)
@@ -165,15 +166,22 @@ r2<-d7
 #(length(d5)/2)+1:(length(d5))
 #change values according to stichproben set C or D by add/remove comment (#)
 #chose set C (meindl daten)
-a1<-cst1
-a2<-cst2
-r1<-c6
-r2<-c7
+#a1<-cst1
+#a2<-cst2
+#r1<-c6
+#r2<-c7
 #choose set D (rosemeyer daten)
-a1<-d1
-a2<-d2
+#a1<-d1
+#a2<-d2
+#r1<-d6
+#r2<-d7
+#choose SET hux2022
+a1<-d1<-tn1op
+a2<-d2<-tn2op
 r1<-d6
 r2<-d7
+
+
 #################
 n1<-length(a1)
 n2<-n1+1

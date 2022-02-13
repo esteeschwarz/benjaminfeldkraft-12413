@@ -1,7 +1,7 @@
 #Daten: #r+ &rScript
 
-library(readr)
-library(stringi)
+#library(readr)
+#library(stringi)
 
 
 
@@ -73,7 +73,7 @@ item_names<-names(ds[20:45])
 # items 1-26  
 #  itemx<-"F4xx"
  # items<-c(1:26)
-
+acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
 #count A1 in obs
  ct1<-0
   for(k in 1:25){
@@ -90,14 +90,16 @@ item_names<-names(ds[20:45])
     f<-k
 #    k1<-k+26
     #k2<-
-    o1<-op2
+    o1<-op[1]
 #    o2<-o1
     o3<-o1*26+f
+    print(o3)
    # o3<-f*o2+f*26-f
     acp[o3]<-TRUE
   #  o3<-0
    # o2<-0
       } 
+	  print(acp)
  as.integer(ds[[item_names[1][1]]][2])
  #now as function for each option
  #a_options<-c(1:7)
@@ -109,7 +111,7 @@ item_names<-names(ds[20:45])
 #rbind(1:4,c=2,d=3)
 #acp<-rbind(1:26,A1=1,A2=2,A3=3,A4=4,A5=5,A6=6,A7=7,deparse.level = 1)
 #create empty array per participant
-acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
+
 
 
 #tabulate(c(2,2,2,1,3,3,3,4,2),6)
@@ -194,4 +196,4 @@ acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
 # }
 # 
 # 
-#          
+#           file:///private/var/mobile/Containers/Shared/AppGroup/C7BD38E1-A387-4CCB-99B8-616A0C5F32FC/File%20Provider%20Storage/Repositories/essais/docs/hux2022/eval_hux2022_12067.R

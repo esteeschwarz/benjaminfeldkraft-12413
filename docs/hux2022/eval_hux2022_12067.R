@@ -10,55 +10,12 @@
 #srvd2<-"https://www.soscisurvey.de/hux2022/?act=4eqU86Oc62EfGZm7PbHOjcmL"
 #srvx<-"https://www.soscisurvey.de/hux2022/?act=XFHFbeVybOP6o72MZIy0lUlR"
 #pre<-eval(parse("https://www.soscisurvey.de/hux2022/?act=qM85F9YYrhjRhLB3gvub2AyF&rScript"))
-
-#print(ds$F401)
-#ifelse(as.logical(attr(ds$F401,"*"))==1,print(5))
-#attr()
-#as.logical(ds$F404)
-
-#as.logical(c(pi,1:10))
-# #length(c(
-#   "CASE","SERIAL","REF","QUESTNNR","MODE","STARTED","MT02","MT02_01","MT02_02",
-#   "MT03","MT03_01","MT03_02","MT03_03","MT03_04","MT03_05","MT04","MT04_01",
-#   "MT04_02","MT04_03","MT04_04","F401","F402","F403","F404","F405","F406","F407",
-#   "F408","F409","F410","F411","F412","F413","F414","F415","F416","F417","F418",
-#   "F419","F420","F421","F422","F423","F424","F425","TIME001","TIME002","TIME003",
-#   "TIME004","TIME005","TIME006","TIME007","TIME008","TIME009","TIME010","TIME011",
-#   "TIME012","TIME013","TIME014","TIME015","TIME016","TIME017","TIME018","TIME019",
-#   "TIME020","TIME021","TIME022","TIME023","TIME024","TIME025","TIME026","TIME027",
-#   "TIME028","TIME029","TIME_SUM","MAILSENT","LASTDATA","FINISHED","Q_VIEWER",
-#   "LASTPAGE","MAXPAGE","MISSING","MISSREL","TIME_RSI","DEG_TIME"
-# ))
-
-#eval(parse(srvd2,encoding="UTF-8"))
-
-#tst<-as.data.frame(ds)
-#tst<-attr(ds$FR01,"*",TRUE)
-#tst<-read_csv(srvwd,sep=" ",skip=1)
-#xcl<-read_table2(srvx)
-#library(readxl)
-#data_hux2022_2022_02_11_10_02 <- read_excel(srvx)
-#View(data_hux2022_2022_02_11_10_02)
-#srvwd<-"hux2022b.xlsx"
-#download.file(srvx,"hux2022b.csv")
-#srvdta<-read_tab
-#eval(parse("https://www.soscisurvey.de/hux2022/index.php?act=HI51SUMbGgqxTS7sOaZhvObS&vQuality&useSettings&rScript", encoding="UTF-8"))
-
-#eval(parse("https://www.soscisurvey.de/hux2022/index.php?act=izH5VoemaNi2OS5dlmNdkI4k&vQuality&useSettings&rScript", encoding="UTF-8"))
-#eval(parse("https://www.soscisurvey.de/hux2022/index.php?act=HI51SUMbGgqxTS7sOaZhvObS&vQuality&useSettings&rScript", encoding="UTF-8"))
-
-
-#print(ds$F401["avector"])
 ###########THISSSSS###########
 #insert data + script link
 srvd3<-"https://www.soscisurvey.de/hux2022/?act=EpHVi8ffiKSbizRseExLpsec&rScript"
 
 eval(parse(srvd3, encoding="UTF-8"))
 
-
-##### as.integer(ds$F407) ####
-##### print antwortcode # A1 = 1, A6 = 6, -9(NA) = 7 ####
-#as.integer(ds$F407)
 #########################################################
 a1<-1
  a2<-2
@@ -72,11 +29,8 @@ a1<-1
 obs<- nrow(ds)
  item_names<-names(ds[20:44])
  lq<-length(item_names)
-#eval1<-function(set,qx){
-# items 1-26  
-#  itemx<-"F4xx"
- # items<-c(1:26)
-acp<-cbind(1:lq,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
+
+ acp<-cbind(1:lq,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
 #count A1 in obs
  #ct1<-0
  
@@ -85,8 +39,6 @@ acp<-cbind(1:lq,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
  #u test arrays / observation
  tn_array_count<-obs*6
  tna<-tn_array_count
-# tnid<-c(1,2,3) 
- #tncpt<-matrix(1:18,3)
 tncptr<-matrix(1:tn_array_count,6)
 tncpt_obs<-matrix(1:tna,obs)*0
 tncpt_obs_sk<-matrix(1:tna,obs)*0
@@ -95,8 +47,6 @@ tncpt_sk2<-matrix(1:tna,obs)*0
   tncptr<-tncptr*0
   tncpt<-tncptr
   tncpt_sk<-tncpt
-# tn<-2
-# rm(tn)
   qcount<-lq
   acp2<-cbind(1:obs,1:qcount,1:qcount)
   acp2<-acp2*0
@@ -187,22 +137,6 @@ opox<-ifelse(o4==1,2,ifelse(o4==2,3,ifelse(o4==3,5,ifelse(o4==4,5,ifelse(o4==5,1
 	  tncpt_obs_sk[tn,6]<-sum(  print(acp[1:lq,7]*1))
 	#########
 	  ##
-#	  tncptr[6,2]<-1
-	 # a<-c(c(1:6))
-	 # b<-c(a,a)
-	 # b<-c(c(1:3),c(1:3))
-	 # b<-append(b,a,after=length(b))
-	 # c<-c(tnop_array(tn,acp))
-	 # d_arr<-qcount*obs
-	 # d<-d_arr*0
-	 # d<-append(d,c,after=length(d))
-	 # c<-0
-	 # e<-append(c(tnop_array(tn,acp)),c(tnop_array(tn,acp)),after=length(c))
-	 # e<-append(c(tnop_array(tn,acp)),c(tnop_array(tn,acp)),after=length(c))
-	  
-	  
-	   } # end tn loop
-# print(e)
 tnop_array<-function(tn,acp){
 tnopsum1<-sum((acp[1:lq,2]))
 tnopsum2<-sum((acp[1:lq,3]))
@@ -213,13 +147,10 @@ tnopsum6<-sum((acp[1:lq,7]))
 
   return (c(tnopsum1,tnopsum2,tnopsum3,tnopsum4,tnopsum5,tnopsum6))
 }
-
+} 
 
 #### tnarrayr for u test
-a<-c(c(1:6))
-b<-cbind(a,a)
-tn_arrayx<-c(1:6)*0
-#rows oure
+#rows pure
 tn1op<-tncpt[1:6]
 tn2op<-tncpt[7:12]
 tn3op<-tncpt[13:18]
@@ -228,9 +159,9 @@ tn1op_sk<-tncpt_sk[1:6]
 tn2op_sk<-tncpt_sk[7:12]
 tn3op_sk<-tncpt_sk[13:18]
 
-tn1op_sk2<-acp2[1:26]
-tn2op_sk2<-acp2[27:54]
-tn3op_sk2<-acp2[55:78]
+tn1op_sk2<-acp2[1:25]
+tn2op_sk2<-acp2[26:50]
+tn3op_sk2<-acp2[51:75]
 #print(tncpt[1:6])
 chisq.test(tn2op,tn3op)
 wilcox.test(tn2op,tn3op)
@@ -240,10 +171,6 @@ wilcox.test(tn2op_sk,tn3op_sk)
 chisq.test(tn2op_sk2,tn3op_sk2)
 wilcox.test(tn2op_sk2,tn3op_sk2)
 
-levels(ds$F401)
-#print(tncpt)
-#cbind(tncpt[1:6])
-#rm(tnoparray)
 ########################################################
 ####################### U TEST #########################
 ################## VLG 12043.chi_notes #################
@@ -260,17 +187,9 @@ levels(ds$F401)
 
 
 
-linetest<- function(tncpt){
+#linetest<- function(tncpt){
   library(lme4)
   library(lmerTest)
-  random2<-tncpt_obs_sk[4:6]
-  random3<-tncpt_obs_sk[7:9]
-  random4<-tncpt_obs_sk[10:12]
-  random5<-tncpt_obs_sk[13:15]
-  random6<-tncpt_obs_sk[16:18]
-  main1<-tn1op_sk2
-  main2<-tn2op_sk2
-  main3<-tn3op_sk2
   25*3*6 # q*obs*opt
   #array per variable
   #variables: question*opt
@@ -280,11 +199,10 @@ linetest<- function(tncpt){
   vartn2<-acp2[26:50]
   vartn3<-acp2[51:75]
   varcpt<<-c(vartn1,vartn2,vartn3) #75
-  print(acp2$V1)
-  acptable<-as.table(acp2)
-  outtemp<-tempfile("outdta.csv")
-  write.csv(acp2,outtemp)
-  inputdata<-read.csv(outtemp)
+  #acptable<-as.table(acp2)
+  #outtemp<-tempfile("outdta.csv")
+  #write.csv(acp2,outtemp)
+  #inputdata<-read.csv(outtemp)
   #c(inputdata$)
   vartbl<-cbind(varcpt)
   vartn1_1<-vartn1*0+1
@@ -293,30 +211,32 @@ linetest<- function(tncpt){
   varcpt_gr<-c(vartn1_1,vartn1_2,vartn1_3)
   varcpt_gr
   varq1<-1:25
-  varq2<-26:50
-  varq3<-51:75
+  #varq2<-26:50
+  #varq3<-51:75
   varqx<-c(varq1,varq1,varq1)
   #bind table of 75 options chosen + groups(tn 1-3
   acp3<-cbind("quest"=varqx,"opt"=varcpt,"tn"=varcpt_gr)
   outtemp<-tempfile("outdta.csv")
   write.csv(acp3,outtemp)
   acp4<-read.csv(outtemp)
-  print(acp4$quest)
-  rm(inputdata)  
+#  print(acp4$quest)
+ # rm(inputdata)  
   lme1_form<-(acp4$opt~acp4$quest+(1|acp4$tn))
-  lme1<-(acp4$opt~acp4$quest+(1|acp4$tn)+(1|acp4$quest:acp4$quest))
+  lme1<-(acp4$opt~acp4$quest+(1|acp4$tn)+(1+acp4$quest:acp4$tn))
     lme2<-(ds$F401)
    testlme<- lmer(lme1)
 summary(testlme)
-   
-   }
 
+
+#linetest(acp2)
+
+#placeholder, to integrate
 
 
 d1<-tn1op
 d2<-tn2op
-d3<-tn3op
-d1<-
+#d3<-tn3op
+#d1<-
 chisq.test(d1,d2)
 wilcox.test(d1,d2,correct = FALSE)
 #wilcox.test(d1,d2,alternative="greater")

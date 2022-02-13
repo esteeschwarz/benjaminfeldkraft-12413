@@ -70,12 +70,13 @@ a1<-1
 ######
 #obs(ds)
 obs<- nrow(ds)
- item_names<-names(ds[20:45])
+ item_names<-names(ds[20:44])
+ lq<-length(item_names)
 #eval1<-function(set,qx){
 # items 1-26  
 #  itemx<-"F4xx"
  # items<-c(1:26)
-acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
+acp<-cbind(1:lq,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
 #count A1 in obs
  #ct1<-0
  
@@ -88,25 +89,32 @@ acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
  #tncpt<-matrix(1:18,3)
 tncptr<-matrix(1:tn_array_count,6)
 tncpt_obs<-matrix(1:tna,obs)*0
+tncpt_obs_sk<-matrix(1:tna,obs)*0
+tncpt_sk2<-matrix(1:tna,obs)*0
+
   tncptr<-tncptr*0
   tncpt<-tncptr
   tncpt_sk<-tncpt
 # tn<-2
 # rm(tn)
-  qcount<-26
-  
+  qcount<-lq
+  acp2<-cbind(1:obs,1:qcount,1:qcount)
+  acp2<-acp2*0
   #start looping
   for (tn in 1:obs){
     # matrix 6 options over 26 questions
    acp<-cbind(1:qcount,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
-   
+  
+# hier skalierte werte eintrage
    for(k in 1:qcount){
     
   print(op<-  as.integer(ds[[item_names[k]]])) 
  #   ifelse(op[1]==1,ct1<-ct1+1,ifelse(op[2]==1,ct1<-ct1+1,"no"))
    # opv<-tabulate(as.integer(ds[[item_names[k]]]),6)
     op2<-as.integer(ds[[item_names[1][1]]][2])
- #   ifelse(op2)
+   # print(op<-  as.integer(ds[[item_names[lq]]])) 
+    #  
+    #   ifelse(op2)
     #acp[op2,k+26]<-TRUE
     #27=
     #7=1
@@ -115,42 +123,69 @@ tncpt_obs<-matrix(1:tna,obs)*0
 #    k1<-k+26
     #k2<-
    # tn<-1
+    #get array position
+  #  o1<-5
     o1<-op[tn] # option per tn
-#    o2<-o1
     o3<-o1*qcount+f
     print(o3)
+    3*26
    # o3<-f*o2+f*26-f
-    acp[o3]<-TRUE
-  #  o3<-0
-   # o2<-0
-  #  tnoparray<-tnop_array(tn,acp)
-    
+#put true array position
+        acp[o3]<-TRUE
+     #########
+           #nochmal skaliert
+       # otn<-1
+        #array position
+        #f<-26
+        #tn<-3
+        #o4<-5
+        o4<-op[tn]
+        o5<-tn*qcount-qcount+f
+        #put scaled value
+opox<-ifelse(o4==1,2,ifelse(o4==2,3,ifelse(o4==3,5,ifelse(o4==4,5,ifelse(o4==5,1,ifelse(o4==6,1,0))))))
+       acp2[o5]<-opox
+          
+          
       } # end question loop
    print ("ACP")
 	  print(acp)
-	 # tn_table<-cbind(tnoparray[tn])
 	 # rows observations
-	  tncpt_obs[tn,1]<-sum(  print(acp[1:26,2]))
-	  tncpt_obs[tn,2]<-sum(  print(acp[1:26,3]))
-	  tncpt_obs[tn,3]<-sum(  print(acp[1:26,4]))
-	  tncpt_obs[tn,4]<-sum(  print(acp[1:26,5]))
-	  tncpt_obs[tn,5]<-sum(  print(acp[1:26,6]))
-	  tncpt_obs[tn,6]<-sum(  print(acp[1:26,7]))
+	  tncpt_obs[tn,1]<-sum(  print(acp[1:lq,2]))
+	  tncpt_obs[tn,2]<-sum(  print(acp[1:lq,3]))
+	  tncpt_obs[tn,3]<-sum(  print(acp[1:lq,4]))
+	  tncpt_obs[tn,4]<-sum(  print(acp[1:lq,5]))
+	  tncpt_obs[tn,5]<-sum(  print(acp[1:lq,6]))
+	  tncpt_obs[tn,6]<-sum(  print(acp[1:lq,7]))
 	  # colums observations
-	  tncpt[1,tn]<-sum(  print(acp[1:26,2]))
-	  tncpt[2,tn]<-sum(  print(acp[1:26,3]))
-	  tncpt[3,tn]<-sum(  print(acp[1:26,4]))
-	  tncpt[4,tn]<-sum(  print(acp[1:26,5]))
-	  tncpt[5,tn]<-sum(  print(acp[1:26,6]))
-	  tncpt[6,tn]<-sum(  print(acp[1:26,7]))
+	  tncpt[1,tn]<-sum(  print(acp[1:lq,2]))
+	  tncpt[2,tn]<-sum(  print(acp[1:lq,3]))
+	  tncpt[3,tn]<-sum(  print(acp[1:lq,4]))
+	  tncpt[4,tn]<-sum(  print(acp[1:lq,5]))
+	  tncpt[5,tn]<-sum(  print(acp[1:lq,6]))
+	  tncpt[6,tn]<-sum(  print(acp[1:lq,7]))
 	  # skaliertes array
-	  tncpt_sk[1,tn]<-sum(  print(acp[1:26,2]*2))
-	  tncpt_sk[2,tn]<-sum(  print(acp[1:26,3]*3))
-	  tncpt_sk[3,tn]<-sum(  print(acp[1:26,4]*5))
-	  tncpt_sk[4,tn]<-sum(  print(acp[1:26,5]*5))
-	  tncpt_sk[5,tn]<-sum(  print(acp[1:26,6]*1))
-	  tncpt_sk[6,tn]<-sum(  print(acp[1:26,7]*1))
-	  
+	  tncpt_sk[1,tn]<-sum(  print(acp[1:lq,2]*2))
+	  tncpt_sk[2,tn]<-sum(  print(acp[1:lq,3]*3))
+	  tncpt_sk[3,tn]<-sum(  print(acp[1:lq,4]*5))
+	  tncpt_sk[4,tn]<-sum(  print(acp[1:lq,5]*5))
+	  tncpt_sk[5,tn]<-sum(  print(acp[1:lq,6]*1))
+	  tncpt_sk[6,tn]<-sum(  print(acp[1:lq,7]*1))
+	# with values according to option
+	  # tncpt_sk2[1,tn]<-sum(  print(acp2[1:lq,2]))
+	  # tncpt_sk2[2,tn]<-sum(  print(acp2[1:lq,3]))
+	  # tncpt_sk2[3,tn]<-sum(  print(acp2[1:lq,4]))
+	  # tncpt_sk2[4,tn]<-sum(  print(acp2[1:lq,5]))
+	  # tncpt_sk2[5,tn]<-sum(  print(acp2[1:lq,6]))
+	  # tncpt_sk2[6,tn]<-sum(  print(acp2[1:lq,7]))
+	  # 
+	    
+	  tncpt_obs_sk[tn,1]<-sum(  print(acp[1:lq,2]*2))
+	  tncpt_obs_sk[tn,2]<-sum(  print(acp[1:lq,3]*3))
+	  tncpt_obs_sk[tn,3]<-sum(  print(acp[1:lq,4]*5))
+	  tncpt_obs_sk[tn,4]<-sum(  print(acp[1:lq,5]*5))
+	  tncpt_obs_sk[tn,5]<-sum(  print(acp[1:lq,6]*1))
+	  tncpt_obs_sk[tn,6]<-sum(  print(acp[1:lq,7]*1))
+	#########
 	  ##
 #	  tncptr[6,2]<-1
 	 # a<-c(c(1:6))
@@ -169,12 +204,12 @@ tncpt_obs<-matrix(1:tna,obs)*0
 	   } # end tn loop
 # print(e)
 tnop_array<-function(tn,acp){
-tnopsum1<-sum((acp[1:26,2]))
-tnopsum2<-sum((acp[1:26,3]))
-tnopsum3<-sum((acp[1:26,4]))
-tnopsum4<-sum((acp[1:26,5]))
-tnopsum5<-sum((acp[1:26,6]))
-tnopsum6<-sum((acp[1:26,7]))
+tnopsum1<-sum((acp[1:lq,2]))
+tnopsum2<-sum((acp[1:lq,3]))
+tnopsum3<-sum((acp[1:lq,4]))
+tnopsum4<-sum((acp[1:lq,5]))
+tnopsum5<-sum((acp[1:lq,6]))
+tnopsum6<-sum((acp[1:lq,7]))
 
   return (c(tnopsum1,tnopsum2,tnopsum3,tnopsum4,tnopsum5,tnopsum6))
 }
@@ -193,11 +228,17 @@ tn1op_sk<-tncpt_sk[1:6]
 tn2op_sk<-tncpt_sk[7:12]
 tn3op_sk<-tncpt_sk[13:18]
 
+tn1op_sk2<-acp2[1:26]
+tn2op_sk2<-acp2[27:54]
+tn3op_sk2<-acp2[55:78]
 #print(tncpt[1:6])
 chisq.test(tn2op,tn3op)
 wilcox.test(tn2op,tn3op)
 chisq.test(tn2op_sk,tn3op_sk)
 wilcox.test(tn2op_sk,tn3op_sk)
+
+chisq.test(tn2op_sk2,tn3op_sk2)
+wilcox.test(tn2op_sk2,tn3op_sk2)
 
 levels(ds$F401)
 #print(tncpt)
@@ -215,17 +256,20 @@ levels(ds$F401)
 #lme1<-lme1.formula.1<-(timeinterval ~ charsA + (1|participant)+(1+charsA:participant))
 ## again array topdown observations
 ### die werte müssen ordinalskaliert werden, um gewichte pro option vergeben zu können?
+# matrix: left: questions, top: tn, vaules: option
+
 
 
 linetest<- function(tncpt){
   library(lme4)
   library(lmerTest)
-  random2<-tncpt_obs[4:6]
-  random3<-tncpt_obs[7:9]
-  random4<-tncpt_obs[10:12]
-  random5<-tncpt_obs[13:15]
-  random6<-tncpt_obs[16:18]
-    lme1<-(tncpt_obs[1:3]~random3+(1|random2))
+  random2<-tncpt_obs_sk[4:6]
+  random3<-tncpt_obs_sk[7:9]
+  random4<-tncpt_obs_sk[10:12]
+  random5<-tncpt_obs_sk[13:15]
+  random6<-tncpt_obs_sk[16:18]
+    lme1<-(tncpt_obs[1:3]~random3+(1|random4))
+    lme2<-(ds$F401)
     lmer(lme1)
 }
 

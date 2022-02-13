@@ -60,13 +60,13 @@ eval(parse(srvd3, encoding="UTF-8"))
 ##### print antwortcode # A1 = 1, A6 = 6, -9(NA) = 7 ####
 as.integer(ds$F407)
 #########################################################
-# a1<-1
-# a2<-2
-# a3<-3
-# a4<-4
-# a5<-5
-# a6<-6
-# a7<-7
+a1<-1
+ a2<-2
+ a3<-3
+ a4<-4
+ a5<-5
+ a6<-6
+ a7<-7
 ######
 item_names<-names(ds[20:45])
 #eval1<-function(set,qx){
@@ -76,7 +76,22 @@ item_names<-names(ds[20:45])
 acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
 #count A1 in obs
  ct1<-0
-  for(k in 1:25){
+ 
+ #todo
+ #arary obs over options
+ #u test arrays / observation
+ 
+ tnid<-c(1,2,3) 
+ tncpt<-matrix(1:18,3)
+tncptr<-matrix(1:18,6)
+  tncptr<-tncptr*0
+  tncpt<-tncptr
+# tn<-2
+ rm(tn)
+ for (tn in 1:3){
+   acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
+   
+   for(k in 1:25){
     
   print(op<-  as.integer(ds[[item_names[k]]])) 
  #   ifelse(op[1]==1,ct1<-ct1+1,ifelse(op[2]==1,ct1<-ct1+1,"no"))
@@ -90,7 +105,8 @@ acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
     f<-k
 #    k1<-k+26
     #k2<-
-    o1<-op[1]
+   # tn<-1
+    o1<-op[tn] # option per tn
 #    o2<-o1
     o3<-o1*26+f
     print(o3)
@@ -98,9 +114,45 @@ acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
     acp[o3]<-TRUE
   #  o3<-0
    # o2<-0
-      } 
+  #  tnoparray<-tnop_array(tn,acp)
+    
+      } # end question loop
+   print ("ACP")
 	  print(acp)
- as.integer(ds[[item_names[1][1]]][2])
+	 # tn_table<-cbind(tnoparray[tn])
+	  #tncpt[tn,op]<-
+	  # tncpt[tn,1]<-sum(  print(acp[1:26,2]))
+	  # tncpt[tn,2]<-sum(  print(acp[1:26,3]))
+	  # tncpt[tn,3]<-sum(  print(acp[1:26,4]))
+	  # tncpt[tn,4]<-sum(  print(acp[1:26,5]))
+	  # tncpt[tn,5]<-sum(  print(acp[1:26,6]))
+	  # tncpt[tn,6]<-sum(  print(acp[1:26,7]))
+	  # 
+	  tncpt[1,tn]<-sum(  print(acp[1:26,2]))
+	  tncpt[2,tn]<-sum(  print(acp[1:26,3]))
+	  tncpt[3,tn]<-sum(  print(acp[1:26,4]))
+	  tncpt[4,tn]<-sum(  print(acp[1:26,5]))
+	  tncpt[5,tn]<-sum(  print(acp[1:26,6]))
+	  tncpt[6,tn]<-sum(  print(acp[1:26,7]))
+	  ###
+#	  tncptr[6,2]<-1
+	  
+	   } # end tn loop
+tnop_array<-function(tn,acp){
+tnopsum1<-sum((acp[1:26,2]))
+tnopsum2<-sum((acp[1:26,3]))
+tnopsum3<-sum((acp[1:26,4]))
+tnopsum4<-sum((acp[1:26,5]))
+tnopsum5<-sum((acp[1:26,6]))
+tnopsum6<-sum((acp[1:26,7]))
+
+  return(c(tnopsum1,tnopsum2,tnopsum3,tnopsum4,tnopsum5,tnopsum6))
+}
+print(tncpt)
+cbind(tncpt[1:6])
+#rm(tnoparray)
+
+# as.integer(ds[[item_names[1][1]]][2])
  #now as function for each option
  #a_options<-c(1:7)
  #a_questions<-c(1:26)

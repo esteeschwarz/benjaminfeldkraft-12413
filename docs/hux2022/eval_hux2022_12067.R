@@ -268,10 +268,48 @@ linetest<- function(tncpt){
   random4<-tncpt_obs_sk[10:12]
   random5<-tncpt_obs_sk[13:15]
   random6<-tncpt_obs_sk[16:18]
-    lme1<-(tncpt_obs[1:3]~random3+(1|random4))
+  main1<-tn1op_sk2
+  main2<-tn2op_sk2
+  main3<-tn3op_sk2
+  25*3*6 # q*obs*opt
+  #array per variable
+  #variables: question*opt
+  25*6 #150 each obs
+  #alle acp2 in einer variable
+  vartn1<-acp2[1:25]
+  vartn2<-acp2[26:50]
+  vartn3<-acp2[51:75]
+  varcpt<<-c(vartn1,vartn2,vartn3) #75
+  print(acp2$V1)
+  acptable<-as.table(acp2)
+  outtemp<-tempfile("outdta.csv")
+  write.csv(acp2,outtemp)
+  inputdata<-read.csv(outtemp)
+  #c(inputdata$)
+  vartbl<-cbind(varcpt)
+  vartn1_1<-vartn1*0+1
+  vartn1_2<-vartn1*0+2
+  vartn1_3<-vartn1*0+3
+  varcpt_gr<-c(vartn1_1,vartn1_2,vartn1_3)
+  varcpt_gr
+  varq1<-1:25
+  varq2<-26:50
+  varq3<-51:75
+  varqx<-c(varq1,varq1,varq1)
+  #bind table of 75 options chosen + groups(tn 1-3
+  acp3<-cbind("quest"=varqx,"opt"=varcpt,"tn"=varcpt_gr)
+  outtemp<-tempfile("outdta.csv")
+  write.csv(acp3,outtemp)
+  acp4<-read.csv(outtemp)
+  print(acp4$quest)
+  rm(inputdata)  
+  lme1_form<-(acp4$opt~acp4$quest+(1|acp4$tn))
+  lme1<-(acp4$opt~acp4$quest+(1|acp4$tn)+(1|acp4$quest:acp4$quest))
     lme2<-(ds$F401)
-    lmer(lme1)
-}
+   testlme<- lmer(lme1)
+summary(testlme)
+   
+   }
 
 
 

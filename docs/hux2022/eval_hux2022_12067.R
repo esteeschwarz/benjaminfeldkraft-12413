@@ -8,7 +8,7 @@
 #srvr<-"https://www.soscisurvey.de/hux2022/?act=fKtaZ3c23D7eVyfBFrzzGT08&rScript"
 #srvd<-"https://www.soscisurvey.de/hux2022/?act=4eqU86Oc62EfGZm7PbHOjcmL"
 #srvd2<-"https://www.soscisurvey.de/hux2022/?act=4eqU86Oc62EfGZm7PbHOjcmL"
-srvx<-"https://www.soscisurvey.de/hux2022/?act=XFHFbeVybOP6o72MZIy0lUlR"
+#srvx<-"https://www.soscisurvey.de/hux2022/?act=XFHFbeVybOP6o72MZIy0lUlR"
 #pre<-eval(parse("https://www.soscisurvey.de/hux2022/?act=qM85F9YYrhjRhLB3gvub2AyF&rScript"))
 
 #print(ds$F401)
@@ -58,7 +58,7 @@ eval(parse(srvd3, encoding="UTF-8"))
 
 ##### as.integer(ds$F407) ####
 ##### print antwortcode # A1 = 1, A6 = 6, -9(NA) = 7 ####
-as.integer(ds$F407)
+#as.integer(ds$F407)
 #########################################################
 a1<-1
  a2<-2
@@ -68,30 +68,33 @@ a1<-1
  a6<-6
  a7<-7
 ######
-item_names<-names(ds[20:45])
+#obs(ds)
+obs<- nrow(ds)
+ item_names<-names(ds[20:45])
 #eval1<-function(set,qx){
 # items 1-26  
 #  itemx<-"F4xx"
  # items<-c(1:26)
 acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
 #count A1 in obs
- ct1<-0
+ #ct1<-0
  
  #todo
  #arary obs over options
  #u test arrays / observation
- 
- tnid<-c(1,2,3) 
- tncpt<-matrix(1:18,3)
-tncptr<-matrix(1:18,6)
+ tn_array_count<-obs*6
+# tnid<-c(1,2,3) 
+ #tncpt<-matrix(1:18,3)
+tncptr<-matrix(1:tn_array_count,6)
   tncptr<-tncptr*0
   tncpt<-tncptr
 # tn<-2
- rm(tn)
- for (tn in 1:3){
-   acp<-cbind(1:26,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
+# rm(tn)
+  qcount<-26
+ for (tn in 1:obs){
+   acp<-cbind(1:qcount,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
    
-   for(k in 1:25){
+   for(k in 1:qcount){
     
   print(op<-  as.integer(ds[[item_names[k]]])) 
  #   ifelse(op[1]==1,ct1<-ct1+1,ifelse(op[2]==1,ct1<-ct1+1,"no"))
@@ -108,7 +111,7 @@ tncptr<-matrix(1:18,6)
    # tn<-1
     o1<-op[tn] # option per tn
 #    o2<-o1
-    o3<-o1*26+f
+    o3<-o1*qcount+f
     print(o3)
    # o3<-f*o2+f*26-f
     acp[o3]<-TRUE
@@ -136,8 +139,21 @@ tncptr<-matrix(1:18,6)
 	  tncpt[6,tn]<-sum(  print(acp[1:26,7]))
 	  ###
 #	  tncptr[6,2]<-1
+	  a<-c(c(1:6))
+	  b<-c(a,a)
+	  b<-c(c(1:3),c(1:3))
+	  b<-append(b,a,after=length(b))
+	  c<-c(tnop_array(tn,acp))
+	  d_arr<-qcount*obs
+	  d<-d_arr*0
+	  d<-append(d,c,after=length(d))
+	  c<-0
+	  e<-append(c(tnop_array(tn,acp)),c(tnop_array(tn,acp)),after=length(c))
+	  e<-append(c(tnop_array(tn,acp)),c(tnop_array(tn,acp)),after=length(c))
+	  
 	  
 	   } # end tn loop
+ print(e)
 tnop_array<-function(tn,acp){
 tnopsum1<-sum((acp[1:26,2]))
 tnopsum2<-sum((acp[1:26,3]))
@@ -146,106 +162,130 @@ tnopsum4<-sum((acp[1:26,5]))
 tnopsum5<-sum((acp[1:26,6]))
 tnopsum6<-sum((acp[1:26,7]))
 
-  return(c(tnopsum1,tnopsum2,tnopsum3,tnopsum4,tnopsum5,tnopsum6))
+  return (c(tnopsum1,tnopsum2,tnopsum3,tnopsum4,tnopsum5,tnopsum6))
 }
-print(tncpt)
-cbind(tncpt[1:6])
+
+
+#### tnarrayr for u test
+a<-c(c(1:6))
+b<-cbind(a,a)
+tn_arrayx<-c(1:6)*0
+tn1op<-tncpt[1:6]
+tn2op<-tncpt[7:12]
+tn3op<-tncpt[13:18]
+#print(tncpt[1:6])
+chisq.test(tn2op,tn3op)
+wilcox.test(tn2op,tn3op)
+#print(tncpt)
+#cbind(tncpt[1:6])
 #rm(tnoparray)
-
-# as.integer(ds[[item_names[1][1]]][2])
- #now as function for each option
- #a_options<-c(1:7)
- #a_questions<-c(1:26)
- #a_ainq<-c(c(a_questions(c(a_options)))
-#acp<-CrossTable(a_questions,1:7)   
-#acp<-matrix(a_questions,nrow = 7)
- ###
-#rbind(1:4,c=2,d=3)
-#acp<-rbind(1:26,A1=1,A2=2,A3=3,A4=4,A5=5,A6=6,A7=7,deparse.level = 1)
-#create empty array per participant
+########################################################
+####################### U TEST #########################
+################## VLG 12043.chi_notes #################
 
 
 
-#tabulate(c(2,2,2,1,3,3,3,4,2),6)
-# print(ds1)
-# #F4<-"F401"
-# #cn<-colnames(ds)
-# as.integer(ds[[item_names[4]]])
-# #xnam<-paste0(1:25)
-#print(fmla <- paste("ds$",paste(xnam)))
+d1<-tn1op
+d2<-tn2op
+#wilcox test
+#wilcox.test(d1,d2,alternative="greater")
 
-#########
-# e1 <- new.env()
-# e1$a <- 10
-# e1[["a"]]
-# e1[["b"]] <- 20
-# e1$b
-# ls(e1)
-# 
+d3<-c(d1,d2)
+#wilcox.test(d3)
 
-#eval(parse("https://www.soscisurvey.de/hux2022/index.php?act=yHcq99bf4xyBI7rKAs5CALnT&vQuality&useSettings&rScript", encoding="UTF-8"))
-#source(srvd)
-#eval(parse(srvd2))
+##insert first set C ///comment line for further set D
+#d3<-c(cst1,cst2)
 
-#hux2022x <- read_table2(srvd)
-#read_tab
-#hux2022x$`"F401"`
-#print(hux2022x$`"F401"`)
-#read_table(srvx,se)
+d5<-rank(d3)
+d4<-cbind(d5,d3)
+d6<-sum(d5[1:(length(d5)/2)])
+#p.175 R1, R2
+r1<-d6
+d7pos<-length(d5)/2+1
+d7<-sum(d5[d7pos:length(d5)])
+r2<-d7
 
-# 
-# ### this one after updating srvd
-# huxdta<-read_table2(srvd)
-# print(huxdta$`"F401"`[1])
-# #read_csv(("var_hux.csv"))
-# adress_answer<-function(dta,x){
-# (qx<-huxdta$`"F402"`[x])
-#   itemx<-qx
-#   print(itemy<-stri_sub_replace((itemx),2,4,replacement=12))
-#   print(itemy)
-#   }
-#   
-#   
-# adress_answer(huxdat,1)
-# ifelse(huxdta$`"F401"`[1]==1,TRUE,FALSE)
-# repl<-c("G","H","I","J","k")
-# itema<-"ABCDE"
-# stri_sub(itema,1:5)<-repl
-# print(itema)
-# 
-# itemb<-print(as.matrix(stri_sub(itema,1,5))[1:5])
-# 
-# ############# original script import
-# function(x,i,...) {
-#   r <- NextMethod("[")
-#   mostattributes(r) <- attributes(x)
-#   r
-# }
-# 
-# 
-# function (x, row.names = NULL, optional = FALSE, ..., nm = deparse1(substitute(x))) 
-# {
-#   force(nm)
-#   nrows <- length(x)
-#   if (!(is.null(row.names) || (is.character(row.names) && 
-#                                length(row.names) == nrows))) {
-#     warning(gettextf("'row.names' is not a character vector of length %d -- omitting it. Will be an error!", 
-#                      nrows), domain = NA)
-#     row.names <- NULL
-#   }
-#   if (is.null(row.names)) {
-#     if (nrows == 0L) 
-#       row.names <- character()
-#     else if (length(row.names <- names(x)) != nrows || anyDuplicated(row.names)) 
-#       row.names <- .set_row_names(nrows)
-#   }
-#   if (!is.null(names(x))) 
-#     names(x) <- NULL
-#   value <- list(x)
-#   if (!optional) 
-#     names(value) <- nm
-#   structure(value, row.names = row.names, class = "data.frame")
-# }
-# 
-# 
-#           file:///private/var/mobile/Containers/Shared/AppGroup/C7BD38E1-A387-4CCB-99B8-616A0C5F32FC/File%20Provider%20Storage/Repositories/essais/docs/hux2022/eval_hux2022_12067.R
+#choose SET hux2022
+a1<-d1<-tn1op
+a2<-d2<-tn2op
+r1<-d6
+r2<-d7
+
+
+#################
+n1<-length(a1)
+n2<-n1+1
+u1<-r1-((n1*n2)/2)
+u2<-r2-((n1*n2)/2)
+#should be 0
+uproof<-(u1+u2)-(n1*n1)
+Ucpt<-c(u1,u2)
+usort<-sort(Ucpt)
+umin<-usort[1]
+
+print("(3) U-test according to set")
+print("stichproben:")
+print(a1)
+print (a2)
+print(z1o<-(umin-((n1*n1))/2))
+print(z1u<-sqrt(((n1*n1)*(n1+n1+1))/12))
+print(z1<-z1o/z1u)
+
+###########
+#12045.
+#p.175
+z2u<-(umin-(n1*n2/2))/(sqrt(n1*n2*(n1+n2+1)/12))
+print(d5)
+#verbundene rangplätze finden
+########################################
+#this counting vorkommen of rank /// WORKS
+d5<-d3
+d6<-unique(d5)
+posd6<-d6
+posd7<-d6
+x<-1
+pos<-1
+for (x in pos:length(d6)){
+  # print (x)
+  #print(d6[x])
+  for (l in pos:length(d5)){
+    # print(l)
+    ifelse (d6[x]==d5[l],posd6[x]<-posd6[x]+1,posd6[x])
+    
+  }
+}
+print (d6)
+print (d3)
+print(posd6-posd7)
+d8<-posd6-posd7
+#fälle vorkommen ties: 3-1-4-5-6-4-2-1-1-1-1-1 cvd. 1*3,2*4,1*5,1*6,1*2,6*1
+#(3^3-3)+6*(1^3-1)+2*(4^3-4)+(5^3-5)+(6^3-6)+(2^3-2)
+#480
+
+#####
+d9<-unique(d8)
+posd8<-d8
+posd9<-d8
+x<-1
+pos<-1
+for (x in pos:length(d9)){
+  # print (x)
+  #print(d6[x])
+  for (l in pos:length(d8)){
+    # print(l)
+    ifelse (d9[x]==d8[l],posd9[x]<-posd9[x]+1,posd9[x])
+    
+  }
+}
+print (d8)
+print (d9)
+print(posd9-posd8)
+d10<-posd9-posd8
+#(3^3-3)+6*(1^3-1)+2*(4^3-4)+(5^3-5)+(6^3-6)+(2^3-2)
+#for(l in 1:length(d10)){
+#tie<-(d10[l]*(d9[l]^3-d9[l]))
+#}
+tie<-(d10*(d9^3-d9))
+print (tie)
+print(sum(tie)) ####YES!
+

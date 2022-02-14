@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <questionnaire>
+<!-- the id s in this section have to always
+be named the same. else the study gives out differen
+variable names in data obtained. dont change the ids in this 
+section.-->
   <!-- Seite 1 -->
   <page intID="1">
     <question id="MT01" intID="2"/>

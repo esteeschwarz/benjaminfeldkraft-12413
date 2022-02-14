@@ -235,6 +235,9 @@ ifelse(flag==1,(xml_attr(pos,"id")<-txt),0)
 #TODO############################################
 #this doesnt work perfect, the category meta is refreshed with setversion number as
 #well even if not changed anything.
+#and, important: this routine is dangerous not to say useless: if the category is renamed
+#and actualised in the questionaire layout then the survey data obtained refers to different
+#variables cvd. its not comparable anymore. kill this routine!!!
 }
 #################
 #7.1 try add elements to scheme
@@ -308,6 +311,7 @@ datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/
 #datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR04.csv")
 #set dataset version
 setversion<-6
+setversion_top<-4
 #schemeset<-xmlorigin
 schemeset<-xmlmod
 base_xml<-xmlmod_git
@@ -330,13 +334,17 @@ scheme_top<-init("new",x,xmltop_scheme) #values: old=original scheme, mod=modifi
 #writes new scheme for category fragen into working directory, this scheme has to be
 #imported into soscisurvey to actualise category
 #write_xml(scheme,"qscheme_output.xml")
-#5#############################
+#5########################################################################
+############# NONONONONO not do the following. it changes the variable reference in 
+#the study layout. NOT DO, not import output of this into questionaire layout!
+#######################
 #refresh study top layout according to set
-#refresh_top(xmltop_scheme,setversion)
+#refresh_top(xmltop_scheme,setversion_top)
 #test for change
  #print(xml_children(xml_children(scheme_top)))
 #write new layout scheme, this has to be imported into questionaire design
 #write_xml(scheme_top,"qscheme_surveylayout_top_mod.xml")
+#### this routine is obsolete #############################################
 ###########################################################################
 ###########################################################################
 ###########################################################################

@@ -1,9 +1,16 @@
 #12054.item XML schemes
 #hux2022 sprichworttest charite
-#20220304(13.23)
-#20220307(19.17) working state
-#20220309(20.14) this script is in progress. continue scripting from:
+#20220204(13.23)
+#20220207(19.17) working state
+#20220214(19.39) proof
+##################################################################
+#20220209(20.14) this script is in progress. continue scripting from:
 ################ 12057.qscheme_essai_clean.R
+##################################################################
+##################################################################
+##### to start replacement routine go to end of script (runroutine)
+##### and start there ############################################
+##################################################################
 ##################################################################
 #abstract
 #script procedure to substitute itemset in xml-scheme for
@@ -224,8 +231,10 @@ tst1<-xml_attr(xml_children(xml_children(scheme_top_2)),"id")
 pos<-scheme_top_2[1:length(scheme_top_2)]
 txt<-    stri_sub_replace((xml_attr(pos,"id")),2,2,replacement=version)
 ifelse(stri_sub((xml_attr(pos,"id")),2,2)=="F",flag<-1,flag<-0)
-(xml_attr(pos,"id")<-txt)
-
+ifelse(flag==1,(xml_attr(pos,"id")<-txt),0)
+#TODO############################################
+#this doesnt work perfect, the category meta is refreshed with setversion number as
+#well even if not changed anything.
 }
 #################
 #7.1 try add elements to scheme
@@ -240,8 +249,8 @@ xml_set_attr(xml_children(xml_children(scheme_top)[[4]]),"id","NEUER")
 print(xml_children(xml_children(scheme_top)))
 }
 ####
-#refresh_top(xmltop_scheme)
-#print(xml_children(xml_children(scheme_top)))
+# refresh_top(xmltop_scheme,setversion)
+# print(xml_children(xml_children(scheme_top)))
 ####works for row replacement
 #replace_top_id_q
 ########################################
@@ -283,7 +292,8 @@ proof<-function(item,ax,qx){
 #get_question(items,64,1)
 #proof(28,1:6,1:3)
 ###############################################################
-####################################################
+###############################################################
+###############################################################
 ### in this section the variables have to be adapted
 
 # declare scheme & dataset
@@ -297,27 +307,46 @@ xmltop_scheme<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2022/qs
 datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR01_GR04_mod_cpt.csv")
 #datenset<-("https://github.com/esteeschwarz/12431_hux2021-appendix/raw/12057_VS/hux2022/proverbs/context2022_items_GR04.csv")
 #set dataset version
-setversion<-5
+setversion<-6
 #schemeset<-xmlorigin
 schemeset<-xmlmod
 base_xml<-xmlmod_git
 #seta<-refresh_base_a(schemeset)
 #setq<-refresh_base_q(schemeset)
+##############################################################################
+####################################################
 ######## run routine: ############################## 
 #1
 items<-init("items",x,x)
 #2
 scheme<-init("old",x,base_xml) #values: old=original scheme, mod=modified scheme
 scheme_top<-init("new",x,xmltop_scheme) #values: old=original scheme, mod=modified scheme
-#3############################ discomment the following two commands
+#3###########################################################################
+#######discomment the following commands to start refresh####################
+#of items in scheme according to dataset
 #replaces all according to itemvorlagen .csv as specified in datenset 
 #replace_loop()
 #4############################
+#writes new scheme for category fragen into working directory, this scheme has to be
+#imported into soscisurvey to actualise category
 #write_xml(scheme,"qscheme_output.xml")
-##############################
+#5#############################
+#refresh study top layout according to set
+#refresh_top(xmltop_scheme,setversion)
+#test for change
+ #print(xml_children(xml_children(scheme_top)))
+#write new layout scheme, this has to be imported into questionaire design
+#write_xml(scheme_top,"qscheme_surveylayout_top_mod.xml")
+###########################################################################
+###########################################################################
+###########################################################################
+###########################################################################
+
+
+
 #6.proof: call item/antwort/question in modified scheme
 # call: proof([item],[antwortoption 1-6],[questionfield 1-3])
-#proof(64,1,1)
+proof(64,1,1)
 #call csv content
 
 #####call replacement #################################
@@ -339,7 +368,8 @@ scheme_top<-init("new",x,xmltop_scheme) #values: old=original scheme, mod=modifi
 #4.new functions to refresh top study layout: another xml scheme which builds the final questionaire
 #has to be adapted to the set(version)number of the questions set automatically. this could be done 
 #by simple replace "F4" with "F[setversionnr.] but also automatically should be fine
-#5.make get_item() put out items according to item number, not row...; in case could be the rownumber doesnt correspond with itemcounting 1-64...
+#5.make get_item() put out items according to item number, not row...; 
+#in case could be the rownumber doesnt correspond with itemcounting 1-64...
 
 #itemnr<-get_question(items,3,1)
 #nr2<-as.integer(itemnr)/100+4

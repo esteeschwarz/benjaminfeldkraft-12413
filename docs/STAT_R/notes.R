@@ -1,5 +1,6 @@
 #12077.statistik_R (barghoorn)
 #20220218(17.38)
+#20220219(23.00)
 #lebendgeburten tabelle destatis:
 "https://www-genesis.destatis.de/genesis/online?sequenz=tabelleErgebnis&selectionname=12612-0002#abreadcrumb"
 #try for API fetch tables
@@ -37,30 +38,43 @@ src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=Au
 
 #i give this one up. i manage no api fetch...
 #work with static files
-#import dataset:
-#fuck sonderzeichen im datensatz!
-
+#import destatis dataset:
 ns<-c(1:4,"year",6:12,"gender",14:15,"month","month_nm","all")
 xcpt1 <- read.csv2("12612-0002_flatcpt.csv",sep = ";",col.names = ns, na="0")
-sum(as.double(xcpt1$all[1:10]))
-#type_convert(xcpt1[5],"numeric")
+
 #fuck sonderzeichen im datensatz!
 stri_detect(xcpt1$gender,regex="\xe4")
-#xcpt1$X2_Auspraegung_Label
+
 geschlecht<-stri_replace(xcpt1$gender,"ae",regex = "\xe4")
 monat<-stri_replace(xcpt1$month_nm,"ae",regex = "\xe4")
 table2<-replace(xcpt1,13,values = geschlecht)
 table3<-replace(table2,17,values = monat)
 
-sumup<-function(df,jahr){
-  yearx<-subset(df,year==jahr)
-  return(sum(as.double(yearx$all)))
-  
+sumup<-function(df,gnd,jahr){
+  yearxm<-subset(df,year==jahr&gender=="maennlich")
+  yearxw<-subset(df,year==jahr&gender=="weiblich")
+  ifelse(gnd=="m",return(sum(as.double(yearxm$all))),
+  ifelse(gnd=="w",return(sum(as.double(yearxw$all))),"specify gender"))
 }
-sumup(xcpt1,2019)
-#subset(xcpt1)
 
+c<-c(sumup(table3,"m",2019),sumup(table3,"w",2019))
+d<-c(sumup(table3,"m",2020),sumup(table3,"w",2020))
+
+ns<-c("maennlich","weiblich")
+sum1920<-rbind("2019"=c,"2020"=d)
+colnames(sum1920)<-ns
+
+
+#import task dataset
 geb<-read.csv2("geburten_d.csv")
+
+geb<-rbind(geb,sum1920)
+geb
+#sum1920
+
+
+##########
+
 dim(geb)
 mode(geb)
 attributes(geb)
@@ -88,8 +102,7 @@ tabs<-function(x) {
   m<-dim(x)                          # dimension(x)
   colnames(gew)[1+m[2]]<-"Gesamt"    # update je nach Spalten-zahl
   return(gew) }
-#tabs
-#colSums()
+
 tabss <-function(x) {
   gew<-cbind(x,apply(x,1,sum)) # Spaltensumme verketten
   colnames(gew)[3]<-"Gesamt"
@@ -99,16 +112,11 @@ m<-tabss(geb)
 lastrow<-length(m$Gesamt)
 (row.names(m)[lastrow]<-"sum")
 print(m)
-#row.names(m)
-tabss(m)
-dim(m)
+
 proz<-geb/apply(geb,1,sum)
 dim(proz)
 print(proz)
 ####
-set<-matrix(1:20,5)
-print(set)
-#set/apply(set,1,sqrt)
 ####
 e1<-round(proz,3)
 head(round(100*proz,1))
@@ -135,7 +143,7 @@ proztab_q <- function(x) {
 
 proztab(geb)
 proztab_q(geb)
-print(s)
+#print(s)
 
 print(proz_q<-geb/apply(geb,2,sum))
 dim(proz_q)
@@ -151,4 +159,4 @@ proztab_q <- function(x) {
 ####
 barplot(geb$maennlich)
 barplot(geb$weiblich,col=2,add=TRUE)
-###
+

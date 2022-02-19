@@ -114,21 +114,41 @@ e1<-round(proz,3)
 head(round(100*proz,1))
 ####
 proztab <- function(x) {
-  s<-apply(x,1,sum)         # Spaltensumme #falsch: hier (mit margin=1) wird schon die rowsum berechnet
- print( p<-x/s)                    # Tabelle / Spaltensumme
+  s<-apply(x,1,sum)         # Spaltensumme 
+  p<-x/s                    # Tabelle / Spaltensumme
   p<-round((100*p),1)      # *100 gerundet auf eine Stelle
   p   
-  print(s)# Ergebnis
+  print(p)# Ergebnis
 }
+## #hä?: hier (mit margin=1) wird schon die rowsum berechnet
+# welchen sinn soll es haben, den prozentsatz eines jahres innerhalb
+# von allen jahren zu betrachten? was wären denn 100%? das mean?
+####################
 proztab_q <- function(x) {
   s<-apply(x,2,sum)         # Spaltensumme
- print( p<-x/s)                    # Tabelle / Spaltensumme
+  p<-x/s                    # Tabelle / Spaltensumme
   p<-round((100*p),1)      # *100 gerundet auf eine Stelle
   p
-  print(s)# Ergebnis
+  print(p)# Ergebnis
 
   }
 
-proztab(set)
-proztab_q(set)
+proztab(geb)
+proztab_q(geb)
 print(s)
+
+print(proz_q<-geb/apply(geb,2,sum))
+dim(proz_q)
+
+proztab_q <- function(x) {
+  s<-apply(x,2,sum/x)         # Spaltensumme
+  p<-x/s                    # Tabelle / Spaltensumme
+  p<-round((100*s),1)      # *100 gerundet auf eine Stelle
+  p
+  print(p)# Ergebnis
+  
+}
+####
+barplot(geb$maennlich)
+barplot(geb$weiblich,col=2,add=TRUE)
+###

@@ -33,3 +33,14 @@ stri_replace(src,destatis_cred$pwd,regex = "IHR_PASSWORT")
 #dt1<-eval(parse(src))
 dt2<-read.csv2(src)
 dt3<-read_xml(src)
+
+#i give this one up. i manage no api fetch...
+#work with static files
+#import dataset:
+lebendgeburten <- read.csv2("PRO/git/essais/docs/STAT_R/data/12612-0002_flat.csv",sep= ";")
+#fuck sonderzeichen im datensatz!
+stri_detect(lebendgeburten$X2_Auspraegung_Label,regex="\xe4")
+geschlecht<-stri_replace(lebendgeburten$X2_Auspraegung_Label,"ae",regex = "\xe4")
+monat<-stri_replace(lebendgeburten$X3_Auspraegung_Label,"ae",regex = "\xe4")
+table2<-replace(lebendgeburten,13,values = geschlecht)
+table2<-replace(table2,17,values = monat)

@@ -106,6 +106,29 @@ proz<-geb/apply(geb,1,sum)
 dim(proz)
 print(proz)
 ####
-set<-matrix(1:20)
-set/apply(set,1,sqrt)
+set<-matrix(1:20,5)
+print(set)
+#set/apply(set,1,sqrt)
 ####
+e1<-round(proz,3)
+head(round(100*proz,1))
+####
+proztab <- function(x) {
+  s<-apply(x,1,sum)         # Spaltensumme #falsch: hier (mit margin=1) wird schon die rowsum berechnet
+ print( p<-x/s)                    # Tabelle / Spaltensumme
+  p<-round((100*p),1)      # *100 gerundet auf eine Stelle
+  p   
+  print(s)# Ergebnis
+}
+proztab_q <- function(x) {
+  s<-apply(x,2,sum)         # Spaltensumme
+ print( p<-x/s)                    # Tabelle / Spaltensumme
+  p<-round((100*p),1)      # *100 gerundet auf eine Stelle
+  p
+  print(s)# Ergebnis
+
+  }
+
+proztab(set)
+proztab_q(set)
+print(s)

@@ -2,22 +2,15 @@
 #20220218(17.38)
 #lebendgeburten tabelle destatis:
 "https://www-genesis.destatis.de/genesis/online?sequenz=tabelleErgebnis&selectionname=12612-0002#abreadcrumb"
-src<-"https://www-genesis.destatis.de/genesisWS/rest/2020/find/find?username=IHRE_KENNUNG&password=IHR_PASSWORT&term=Lebendgeburten&category=all&language=de"
 #try for API fetch tables
 #destatis webservices: https://www-genesis.destatis.de/genesis/online?Menu=Webservice#abreadcrumb
-#import destatis credentials
 library(readr)
 library(stringi)
-destatis_cred <- read_csv("Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
- stri_detect(src,regex="IHRE_KENNUNG")
- stri_detect(src,regex="IHR_PASSWORT")
-#substitute kennung, pwd in request 
-stri_replace(src,destatis_cred$kennung,regex = "IHRE_KENNUNG")
-stri_replace(src,destatis_cred$pwd,regex = "IHR_PASSWORT")
 
-dt1<-eval(parse(src))
-dt2<-read.csv2(src)
-dt3<-read_xml(src)
+#import local destatis credentials
+destatis_cred <- read_csv("Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
+
+src<-"https://www-genesis.destatis.de/genesisWS/rest/2020/find/find?username=IHRE_KENNUNG&password=IHR_PASSWORT&term=Lebendgeburten&category=all&language=de"
 src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=ARBEITSLOS09&bereich=Alle&sprache=de"
 src<-"https://www- 
   genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_KENNUNG&password=IHR_PASSWORT&selectionname=12612-0002&format=csv&language=de"
@@ -30,3 +23,13 @@ src<-"https://www-genesis.destatis.de/genesisWS/rest/2020/find/find?username=IHR
 src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=DatenExport&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Meine&format=csv&werte=true&&sprache=de"
 src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=ARBEITSLOS09&bereich=Alle&sprache=de"
 src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Alle&sprache=de"
+
+stri_detect(src,regex="IHRE_KENNUNG")
+stri_detect(src,regex="IHR_PASSWORT")
+#substitute kennung, pwd in request 
+stri_replace(src,destatis_cred$kennung,regex = "IHRE_KENNUNG")
+stri_replace(src,destatis_cred$pwd,regex = "IHR_PASSWORT")
+
+#dt1<-eval(parse(src))
+dt2<-read.csv2(src)
+dt3<-read_xml(src)

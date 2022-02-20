@@ -30,7 +30,7 @@ src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method
 src<-"https://www-ge nesis.d estatis.de/ge nesisWS/web/Recher cheServic e_2010?method=MerkmalAuspraegunge nKatalog&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=BILHS1&auswahl=hs18*&kriterium=code&b ereich=Alle&listenLaenge=10&sprache=de"
 #wks: ausprägungen merkmal, xml_children: 6
 src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=MerkmalTabellenKata log&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=GES&auswahl=12*&bereich=Alle&listenLaenge= 15&sprache=de"
-src<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0002&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=csv&job=false&stand=01.01.1970&language=de"
+src<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0002&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
 #wks, spuckt in browser tabelle aus, now read this
 
 #############
@@ -62,7 +62,7 @@ riplx()
 # dt2<-read.csv2(src)
  dt3<-read_xml(riplx()) #for request of xml sheets, catalogue requests...
  dt4<-read_csv2(riplx()) #no
- dt5 <- read.csv2(riplx(),sep = ";",skip = 1)
+ dt5 <- read.csv2(riplx(),sep = ";")
  #wks. yes!
 #works
  #### neuer ansatz: das untenstehende ab 1.1. hatte den vorlagedatensatz(barghoorn) mit den daten aus einer
@@ -70,6 +70,8 @@ riplx()
  #API-fetched datensatz vorzunehmen
  #in der tabelle sind leider die jahre nicht vollständig aufgeführt, sondern nur jeweils im monat januar
  #das jahr in der entsprechenden spalte. damit läszt sich
+ #hat sich erledigt, das flat csv mit format=ffcsv entspricht dem format, das ich für die aktualisierung 
+ #der vorlage benutzt habe
  
  
  # 
@@ -100,31 +102,57 @@ monat<-stri_replace(xcpt1$month_nm,"ae",regex = "\xe4")
 table2<-replace(xcpt1,13,values = geschlecht)
 table3<-replace(table2,17,values = monat)
 
+############ altes geladenes set mit korrekturen
+# sumup<-function(df,gnd,jahr){
+#   yearxm<-subset(df,year==jahr&gender=="maennlich")
+#   yearxw<-subset(df,year==jahr&gender=="weiblich")
+#   ifelse(gnd=="m",return(sum(as.double(yearxm$all))),
+#   ifelse(gnd=="w",return(sum(as.double(yearxw$all))),"specify gender"))
+# }
+
+# c<-c(sumup(table3,"m",2019),sumup(table3,"w",2019))
+# d<-c(sumup(table3,"m",2020),sumup(table3,"w",2020))
+#########################################################
+
+################
+#neues set aus API fetch
+
+#del mal rows
+stri_detect(dt5,regex="...")
+dt6<-stri_replace(dt5,"0",regex = "...")
+
 sumup<-function(df,gnd,jahr){
-  yearxm<-subset(df,year==jahr&gender=="maennlich")
-  yearxw<-subset(df,year==jahr&gender=="weiblich")
-  ifelse(gnd=="m",return(sum(as.double(yearxm$all))),
-  ifelse(gnd=="w",return(sum(as.double(yearxw$all))),"specify gender"))
+  yearxm<-subset(df,Zeit==jahr&X2_Auspraegung_Label=="männlich")
+  yearxw<-subset(df,Zeit==jahr&X2_Auspraegung_Label=="weiblich")
+  ifelse(gnd=="m",return(sum(as.double(yearxm$BEV001__Lebendgeborene__Anzahl),na.rm=TRUE)),
+         ifelse(gnd=="w",return(sum(as.double(yearxw$BEV001__Lebendgeborene__Anzahl),na.rm=TRUE)),"specify gender"))
 }
+# gnd<-"m"
+#  yearxm<-subset(dt5,Zeit==2021&X2_Auspraegung_Label=="männlich")
+#  ifelse(gnd=="m",(sum(as.double(yearxm$BEV001__Lebendgeborene__Anzahl),na.rm=TRUE)),
+#         ifelse(gnd=="w",(sum(as.double(yearxw$BEV001__Lebendgeborene__Anzahl))),"specify gender"))
+#  
+# sum(as.double(yearxm$BEV001__Lebendgeborene__Anzahl),na.rm = TRUE)
 
-c<-c(sumup(table3,"m",2019),sumup(table3,"w",2019))
-d<-c(sumup(table3,"m",2020),sumup(table3,"w",2020))
-
+c<-c(sumup(dt5,"m",2019),sumup(dt5,"w",2019))
+d<-c(sumup(dt5,"m",2020),sumup(dt5,"w",2020))
+e<-c(sumup(dt5,"m",2021),sumup(dt5,"w",2021))
+####works
 ns<-c("maennlich","weiblich")
 #die columnnames müssen genauso wie in der vorlage(barghoorn) heiszen, sonst können die
 #reihen nicht mit rbind kombiniert (also die neuen daten den alten angefügt) werden.
-sum1920<-rbind("2019"=c,"2020"=d)
+sum1920<-rbind("2019"=c,"2020"=d,"2021"=e)
 colnames(sum1920)<-ns
 #sum1920 beinhaltet jetzt die daten von 2019 und 2020, m/w
 
 #import task dataset
-geb<-read.csv2("geburten_d.csv")
+geb<-read.csv2("PRO/git/essais/docs/STAT_R/data/geburten_d.csv")
 ##################################
 #hier werden die geforderten aktualisierungen vorgenommen, bevor die funktionen laut script
 #ausgeführt werden. also per <rbind> dem datensatz zwei zusätzliche reihen (2019,2020) hinzugefügt.
 geb<-rbind(geb,sum1920)
 geb
-
+####works add years 2019-2021 to barghoorn dataset
 
 ##########
 #das folgende sind die übertragungen, nachbauten aus dem seminarscript

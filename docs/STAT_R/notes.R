@@ -7,11 +7,11 @@
 #destatis webservices: https://www-genesis.destatis.de/genesis/online?Menu=Webservice#abreadcrumb
 library(readr)
 library(stringi)
-library(readxl)
+library(xml2)
 
 #import local destatis credentials
-#destatis_cred <- read_csv("/Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
-
+destatis_cred <- read_csv("Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
+#dir(".")
 src<-"https://www-genesis.destatis.de/genesisWS/rest/2020/find/find?username=IHRE_KENNUNG&password=IHR_PASSWORT&term=Lebendgeburten&category=all&language=de"
 src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=ARBEITSLOS09&bereich=Alle&sprache=de"
 src<-"https://www- 
@@ -25,17 +25,53 @@ src<-"https://www-genesis.destatis.de/genesisWS/rest/2020/find/find?username=IHR
 src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=DatenExport&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Meine&format=csv&werte=true&&sprache=de"
 src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=ARBEITSLOS09&bereich=Alle&sprache=de"
 src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Alle&sprache=de"
+#wks >
+src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Geburten&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
+src<-"https://www-ge nesis.d estatis.de/ge nesisWS/web/Recher cheServic e_2010?method=MerkmalAuspraegunge nKatalog&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=BILHS1&auswahl=hs18*&kriterium=code&b ereich=Alle&listenLaenge=10&sprache=de"
+#wks: ausprägungen merkmal, xml_children: 6
+src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=MerkmalTabellenKata log&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=GES&auswahl=12*&bereich=Alle&listenLaenge= 15&sprache=de"
+src<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0002&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=csv&job=false&stand=01.01.1970&language=de"
+#wks, spuckt in browser tabelle aus, now read this
 
-# stri_detect(src,regex="IHRE_KENNUNG")
-# stri_detect(src,regex="IHR_PASSWORT")
+#############
+riplx<-function(){
+ stri_detect(src,regex="IHRE_KENNUNG")
+ stri_detect(src,regex="IHR_PASSWORT")
 # #substitute kennung, pwd in request 
-# stri_replace(src,destatis_cred$kennung,regex = "IHRE_KENNUNG")
-# stri_replace(src,destatis_cred$pwd,regex = "IHR_PASSWORT")
-# 
+#blank<-"\s"
+ k<-1
+ x<-1
+ for(k in 1:10){ 
+ quest<-stri_replace(src,"",regex = "[:space:]");quest
+  findspace<-stri_detect(quest,regex="[:space:]");findspace
+ifelse(findspace==TRUE,p<-k+1,p<-k)
+       for (p in 1:p){
+         quest<-stri_replace(quest,"",regex = "[:space:]")}
+   };quest
+  quest<-stri_replace(quest,destatis_cred$kennung,regex = "IHRE_KENNUNG")
+ quest_res<-stri_replace(quest,destatis_cred$pwd,regex = "IHR_PASSWORT")
+ print(quest_res)
+ return(quest_res)
+ 
+}
+
+riplx()
 # #dt1<-eval(parse(src))
 # dt2<-read.csv2(src)
-# dt3<-read_xml(src)
-
+ dt3<-read_xml(riplx())
+ dt4<-read_csv2(riplx())
+ dt5 <- read.csv2(riplx(),sep = ";",skip = 1)
+ #wks. yes!
+ 
+#works
+ rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
+ xp1<-xml_text(rech1)
+ print(xp1[145:160])
+ xml_attr(rech1,"EVAL")
+ rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
+ #bei children=7 gibt es keine einträge mehr
+ a<-(rech1[20])
+ 
 #i give this one up. i manage no api fetch...
 #work with static files
 #import destatis dataset:

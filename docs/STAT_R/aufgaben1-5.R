@@ -56,3 +56,13 @@ typeof(int)
 #4.1.2.double integer (flieszkommazahlen)
 dobl<-c(seq(1.6,1.85,0.05))
 typeof(dobl)
+#test:
+char<-"drei"
+char*int
+char*dobl
+char*char
+#fail: nicht-numerisches argument für binären operator
+typeof(int*int)
+typeof(int*dobl)
+#stays same
+#antwort: in numerischen datentypen dürfen NUR zahlen vorkommen.

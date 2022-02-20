@@ -103,19 +103,23 @@ c<-c(sumup(table3,"m",2019),sumup(table3,"w",2019))
 d<-c(sumup(table3,"m",2020),sumup(table3,"w",2020))
 
 ns<-c("maennlich","weiblich")
+#die columnnames müssen genauso wie in der vorlage(barghoorn) heiszen, sonst können die
+#reihen nicht mit rbind kombiniert (also die neuen daten den alten angefügt) werden.
 sum1920<-rbind("2019"=c,"2020"=d)
 colnames(sum1920)<-ns
-
+#sum1920 beinhaltet jetzt die daten von 2019 und 2020, m/w
 
 #import task dataset
 geb<-read.csv2("geburten_d.csv")
-
+##################################
+#hier werden die geforderten aktualisierungen vorgenommen, bevor die funktionen laut script
+#ausgeführt werden.
 geb<-rbind(geb,sum1920)
 geb
-#sum1920
 
 
 ##########
+#das folgende sind die übertragungen, nachbauten aus dem seminarscript
 
 dim(geb)
 mode(geb)

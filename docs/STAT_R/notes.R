@@ -1,9 +1,9 @@
 #12077.statistik_R (barghoorn)
 #20220218(17.38)
 #20220219(23.00)
-#lebendgeburten tabelle destatis:
+#lebendgeburten tabelle destatis provided by tutor
 "https://www-genesis.destatis.de/genesis/online?sequenz=tabelleErgebnis&selectionname=12612-0002#abreadcrumb"
-#try for API fetch tables
+#try for API fetch tables, pdf with sample request links
 #destatis webservices: https://www-genesis.destatis.de/genesis/online?Menu=Webservice#abreadcrumb
 library(readr)
 library(stringi)
@@ -34,6 +34,8 @@ src<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?userna
 #wks, spuckt in browser tabelle aus, now read this
 
 #############
+#this to remove blanks and substitute kennung/pw in link provided by genesis, link to pdf with sample-links
+#for API requests top of page
 riplx<-function(){
  stri_detect(src,regex="IHRE_KENNUNG")
  stri_detect(src,regex="IHR_PASSWORT")
@@ -58,8 +60,8 @@ ifelse(findspace==TRUE,p<-k+1,p<-k)
 riplx()
 # #dt1<-eval(parse(src))
 # dt2<-read.csv2(src)
- dt3<-read_xml(riplx())
- dt4<-read_csv2(riplx())
+ dt3<-read_xml(riplx()) #for request of xml sheets, catalogue requests...
+ dt4<-read_csv2(riplx()) #no
  dt5 <- read.csv2(riplx(),sep = ";",skip = 1)
  #wks. yes!
  

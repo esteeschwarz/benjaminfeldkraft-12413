@@ -77,6 +77,10 @@ riplx()
 #i give this one up. i manage no api fetch...
 #work with static files
 #import destatis dataset:
+ #das folgende könnte obsolet werden, weil der API fetch doch funktioniert hat und in diesem dann datensatz
+ #(die geburtentabelle von destatis) keine sonderzeichen drin sind im gegensatz zur heruntergeladenen
+ #datei. im folgenden absatz habe ich versucht, die <ä>s wieder herzustellen bzw. durch <ae> zu ersetzen,
+ #sie waren im datensatz so formatiert, dasz die zellen von R nicht vernünftig gelesen wurden.
 ns<-c(1:4,"year",6:12,"gender",14:15,"month","month_nm","all")
 xcpt1 <- read.csv2("12612-0002_flatcpt.csv",sep = ";",col.names = ns, na="0")
 

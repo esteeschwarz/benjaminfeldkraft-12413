@@ -40,3 +40,11 @@
 # Bei Gruppenarbeiten sollten alle Gruppenmitglieder angegeben sein. Das Dokument sollte nicht mehr als 10 Seiten haben und spätestens bis zum 6. März bei mir per Email abgegeben werden.
 # Viel Erfolg wünscht Online-Dozent Martin B.
 ################################################################################
+#3.tabelle erstellen
+a<-"nominal"<-c("eins","zwei","drei","vier","funf","sechs")
+b<-"ordinal"<-c(1:6)
+c<-"metrisch"<-c(seq(1.6,1.85,0.05))
+ns<-c("nominal","ordinal(zensuren)","metrisch(grösze)")
+tab1<-cbind(a,b,c)
+colnames(tab1)<-ns;tab1
+#######################

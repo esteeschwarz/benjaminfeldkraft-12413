@@ -48,3 +48,11 @@ ns<-c("nominal","ordinal(zensuren)","metrisch(grösze)")
 tab1<-cbind(a,b,c)
 colnames(tab1)<-ns;tab1
 #######################
+#4.zeichentypen numerischer variablen
+#4.1.numerisch
+#4.1.1.integer (ganzzahlen)
+int<-c(1:6)
+typeof(int)
+#4.1.2.double integer (flieszkommazahlen)
+dobl<-c(seq(1.6,1.85,0.05))
+typeof(dobl)

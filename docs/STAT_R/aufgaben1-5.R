@@ -91,7 +91,6 @@ lc<-length(c)
 rank(c)
 md<-(lc-lc/2)
 mdcor<-lc-round(lc/2)
-#mdif<-md-mdcor
 #limes function
 k<-1
 mdx1<-(c[md]+c[mdcor])/2

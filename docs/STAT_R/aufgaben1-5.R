@@ -41,9 +41,9 @@
 # Viel Erfolg wünscht Online-Dozent Martin B.
 ################################################################################
 #3.tabelle erstellen
-a<-"nominal"<-c("eins","zwei","drei","vier","funf","sechs")
-b<-"ordinal"<-c(1:6)
-c<-"metrisch"<-c(seq(1.6,1.85,0.05))
+a<-c("eins","zwei","drei","vier","funf","sechs")
+b<-c(1:6)
+c<-c(seq(1.6,1.85,0.05))
 ns<-c("nominal","ordinal(zensuren)","metrisch(grösze)")
 tab1<-cbind(a,b,c)
 colnames(tab1)<-ns;tab1

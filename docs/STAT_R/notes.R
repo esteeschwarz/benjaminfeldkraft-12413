@@ -64,19 +64,27 @@ riplx()
  dt4<-read_csv2(riplx()) #no
  dt5 <- read.csv2(riplx(),sep = ";",skip = 1)
  #wks. yes!
- 
 #works
- rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
- xp1<-xml_text(rech1)
- print(xp1[145:160])
- xml_attr(rech1,"EVAL")
- rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
- #bei children=7 gibt es keine einträge mehr
- a<-(rech1[20])
+ #### neuer ansatz: das untenstehende ab 1.1. hatte den vorlagedatensatz(barghoorn) mit den daten aus einer
+ #heruntergeladenen tabelle aktualisiert. ich möchte nun nocheinmal versuchen, diese aktualisierung aus dem
+ #API-fetched datensatz vorzunehmen
+ #in der tabelle sind leider die jahre nicht vollständig aufgeführt, sondern nur jeweils im monat januar
+ #das jahr in der entsprechenden spalte. damit läszt sich
  
+ 
+ # 
+ #  rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
+ # xp1<-xml_text(rech1)
+ # print(xp1[145:160])
+ # xml_attr(rech1,"EVAL")
+ # rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
+ # #bei children=7 gibt es keine einträge mehr
+ # a<-(rech1[20])
+ # 
 #i give this one up. i manage no api fetch...
 #work with static files
-#import destatis dataset:
+#1.
+ #1.1.import destatis dataset:
  #das folgende könnte obsolet werden, weil der API fetch doch funktioniert hat und in diesem dann datensatz
  #(die geburtentabelle von destatis) keine sonderzeichen drin sind im gegensatz zur heruntergeladenen
  #datei. im folgenden absatz habe ich versucht, die <ä>s wieder herzustellen bzw. durch <ae> zu ersetzen,
@@ -113,7 +121,7 @@ colnames(sum1920)<-ns
 geb<-read.csv2("geburten_d.csv")
 ##################################
 #hier werden die geforderten aktualisierungen vorgenommen, bevor die funktionen laut script
-#ausgeführt werden.
+#ausgeführt werden. also per <rbind> dem datensatz zwei zusätzliche reihen (2019,2020) hinzugefügt.
 geb<-rbind(geb,sum1920)
 geb
 

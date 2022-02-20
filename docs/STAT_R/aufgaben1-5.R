@@ -81,17 +81,27 @@ median(c)
 #(c[md]+c[md+1])/2
 
 #for the difference: outliers
-c<-c(1:5,20:25,1000)
+c<-c(1:5,20:27,1000)
 mean(c)
 median(c)
-#rank(c)
-#lc<-length(c)
-#md<-lc/2
-#(c[md]+c[md+1])/2
+head(c)
+lc<-length(c)
+#lc2<-round(lc/2)
+
+rank(c)
+md<-(lc-lc/2)
+mdcor<-lc-round(lc/2)
+#mdif<-md-mdcor
+#limes function
+k<-1
+mdx1<-(c[md]+c[mdcor])/2
+mdx2<-(c[md]+c[mdcor])/2+1
+mdx3<-(mdx1+mdx2)/2
+print(mdx3)
 
 #5.3.standardabweichung
 sd(c)
-#5.4.korrelation
+#5.4.kovarianz
 d<-c(seq(1,20,2))
 e<-c(seq(1,10,1))
 cbind(d,e,d/e)

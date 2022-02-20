@@ -67,11 +67,33 @@ typeof(int*dobl)
 #stays same
 #antwort: in numerischen datentypen dürfen NUR zahlen vorkommen.
 #5.statistische kenngröszen
+c<-c(1:7)
 #5.1.mean
 mean(c)
+lc<-length(c)
+#dim(c)
+c2<-cbind(c)
+apply(c2,2,sum)/lc
 #5.2.median
 median(c)
+#rank(c)
+#md<-lc/2
+#(c[md]+c[md+1])/2
+
 #for the difference: outliers
 c<-c(1:5,20:25,1000)
 mean(c)
 median(c)
+#rank(c)
+#lc<-length(c)
+#md<-lc/2
+#(c[md]+c[md+1])/2
+
+#5.3.standardabweichung
+sd(c)
+#5.4.korrelation
+d<-c(seq(1,20,2))
+e<-c(seq(1,10,1))
+cbind(d,e,d/e)
+e2<-c(seq(1,40,4))
+cbind(d,e,"pos"=d/e,e2,"neg"=d/e2)

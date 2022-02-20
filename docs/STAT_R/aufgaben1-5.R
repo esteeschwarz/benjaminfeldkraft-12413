@@ -66,3 +66,12 @@ typeof(int*int)
 typeof(int*dobl)
 #stays same
 #antwort: in numerischen datentypen dürfen NUR zahlen vorkommen.
+#5.statistische kenngröszen
+#5.1.mean
+mean(c)
+#5.2.median
+median(c)
+#for the difference: outliers
+c<-c(1:5,20:25,1000)
+mean(c)
+median(c)

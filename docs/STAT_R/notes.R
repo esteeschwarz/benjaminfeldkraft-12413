@@ -260,4 +260,4 @@ proztab_q <- function(x) {
 ####
 barplot(geb$maennlich)
 barplot(geb$weiblich,col=2,add=TRUE)
-
+###################################################

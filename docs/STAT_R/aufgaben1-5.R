@@ -68,13 +68,13 @@ typeof(int*dobl)
 #antwort: in numerischen datentypen dürfen NUR zahlen vorkommen.
 #5.statistische kenngröszen
 c<-c(1:7)
-#5.1.mean
+#5.1.mean, numeric double
 mean(c)
 lc<-length(c)
 #dim(c)
 c2<-cbind(c)
 apply(c2,2,sum)/lc
-#5.2.median
+#5.2.median, numeric double
 median(c)
 #rank(c)
 #md<-lc/2
@@ -98,7 +98,7 @@ mdx2<-(c[md]+c[mdcor])/2+1
 mdx3<-(mdx1+mdx2)/2
 print(mdx3)
 
-#5.3.standardabweichung
+#5.3.standardabweichung, numeric double
 sd(c)
 #5.4.kovarianz
 d<-c(seq(1,20,2))
@@ -106,3 +106,5 @@ e<-c(seq(1,10,1))
 cbind(d,e,d/e)
 e2<-c(seq(1,40,4))
 cbind(d,e,"pos"=d/e,e2,"neg"=d/e2)
+#5.4.korrelation
+cbind(d,e,1/d*1/e,e2,1/d*1/e2)

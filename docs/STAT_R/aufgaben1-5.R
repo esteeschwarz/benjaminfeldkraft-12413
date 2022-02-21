@@ -151,7 +151,7 @@ median(gg)
 sample_ungeschichtet<-s_u<-sample(gg,300)
 mean(s_u)
 median(s_u)
-####
+####wesentlich realistischere mittelwerte
 mean(s_g)
 median(s_g)
 #15.
@@ -159,3 +159,5 @@ a<-c(1:10)
 b<-sample(a,4);b
 c<-sample(a,10);c
 d<-sample(a,10,replace=TRUE);d #as you can see, mit zurücklegen können werte mehrmals gezogen werden
+######
+

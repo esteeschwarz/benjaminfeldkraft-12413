@@ -167,28 +167,26 @@ mean(dat$NETTO,na.rm=TRUE)
 median(dat$NETTO,na.rm=TRUE)
 sum(!is.na(dat$NETTO))
 sum(is.na(dat$NETTO))
-sx<-function(s){
-#s1<-dat$NETTO[sample(length(dat$NETTO),length(dat$NETTO)/10)]
-#mean(s1,na.rm=TRUE)
-#s2<-dat$NETTO[sample(length(dat$NETTO),length(dat$NETTO)/10)]
-s<-dat$NETTO[sample(length(dat$NETTO),length(dat$NETTO)/10)]
+sx<-function(s,p){
+s<-dat$NETTO[sample(length(dat$NETTO),length(dat$NETTO)*(p/100))]
 }
 ###
-stich<-rbind(NULL,summary(sx(s),na.rm=TRUE))
+p<-10 #for 10%sample
+stich<-rbind(NULL,summary(sx(s,p),na.rm=TRUE))
 #s3<-dat$NETTO[sample(length(dat$NETTO),length(dat$NETTO)/10)]
-stich<-rbind(stich,summary(sx(s),na.rm=TRUE))
-stich<-rbind(stich,summary(sx(s),na.rm=TRUE))
-stich<-rbind(stich,summary(sx(s),na.rm=TRUE))
+stich<-rbind(stich,summary(sx(s,p),na.rm=TRUE))
+stich<-rbind(stich,summary(sx(s,p),na.rm=TRUE))
+stich<-rbind(stich,summary(sx(s,p),na.rm=TRUE))
 dim(stich)
 (stich[,"Mean"])
 stich[,"Median"]
 ###
 #und wie soll man die sd eines samples berechnen, das nicht mehr verfügbar ist?
 #also nochmal
-s1<-sx(s)
-s2<-sx(s)
-s3<-sx(s)
-s4<-sx(s)
+s1<-sx(s,p)
+s2<-sx(s,p)
+s3<-sx(s,p)
+s4<-sx(s,p)
 stich<-rbind(NULL,summary(s1))
 stich<-rbind(stich,summary(s2))
 stich<-rbind(stich,summary(s3))

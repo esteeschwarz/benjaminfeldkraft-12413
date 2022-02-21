@@ -61,8 +61,11 @@ riplx() #produces clean link with credentials in it
 # dt3<-read_xml(riplx()) #for request of xml sheets, catalogue requests...
 # dt4<-read_csv2(riplx()) #no
 #dt5 <- read.csv2(riplx(),sep = ";",skip=1) #for import regular csv table
- dt5 <- read.csv2(riplx(),sep = ";") #mind no skip rows import flat csv
- #wks. yes!
+# dt5 <- read.csv2(riplx(),sep = ";") #mind no skip rows import flat csv
+ dt5<- read.csv2(riplx(), 
+            sep = ";", na = "...") #this important to remove [...] NAs
+#if read_delim instead, the variable names are bracketed complicate way in sonderzeichen, not plain as with read.csv2 
+  #wks. yes!
 #works
  #### neuer ansatz: das untenstehende ab 1.1. hatte den vorlagedatensatz(barghoorn) mit den daten aus einer
  #heruntergeladenen tabelle aktualisiert. ich möchte nun nocheinmal versuchen, diese aktualisierung aus dem
@@ -90,16 +93,17 @@ riplx() #produces clean link with credentials in it
  #(die geburtentabelle von destatis) keine sonderzeichen drin sind im gegensatz zur heruntergeladenen
  #datei. im folgenden absatz habe ich versucht, die <ä>s wieder herzustellen bzw. durch <ae> zu ersetzen,
  #sie waren im datensatz so formatiert, dasz die zellen von R nicht vernünftig gelesen wurden.
-ns<-c(1:4,"year",6:12,"gender",14:15,"month","month_nm","all")
-xcpt1 <- read.csv2("12612-0002_flatcpt.csv",sep = ";",col.names = ns, na="0")
 
-#fuck sonderzeichen im datensatz!
-stri_detect(xcpt1$gender,regex="\xe4")
-
-geschlecht<-stri_replace(xcpt1$gender,"ae",regex = "\xe4")
-monat<-stri_replace(xcpt1$month_nm,"ae",regex = "\xe4")
-table2<-replace(xcpt1,13,values = geschlecht)
-table3<-replace(table2,17,values = monat)
+#  ns<-c(1:4,"year",6:12,"gender",14:15,"month","month_nm","all")
+# xcpt1 <- read.csv2("12612-0002_flatcpt.csv",sep = ";",col.names = ns, na="0")
+# 
+# #fuck sonderzeichen im datensatz!
+# stri_detect(xcpt1$gender,regex="\xe4")
+# 
+# geschlecht<-stri_replace(xcpt1$gender,"ae",regex = "\xe4")
+# monat<-stri_replace(xcpt1$month_nm,"ae",regex = "\xe4")
+# table2<-replace(xcpt1,13,values = geschlecht)
+# table3<-replace(table2,17,values = monat)
 
 ############ altes geladenes set mit korrekturen
 # sumup<-function(df,gnd,jahr){
@@ -117,22 +121,35 @@ table3<-replace(table2,17,values = monat)
 #2.neues set aus API fetch
 
 #2.1.del mal rows
-stri_detect(dt5,regex="...")
-dt6<-stri_replace(dt5,"0",regex = "...")
+#@barghoorn apropos numerische variablen:
+#im genesis datensatz erscheinen in den zeilen mit den zahlen für dezember 2021
+#drei punkte (character, [...]). das macht eine declaration der spalte als numerisch
+#unmöglich und erschwert die auswertung ungemein, da die gesamte spalte nur als type=character
+#gelesen werden kann. warum dort von den verantwortlichen kein NA eingefügt wurde, ist mir schleierhaft...
+###################
 #2.2.sum genderspecified geburtenanzahl per year
+###2.2.1. when dataset is imported without removing NA with import, sum generated out of double
+# sumup<-function(df,gnd,jahr){
+#   yearxm<-subset(df,Zeit==jahr&X2_Auspraegung_Label=="männlich")
+#   yearxw<-subset(df,Zeit==jahr&X2_Auspraegung_Label=="weiblich")
+#   ifelse(gnd=="m",return(sum(as.double(yearxm$BEV001__Lebendgeborene__Anzahl),na.rm=TRUE)),
+#          ifelse(gnd=="w",return(sum(as.double(yearxw$BEV001__Lebendgeborene__Anzahl),na.rm=TRUE)),"specify gender"))
+# }
+###2.2.2.neu
 sumup<-function(df,gnd,jahr){
   yearxm<-subset(df,Zeit==jahr&X2_Auspraegung_Label=="männlich")
   yearxw<-subset(df,Zeit==jahr&X2_Auspraegung_Label=="weiblich")
-  ifelse(gnd=="m",return(sum(as.double(yearxm$BEV001__Lebendgeborene__Anzahl),na.rm=TRUE)),
-         ifelse(gnd=="w",return(sum(as.double(yearxw$BEV001__Lebendgeborene__Anzahl),na.rm=TRUE)),"specify gender"))
+  ifelse(gnd=="m",return(sum(yearxm$BEV001__Lebendgeborene__Anzahl,na.rm=TRUE)),
+         ifelse(gnd=="w",return(sum(yearxw$BEV001__Lebendgeborene__Anzahl,na.rm=TRUE)),"specify gender"))
 }
+
 # gnd<-"m"
 #  yearxm<-subset(dt5,Zeit==2021&X2_Auspraegung_Label=="männlich")
 #  ifelse(gnd=="m",(sum(as.double(yearxm$BEV001__Lebendgeborene__Anzahl),na.rm=TRUE)),
 #         ifelse(gnd=="w",(sum(as.double(yearxw$BEV001__Lebendgeborene__Anzahl))),"specify gender"))
 #  
 # sum(as.double(yearxm$BEV001__Lebendgeborene__Anzahl),na.rm = TRUE)
-
+#dt5$X2_Auspraegung_Label
 #2.3.create new array with sums
 c<-c(sumup(dt5,"m",2019),sumup(dt5,"w",2019))
 d<-c(sumup(dt5,"m",2020),sumup(dt5,"w",2020))

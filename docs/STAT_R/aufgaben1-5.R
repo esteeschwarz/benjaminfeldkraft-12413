@@ -80,7 +80,7 @@ median(c)
 #md<-lc/2
 #(c[md]+c[md+1])/2
 
-#for the difference: outliers
+#5.2.1.advantage median vs. mean: outliers, practical: durchschnittseinkommen
 c<-c(1:5,20:27,1000)
 mean(c)
 median(c)
@@ -100,11 +100,62 @@ print(mdx3)
 
 #5.3.standardabweichung, numeric double
 sd(c)
-#5.4.kovarianz
+#5.4.1.kovarianz
 d<-c(seq(1,20,2))
 e<-c(seq(1,10,1))
 cbind(d,e,d/e)
 e2<-c(seq(1,40,4))
 cbind(d,e,"pos"=d/e,e2,"neg"=d/e2)
-#5.4.korrelation
+#5.4.2.korrelation
 cbind(d,e,1/d*1/e,e2,1/d*1/e2)
+#6.1.häufigkeitstabelle
+f<-sample(1:100,10)
+g<-letters[1:10]
+h<-cbind(f)
+row.names(h)<-g;h
+#6.2.kontingenztabelle
+n<-sample(1:100,10)
+h<-cbind(f,n)
+row.names(h)<-g;h
+#7.1.median vs mean s.o. 5.2.1
+#8.streuung
+#werte können um einen mittelwert eng oder weit gestreut sein, d.h. eine durchschnittlich (standard)
+#grosze oder kleine abweichung vom mittelwert aufweisen. je weiter die streuung einer wertesammlung,
+#desto gröszer die relative standardabweichung vom mittelwert.
+#9.kovarianz vs. korrelation s. 5.4.
+#9.1.kov: skalenabhängige beziehung zwischen zwei variablen, wenn x+, dann y+
+#9.2.kor: skalenunabhänige lineare beziehung zwischen zwei variablen, wert zwischen -1 und 1
+#10.stichprobe vs totalerhebung
+#kleines datenvolumen zu erheben und auszuwerten, ggf. (meist) randomisiert
+#11.nachteile stichprobe
+#repräsentativität nicht gesichert, stark abhängig von der auswahl der sample
+#12.repräsentativität
+#stichprobe soll getreues abbild der grundgesamtheit sein
+#14.
+#3 einkommensschichten
+a<-c(1000:2000)
+b<-c(2000:10000)
+c<-c(10000:100000)
+#zufälliges ziehen aus schichten
+sa<-sample(a,100)
+sb<-sample(b,100)
+sc<-sample(c,100)
+grundgesamtheit<-gg<-c(a,b,c)
+sample_geschichtet<-s_g<-c(sa,sb,sc)
+tab1<-cbind(sa,sb,sc)
+ns<-c("1000-2000","2000-10000","10000-100000")
+colnames(tab1)<-ns
+####
+mean(gg)
+median(gg)
+sample_ungeschichtet<-s_u<-sample(gg,300)
+mean(s_u)
+median(s_u)
+####
+mean(s_g)
+median(s_g)
+#15.
+a<-c(1:10)
+b<-sample(a,4);b
+c<-sample(a,10);c
+d<-sample(a,10,replace=TRUE);d #as you can see, mit zurücklegen können werte mehrmals gezogen werden

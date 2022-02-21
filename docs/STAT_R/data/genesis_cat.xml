@@ -1,0 +1,1139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <RechercheResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+      <RechercheReturn>
+        <returncode>(0)</returncode>
+        <trefferListe xmlns:ns1="daten.webservice_2010.genesis" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" soapenc:arrayType="ns1:EinzelTreffer[100]" xsi:type="soapenc:Array">
+          <trefferListe>
+            <EVAS>12421</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Vorausberechneter Bevölkerungsstand: Deutschland, Stichtag,
+Varianten der Bevölkerungsvorausberechnung</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12421-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12421</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Vorausberechneter Bevölkerungsstand: Deutschland, Stichtag,
+Varianten der Bevölkerungsvorausberechnung, Geschlecht,
+Altersjahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12421-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12421</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Vorausberechneter Bevölkerungsstand: Bundesländer, Stichtag,
+Varianten der Bevölkerungsvorausberechnung</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12421-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>7</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12421</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Vorausberechneter Bevölkerungsstand: Bundesländer, Stichtag,
+Varianten der Bevölkerungsvorausberechnung, Geschlecht,
+Altersjahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12421-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Deutschland, Stichtag, Geschlecht, Altersjahre,
+Migrantengeneration, Ländergruppierungen/Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Deutschland, Stichtag, Geschlecht,
+Aufenthaltstitel</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0007</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Deutschland, Stichtag, Geschlecht,
+Aufenthaltstitel/Ausgewählte Aufenthaltstitel,
+Ländergruppierungen/Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0008</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Deutschland, Jahre, Geschlecht,
+Registerbewegungen (Bund), Ländergruppierungen/
+Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0009</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Deutschland, Jahre, Geschlecht, Altersjahre,
+Registerzu- und abgänge (Bund), Ländergruppierungen/
+Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0010</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Bundesländer, Stichtag, Geschlecht, Altersjahre,
+Migrantengeneration, Ländergruppierungen/Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0023</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Bundesländer, Stichtag, Geschlecht,
+Aufenthaltstitel/Ausgewählte Aufenthaltstitel,
+Ländergruppierungen/Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0026</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Bundesländer, Jahre, Geschlecht,
+Registerbewegungen (regional), Ländergruppierungen/
+Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0027</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Bundesländer, Jahre, Geschlecht, Altersjahre,
+Registerzu- und abgänge (regional), Ländergruppierungen/
+Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0028</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Kreise, Stichtag, Geschlecht, Aufenthaltstitel,
+Ländergruppierungen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0042</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausländer: Kreise, Jahre, Geschlecht, Registerbewegungen
+(regional), Ländergruppierungen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12521-0044</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12531</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Schutzsuchende: Deutschland, Stichtag, Geschlecht,
+Altersjahre, Migrantengeneration, Ländergruppierungen
+/Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12531-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12531</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Schutzsuchende: Bundesländer, Stichtag, Geschlecht,
+Altersjahre, Migrantengeneration, Ländergruppierungen
+/Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12531-0023</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Deutschland, Jahre, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Deutschland, Monate, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Deutschland, Jahre, Staatsangehörigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Deutschland, Jahre, Familienstand der Eltern</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Deutschland, Jahre, Alter der Mutter,
+Lebendgeburtenfolge</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0005</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Deutschland, Jahre, Alter des Vaters,
+Familienstand des Vaters</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0006</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Deutschland, Jahre, Alter der Mutter,
+Geschlecht der Lebendgeborenen, Familienstand der Eltern</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0007</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Geburtenziffern (Lebendgeborene je 1000 Frauen):
+Deutschland, Jahre, Alter</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0008</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Zusammengefasste Geburtenziffern (je Frau): Deutschland,
+Jahre, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0009</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Zusammengefasste Geburtenziffern (je Frau): Deutschland,
+Jahre, Staatsangehörigkeit der Mutter</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0010</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Nettoreproduktionsrate: Deutschland, Jahre, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0011</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Kohortenspezifische Geburtenziffern (Lebendgeborene je 1000
+Frauen): Deutschland, Geburtsjahr der Frau, Alter</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0012</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Endgültige Kinderzahl (je Frau): Deutschland, Geburtsjahr
+der Frau, Altersgruppen der Frauen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0013</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliches Alter der Mutter bei der Geburt:
+Deutschland, Jahre, Lebendgeburtenfolge</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0014</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliches Alter der Mutter bei der Geburt ihrer
+lebend geborenen Kinder: Deutschland, Jahre, Familienstand
+der Eltern</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0015</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Mehrlingsgeburten: Deutschland, Jahre, Art der
+Mehrlingsgeburt</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0016</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Mehrlingsgeburten je 1000 Mütter: Deutschland, Jahre,
+Art der Mehrlingsgeburt</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0017</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Totgeborene: Deutschland, Jahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0018</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene je 1000 Einwohner: Deutschland, Jahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0019</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene je 1000 Einwohner: Deutschland, Monate</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0020</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Zusammengefasste Vaterschaftsziffern: Deutschland, Jahre,
+Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0021</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliches Alter des Vaters bei Geburt des Kindes:
+Deutschland, Jahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0022</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliches Alter des Vaters bei Geburt des Kindes:
+Deutschland, Jahre, Lebendgeburtenfolge</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0023</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Bundesländer, Jahre, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0100</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Bundesländer, Monate, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0101</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Bundesländer, Jahre, Familienstand der
+Eltern</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0102</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Lebendgeborene: Bundesländer, Jahre, Staatsangehörigkeit des
+Kindes und der Eltern</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0103</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Zusammengefasste Geburtenziffern (je Frau): Bundesländer,
+Jahre, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0104</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Nettoreproduktionsrate: Bundesländer, Jahre (bis 2010),
+Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0105</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12612</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Totgeborene: Bundesländer, Jahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12612-0106</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>7</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12621</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliche Lebenserwartung bei Geburt
+(Periodensterbetafel): Bundesländer, Jahre, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12621-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>7</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Adoptierte Kinder und Jugendliche: Deutschland, Jahre,
+Geschlecht, Nationalität, Merkmale der Eltern</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22521-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Adoptierte Kinder und Jugendliche: Deutschland, Jahre,
+Geschlecht, Altersgruppen, Merkmale der Eltern</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22521-0005</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Adoptierte Kinder und Jugendliche: Deutschland, Jahre,
+Nationalität, Altersgruppen, Merkmale der Eltern</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22521-0006</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Adoptierte Kinder und Jugendliche: Deutschland, Jahre,
+Altersgruppen, Familienstand der abgebenden Eltern,
+Art der Unterbringung vor der Adoption</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22521-0007</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Adoptierte Kinder und Jugendliche: Deutschland, Jahre,
+Verwandtschaftsverhältnis zu Adoptiveltern, Familienstand
+der abgebenden Eltern, Art der Unterbringung vor der Adopt.</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22521-0008</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Adoptierte mit gerichtlich ersetzter Einwilligung:
+Deutschland, Jahre, Familienstand der abgebenden Eltern,
+Art der Unterbringung vor der Adoption</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22521-0009</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22521</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Adoptierte Kinder und Jugendliche: Bundesländer, Jahre,
+Nationalität, Art der Unterbringung vor der Adoption</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22521-0022</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22523</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Vorläufige Schutzmaßnahmen für Kinder und Jugendliche: Deutschland, Jahre, Aufenthalt vor der Maßnahme, Unterbringung während der Maßnahme</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22523-0011</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22523</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Vorläufige Schutzmaßnahmen für Kinder und Jugendliche:
+Deutschland, Jahre, Aufenthalt vor der Maßnahme, Ende der
+Maßnahme</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22523-0012</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Elterngeldempfänger nach Geburtszeiträumen: Deutschland,
+Jahre, Geschlecht, Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Elterngeldempfänger nach Geburtszeiträumen: Deutschland,
+Quartale, Geschlecht, Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Elterngeldempfänger nach Geburtszeiträumen: Bundesländer,
+Jahre, Geschlecht, Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0022</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Elterngeldempfänger nach Geburtszeiträumen: Bundesländer,
+Quartale, Geschlecht, Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0023</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Elterngeldempfänger: Deutschland, Jahre, Geschlecht,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0101</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Elterngeldempfänger: Deutschland, Quartale, Geschlecht,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0102</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliche Höhe des Elterngeldanspruchs:
+Deutschland, Jahre, Geschlecht, Art der Inanspruchnahme,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0107</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliche Höhe des Elterngeldanspruchs:
+Deutschland, Quartale, Geschlecht, Art der Inanspruchnahme,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0108</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Elterngeldempfänger: Bundesländer, Jahre, Geschlecht,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0111</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Elterngeldempfänger: Bundesländer, Quartale, Geschlecht,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0112</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliche Höhe des Elterngeldanspruchs:
+Bundesländer, Jahre, Geschlecht, Art der Inanspruchnahme,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0117</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliche Höhe des Elterngeldanspruchs:
+Bundesländer, Quartale, Geschlecht, Art der Inanspruchnahme,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0118</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Elterngeldempfänger: Kreise, Jahre, Geschlecht,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0121</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22922</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliche Höhe des Elterngeldanspruchs:
+Kreise, Jahre, Geschlecht, Art der Inanspruchnahme,
+Erwerbstätigkeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22922-0124</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23131</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Krankenhauspatienten: Deutschland, Jahre,
+Hauptdiagnose ICD-10 (1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23131-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23131</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Krankenhauspatienten: Deutschland, Jahre, Geschlecht,
+Altersgruppen, Hauptdiagnose ICD-10 (1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23131-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23131</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Krankenhauspatienten: Deutschland, Jahre, Geschlecht,
+Altersgruppen, Wohnort des Patienten, Hauptdiagnose ICD-10
+(1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23131-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23131</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Krankenhauspatienten: Deutschland, Jahre, Geschlecht,
+Altersgruppen, Fachabteilungen, Hauptdiagnose ICD-10
+(1-Steller)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23131-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23131</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Krankenhauspatienten: Bundesländer, Jahre,
+Hauptdiagnose ICD-10 (1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23131-0010</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23131</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Krankenhauspatienten: Bundesländer, Jahre, Geschlecht,
+Altersgruppen, Hauptdiagnose ICD-10 (1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23131-0011</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23132</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Patienten in Vorsorge- oder Rehabilitationseinrichtungen:
+Deutschland, Jahre, Hauptdiagnose ICD-10 (1-3-Steller
+Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23132-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23132</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Patienten in Vorsorge- oder Rehabilitationseinrichtungen:
+Deutschland, Jahre, Geschlecht, Altersgruppen,
+Hauptdiagnose ICD-10 (1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23132-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23132</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Patienten in Vorsorge- oder Rehabilitationseinrichtungen:
+Deutschland, Jahre, Geschlecht, Altersgruppen, Wohnort des
+Patienten, Hauptdiagnose ICD-10 (1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23132-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Nebendiagnosen der vollstationären Patienten: Deutschland,
+Jahre, Nebendiagnosen ICD-10 (1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Nebendiagnosen der vollstationären Patienten: Deutschland,
+Jahre, Geschlecht, Altersgruppen, Nebendiagnosen ICD-10
+(1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Nebendiagnosen der vollstationären Patienten: Deutschland,
+Jahre, Geschlecht, Altersgruppen, Wohnort des Patienten,
+Nebendiagnosen ICD-10 (1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Nebendiagnosen der vollstationären Patienten: Bundesländer,
+Jahre, Nebendiagnosen ICD-10 (1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0010</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Nebendiagnosen der vollstationären Patienten: Bundesländer,
+Jahre, Geschlecht, Altersgruppen, Nebendiagnosen ICD-10
+(1-3-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0011</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Operationen und Prozeduren an vollstationären Patienten:
+Deutschland, Jahre, Operationen und Prozeduren (1-4-Steller
+Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0101</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Operationen und Prozeduren an vollstationären Patienten:
+Deutschland, Jahre, Geschlecht, Altersgruppen, Operationen
+und Prozeduren (1-4-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0102</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Operationen und Prozeduren an vollstationären Patienten:
+Deutschland, Jahre, Geschlecht, Altersgruppen, Wohnort des
+Patienten, Operationen und Prozeduren (1-4-Steller Hier.)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0103</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Operationen und Prozeduren an vollstationären Patienten:
+Bundesländer, Jahre, Operationen und Prozeduren
+(1-4-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0110</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23141</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Operationen und Prozeduren an vollstationären Patienten:
+Bundesländer, Jahre, Geschlecht, Altersgruppen, Operationen
+und Prozeduren (1-4-Steller Hierarchie)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23141-0111</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Gestorbene: Deutschland, Jahre, Todesursachen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23211-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Gestorbene: Deutschland, Jahre, Todesursachen, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23211-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Gestorbene: Deutschland, Jahre, Todesursachen, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23211-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Gestorbene: Deutschland, Jahre, Todesursachen, Geschlecht,
+Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23211-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23631</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Krankheitskosten: Deutschland, Jahre, Krankheitsdiagnosen
+(ICD-10)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23631-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>23631</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Krankheitskosten: Deutschland, Jahre, Krankheitsdiagnosen
+(ICD-10), Geschlecht, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>23631-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63511</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Beratene Personen, Durchschnittliche Schulden: Deutschland,
+Jahre, Sozioökonomische Merkmale</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63511-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63511</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Beratene Personen (Anteilswerte), Durchschnittliche
+Schulden: Deutschland, Jahre, Hauptauslöser der
+Überschuldung, Sozioökonomische Merkmale</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63511-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63511</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Beratene Personen (Anteilswerte), Durchschnittliche
+Schulden: Deutschland, Jahre, Gläubigerarten,
+Sozioökonomische Merkmale</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63511-0008</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63511</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Durchschnittliche monatliche Einkünfte je beratene Person:
+Deutschland, Jahre, Einkunftsarten, Sozioökonomische
+Merkmale</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63511-0011</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+        </trefferListe>
+        <trefferUebersicht xmlns:ns2="daten.webservice_2010.genesis" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" soapenc:arrayType="ns2:ObjektTreffer[1]" xsi:type="soapenc:Array">
+          <trefferUebersicht>
+            <objektTyp>Tabelle</objektTyp>
+            <trefferAnzahl>100</trefferAnzahl>
+          </trefferUebersicht>
+        </trefferUebersicht>
+      </RechercheReturn>
+    </RechercheResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

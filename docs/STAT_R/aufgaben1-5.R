@@ -160,4 +160,44 @@ b<-sample(a,4);b
 c<-sample(a,10);c
 d<-sample(a,10,replace=TRUE);d #as you can see, mit zurücklegen können werte mehrmals gezogen werden
 ######
-
+#16.
+dat<-read.csv2("PRO/git/essais/docs/STAT_R/data/Umfrage.csv")
+dim(dat)
+mean(dat$NETTO,na.rm=TRUE)
+median(dat$NETTO,na.rm=TRUE)
+sum(!is.na(dat$NETTO))
+sum(is.na(dat$NETTO))
+sx<-function(s){
+#s1<-dat$NETTO[sample(length(dat$NETTO),length(dat$NETTO)/10)]
+#mean(s1,na.rm=TRUE)
+#s2<-dat$NETTO[sample(length(dat$NETTO),length(dat$NETTO)/10)]
+s<-dat$NETTO[sample(length(dat$NETTO),length(dat$NETTO)/10)]
+}
+###
+stich<-rbind(NULL,summary(sx(s),na.rm=TRUE))
+#s3<-dat$NETTO[sample(length(dat$NETTO),length(dat$NETTO)/10)]
+stich<-rbind(stich,summary(sx(s),na.rm=TRUE))
+stich<-rbind(stich,summary(sx(s),na.rm=TRUE))
+stich<-rbind(stich,summary(sx(s),na.rm=TRUE))
+dim(stich)
+(stich[,"Mean"])
+stich[,"Median"]
+###
+#und wie soll man die sd eines samples berechnen, das nicht mehr verfügbar ist?
+#also nochmal
+s1<-sx(s)
+s2<-sx(s)
+s3<-sx(s)
+s4<-sx(s)
+stich<-rbind(NULL,summary(s1))
+stich<-rbind(stich,summary(s2))
+stich<-rbind(stich,summary(s3))
+stich<-rbind(stich,summary(s4))
+stich
+dim(stich)
+(stich[,"Mean"])
+stich[,"Median"]
+sd1<-rbind(sd(s1,na.rm = TRUE),sd(s2,na.rm = TRUE),sd(s3,na.rm = TRUE),sd(s4,na.rm = TRUE))
+colnames(sd1)<-"standardabweichung/samples"
+sd1
+###

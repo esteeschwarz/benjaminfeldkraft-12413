@@ -1,6 +1,8 @@
-################### INTRODUCTION TO R ###################
 #20220222(14.27)ST: script von Malte Rosemeyer, 16853W, quantitative corpuslinguistik mit R
-# mathematical functions
+#upload for ABV to: https://github.com/esteeschwarz/essais/blob/main/docs/STAT_R/rosemeyer_r_intro.R
+################### INTRODUCTION TO R ###################
+#mathematical functions
+#
 1+1
 1-1
 2*2

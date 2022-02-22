@@ -1,4 +1,4 @@
-
+library(ggplot2)
 
 cpt<-X12612_0002_flatcpt
 sum(cpt$BEV001__Lebendgeborene__Anzahl,na.rm = TRUE)
@@ -162,15 +162,50 @@ riplx() #produces clean link with credentials in it
  mnt<-unique(dt5$Zeit)
  #wks
  #loop sum through monat/bundesland
- y<-2;ey<-2;land<-1
+ y<-1;ey<-2;land<-1
  mnt[sy:ey]
  sumloop<-function(land,y){
-   sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Label==bnd[land]&dt5$Zeit==mnt[y]])
+   sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==land&dt5$Zeit==mnt[y]])
    
  }
  #for sum under condition (bundesland[1:16],year[1:29])
- sumloop(1,1)
+ sumloop(1,1) #wich is senseless because theres only one value bundesland/year
+ #also task: nur abbilden des verlaufs bundesland~years
+ #####
+ #plot
+ #better take land x1 ausprägung code, numbers 1:16
+ SH<-(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==land&dt5$Zeit==mnt[y]])
+ y<-1#nope
+ #subset
+ SH1<-dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==land]
+ bnc_in<-c(SH1<-1,HH2<-2,NS3<-3,BR4<-4,NR5<-5,HS6<-6,RE7<-7,BW8<-8,BA9<-9,
+ SR10<-10,BE11<-11,BR12<-12,MV13<-13,SC14<-14,SA15<-15,TH16<-16)
+ bnc<-c(SH1,HH2,NS3,BR4,NR5,HS6,RE7,BW8,BA9,
+        SR10,BE11,BR12,MV13,SC14<-14,SA15,TH16)
  
+ bplot<-c(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==1]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==2]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==3]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==4]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==5]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==6]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==7]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==8]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==9]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==10]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==11]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==12]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==13]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==14]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==15]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==16])
+ barplot(bplot,col=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16))
+ bplot<-sort(bplot)
+ plot(bplot[1:16],col=1:16,type="s",)
+ df<-data.frame(bplot)
+ ggplot(df)
+ 
+  HH2<-19
  ######
 #rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
 # #bei children=7 gibt es keine einträge mehr

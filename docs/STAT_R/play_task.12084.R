@@ -1,11 +1,13 @@
 #12084.play task
+#20220222(07.13)
+#users without genesis credentials loaded load libraries below and start at # 4. #
 #########
 library(readr)
 library(stringi)
 library(xml2)
-
+#########
 #import local destatis credentials. diese sind in einer csv nach dem muster kennung,pwd abgelegt
-setwd("~/Users/guhl/Nextcloud/UNI/21S/SPUND/R/")
+#setwd("~/Users/guhl/Nextcloud/UNI/21S/SPUND/R/")
 destatis_cred <- read_csv("~/Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
 ###destatis sample links:
 # src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Alle&sprache=de"
@@ -80,4 +82,24 @@ dt51[maxrow,]
 ####2.now research task:
 ####2.1.werden heute mehr kinder mit späterem alter der mutter geboren
 ####als vor zehn jahren?
-####2.2.
+####3.save data
+getwd()
+#setwd("~/PRO/git/essais/docs/STAT_R/")
+write.csv2(dt51,"~/PRO/git/essais/docs/STAT_R/data/dt51_outl.csv")
+####push gith...
+####reimport from gith
+##################################################################
+####4.
+####from here #####START#### for users with no genesis credentials loaded above.
+##################################################################
+git<-("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/dt51_outl.csv")
+dt6<-read.csv2(git,sep=";")
+sum(dt6$BEV001__Lebendgeborene__Anzahl)
+#wks.now repeat routine
+dt51<-dt6 #fresh set without outliers
+max<-max(dt51$BEV001__Lebendgeborene__Anzahl)
+#####
+#wks! > row.names(dt5[dt51$BEV001__Lebendgeborene__Anzahl==max,])
+#extract row number = row name with max value
+maxrow<-row.names(dt51[dt51$BEV001__Lebendgeborene__Anzahl==max,])
+dt51[maxrow,]

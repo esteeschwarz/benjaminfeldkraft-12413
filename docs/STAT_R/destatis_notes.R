@@ -162,7 +162,8 @@ print(row.names(max(dt51$BEV001__Lebendgeborene__Anzahl)))
 
 maxrow<-row.names(dt5[dt51$BEV001__Lebendgeborene__Anzahl==max,])
 #print(dt51[,maxrow])
-     dt51[1586,]           
-md<-median(dt51$BEV001__Lebendgeborene__Anzahl)     
-mdrow<-row.names(dt5[dt51$BEV001__Lebendgeborene__Anzahl==md,])
-dt51[mdrow,]           
+     dt51[1586,]      
+#####interessant: peak bei 30jahren, erstes kind, 2020 mit 31628 geburten
+#md<-median(dt51$BEV001__Lebendgeborene__Anzahl)     
+#mdrow<-row.names(dt5[dt51$BEV001__Lebendgeborene__Anzahl==md,])
+#dt51[mdrow,]           

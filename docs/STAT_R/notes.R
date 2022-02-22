@@ -14,8 +14,9 @@ library(xml2)
 ########
 #dir(".")
 # src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Alle&sprache=de"
-# #wks >
+# #wks > this for database query for string ########
 # src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Geburten&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
+####################################################
 # src<-"https://www-ge nesis.d estatis.de/ge nesisWS/web/Recher cheServic e_2010?method=MerkmalAuspraegunge nKatalog&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=BILHS1&auswahl=hs18*&kriterium=code&b ereich=Alle&listenLaenge=10&sprache=de"
 # #wks: ausprägungen merkmal, xml_children: 6
 # src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=MerkmalTabellenKata log&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=GES&auswahl=12*&bereich=Alle&listenLaenge= 15&sprache=de"
@@ -263,3 +264,6 @@ proztab_q <- function(x) {
 barplot(geb$maennlich)
 barplot(geb$weiblich,col=2,add=TRUE)
 ###################################################
+#EDA20(1) #3.9 erwerbstätige auswertung nach bundesland/jahr
+#import datenset#fk where is erwerbstaet_land.txt?
+#look in genesis myself

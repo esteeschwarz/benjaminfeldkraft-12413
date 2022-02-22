@@ -100,18 +100,18 @@ library(stringi)
 library(xml2)
 
 #import local destatis credentials. diese sind in einer csv nach dem muster kennung,pwd abgelegt
-destatis_cred <- read_csv("Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
+destatis_cred <- read_csv("~/Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
 
 ###destatis sample links:
 # src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Alle&sprache=de"
 # #wks >
-for xml request of keywords
-src_x<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Geburten&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
+#for xml request of keywords
+src_x<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Erwerbstaetige&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
 # src<-"https://www-ge nesis.d estatis.de/ge nesisWS/web/Recher cheServic e_2010?method=MerkmalAuspraegunge nKatalog&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=BILHS1&auswahl=hs18*&kriterium=code&b ereich=Alle&listenLaenge=10&sprache=de"
 # #wks: ausprägungen merkmal, xml_children: 6
 # src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=MerkmalTabellenKata log&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=GES&auswahl=12*&bereich=Alle&listenLaenge= 15&sprache=de"
 ###for csv data request
-src_d<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0005&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+src_d<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-9004&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
 
 
 #this to remove blanks in copied sample link and substitute kennung/pw in link provided by genesis, link to pdf with sample-links
@@ -139,18 +139,40 @@ riplx<-function(src){
 
 riplx() #produces clean link with credentials in it
  dt3<-read_xml(riplx(src_x)) #for request of xml sheets, catalogue requests...
-# dt4<-read_csv2(riplx()) #no
+#export sheet to read in editor
+ write_xml(dt3,"data/dt3_genesis_q_erwerbstaetige.xml")
+#get:<kurztext>Bevölkerung, Erwerbstätige, Erwerbslose, Erwerbspersonen,
+# Nichterwerbspersonen: Bundesländer, Jahre (bis 2019)</kurztext>12211-9004
+  # dt4<-read_csv2(riplx()) #no
 #dt5 <- read.csv2(riplx(),sep = ";",skip=1) #for import regular csv table
 # dt5 <- read.csv2(riplx(),sep = ";") #mind no skip rows import flat csv
-dt5<- read.csv2(riplx(src_d), 
+ src_d<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-9004&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+ 
+ dt5<- read.csv2(riplx(src_d), 
                 sep = ";", na = c("-",".","...")) #this important to remove [...] NAs
-#if read_delim instead, the variable names are bracketed complicate way in sonderzeichen, not plain as with read.csv2 
-#wks. yes!
-#works
-######
-rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
+ #import as csv wks. now what was the task again?
+ #3.9.entwicklung im zeitverlauf nach bundesländern
+ #col X1auspr.label=bundesland, ERW002=erwerbstätige
+ sum(dt5$ERW002__Erwerbstaetige__1000)
+ #numeric works
+ sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Label=="Berlin"&dt5$Zeit=="04/1991"])
+ #wks
+ bnd<-unique(dt5$X1_Auspraegung_Label)
+ mnt<-unique(dt5$Zeit)
+ #wks
+ #loop sum through monat/bundesland
+ y<-2;ey<-2;land<-1
+ mnt[sy:ey]
+ sumloop<-function(land,y){
+   sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Label==bnd[land]&dt5$Zeit==mnt[y]])
+   
+ }
+ sumloop(1,1)
+ 
+ ######
+#rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
 # #bei children=7 gibt es keine einträge mehr
- (rech1[1:20])
+ #(rech1[1:20])
 #
 write_xml(dt3,"genesis_cat.xml")
 

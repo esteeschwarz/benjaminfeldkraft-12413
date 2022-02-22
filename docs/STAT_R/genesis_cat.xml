@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <RechercheResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+      <RechercheReturn>
+        <returncode>(0)</returncode>
+        <trefferListe xmlns:ns1="daten.webservice_2010.genesis" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" soapenc:arrayType="ns1:EinzelTreffer[50]" xsi:type="soapenc:Array">
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung, Erwerbstätige, Erwerbslose, Erwerbspersonen, Nichterwerbspersonen aus Hauptwohnsitzhaushalten: Deutschland, Jahre, Geschlecht, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung, Erwerbstätige, Erwerbslose, Erwerbspersonen, Nichterwerbspersonen aus Hauptwohnsitzhaushalten: Deutschland, Jahre, Überwiegender Lebensunterhalt, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung, Erwerbstätige, Erwerbslose, Erwerbspersonen,
+Nichterwerbspersonen aus Hauptwohnsitzhaush.: Deutschland,
+Jahre, Geschlecht, Größenkl. persönl. monatl. Nettoeinkommen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige aus Hauptwohnsitzhaushalten: Deutschland,
+Jahre, Geschlecht, Altersgruppen, Stellung im Beruf</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige aus Hauptwohnsitzhaushalten: Deutschland, Jahre, Geschlecht, Stellung im Beruf, Größenklassen der in der Arbeitsstätte tätigen Personen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0005</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige aus Hauptwohnsitzhaushalten: Deutschland,
+Jahre, Geschlecht, Stellung im Beruf, Wochenend- und
+Feiertagsarbeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0006</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige aus Hauptwohnsitzhaushalten: Deutschland,
+Jahre, Geschlecht, Stellung im Beruf, Abend-, Nacht- und
+Schichtarbeit</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0007</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige aus Hauptwohnsitzhaushalten: Deutschland,
+Jahre, Geschlecht, Stellung im Beruf, Art der geleisteten
+Arbeitsstunden, Größenkl. d.geleisteten Arbeitsstd. je Woche</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0008</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige aus Hauptwohnsitzhaushalten: Deutschland,
+Jahre, Geschlecht, Altersgruppen, Erwerbsformen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0010</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Abhängig Erwerbstätige aus Hauptwohnsitzhaushalten:
+Deutschland, Jahre, Geschlecht, Altersgruppen, Art des
+Arbeitsvertrages</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0011</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Abhängig Erwerbstätige aus Hauptwohnsitzhaushalten:
+Deutschland, Jahre, Geschlecht, Altersgruppen,
+Beschäftigungsumfang</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0012</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung in Gemeinschaftsunterkünften: Deutschland,
+Jahre, Hauptstatus, Geschlecht, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0900</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung in Gemeinschaftsunterkünften: Bundesländer,
+Jahre, Hauptstatus, Geschlecht, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0902</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung, Erwerbstätige, Erwerbslose, Erwerbspersonen,
+Nichterwerbspersonen [jeweils im Alter von 15 bis unter 65
+Jahren]: Deutschland, Jahre (bis 2019), Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9000</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung, Erwerbstätige, Erwerbslose, Erwerbspersonen, Nichterwerbspersonen: Deutschland, Jahre (bis 2019), Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung, Erwerbstätige, Erwerbslose: Deutschland,
+Jahre (bis 2019), Geschlecht, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung, Erwerbstätige, Erwerbslose,
+Nichterwerbspersonen: Deutschland, Jahre (bis 2019),
+Überwiegender Lebensunterhalt, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Bevölkerung, Erwerbstätige, Erwerbslose, Erwerbspersonen,
+Nichterwerbspersonen: Bundesländer, Jahre (bis 2019)</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>7</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige: Deutschland, Jahre (bis 2019), Stellung im Beruf, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9005</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige: Deutschland, Jahre (bis 2019), Stellung im Beruf, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9006</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige: Deutschland, Jahre (bis 2009),
+Wirtschaftszweige (WZ2003), Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9007</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige: Deutschland, Jahre (bis 2019),
+Wirtschaftszweige (WZ2008), Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9008</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Abhängig Erwerbstätige: Deutschland, Jahre (bis 2019), Art des Arbeitsvertrages, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9009</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Abhängig Erwerbstätige: Deutschland, Jahre (bis 2019),
+Beschäftigungsumfang, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9010</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Privathaushalte: Deutschland, Jahre (bis 2019),
+Haushaltsgröße, Beteiligung der Bezugsperson am Erwerbsleben</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9030</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätigenquoten der 15- bis unter 65-Jährigen mit
+Kindern unter 18 Jahren: Früheres Bundesgebiet/Neue Länder,
+Jahre (bis 2019), Alter des jüngsten Kindes, Geschlecht</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9048</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Familien (traditionelles Familienkonzept): Deutschland,
+Stichmonat (bis 04/1995), Beteiligung der Bezugsperson am
+Erwerbsleben</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9060</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>13231</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbslose, Erwerbstätige, Erwerbspersonen,
+Erwerbslosenquote: Deutschland, Monate, Original- und
+bereinigte Daten</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>13231-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>13231</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbslose/Erwerbstätige/Erwerbspersonen: Deutschland,
+Monate, Geschlecht, Altersgruppen, Original- und bereinigte
+Daten</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>13231-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>13311</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige, Arbeitnehmer, Selbständige und mithelfende
+Familienangehörige (im Inland): Deutschland, Jahre,
+Wirtschaftszweige</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>13311-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>13311</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige, Arbeitnehmer, Selbständige und mithelfende
+Familienangehörige (im Inland): Bundesländer, Jahre,
+Wirtschaftszweige</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>13311-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>13321</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige (inkl. Veränderungsraten): Deutschland, Monate, Inlands-/Inländerkonzept, Original- und bereinigte Daten</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>13321-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>13321</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige (inkl. Veränderungsraten): Deutschland, Quartale, Inlands-/Inländerkonzept, Original- und bereinigte Daten</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>13321-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>22221</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Empfänger von Regelleistungen nach dem Asylbewerberleistungsgesetz: Deutschland, Stichtag (bis 31.12.2019), Erwerbsstatus</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>22221-0006</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63411</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>EU-SILC - Erfasste Personen ab 16 Jahren, Hochgerechnete
+Personen ab 16 Jahren, Nettoäquivalenzeinkommen,
+Armutsgefährdungsquote: Deutschland, Jahre, Erwerbsstatus</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63411-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63411</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>EU-SILC - Erfasste erwerbstätige Personen ab 16 Jahren,
+Hochgerechnete erwerbstätige Personen ab 16 Jahren,
+Armutsgefährdungsquote: Deutschland, Jahre, Bildungsstatus</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63411-0005</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63411</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>EU-SILC - Erfasste erwerbstätige Personen ab 18 Jahren,
+Hochgerechnete erwerbstätige Personen ab 18 Jahren,
+Armutsgefährdungsquote: Deutschland, Jahre, Bildungsstatus</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63411-0006</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63511</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Beratene Personen (Anteilswerte), Durchschnittliche
+Schulden: Deutschland, Jahre, Erwerbssituation,
+Sozioökonomische Merkmale</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63511-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63931</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Personen ab 16 Jahre, die den Computer im 1. Quartal
+genutzt haben: Deutschland, Jahre, Soziale Stellung,
+Häufigkeit und Ort der Computernutzung</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63931-0005</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63931</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Personen ab 16 Jahre, die das Internet im 1. Quartal
+genutzt haben: Deutschland, Jahre, Soziale Stellung,
+Nutzung des Internet</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63931-0008</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63931</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Personen ab 16 Jahre, die das Internet im 1. Quartal
+genutzt haben: Deutschland, Jahre, Soziale
+Stellung, Einkaufen/Bestellen über das Internet</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63931-0011</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Bevölkerung, Erwerbstätigkeit:
+Deutschland, Jahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0011</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Bevölkerung, Erwerbstätigkeit:
+Deutschland, Quartale, Original- und bereinigte Daten</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0012</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Erwerbstätigkeit, Löhne und Gehälter,
+Arbeitsstunden: Deutschland, Jahre, Wirtschaftsbereiche</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0015</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Erwerbstätigkeit, Löhne und Gehälter, Arbeitsstunden: Deutschland, Quartale, Original- und bereinigte Daten, Wirtschaftsbereiche</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0016</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Produktivität, Arbeitnehmerentgelt,
+Bruttolöhne und -gehälter, Lohnstückkosten: Deutschland,
+Jahre, Wirtschaftsbereiche</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0017</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Produktivität, Arbeitnehmerentgelt, Brutto-
+löhne u. -gehälter, Lohnstückkosten: Deutschland, Quartale,
+Original- und bereinigte Daten, Wirtschaftsbereiche</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0018</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Erwerbstätige:
+Deutschland, Jahre, Wirtschaftsbereiche</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0112</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Arbeitsstunden:
+Deutschland, Jahre, Wirtschaftsbereiche</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0114</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81511</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Erwerbstätige, Arbeitnehmer (im Inland): Deutschland,
+Jahre, Produktionsbereiche</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81511-0010</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+        </trefferListe>
+        <trefferUebersicht xmlns:ns2="daten.webservice_2010.genesis" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" soapenc:arrayType="ns2:ObjektTreffer[1]" xsi:type="soapenc:Array">
+          <trefferUebersicht>
+            <objektTyp>Tabelle</objektTyp>
+            <trefferAnzahl>50</trefferAnzahl>
+          </trefferUebersicht>
+        </trefferUebersicht>
+      </RechercheReturn>
+    </RechercheResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

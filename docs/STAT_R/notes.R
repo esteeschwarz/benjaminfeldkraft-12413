@@ -9,28 +9,19 @@ library(readr)
 library(stringi)
 library(xml2)
 
-#import local destatis credentials. diese sind in einer csv nach dem muster kennung,pwd abgelegt
-destatis_cred <- read_csv("Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
+#########import local destatis credentials. diese sind in einer csv nach dem muster kennung,pwd abgelegt
+#destatis_cred <- read_csv("~/Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
+########
 #dir(".")
-# src<-"https://www-genesis.destatis.de/genesisWS/rest/2020/find/find?username=IHRE_KENNUNG&password=IHR_PASSWORT&term=Lebendgeburten&category=all&language=de"
-# src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=ARBEITSLOS09&bereich=Alle&sprache=de"
-# src<-"https://www- 
-#   genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_KENNUNG&password=IHR_PASSWORT&selectionname=12612-0002&format=csv&language=de"
-# src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=DatenAufbau&username=IHRE_KENNUNG&password=IHR_PASSWORT&namen=11111KE001&bereich=Alle&sprache=de"
-# src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=DatenExport&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&namen=11111KE001&bereich=Alle&format=csv&werte=true&metadaten=false&zusatz=false&startjahr=&endjahr=&zeitscheiben=1&inhalte=&regionalmerkmal=&regionalschluessel=&sachmerkmal=GES&sachschluessel=GESW&sachmerkmal2=NAT&sachschluessel2=NATA&sachmerkmal3=&sachschluessel3=&stand=01.01.1900&sprache=de"
-# src<-"https://www-genesis.destatis.de/genesisWS/web/DownloadService_2010?method=TabellenDownload&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12411-0002&bereich=Alle&format=csv&komprimieren=false&transponieren=false&startjahr=1995&endjahr=2000&zeitscheiben=&regionalmerkmal=&regionalschluessel=&sachmerkmal=&sachschluessel=&sachmerkmal2=&sachschluessel2=&sachmerkmal3=&sachschluessel3=&auftrag=false&stand=&sprache=de"
-# src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=DatenExport&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&namen=21311BS003&bereich=Alle&format=csv&werte=true&metadaten=false&zusatz=false&startjahr=&endjahr=&zeitscheiben=1&inhalte=&regionalmerkmal=&regionalschluessel=&sachmerkmal=GES&sachschluessel=GESW&sachmerkmal2=NAT&sachschluessel2=NATA&sachmerkmal3=&sachschluessel3=&stand=01.01.1900&sprache=de"
-# src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=DatenExport&username=IHRE_KENNUNG&password=IHR_PASSWORT&term=berufsgruppen&bereich=Alle&format=csv&werte=true&&sprache=de"
-# src<-"https://www-genesis.destatis.de/genesisWS/rest/2020/find/find?username=IHRE_KENNUNG&password=IHR_PASSWORT&term=Berufsgruppen&category=all&language=de"
-# src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=DatenExport&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Meine&format=csv&werte=true&&sprache=de"
-# src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=ARBEITSLOS09&bereich=Alle&sprache=de"
 # src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Alle&sprache=de"
 # #wks >
 # src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Geburten&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
 # src<-"https://www-ge nesis.d estatis.de/ge nesisWS/web/Recher cheServic e_2010?method=MerkmalAuspraegunge nKatalog&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=BILHS1&auswahl=hs18*&kriterium=code&b ereich=Alle&listenLaenge=10&sprache=de"
 # #wks: ausprägungen merkmal, xml_children: 6
 # src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=MerkmalTabellenKata log&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=GES&auswahl=12*&bereich=Alle&listenLaenge= 15&sprache=de"
-src<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0002&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+#######genesis source of geburten table
+#src<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0002&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+#######
 #wks, spuckt in browser tabelle aus, now read this in R
 
 #############
@@ -56,36 +47,38 @@ ifelse(findspace==TRUE,p<-k+1,p<-k)
  return(quest_res)
  
 }
-
-riplx() #produces clean link with credentials in it
+########produces clean link with credentials in it
+#riplx() 
+########
 # dt3<-read_xml(riplx()) #for request of xml sheets, catalogue requests...
 # dt4<-read_csv2(riplx()) #no
 #dt5 <- read.csv2(riplx(),sep = ";",skip=1) #for import regular csv table
 # dt5 <- read.csv2(riplx(),sep = ";") #mind no skip rows import flat csv
- dt5<- read.csv2(riplx(), 
-            sep = ";", na = "...") #this important to remove [...] NAs
-#if read_delim instead, the variable names are bracketed complicate way in sonderzeichen, not plain as with read.csv2 
+#####request for genesis table
+# dt5<- read.csv2(riplx(), sep = ";", na = c("...","-",".")) #this important to remove [...] NAs
+#####
+ #if read_delim instead, the variable names are bracketed complicate way in sonderzeichen, not plain as with read.csv2 
   #wks. yes!
 #works
+#######export table for static use w/o credentials
+# write.csv2(dt5,"~/PRO/git/essais/docs/STAT_R/data/geburten_genesis.csv")
+###############
+ #now you should be able to import geburten table to apply aktualisierung der
+ #barghoorn tabele
+##############################################
+ #run line for line from here with [command]+[return]
+##############################################
+####import static genesis datenset geburten 1950-2021
+ dt6<-read.csv2("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/geburten_genesis.csv")
+ dt5<-dt6
  #### neuer ansatz: das untenstehende ab 1.1. hatte den vorlagedatensatz(barghoorn) mit den daten aus einer
- #heruntergeladenen tabelle aktualisiert. ich möchte nun nocheinmal versuchen, diese aktualisierung aus dem
+ # über die genesis GUI heruntergeladenen tabelle aktualisiert. ich möchte nun nocheinmal versuchen, diese aktualisierung aus dem
  #API-fetched datensatz vorzunehmen
  #OBSOLET:in der tabelle sind leider die jahre nicht vollständig aufgeführt, sondern nur jeweils im monat januar
  #das jahr in der entsprechenden spalte. damit läszt sich
  #hat sich erledigt, das flat csv mit format=ffcsv entspricht dem format, das ich für die aktualisierung 
  #der vorlage benutzt habe.
  
- 
- # 
- #  rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
- # xp1<-xml_text(rech1)
- # print(xp1[145:160])
- # xml_attr(rech1,"EVAL")
- # rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
- # #bei children=7 gibt es keine einträge mehr
- # a<-(rech1[20])
- # 
-#i give this one up. i manage no api fetch...
 #work with static files
 #1.
  #1.1.import destatis dataset:
@@ -126,6 +119,12 @@ riplx() #produces clean link with credentials in it
 #drei punkte (character, [...]). das macht eine declaration der spalte als numerisch
 #unmöglich und erschwert die auswertung ungemein, da die gesamte spalte nur als type=character
 #gelesen werden kann. warum dort von den verantwortlichen kein NA eingefügt wurde, ist mir schleierhaft...
+#NT man kann beim import durch den parameter [na = "..."] sicherstellen, dasz solche
+#fake NAs durch richtige ersetzt werden und die spalte dadurch als double integer
+#interpretiert werden kann. man musz nur in der spalte erstmal suchen und finden, dasz
+#fehlende werte (geburtenzahlen für monate) durch [...] dargestellt werden, bzw. in anderen
+#genesis tabellen auch durch ["-"] oder ["."] / es lohnt sich also, beim csv import
+#als parameter für die deklaration von NAs direkt: na = c("...","-",".") anzugeben.
 ###################
 #2.2.sum genderspecified geburtenanzahl per year
 ###2.2.1. when dataset is imported without removing NA with import, sum generated out of double
@@ -163,7 +162,10 @@ colnames(sum1920)<-ns
 #sum1920 beinhaltet jetzt die daten von 2019 und 2020, m/w
 
 #2.4.import task barghoorn dataset
-geb<-read.csv2("PRO/git/essais/docs/STAT_R/data/geburten_d.csv")
+#static:
+#geb<-read.csv2("PRO/git/essais/docs/STAT_R/data/geburten_d.csv")
+#gith:
+geb<-read.csv2("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/geburten_d.csv")
 ##################################
 #2.5.
 #hier werden die geforderten aktualisierungen vorgenommen, bevor die funktionen laut script

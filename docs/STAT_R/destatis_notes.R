@@ -140,7 +140,7 @@ riplx<-function(src){
 riplx() #produces clean link with credentials in it
  dt3<-read_xml(riplx(src_x)) #for request of xml sheets, catalogue requests...
 #export sheet to read in editor
- write_xml(dt3,"data/dt3_genesis_q_erwerbstaetige.xml")
+ write_xml(dt3,"data/erwerbstaetige_genesis_q.xml")
 #get:<kurztext>Bevölkerung, Erwerbstätige, Erwerbslose, Erwerbspersonen,
 # Nichterwerbspersonen: Bundesländer, Jahre (bis 2019)</kurztext>12211-9004
   # dt4<-read_csv2(riplx()) #no
@@ -150,6 +150,7 @@ riplx() #produces clean link with credentials in it
  
  dt5<- read.csv2(riplx(src_d), 
                 sep = ";", na = c("-",".","...")) #this important to remove [...] NAs
+ write.csv2(dt5,"data/erwerbstaetige_genesis.csv")
  #import as csv wks. now what was the task again?
  #3.9.entwicklung im zeitverlauf nach bundesländern
  #col X1auspr.label=bundesland, ERW002=erwerbstätige
@@ -167,6 +168,7 @@ riplx() #produces clean link with credentials in it
    sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Label==bnd[land]&dt5$Zeit==mnt[y]])
    
  }
+ #for sum under condition (bundesland[1:16],year[1:29])
  sumloop(1,1)
  
  ######

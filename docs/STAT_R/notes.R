@@ -58,12 +58,12 @@ genesislx_erwerbstätigen<-riplx(src_e)
 ####create table of references
 genesis_src<-list()
 src0<-c("genesis code","content")
-src1<-c("12612-002","geburten")
+src1<-c("12612-002","geburten D geschlecht")
 src2<-c("12211-9004","erwerbstätige")
 src3<-c("12612-0005","alter mütter zur geburt")
-tabsrc<-(rbind(src1,src2,src3));colnames(tabsrc)<-src0
+src4<-c("12612-0100","geburten bundesländer geschlecht")
+tabsrc<-(rbind(src1,src2,src3,src4));colnames(tabsrc)<-src0
 write.csv2(tabsrc,"~/PRO/git/essais/docs/STAT_R/data/genesis_sources.csv")
-coln
 ########
 # dt3<-read_xml(riplx()) #for request of xml sheets, catalogue requests...
 # dt4<-read_csv2(riplx()) #no

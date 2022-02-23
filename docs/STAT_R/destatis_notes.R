@@ -372,6 +372,7 @@ dim(abind(a, a, along=3.5))
 asum<-abind(a,apply(a,c(1,2),sum),along=3) ; dim(asum)
 dimnames(asum)[[3]][3]<-"Gesamt"
 dim(asum)
+asum
 ####§6.7,stundenaufgaben:
 src8<-riplx(lnk8)#genesis: 12612-0100
 dt8<-read.csv2(src8,sep=";",na = c("...","-","."))
@@ -384,6 +385,14 @@ o1<-subset(dt8,dt8$X2_Auspraegung_Code=="GESM"&as.double(dt8$Zeit)>=2006&as.doub
 o2<-subset(dt8,dt8$X2_Auspraegung_Code=="GESW"&as.double(dt8$Zeit)>=2006&as.double(dt8$Zeit)<=2010)
 #ar1[[1:80]]<-o1
 #ar1[81:160]<-o2
-abind(matrix(o1$BEV001__Lebendgeborene__Anzahl,ncol=5),matrix(o2$BEV001__Lebendgeborene__Anzahl,ncol=5),along=2.5)
+o3<-abind(matrix(o1$BEV001__Lebendgeborene__Anzahl,ncol=5),matrix(o2$BEV001__Lebendgeborene__Anzahl,ncol=5),along=2.5)
+o3
 #wks.
-
+####tabs3? why?
+#asum<-abind(o1,o2,along=2.5)
+#dim(asum)
+#asum
+#cube?
+asum<-abind(o3,apply(o3,c(1,2),sum),along=3)
+dim(asum)
+asum

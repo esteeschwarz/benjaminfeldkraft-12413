@@ -265,4 +265,125 @@ maxrow<-row.names(dt5[dt51$BEV001__Lebendgeborene__Anzahl==max,])
 #####interessant: peak bei 30jahren, erstes kind, 2020 mit 31628 geburten
 #md<-median(dt51$BEV001__Lebendgeborene__Anzahl)     
 #mdrow<-row.names(dt5[dt51$BEV001__Lebendgeborene__Anzahl==md,])
-#dt51[mdrow,]           
+#dt51[mdrow,]          
+     
+     
+#barghoorn §4.9
+dat<-     read.csv2("data/Umfrage.csv")
+ld<-length(dat$ID)
+tab<-cbind(a<-colSums(is.na(dat)),round(100*a/ld))  # tab
+
+colnames(tab)<-c("Antwort abs","Anwort rel") ; tab
+red<-subset(dat[!is.na(dat$NETTO),])  # bereinigt um na-Fälle
+dim(red)
+gg<-mean(red$NETTO)
+tapply(red$NETTO, list(red$GESCHL), FUN=mean)
+tapply(red$NETTO, list(red$GESCHL), var)
+tapply(red$NETTO, list(red$GESCHL), sd)
+s1<-dim(red)[1]
+s<-sample(s1,s1*0.02) ; length(s)
+head(s)
+simple<-mean(red$NETTO[s]) ; simple
+strata<-tapply(red$NETTO[s], list(red$GESCHL[s]), mean); strata
+mean(strata)
+c(simple, mean(strata))/gg
+###2.
+red<-subset(dat[!is.na(dat$GRO),])  ; dim(red)
+gg<-mean(red$GRO)
+s1<-dim(red)[1]
+s<-sample(s1,s1*0.02) ; head(s)               
+strata<-tapply(red$GRO[s], list(red$GESCHL[s]), mean); strata
+simple<- mean(red$GRO[s]) ; simple
+c(simple, mean(strata))/gg              # Vergleich gg
+1-c(simple, mean(strata))/gg
+
+###6
+bsr<-read.table("data/bsrorg.csv", header=TRUE)
+is.list(bsr[1,])
+mode(bsr[1,])
+
+sauber<-c("IMI", "ATA", "PERSIL")
+menge<-c(50,100,200)
+names(menge)<-sauber ; menge                 
+sum(menge)
+summary(menge)
+menge[rev(1:3)]                        
+menge1<-menge                          # Kopie von menge1 erzeu-gen
+menge1[2:3]<-menge1[2:3]*5 ; menge1
+
+menge1[menge1 == 50]<- 1000 ; menge1  # Zuweisung logische Ab-frage
+
+menge1["IMI"]<- 2000 ; menge1         # nur label IMI
+
+menge1[]<-555 ; menge1
+
+liste<-split (1:10, c(1,1,1,2,2,2,3,3,3,4))
+names(liste)<-c("IMI", "ATA", "PERSIL", "FEWA");liste  
+
+lapply(liste,length)
+lapply(liste,max)                              
+unlist(lapply(liste,mean))  
+sapply(liste, mean)
+length(liste[1])
+length(liste[[1]])
+liste[[1]][3]<-7
+liste[[1]]
+liste[[4]]<-1:10                            
+liste[4]
+tabs<-
+  function(x) {
+    gew<-cbind(x,apply(x,1,sum)) 
+    m<-dim(x)                          # dimension(x)
+    colnames(gew)[1+m[2]]<-"Gesamt"    # update je nach Spaltenzahl
+    gew}
+liste[4]<-list(tabs)
+
+mat<-matrix(1:25, ncol=5)
+mat
+split(mat,col(mat))
+split(mat, row(mat))                    
+liste["ATA"]
+liste[names(liste)=="ATA"]
+match(4:6,liste)
+match(list(4:6), liste)
+match(liste,list(4:6,7:9))
+liste[!is.na(match(liste,list(4:6,7:9)))]
+listdata<-split(mat, row(mat))
+listdata<-c(listdata, zweite<-listdata[2]) ; length(listdata)
+names(listdata)<-c("EINS","ZWEI","DREI","VIER","FUENF","SECHS")
+listdata                   
+match(listdata, zweite)   
+listdata[!is.na(match(listdata, zweite))]
+###
+a <- array(data=1:24, dim=c(4,3,2))
+dimnames(a)=list(letters[1:4],LETTERS[1:3],c("Mann","Frau"))
+dimnames(a)
+      
+dim(a) ; dim(aperm(a, c(2,1,3)))   
+aperm(a, c(2,1,3))                 
+apply(a,c(1,2),sum)
+dim(apply(a,c(1,2),sum))              
+apply(a,c(1,2),mean)                     
+cbind(a[,,1],a[,,2], apply(a,c(1,2),mean))
+sweep(a, c(1,2), apply(a, c(1,2), mean), "-")    
+
+abind(matrix(1:4, ncol=2), matrix(4:1, ncol=2),along=2.5)
+dim(abind(a, a, along=3.5))                   
+asum<-abind(a,apply(a,c(1,2),sum),along=3) ; dim(asum)
+dimnames(asum)[[3]][3]<-"Gesamt"
+dim(asum)
+####§6.7,stundenaufgaben:
+src8<-riplx(lnk8)#genesis: 12612-0100
+dt8<-read.csv2(src8,sep=";",na = c("...","-","."))
+ar1<-array(data=dt8$BEV001__Lebendgeborene__Anzahl,dim=c(16,5,2))
+print(ar1)
+ar1
+ontop1<-1:(16*5)
+ontop2<-ontop1+16*5
+o1<-subset(dt8,dt8$X2_Auspraegung_Code=="GESM"&as.double(dt8$Zeit)>=2006&as.double(dt8$Zeit)<=2010)
+o2<-subset(dt8,dt8$X2_Auspraegung_Code=="GESW"&as.double(dt8$Zeit)>=2006&as.double(dt8$Zeit)<=2010)
+#ar1[[1:80]]<-o1
+#ar1[81:160]<-o2
+abind(matrix(o1$BEV001__Lebendgeborene__Anzahl,ncol=5),matrix(o2$BEV001__Lebendgeborene__Anzahl,ncol=5),along=2.5)
+#wks.
+

@@ -21,8 +21,12 @@ library(xml2)
 # #wks: ausprägungen merkmal, xml_children: 6
 # src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=MerkmalTabellenKata log&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=GES&auswahl=12*&bereich=Alle&listenLaenge= 15&sprache=de"
 #######genesis source of geburten table
-#src<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0002&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
-#######
+src<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0002&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+lnk8<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0100&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+
+#######genesis erwerbstätigen
+src_e<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-9004&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+
 #wks, spuckt in browser tabelle aus, now read this in R
 
 #############
@@ -49,7 +53,17 @@ ifelse(findspace==TRUE,p<-k+1,p<-k)
  
 }
 ########produces clean link with credentials in it
-#riplx() 
+genesislx_geburten<-riplx(src) 
+genesislx_erwerbstätigen<-riplx(src_e)
+####create table of references
+genesis_src<-list()
+src0<-c("genesis code","content")
+src1<-c("12612-002","geburten")
+src2<-c("12211-9004","erwerbstätige")
+src3<-c("12612-0005","alter mütter zur geburt")
+tabsrc<-(rbind(src1,src2,src3));colnames(tabsrc)<-src0
+write.csv2(tabsrc,"~/PRO/git/essais/docs/STAT_R/data/genesis_sources.csv")
+coln
 ########
 # dt3<-read_xml(riplx()) #for request of xml sheets, catalogue requests...
 # dt4<-read_csv2(riplx()) #no
@@ -307,4 +321,20 @@ s1mean<-c(mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==1]),me
           mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==10]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==11]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==12]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==13]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==14]),
           mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==15]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==16]))
 barplot(s1mean,1,1,bnc_ns,"mean 1991-2020") #gleiche ansicht
+##########
+####§6.7,stundenaufgaben:
+src8<-riplx(lnk8)#genesis: 12612-0100
+dt8<-read.csv2(src8,sep=";",na = c("...","-","."))
+ar1<-array(data=dt8$BEV001__Lebendgeborene__Anzahl,dim=c(16,5,2))
+print(ar1)
+ar1
+ontop1<-1:(16*5)
+ontop2<-ontop1+16*5
+o1<-subset(dt8,dt8$X2_Auspraegung_Code=="GESM"&as.double(dt8$Zeit)>=2006&as.double(dt8$Zeit)<=2010)
+o2<-subset(dt8,dt8$X2_Auspraegung_Code=="GESW"&as.double(dt8$Zeit)>=2006&as.double(dt8$Zeit)<=2010)
+#ar1[[1:80]]<-o1
+#ar1[81:160]<-o2
+abind(matrix(o1$BEV001__Lebendgeborene__Anzahl,ncol=5),matrix(o2$BEV001__Lebendgeborene__Anzahl,ncol=5),along=2.5)
+#wks.
+
 

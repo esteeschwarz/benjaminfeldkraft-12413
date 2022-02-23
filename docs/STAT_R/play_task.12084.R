@@ -103,3 +103,9 @@ max<-max(dt51$BEV001__Lebendgeborene__Anzahl)
 #extract row number = row name with max value
 maxrow<-row.names(dt51[dt51$BEV001__Lebendgeborene__Anzahl==max,])
 dt51[maxrow,]
+
+#acc. barghoorn §3.8
+dt51[dt51$BEV001__Lebendgeborene__Anzahl==max(dt51$BEV001__Lebendgeborene__Anzahl),]
+dt51[which.max(dt51$BEV001__Lebendgeborene__Anzahl),]
+
+

@@ -181,29 +181,37 @@ riplx() #produces clean link with credentials in it
  bnc_in<-c(SH1<-1,HH2<-2,NS3<-3,BR4<-4,NR5<-5,HS6<-6,RE7<-7,BW8<-8,BA9<-9,
  SR10<-10,BE11<-11,BR12<-12,MV13<-13,SC14<-14,SA15<-15,TH16<-16)
  bnc<-c(SH1,HH2,NS3,BR4,NR5,HS6,RE7,BW8,BA9,
-        SR10,BE11,BR12,MV13,SC14<-14,SA15,TH16)
+        SR10,BE11,BR12,MV13,SC14,SA15,TH16)
+ bnc_ns<-c("SH","HH","NS","BR","NR","HS","RE","BW","BA","SR","BE","BR","MV","SC","SA","TH")
  
- bplot<-c(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==1]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==2]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==3]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==4]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==5]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==6]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==7]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==8]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==9]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==10]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==11]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==12]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==13]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==14]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==15]
- ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==16])
+ sumpery<-function(y){
+ bplot<-c(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==1&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==2&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==3&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==4&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==5&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==6&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==7&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==8&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==9&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==10&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==11&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==12&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==13&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==14&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==15&dt5$Zeit==mnt[y]]
+ ,dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==16&dt5$Zeit==mnt[y]])
+ }
+ #col_y<-(sumpery(1:29))
+ 1991+29
+ barplot(sumpery(1:29),1,1,bnc_ns,"1991-2020")
+ barplot(sumpery(1):sumpery(10),col=1:10)
  barplot(bplot,col=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16))
  bplot<-sort(bplot)
  plot(bplot[1:16],col=1:16,type="s",)
  df<-data.frame(bplot)
  ggplot(df)
+ print (bplot)
  
   HH2<-19
  ######

@@ -13,11 +13,13 @@ library(xml2)
 #destatis_cred <- read_csv("~/Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
 ########
 #dir(".")
+#src<-"https://www-genesis.destatis.de/genesisWS/web/DownloadService_2010?method=TabellenDownload&ken nung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=12411- 0002&bereich=Alle&format=csv&komprimieren=false&transponieren=false&startjahr=1995&endjahr=200 0&zeitscheiben=&regionalmerkmal=&regionalschluessel=&sachmerkmal=&sachschluessel=&sachmerkmal2 =&sachschluessel2=&sachmerkmal3=&sachschluessel3=&auftrag=false&stand=&sprache=de"
+#src<-"https://www- genesis.destatis.de/genesisWS/rest/2020/find/find?username=IHRE_KENNU NG&password=IHR_PASSWORT&term=Abfall&category=all&pagelength=16&lang uage=de"
 # src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Alle&sprache=de"
 # #wks > this for database query for string ########
-# src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Geburten&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
+ src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Geburten&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
 ####################################################
-# src<-"https://www-ge nesis.d estatis.de/ge nesisWS/web/Recher cheServic e_2010?method=MerkmalAuspraegunge nKatalog&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=BILHS1&auswahl=hs18*&kriterium=code&b ereich=Alle&listenLaenge=10&sprache=de"
+#src<-"https://www-ge nesis.d estatis.de/ge nesisWS/web/Recher cheServic e_2010?method=MerkmalAuspraegunge nKatalog&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=BILHS1&auswahl=hs18*&kriterium=code&b ereich=Alle&listenLaenge=10&sprache=de"
 # #wks: ausprägungen merkmal, xml_children: 6
 # src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=MerkmalTabellenKata log&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=GES&auswahl=12*&bereich=Alle&listenLaenge= 15&sprache=de"
 #######genesis source of geburten table
@@ -53,6 +55,8 @@ ifelse(findspace==TRUE,p<-k+1,p<-k)
  
 }
 ########produces clean link with credentials in it
+oxy<-riplx(src)
+write_clip(oxy)
 genesislx_geburten<-riplx(src) 
 genesislx_erwerbstätigen<-riplx(src_e)
 ####create table of references

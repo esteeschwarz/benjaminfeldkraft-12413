@@ -396,3 +396,25 @@ o3
 asum<-abind(o3,apply(o3,c(1,2),sum),along=3)
 dim(asum)
 asum
+###
+bula<-unlist(strsplit("BW BY BE BB HB HH HE MV NI NW RP SL SN ST SH TH", " "))                  
+geburt<-read.csv2("data/geburt_land.csv")
+head(geburt)
+#geil. export als utf-8 wäre schön gewesen. fk sonderzeichen.
+dim(geburt)
+is.numeric(as.matrix(geburt[,3:31]))
+num<-geburt[,3:31]
+dim(num)
+bev.cube<-array(as.matrix(num), dim=c(3,16,29))
+dim(bev.cube)
+dimnames(bev.cube)[[1]]<-c("m","w","all")
+dimnames(bev.cube)[[2]]<-bula
+dimnames(bev.cube)[[3]]<-1990:2018
+bev.cube[3,,1:10]
+bev.cube[,,1]
+###odbc
+chan<-odbcConnect("statR")
+#no connection
+chan
+odbcDataSources()
+#2 sources, but no connection

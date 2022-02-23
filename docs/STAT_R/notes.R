@@ -267,3 +267,44 @@ barplot(geb$weiblich,col=2,add=TRUE)
 #EDA20(1) #3.9 erwerbstätige auswertung nach bundesland/jahr
 #import datenset#fk where is erwerbstaet_land.txt?
 #look in genesis myself
+src_x2<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Erwerbstaetige&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
+dt3<-read_xml(riplx(src_x2)) #for request of xml sheets, catalogue requests...
+#export sheet to scan in editor
+write_xml(dt3,"data/erwerbstaetige_genesis_q.xml")
+#source:table 12211-9004
+src_e<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-9004&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+dt7<- read.csv2(riplx(src_e), 
+                sep = ";", na = c("-",".","...")) #this important to remove [...] NAs
+bnc_ns<-c("SH","HH","NS","BR","NR","HS","RE","BW","BA","SR","BE","BR","MV","SC","SA","TH")
+sumovery<-function(y){
+  bplot<-c(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==1])
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==2]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==3]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==4]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==5]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==6]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==7]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==8]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==9]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==10]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==11]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==12]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==13]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==14]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==15]))
+           ,(sum(dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==16])))
+}
+s1<-sumovery()
+hundert<-sum(s1)
+barplot(s1) #well wks, but whole sum. now percentage
+psh<-100/hundert*s1[1]
+phundert<-c(100/hundert*s1[1:16])
+barplot(phundert,1,1,bnc_ns,"v.H:1991-2020")
+barplot(s1/29,1,1,bnc_ns) #same
+
+s1mean<-c(mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==1]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==2]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==3]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==4]),
+          mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==5]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==6]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==7]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==8]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==9]),
+          mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==10]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==11]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==12]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==13]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==14]),
+          mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==15]),mean( dt7$ERW002__Erwerbstaetige__1000[dt7$X1_Auspraegung_Code==16]))
+barplot(s1mean,1,1,bnc_ns,"mean 1991-2020") #gleiche ansicht
+

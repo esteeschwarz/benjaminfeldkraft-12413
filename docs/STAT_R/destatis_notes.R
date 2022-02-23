@@ -204,16 +204,48 @@ riplx() #produces clean link with credentials in it
  }
  #col_y<-(sumpery(1:29))
  1991+29
- barplot(sumpery(1:29),1,1,bnc_ns,"1991-2020")
- barplot(sumpery(1):sumpery(10),col=1:10)
- barplot(bplot,col=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16))
- bplot<-sort(bplot)
- plot(bplot[1:16],col=1:16,type="s",)
- df<-data.frame(bplot)
- ggplot(df)
+ barplot(sumpery(1:29),1,1,bnc_ns,"1991-2020") #what exactly is he doing?
+# barplot(sumpery(1):sumpery(10),col=1:10)
+ #barplot(bplot,col=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16))
+ #bplot<-sort(bplot)
+ #plot(bplot[1:16],col=1:16,type="s",)
+ #df<-data.frame(bplot)
  print (bplot)
+ #try with sum over years percentage of whole
+ sumovery<-function(y){
+   bplot<-c(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==1])
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==2]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==3]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==4]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==5]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==6]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==7]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==8]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==9]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==10]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==11]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==12]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==13]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==14]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==15]))
+            ,(sum(dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==16])))
+ }
+ #dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==
+ s1<-sumovery()
+ hundert<-sum(s1)
+ barplot(s1) #well wks, but whole sum. now percentage
+ barplot(s1/29,1,1,bnc_ns)
+ psh<-100/hundert*s1[1]
+ phundert<-c(100/hundert*s1[1:16])
+ barplot(phundert,1,1,bnc_ns,"v.H:1991-2020")
  
-  HH2<-19
+ s1mean<-c(mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==1]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==2]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==3]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==4]),
+           mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==5]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==6]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==7]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==8]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==9]),
+           mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==10]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==11]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==12]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==13]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==14]),
+           mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==15]),mean( dt5$ERW002__Erwerbstaetige__1000[dt5$X1_Auspraegung_Code==16]))
+ barplot(s1mean,1,1,bnc_ns,"mean 1991-2020") #gleiche ansicht
+ 
+ HH2<-19
  ######
 #rech1<-xml_children(xml_children(xml_children(xml_children(xml_children(xml_children(dt3))))))
 # #bei children=7 gibt es keine einträge mehr

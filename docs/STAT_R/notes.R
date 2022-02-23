@@ -325,6 +325,8 @@ barplot(s1mean,1,1,bnc_ns,"mean 1991-2020") #gleiche ansicht
 ####§6.7,stundenaufgaben:
 src8<-riplx(lnk8)#genesis: 12612-0100
 dt8<-read.csv2(src8,sep=";",na = c("...","-","."))
+write.csv2(dt8,"~/PRO/git/essais/docs/STAT_R/data/geburten_genesis12612-0100.csv")
+
 ar1<-array(data=dt8$BEV001__Lebendgeborene__Anzahl,dim=c(16,5,2))
 print(ar1)
 ar1

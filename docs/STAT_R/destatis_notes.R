@@ -413,8 +413,11 @@ dimnames(bev.cube)[[3]]<-1990:2018
 bev.cube[3,,1:10]
 bev.cube[,,1]
 ###odbc
-chan<-odbcConnect("statR")
+chan<-odbcDriverConnect("stat_r","guhl","moin")
 #no connection
 chan
 odbcDataSources()
+sqlQuery(chan)
+warnings()
 #2 sources, but no connection
+fix(bev.cube)

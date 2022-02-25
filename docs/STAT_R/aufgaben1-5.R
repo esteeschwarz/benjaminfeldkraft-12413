@@ -199,4 +199,138 @@ stich[,"Median"]
 sd1<-rbind(sd(s1,na.rm = TRUE),sd(s2,na.rm = TRUE),sd(s3,na.rm = TRUE),sd(s4,na.rm = TRUE))
 colnames(sd1)<-"standardabweichung/samples"
 sd1
-###
+###########################################
+#aufgabe 21.
+####21.1.import static genesis datenset geburten 1950-2021
+dt6<-read.csv2("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/geburten_genesis.csv")
+dt5<-dt6
+#@barghoorn apropos numerische variablen:
+#im genesis datensatz erscheinen in den zeilen mit den zahlen für dezember 2021
+#drei punkte (character, [...]). das macht eine declaration der spalte als numerisch
+#unmöglich und erschwert die auswertung ungemein, da die gesamte spalte nur als type=character
+#gelesen werden kann. warum dort von den verantwortlichen kein NA eingefügt wurde, ist mir schleierhaft...
+#NT man kann beim import durch den parameter [na = "..."] sicherstellen, dasz solche
+#fake NAs durch richtige ersetzt werden und die spalte dadurch als double integer
+#interpretiert werden kann. man musz nur in der spalte erstmal suchen und finden, dasz
+#fehlende werte (geburtenzahlen für monate) durch [...] dargestellt werden, bzw. in anderen
+#genesis tabellen auch durch ["-"] oder ["."] / es lohnt sich also, beim csv import
+#als parameter für die deklaration von NAs direkt: na = c("...","-",".") anzugeben.
+###################
+#21.2.sum genderspecified geburtenanzahl per year
+###21.2.2.neu
+sumup<-function(df,gnd,jahr){
+  yearxm<-subset(df,Zeit==jahr&X2_Auspraegung_Label=="männlich")
+  yearxw<-subset(df,Zeit==jahr&X2_Auspraegung_Label=="weiblich")
+  ifelse(gnd=="m",return(sum(yearxm$BEV001__Lebendgeborene__Anzahl,na.rm=TRUE)),
+         ifelse(gnd=="w",return(sum(yearxw$BEV001__Lebendgeborene__Anzahl,na.rm=TRUE)),"specify gender"))
+}
+
+#21.3.create new array with sums
+c<-c(sumup(dt5,"m",2019),sumup(dt5,"w",2019))
+d<-c(sumup(dt5,"m",2020),sumup(dt5,"w",2020))
+e<-c(sumup(dt5,"m",2021),sumup(dt5,"w",2021))
+####works
+ns<-c("maennlich","weiblich")
+#die columnnames müssen genauso wie in der vorlage(barghoorn) heiszen, sonst können die
+#reihen nicht mit rbind kombiniert (also die neuen daten den alten angefügt) werden.
+sum1920<-rbind("2019"=c,"2020"=d,"2021"=e)
+colnames(sum1920)<-ns
+#sum1920 beinhaltet jetzt die daten von 2019 und 2020, m/w
+
+#21.4.import task barghoorn dataset
+#static:
+#geb<-read.csv2("PRO/git/essais/docs/STAT_R/data/geburten_d.csv")
+#gith:
+geb<-read.csv2("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/geburten_d.csv")
+##################################
+#21.5.
+#hier werden die geforderten aktualisierungen vorgenommen, bevor die funktionen laut script
+#ausgeführt werden. also per <rbind> dem datensatz zwei zusätzliche reihen (2019,2020) hinzugefügt.
+geb<-rbind(geb,sum1920)
+geb
+####works add years 2019-2021 to barghoorn dataset
+
+##########
+#3.
+dim(geb)
+mode(geb)
+attributes(geb)
+names(geb)
+class(geb)
+row.names(geb)
+head(geb,3)
+gew<-cbind(geb,apply(geb,1,sum))
+dim(gew)
+head(gew,3)
+colnames(gew)[3]<-"all"
+head(gew,3)
+tabs<-function(x){
+  gew<-cbind(x,apply(x,1,sum))
+  colnames(gew)[3]<-"all"
+  gew
+}
+mode(tabs)
+tabs(geb)->e1
+dim(e1)
+sum((e1$maennlich))
+####
+tabs<-function(x) {
+  gew<-cbind(x,apply(x,1,sum)) 
+  m<-dim(x)                          # dimension(x)
+  colnames(gew)[1+m[2]]<-"Gesamt"    # update je nach Spalten-zahl
+  return(gew) }
+
+tabss <-function(x) {
+  gew<-cbind(x,apply(x,1,sum)) # Spaltensumme verketten
+  colnames(gew)[3]<-"Gesamt"
+  gew<-rbind(gew,colSums(gew))
+  return(gew) }
+m<-tabss(geb)
+lastrow<-length(m$Gesamt)
+(row.names(m)[lastrow]<-"sum")
+print(m)
+
+proz<-geb/apply(geb,1,sum)
+dim(proz)
+print(proz)
+####
+####
+e1<-round(proz,3)
+head(round(100*proz,1))
+####
+proztab <- function(x) {
+  s<-apply(x,1,sum)         # Spaltensumme 
+  p<-x/s                    # Tabelle / Spaltensumme
+  p<-round((100*p),1)      # *100 gerundet auf eine Stelle
+  p   
+  print(p)# Ergebnis
+}
+####################
+proztab_q <- function(x) {
+  s<-apply(x,2,sum)         # Spaltensumme
+  p<-x/s                    # Tabelle / Spaltensumme
+  p<-round((100*p),1)      # *100 gerundet auf eine Stelle
+  p
+  print(p)# Ergebnis
+  
+}
+
+proztab(geb)
+proztab_q(geb)
+#print(s)
+
+print(proz_q<-geb/apply(geb,2,sum))
+dim(proz_q)
+
+proztab_q <- function(x) {
+  s<-apply(x,2,sum/x)         # Spaltensumme
+  p<-x/s                    # Tabelle / Spaltensumme
+  p<-round((100*s),1)      # *100 gerundet auf eine Stelle
+  p
+  print(p)# Ergebnis
+  
+}
+####
+barplot(geb$maennlich)
+barplot(geb$weiblich,col=2,add=TRUE)
+###################################################

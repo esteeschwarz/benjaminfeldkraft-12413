@@ -31,7 +31,9 @@
 # Zufallsstichproben der Datei umfrage.csv. Berechnen Sie den Mittelwert der Matrix stich und vergleichen sie diesen mit dem Mittelwert der 3471 Fälle der Umfragedaten.
 # Wieviel beträgt die prozentuale Abweichung?
 # 17. Welche Folgen können die NA-Fälle in den Umfragedaten oder allgemein haben?
+##a: dasz variablenlängen unterschiedlich ausfallen und variablen deshalb nicht mehr vergleichbar/kombinierbar sind.
 # 18. Im R-System lassen sich die Datenobjekte mit den Funktionen length und dim abfragen. Nennen Sie mindestens 4 verschiedene Objekte und ihre Eigenschaften
+##a: ##a: array: kombination (c()) von gleichartigen (typ) werten in einer matrix, matrix (kombination von werten in spalten/reihen), list: mehrdimensionales datenarray, in dem columns ($) erzeugt werden wie, cube, table, vector (allgemein)
 # 19. Warum hat man in der Informatik und in R den Datentyp Liste eingeführt? Vorteile?
 # 20. Vergleichen Sie für Ihre Stichproben das Nettoeinkommen und die Köpergröße die Genauigkeit der einfachen und der nach Geschlecht geschichteten Zufallsauswahl
 # 21. Ergänzen Sie die die Datei Geburten Deutschland ab 1950 um die Daten von 2019 (der link ist im Skript blau) und berechnen Sie mit ihrem selbstgeschriebenen Programm tabs die Summe von maennlich und weiblich in einer 3. Spalte GESAMT. Schreiben Sie ein Programm tabss, das auch die Spaltensummen als Zeile an eine beliebige Matrix unten anfügt und in dieser Summenzeile GESAMT erzeugt. Stellen Sie die Geburtenentwicklung von 1950 bis 2019 graphisch dar und interpretieren Sie bitte das Ergebnis

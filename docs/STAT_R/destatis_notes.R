@@ -413,7 +413,7 @@ dimnames(bev.cube)[[3]]<-1990:2018
 bev.cube[3,,1:10]
 bev.cube[,,1]
 ###odbc
-chan<-odbcDriverConnect("stat_r","guhl","moin")
+chan<-odbcDriverConnect("data/books.xls")
 #no connection
 chan
 odbcDataSources()

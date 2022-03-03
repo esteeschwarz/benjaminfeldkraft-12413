@@ -44,6 +44,7 @@
 # Bei Gruppenarbeiten sollten alle Gruppenmitglieder angegeben sein. Das Dokument sollte nicht mehr als 10 Seiten haben und spätestens bis zum 6. März bei mir per Email abgegeben werden.
 # Viel Erfolg wünscht Online-Dozent Martin B.
 ################################################################################
+#zu den textaufgaben siehe blatt tasks_1.md im selben ordner.
 #3.tabelle erstellen
 a<-c("eins","zwei","drei","vier","funf","sechs")
 b<-c(1:6)

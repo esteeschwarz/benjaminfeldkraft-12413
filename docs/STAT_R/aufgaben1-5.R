@@ -165,7 +165,7 @@ c<-sample(a,10);c
 d<-sample(a,10,replace=TRUE);d #as you can see, mit zurücklegen können werte mehrmals gezogen werden
 ######
 #16.
-dat<-read.csv2("PRO/git/essais/docs/STAT_R/data/Umfrage.csv")
+dat<-read.csv2("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/Umfrage.csv")
 dim(dat)
 mean(dat$NETTO,na.rm=TRUE)
 median(dat$NETTO,na.rm=TRUE)

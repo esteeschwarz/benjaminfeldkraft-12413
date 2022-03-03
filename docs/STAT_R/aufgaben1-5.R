@@ -1,6 +1,7 @@
 #12082.barghoorn aufgaben kapitel 1-5
 #20220220(18.01)
 #src:https://github.com/esteeschwarz/essais/blob/main/docs/STAT_R/aufgaben1-5.R
+#import RAW file to R: https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/aufgaben1-5.R
 ###########################################################
 #Beantworten Sie bitte die folgenden Fragen in ganzen Sätzen bzw. mit dem R-Code. 
 #Stellen Sie sich bitte vor, dass Sie die Themenbereiche jemandem erklären sollen, 

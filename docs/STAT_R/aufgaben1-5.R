@@ -84,7 +84,7 @@ median(c)
 #(c[md]+c[md+1])/2
 
 #5.2.1.advantage median vs. mean: outliers, practical: durchschnittseinkommen
-c<-c(1:5,20:27,1000)
+c<-c(1:7,20:27,1000)
 mean(c)
 median(c)
 head(c)
@@ -99,7 +99,19 @@ k<-1
 mdx1<-(c[md]+c[mdcor])/2
 mdx2<-(c[md]+c[mdcor])/2+1
 mdx3<-(mdx1+mdx2)/2
-print(mdx3)
+print(mdx3) #not working with both gerade/ungerade
+medx<-function(c){
+  print(mean(c))
+  print(median(c))
+  head(c)
+  lc<-length(c)
+  rank(c)
+  rest<-(lc-(lc%/%2)*2)
+pos0<-lc%/%2
+pos1<-pos0+rest+1
+print(medc<-(c[pos0]+c[pos1])/2)
+}
+nmed<-medx(c)
 
 #5.3.standardabweichung, numeric double
 sd(c)

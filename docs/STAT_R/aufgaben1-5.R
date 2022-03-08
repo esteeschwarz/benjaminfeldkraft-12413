@@ -1,6 +1,7 @@
 #12082.barghoorn aufgaben kapitel 1-5
 #20220220(18.01)
 #src:https://github.com/esteeschwarz/essais/blob/main/docs/STAT_R/aufgaben1-5.R
+#import RAW file to R: https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/aufgaben1-5.R
 ###########################################################
 #Beantworten Sie bitte die folgenden Fragen in ganzen Sätzen bzw. mit dem R-Code. 
 #Stellen Sie sich bitte vor, dass Sie die Themenbereiche jemandem erklären sollen, 
@@ -43,6 +44,7 @@
 # Bei Gruppenarbeiten sollten alle Gruppenmitglieder angegeben sein. Das Dokument sollte nicht mehr als 10 Seiten haben und spätestens bis zum 6. März bei mir per Email abgegeben werden.
 # Viel Erfolg wünscht Online-Dozent Martin B.
 ################################################################################
+#zu den textaufgaben siehe blatt tasks_1.md im selben ordner.
 #3.tabelle erstellen
 a<-c("eins","zwei","drei","vier","funf","sechs")
 b<-c(1:6)

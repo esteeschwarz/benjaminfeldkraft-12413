@@ -414,7 +414,7 @@ bev.cube[3,,1:10]
 bev.cube[,,1]
 ###odbc
 library(RODBC)
-chan<-odbcDriverConnect("genesis")
+chan<-odbcDriverConnect("")
 #no connection
 chan
 odbcDataSources()

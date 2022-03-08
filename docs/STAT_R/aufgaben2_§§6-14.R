@@ -93,3 +93,7 @@ mat4<-split(mat,row(mat))
 mat4
 mat5<-abind(lapply(mat4,mean))
 mat5
+liste[[1]]==4:6
+(liste[[1]][1:5])
+attributes(liste)
+

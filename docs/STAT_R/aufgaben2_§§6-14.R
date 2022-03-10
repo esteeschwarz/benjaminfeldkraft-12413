@@ -96,4 +96,10 @@ mat5
 liste[[1]]==4:6
 (liste[[1]][1:5])
 attributes(liste)
-
+liste
+match(liste[[1]],2)# nur so findet die 2
+match(liste[[1:4]],2)#fail
+match(unlist(liste[[1:3]]),2)
+l1<-unlist(liste,recursive=T)
+l1
+as.list(l1)

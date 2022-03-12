@@ -103,3 +103,5 @@ match(unlist(liste[[1:3]]),2)
 l1<-unlist(liste,recursive=T)
 l1
 as.list(l1)
+liste[1,]
+dim(liste)

@@ -58,3 +58,8 @@ tdis<-t.test(dis1,alternative = "g",var.equal = T)
 tdis
 tdis$stderr
 tdis$p.value
+############
+# significant difference between delay at:
+# p = 2.19e-14
+# mean difference:
+# 0.232 sec

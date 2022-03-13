@@ -44,18 +44,20 @@ cat(mdl8)
 
 dis44<-mdl8[1:length(dis52)]
 dis52<-mdl8
-plot(dis44,dis52)
-ggplot(dis44,dis52)
-df<-as.data.frame(dis1)  
-ggplot(df)
-dis1<-cbind(dis44,dis52)
+
+dis1<-cbind("1x2 record"=dis44,"2x1 record"=dis52)
+plot(dis1,main = "delay of speaker secure turns")
+#plot(line(dis1))
+z<-line(dis1)
+abline(coef(z))
+
 boxplot(dis1)
-ggplot(dis1)
 mn44<-mean(dis44)
 mn52<-mean(dis52)
 mndis<-mn52-mn44
 tdis<-t.test(dis1,alternative = "g",var.equal = T)
 tdis
+#summary(tdis)
 tdis$stderr
 tdis$p.value
 ############

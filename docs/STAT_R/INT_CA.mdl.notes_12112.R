@@ -18,8 +18,12 @@
 #import table with delay annotation times
 #read.csv2("#52#DEL_imp.txt",sep = " ")
 library(readr)
-mdl1 <- read_table2("#52#DEL_imp.csv", 
+mdl52 <- read_table2("#52#DEL_imp.csv", 
                             col_names = FALSE)
+
+mdl44<-read_table2("#44#DEL_imp.csv", 
+                   col_names = FALSE)
+mdl1<-mdl44
 print(mdl1)
 library(stringi)
 mdl1[1]
@@ -37,3 +41,20 @@ mdl7<-as.numeric(mdl6)
 mdl8<-subset(mdl7,mdl7!=is.na(mdl7))
 mean(mdl8)
 cat(mdl8)
+
+dis44<-mdl8[1:length(dis52)]
+dis52<-mdl8
+plot(dis44,dis52)
+ggplot(dis44,dis52)
+df<-as.data.frame(dis1)  
+ggplot(df)
+dis1<-cbind(dis44,dis52)
+boxplot(dis1)
+ggplot(dis1)
+mn44<-mean(dis44)
+mn52<-mean(dis52)
+mndis<-mn52-mn44
+tdis<-t.test(dis1,alternative = "g",var.equal = T)
+tdis
+tdis$stderr
+tdis$p.value

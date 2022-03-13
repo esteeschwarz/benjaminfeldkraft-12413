@@ -65,3 +65,52 @@ tdis$p.value
 # p = 2.19e-14
 # mean difference:
 # 0.232 sec
+############
+
+
+#U-test
+##rosemeyer uebung set D
+#stichproben 1,2
+d1<-dis44
+d2<-dis52
+d3<-c(d1,d2)
+
+d5<-rank(d3)
+d4<-cbind(d5,d3)
+d6<-sum(d5[1:25])
+d7<-sum(d5[26:50])
+
+#change values according to stichproben set C or D by add/remove comment (#)
+#chose set C (meindl daten)
+#a1<-cst1
+#a2<-cst2
+#r1<-c6
+#r2<-c7
+#choose set D (rosemeyer daten)
+a1<-d1
+a2<-d2
+r1<-d6
+r2<-d7
+#################
+n1<-length(a1)
+n2<-n1+1
+u1<-r1-((n1*n2)/2)
+u2<-r2-((n1*n2)/2)
+#should be 0
+uproof<-(u1+u2)-(n1*n1)
+Ucpt<-c(u1,u2)
+usort<-sort(Ucpt)
+umin<-usort[1]
+
+print("(3) U-test according to set")
+print("stichproben:")
+print(a1)
+print (a2)
+print(z1o<-(umin-((n1*n1))/2))
+print(z1u<-sqrt(((n1*n1)*(n1+n1+1))/12))
+print(z1<-z1o/z1u)
+
+#according to meindl appendix table A with z = +-2.35 > flächenateil 0.9906
+#i.e. restfläche:
+100-0.9906
+#99.0094

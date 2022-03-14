@@ -61,15 +61,15 @@ sdis52<-sample(dis52,difmdl)
 mean(dis44)
 mean(dis52)
 
-dis1<-cbind("1x2 record"=dis44,"2x1 record"=dis52)
+dis1<-cbind("1x2 record"=sdis44,"2x1 record"=sdis52)
 plot(dis1,main = "delay of speaker secure turns")
 #plot(line(dis1))
 z<-line(dis1)
 abline(coef(z))
 
 boxplot(dis1)
-mn44<-mean(dis44)
-mn52<-mean(dis52)
+mn44<-mean(sdis44)
+mn52<-mean(sdis52)
 mndis<-mn52-mn44
 tdis<-t.test(dis1,alternative = "g",var.equal = T)
 tdis
@@ -78,9 +78,9 @@ tdis$stderr
 tdis$p.value
 ############
 # significant difference between delay at:
-# p = 2.19e-14
+# p = 2.1e-15
 # mean difference:
-# 0.232 sec
+# 0.242 sec
 ############
 
 

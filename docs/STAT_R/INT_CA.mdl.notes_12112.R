@@ -18,32 +18,48 @@
 #import table with delay annotation times
 #read.csv2("#52#DEL_imp.txt",sep = " ")
 library(readr)
-mdl52 <- read_table2("#52#DEL_imp.csv", 
+library(stringi)
+
+mdl52 <- read_table2("~/boxHKW/21S/SPUND/lanwer/MDL/#52#DEL_imp.csv", 
                             col_names = FALSE)
 
-mdl44<-read_table2("#44#DEL_imp.csv", 
+mdl44<-read_table2("~/boxHKW/21S/SPUND/lanwer/MDL/#44#DEL_imp.csv", 
                    col_names = FALSE)
+#both samples same length
+#mdl44<-sample(mdl44,length(mdl52))
+
 mdl1<-mdl44
 print(mdl1)
-library(stringi)
 mdl1[1]
-#str2expression(mdl2[1])
-mdl2<-matrix(mdl1)
+
+
 mdl2
 #as.numeric(mdl2[1])
 #stri_count_boundaries(mdl2[1],"(")
 #stri_split(mdl4,"#")
+
+mdl9<-function(set){
+mdl2<-matrix(set)
 mdl3<-stri_replace_all_fixed(mdl2,"(","")
 mdl4<-stri_replace_all_fixed(mdl3,")","#")
 mdl5<-unlist(strsplit(mdl4,"#"))
 mdl6<-matrix(mdl5)
 mdl7<-as.numeric(mdl6)
 mdl8<-subset(mdl7,mdl7!=is.na(mdl7))
-mean(mdl8)
-cat(mdl8)
+#mean(mdl8)
+return(mdl8)
+}
+cat(mdl9(mdl44))
+mdl9(mdl44)
 
-dis44<-mdl8[1:length(dis52)]
-dis52<-mdl8
+#dis44<-mdl8[1:length(dis52)]
+dis44<-mdl9(mdl44)
+dis52<-mdl9(mdl52)
+difmdl<-ifelse(length(dis44)>length(dis52),dif1<-length(dis52),dif1<-length(dis44))
+sdis44<-sample(dis44,difmdl)
+sdis52<-sample(dis52,difmdl)
+mean(dis44)
+mean(dis52)
 
 dis1<-cbind("1x2 record"=dis44,"2x1 record"=dis52)
 plot(dis1,main = "delay of speaker secure turns")
@@ -71,15 +87,17 @@ tdis$p.value
 #U-test
 ##rosemeyer uebung set D
 #stichproben 1,2
-d1<-dis44
-d2<-dis52
+d1<-sdis44
+d2<-sdis52
 d3<-c(d1,d2)
 
 d5<-rank(d3)
+d51<-length(d5)
 d4<-cbind(d5,d3)
-d6<-sum(d5[1:25])
-d7<-sum(d5[26:50])
-
+d52<-d51/2
+d6<-sum(d5[1:d52])
+d61<-d52+1
+d7<-sum(d5[d61:d51])
 #change values according to stichproben set C or D by add/remove comment (#)
 #chose set C (meindl daten)
 #a1<-cst1

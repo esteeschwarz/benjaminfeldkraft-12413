@@ -2,7 +2,8 @@
 #20220313(15.47)
 
 #######################################
-#file keeping###
+#file keeping#
+#script source: "https://github.com/esteeschwarz/essais/blob/main/docs/STAT_R/INT_CA.mdl.notes_12112.R"
 #audio
 #52: 20201128 podcast "transphilosophisch, folge 52", lockdown, solo recording
 ##/lanwer/MDL/TP#52.wav
@@ -16,7 +17,6 @@
 ###############################
 
 #import table with delay annotation times
-#read.csv2("#52#DEL_imp.txt",sep = " ")
 library(readr)
 library(stringi)
 
@@ -28,12 +28,12 @@ mdl44<-read_table2("~/boxHKW/21S/SPUND/lanwer/MDL/#44#DEL_imp.csv",
 #both samples same length
 #mdl44<-sample(mdl44,length(mdl52))
 
-mdl1<-mdl44
-print(mdl1)
-mdl1[1]
+#mdl1<-mdl44
+#print(mdl1)
+#mdl1[1]
 
-
-mdl2
+#remove(mdl1)
+#mdl2
 #as.numeric(mdl2[1])
 #stri_count_boundaries(mdl2[1],"(")
 #stri_split(mdl4,"#")
@@ -50,7 +50,9 @@ mdl8<-subset(mdl7,mdl7!=is.na(mdl7))
 return(mdl8)
 }
 cat(mdl9(mdl44))
-mdl9(mdl44)
+cat(mdl9(mdl52))
+
+#mdl9(mdl44)
 
 #dis44<-mdl8[1:length(dis52)]
 dis44<-mdl9(mdl44)
@@ -128,7 +130,13 @@ print(z1o<-(umin-((n1*n1))/2))
 print(z1u<-sqrt(((n1*n1)*(n1+n1+1))/12))
 print(z1<-z1o/z1u)
 
-#according to meindl appendix table A with z = +-2.35 > flächenateil 0.9906
+#according to meindl appendix table A with z = +-2.65 > flächenateil 0.9906
 #i.e. restfläche:
-100-0.9906
-#99.0094
+100-0.9959
+#99.0041% ablehnung der nullhypothese=kein latenzunterschied > hoch signifikanter latenzunterschied
+
+#die signifikanzen sind noch nicht beständig, da die zwei stichproben unterschiedliche längen haben (gemessene delays)
+#und ich das bisher nur über sample() anpasse, auf dasz die variablenlängen vergleichbar sind. ich könnte auch einfach
+#die obergrenze kappen und von 2x27 observationen ausgehen, dann stellte sich das problem unterschiedlicher ergebnisse nicht,
+#das schöne jedoch ist, dasz die hypothese bei jedem neuen sample trotzdem bestätigt wird, mit kleinen abweichungen im
+#mean.

@@ -1,5 +1,6 @@
 #12112.SPUND INTERAKTION conversation analysis (MDL)
 #20220313(15.47)
+#20220315(19.04)
 
 #######################################
 #file keeping#

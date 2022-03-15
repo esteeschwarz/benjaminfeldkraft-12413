@@ -59,6 +59,7 @@ cat(mdl9(mdl52))
 dis44<-mdl9(mdl44)
 dis52<-mdl9(mdl52)
 difmdl<-ifelse(length(dis44)>length(dis52),dif1<-length(dis52),dif1<-length(dis44))
+
 sdis44<-sample(dis44,difmdl)
 sdis52<-sample(dis52,difmdl)
 mean(dis44)
@@ -74,20 +75,22 @@ boxplot(dis1)
 mn44<-mean(sdis44)
 mn52<-mean(sdis52)
 mndis<-mn52-mn44
-tdis<-t.test(dis1,alternative = "g",var.equal = T)
+#tdis<-t.test(dis1,alternative = "g",var.equal = T) #no! two arrays!
+tdis<-t.test(sdis44,sdis52,alternative = "g",var.equal = T, correct=F)
+#works also!
 tdis
 #summary(tdis)
 tdis$stderr
 tdis$p.value
 ############
 # significant difference between delay at:
-# p = 2.1e-15
+# p = 0.9912 # 
 # mean difference:
-# 0.242 sec
+# 0.179 sec
 ############
 
 
-#U-test
+#U-test für unabhängige stichproben
 ##rosemeyer uebung set D
 #stichproben 1,2
 d1<-sdis44
@@ -130,14 +133,21 @@ print (a2)
 print(z1o<-(umin-((n1*n1))/2))
 print(z1u<-sqrt(((n1*n1)*(n1+n1+1))/12))
 print(z1<-z1o/z1u)
-
-#according to meindl appendix table A with z = +-2.65 > flächenateil 0.9906
+#z = -2.392
+#according to meindl appendix table A 
 #i.e. restfläche:
+#p= 0.9916
 100-0.9959
-#99.0041% ablehnung der nullhypothese=kein latenzunterschied > hoch signifikanter latenzunterschied
+#99..59% ablehnung der nullhypothese=kein latenzunterschied > hoch signifikanter latenzunterschied
 
 #die signifikanzen sind noch nicht beständig, da die zwei stichproben unterschiedliche längen haben (gemessene delays)
 #und ich das bisher nur über sample() anpasse, auf dasz die variablenlängen vergleichbar sind. ich könnte auch einfach
 #die obergrenze kappen und von 2x27 observationen ausgehen, dann stellte sich das problem unterschiedlicher ergebnisse nicht,
 #das schöne jedoch ist, dasz die hypothese bei jedem neuen sample trotzdem bestätigt wird, mit kleinen abweichungen im
 #mean.
+#ich bin mir unsicher, ob es sich bei den stichproben (gemessenen latenzen in 2x1 /1x2) um unabhängige oder abhängige
+#stichproben handelt
+#wilcox test für abhängige stichproben:
+wilcox.test(sdis44,sdis52,alternative = "g",correct = F)
+#hier p = 0.9916 p < 0.1
+#yes, fits Utest above!

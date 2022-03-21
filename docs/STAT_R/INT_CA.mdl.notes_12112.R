@@ -210,16 +210,17 @@ mdl11<-matrix(as.double(mdl10),ncol = 3,byrow = T)
 colnames(mdl11)<-mdlns
 median(mdl11[,3])
 mdl11[,3]
-barplot(mdl11[,3])
+#barplot(mdl11[,3])
 #return(mdl11[,3])
-mdldis<-mdl11[,3]
-print(mean(mdldis))
-print(median(mdldis))
+mdldis<-mdl11
+#print(mean(mdldis))
+#print(median(mdldis))
 
 }
-dis34<-showdistance(mdlf34)
-dis52<-showdistance(mdlf52)
-
+tbl34<-showdistance(mdlf34)
+tbl52<-showdistance(mdlf52)
+dis52<-tbl52[,3]
+dis34<-tbl34[,3]
 mdlout52<-c(mean((dis52)),median(dis52))
 mdlout34<-c(mean((dis34)),median(dis34))
 max(dis34)
@@ -237,4 +238,35 @@ mdlplot<-cbind(dis52,dis34)
 #now find covariance between topic distance / latenz
 tblsolo<-c(mdlout52,mn52)
 tblensm<-c(mdlout34,mn44)
-chisq.test(tblensm,tblsolo)        
+chisq.test(tblensm,tblsolo)
+#p=0.1991
+#topic stretch
+tpa34<-tbl34[,1]
+tpb34<-tbl34[,2]
+tpa52<-tbl52[,1]
+tpb52<-tbl52[,2]
+
+ltp34<-length(unique(tpa34)) #count individual topics
+ltp52<-length(unique(tpa52))
+maxtp34<-max(tpb34) #max references
+maxtp52<-max(tpb52)
+#now feed into x square
+tblsolo<-c(mdlout52,mn52,ltp52,maxtp52)
+tblensm<-c(mdlout34,mn44,ltp34,maxtp34)
+tblboth<-cbind(tblsolo,tblensm)
+chisq.test(tblensm,tblsolo,correct = F)
+#chisq.test(tblboth)
+barplot(tblboth)
+cov(tblensm,tblsolo)
+(cor(tblensm,tblsolo))
+#correlation at 0.946 # highly correlated
+# 1 would be totale abhängigkeit
+d2<-cor(tblboth)
+a1<-c(10:1)
+b1<-c(1000:1009)
+c1<-cbind(a1,b1)
+cov(c1)
+d1<-cor(c1)
+chisq.test(a1,b1)
+d2[2]
+tblsolo[1]*d2[2]

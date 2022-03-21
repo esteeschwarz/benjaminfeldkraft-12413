@@ -151,3 +151,53 @@ print(z1<-z1o/z1u)
 wilcox.test(sdis44,sdis52,alternative = "g",correct = F)
 #hier p = 0.9916 p < 0.1
 #yes, fits Utest above!
+###12123.topic cont
+###12123.topic cont
+mdl<-scan("xpo002/MDL_xpo_topicA_F52.001.md", what="char")
+head (mdl)
+library(stringi)
+mdl[1:20]
+mdlreg<-()
+print(stri_detect(mdl[1:20],"[[#*#]]"))
+
+
+x <- "Ham, spam,\njam, SPAM, eggs, and spam"
+stri_extract_all_regex(x, ".*am", case_insensitive=TRUE)
+## [[1]]
+## [1] "spam" "SPAM" "spam"
+mdl[1:20]
+#stri_extract_all_regex(mdl,".*\\[.*\\]")
+#wks
+mdlreg<-stri_extract_all_regex(mdl,".*\\[.*\\]")
+mdlreg2<-subset(mdlreg,!is.na(mdlreg))
+mdlreg2
+
+scan(mdlreg2[1:10],sep = "#")               
+mdl2<-stri_split(mdlreg2,regex = "#")
+mdl2
+mdl3<-unlist(mdl2)
+mdl3[1:50]
+mdl4<-stri_extract_all_regex(mdl3,".*\\..*.+d.")
+#mdl4<-stri_extract_all_regex(mdl3,".*\\..*")
+#wks
+mdl5<-subset(mdl4,!is.na(mdl4))
+head(mdl5)
+mdl6<-stri_split(mdl5,regex = "\\.")
+mdl6[1:20]
+length(unlist(mdl6[3]))
+mdl6[2]
+match(mdl6,0)# nur so findet die 2
+#mdl7<-stri_extract_all_regex(mdl6,".+d.")
+#mdl7<-stri_extract_all_regex(mdl6,".*d.*") #all distances in list
+mdl7<-stri_extract_all_regex(mdl3,".*\\..*.+d.*")
+mdl8<-stri_split(mdl7,regex = "\\.")
+
+mdl9<-subset(mdl8,!is.na(mdl8))
+mdl9
+mdl10<-(unlist(mdl9))
+mdl10<-stri_replace( mdl10,replacement="",regex="d")
+mdlns<-c("REF0","REF#","distance")
+mdl11<-matrix(as.double(mdl10),ncol = 3,byrow = T)
+colnames(mdl11)<-mdlns
+median(mdl11[,3])
+mdl11[,3]

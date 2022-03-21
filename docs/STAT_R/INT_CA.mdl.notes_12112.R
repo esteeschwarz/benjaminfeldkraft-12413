@@ -155,10 +155,14 @@ wilcox.test(sdis44,sdis52,alternative = "g",correct = F)
 ###12123.topic cont
 ###12123.topic cont
 mdl<-scan("xpo002/MDL_xpo_topicA_F52.001.md", what="char")
-head (mdl)
+mdl<-scan("MDL_xpo_topicA_F34.001.md", what="char")
+mdlf52<-"xpo002/MDL_xpo_topicA_F52.001.md"
+mdlf34<-"MDL_xpo_topicA_F34.001.md"
+
+#head (mdl)
 library(stringi)
-mdl[1:20]
-mdlreg<-()
+#mdl[1:20]
+
 #print(stri_detect(mdl[1:20],"[[#*#]]"))
 
 
@@ -169,7 +173,11 @@ mdlreg<-()
 # mdl[1:20]
 #stri_extract_all_regex(mdl,".*\\[.*\\]")
 #wks
-mdlreg<-stri_extract_all_regex(mdl,".*\\[.*\\]")
+
+showdistance<-function(set){
+  mdl<-scan(set, what="char")
+  
+  mdlreg<-stri_extract_all_regex(mdl,".*\\[.*\\]")
 mdlreg2<-subset(mdlreg,!is.na(mdlreg))
 mdlreg2
 
@@ -202,3 +210,31 @@ mdl11<-matrix(as.double(mdl10),ncol = 3,byrow = T)
 colnames(mdl11)<-mdlns
 median(mdl11[,3])
 mdl11[,3]
+barplot(mdl11[,3])
+#return(mdl11[,3])
+mdldis<-mdl11[,3]
+print(mean(mdldis))
+print(median(mdldis))
+
+}
+dis34<-showdistance(mdlf34)
+dis52<-showdistance(mdlf52)
+
+mdlout52<-c(mean((dis52)),median(dis52))
+mdlout34<-c(mean((dis34)),median(dis34))
+max(dis34)
+dis34
+#mdlplotns<-c(mdlmean,mdlmedian)
+mdlns52<-c("distance topic, mean/median F52")
+mdlns34<-c("distance topic, mean/median F34")
+
+barplot(dis52,main=mdlns52,xlab=mdlout52)
+barplot(dis34,main=mdlns34,xlab=mdlout34)
+boxplot(dis34,dis52)
+mdlplot<-cbind(dis52,dis34)
+#barplot(mdlplot,beside = T)
+###12123.
+#now find covariance between topic distance / latenz
+tblsolo<-c(mdlout52,mn52)
+tblensm<-c(mdlout34,mn44)
+chisq.test(tblensm,tblsolo)        

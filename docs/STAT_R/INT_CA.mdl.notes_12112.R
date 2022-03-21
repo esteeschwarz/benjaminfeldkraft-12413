@@ -1,31 +1,39 @@
 #12112.SPUND INTERAKTION conversation analysis (MDL)
 #20220313(15.47)
 #20220315(19.04)
+#20220321(18.21)
 
 #######################################
 #file keeping#
 #script source: "https://github.com/esteeschwarz/essais/blob/main/docs/STAT_R/INT_CA.mdl.notes_12112.R"
-#audio
+### audio ####
 #52: 20201128 podcast "transphilosophisch, folge 52", lockdown, solo recording
-##/lanwer/MDL/TP#52.wav
+##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/TP#52.wav
 #44: 20200808 pre lockdown, recording ensemble
-##/lanwer/MDL/TP#44.wav
-#annotation delay table
-##/lanwer/MDL/#52#DEL_imp.csv
-#partitur editor files
-##/lanwer/MDL/MDL_12112_F52.exb
-##/lanwer/MDL/MDL_12104_F44.exb
+##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/TP#44.wav
+#34: 20200120 pre lockdown, recording ensemble
+##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/TP34.wav
+### annotation delay table ###
+src52<-"~/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/TP52_DEL_imp.csv"
+src44<-"~/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/TP44_DEL_imp.csv"
+### topic analysis on transkript ###
+srcta34<-"~/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_xpo_topicA_F34.001.md"
+srcta52<-"~/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_xpo_topicA_F52.001.md"
+### partitur editor files ###
+##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_basisTS_12113_F34_exc-Vmann.002.exb
+##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_basisTS12113_F52_excD.002.basis001.exb
+##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_miniTS_12113_F52_exc-Dupdate.003.exb
+##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_annTS_12104_F44.exb
 ###############################
+### TODO ###
+## annotate topic distance in partitur editor + measure distance in timecode
 
 #import table with delay annotation times
 library(readr)
 library(stringi)
 
-mdl52 <- read_table2("~/boxHKW/21S/SPUND/lanwer/MDL/#52#DEL_imp.csv", 
-                            col_names = FALSE)
-
-mdl44<-read_table2("~/boxHKW/21S/SPUND/lanwer/MDL/#44#DEL_imp.csv", 
-                   col_names = FALSE)
+mdl52 <- read_table2(src52,col_names = FALSE)
+mdl44<-read_table2(src44, col_names = FALSE)
 #both samples same length
 #mdl44<-sample(mdl44,length(mdl52))
 
@@ -104,13 +112,7 @@ d52<-d51/2
 d6<-sum(d5[1:d52])
 d61<-d52+1
 d7<-sum(d5[d61:d51])
-#change values according to stichproben set C or D by add/remove comment (#)
-#chose set C (meindl daten)
-#a1<-cst1
-#a2<-cst2
-#r1<-c6
-#r2<-c7
-#choose set D (rosemeyer daten)
+
 a1<-d1
 a2<-d2
 r1<-d6
@@ -137,8 +139,8 @@ print(z1<-z1o/z1u)
 #according to meindl appendix table A 
 #i.e. restfläche:
 #p= 0.9916
-100-0.9959
-#99..59% ablehnung der nullhypothese=kein latenzunterschied > hoch signifikanter latenzunterschied
+#100-0.9959
+#99.59% ablehnung der nullhypothese=kein latenzunterschied > hoch signifikanter latenzunterschied
 
 #die signifikanzen sind noch nicht beständig, da die zwei stichproben unterschiedliche längen haben (gemessene delays)
 #und ich das bisher nur über sample() anpasse, auf dasz die variablenlängen vergleichbar sind. ich könnte auch einfach
@@ -154,10 +156,10 @@ wilcox.test(sdis44,sdis52,alternative = "g",correct = F)
 #############################
 ###12123.topic cont
 ###12123.topic cont
-mdl<-scan("xpo002/MDL_xpo_topicA_F52.001.md", what="char")
-mdl<-scan("MDL_xpo_topicA_F34.001.md", what="char")
+#mdl<-scan("xpo002/MDL_xpo_topicA_F52.001.md", what="char")
+#mdl<-scan("MDL_xpo_topicA_F34.001.md", what="char")
 mdlf52<-"xpo002/MDL_xpo_topicA_F52.001.md"
-mdlf34<-"MDL_xpo_topicA_F34.001.md"
+mdlf34<-"xpo002/MDL_xpo_topicA_F34.001.md"
 
 #head (mdl)
 library(stringi)
@@ -186,6 +188,7 @@ mdl2<-stri_split(mdlreg2,regex = "#")
 mdl2
 mdl3<-unlist(mdl2)
 mdl3[1:50]
+#extract all distances [x], coded in topicA TS with #REF[0].REF[n].dx#
 mdl4<-stri_extract_all_regex(mdl3,".*\\..*.+d.")
 #mdl4<-stri_extract_all_regex(mdl3,".*\\..*")
 #wks
@@ -272,7 +275,7 @@ d2[2]
 tblsolo[1]*d2[2]
 #bind cases into rows
 tblboth2<-rbind(tblsolo,tblensm)
-cov(tblboth2)
+#cov(tblboth2)
 #meindl p.224
 mndis34<-mean(dis34)
 mndis52<-mean(dis52)

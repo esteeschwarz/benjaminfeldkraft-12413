@@ -262,11 +262,44 @@ cov(tblensm,tblsolo)
 #correlation at 0.946 # highly correlated
 # 1 would be totale abhängigkeit
 d2<-cor(tblboth)
-a1<-c(10:1)
-b1<-c(1000:1009)
-c1<-cbind(a1,b1)
-cov(c1)
-d1<-cor(c1)
-chisq.test(a1,b1)
+#a1<-c(10:1)
+#b1<-c(1000:1009)
+#c1<-cbind(a1,b1)
+#cov(c1)
+#d1<-cor(c1)
+#chisq.test(a1,b1)
 d2[2]
 tblsolo[1]*d2[2]
+#bind cases into rows
+tblboth2<-rbind(tblsolo,tblensm)
+cov(tblboth2)
+#meindl p.224
+mndis34<-mean(dis34)
+mndis52<-mean(dis52)
+
+tblsolo2<-c(mndis52,mn52,maxtp52)
+tblensm2<-c(mndis34,mn44,maxtp34)
+tblboth2<-rbind(tblsolo2,tblensm2)
+
+dim(tblboth2)
+tblc<-tblboth2
+tblc[4]
+ax1<-tblc[1]^2
+by1<-tblc[3]^2
+ax2<-tblc[2]^2
+by2<-tblc[4]^2
+
+c1<-tblc[1]*tblc[3]
+c2<-tblc[2]*tblc[4]
+sx<-sum(tblc[,1])
+sy<-sum(tblc[,2])
+sz<-sum(tblc[,3])
+sc<-sum(c1,c2)
+sb<-sum(ax1,by1)
+sa<-sum(ax2,by2)
+#apply(tblc,1,sum)
+r<-(2*sc-sx*sy)/sqrt(abs((2*sa-sx^2)*(2*sb-sy^2)))
+#sqrt((2*sa-sx^2)*(2*sb-sy^2))
+#sq<-((2*sa-sx^2)*(2*sb-sy^2))
+#sqrt(abs(sq))
+t<-(abs(r)*sqrt(2-1))/(sqrt(1-r^2))

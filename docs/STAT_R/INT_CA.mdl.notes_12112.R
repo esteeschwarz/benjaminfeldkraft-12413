@@ -307,3 +307,4 @@ r<-(2*sc-sx*sy)/sqrt(abs((2*sa-sx^2)*(2*sb-sy^2)))
 #sq<-((2*sa-sx^2)*(2*sb-sy^2))
 #sqrt(abs(sq))
 t<-(abs(r)*sqrt(2-1))/(sqrt(1-r^2))
+

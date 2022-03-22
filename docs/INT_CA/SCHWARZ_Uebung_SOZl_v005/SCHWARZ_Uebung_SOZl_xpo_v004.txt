@@ -1,0 +1,78 @@
+@speaker: 3
+@speaker 1: mother
+@speaker 2: prob. interviewer
+@speaker 3: daughter
+@table conversation
+@duration 00:54min
+
+@begin
+001 S1:     gott ja nich,
+002         wenn man-
+003         wenn man jung verheiratet ist,
+004         dann mAcht man doch ALLerhAnd.
+005 S2:     [dEnn MACHT mans noch;]
+006 AN_S2:  [#REP#1               ]
+007 S2:     und spÄter,
+008 S1:     [denn mAcht,]
+009 S2:     [Ärgert man ]sich drÜber, 
+010         °hh 
+011 S1:     [achnEE: ich;]
+012 S3:     [nee.        ]
+013 S1:     (0.3)[ich Ärger mich ]nich darÜber.
+014 S3:          [ach NEE.       ]
+015 AN_S3:       [#REP#2         ]
+016 S1:     [(0.1) ][dass °h,]
+017 S2:     [h°    ][naja=   ]=aber wenn man Erstmal die männer daran gewÖHNT,
+018         dass man Alles für sie MACHT,
+019 S1:     ja; 
+020         (0.5)denn- 
+021 AN_S1:  #REF#2
+022 S1:     (0.5)ja,
+023         (0.6)
+024 S2:     das mErken sie sich LANge,
+025 S1:     (0.3)najA mit,
+026         (0.2)[wie es da noch WAR,]
+027 AN_S1:       [#REF#2             ]
+028 S1:     h° (1.0)w w (0.2) weil mein mann,
+029         der ist denn- 
+030         auch aus,
+031         der ist aus dem KRIEG gekommen,
+032         dann ist er verWÖHNT worden,
+033         zuhAUse von seiner mUtter,
+034         weil er ja alles nicht KONNte,
+035         (0.3)mit seinen (0.1)[beinen,]
+036 S2:                          [mmh;   ]
+037 S1:     das (0.3) war ja dann AUCH nich so einfach.
+038         °hh ich MEINe wenn jEmand in in;
+039         (0.7)BEIN verloren hat,
+040         ist das SCHWER.
+041         (1.5)und-
+042         (0.5)naja?
+043         (2.1)hab ich den HALT dann Eben,
+044         (0.4)
+045 S3:     [verWÖHNT.]
+046 AN_S3:  [#REP#1   ]
+047 S1:     (0.1)auch ver[WÖHNT.]
+048 AN_S1:  #REP#3
+049 S2:                  [hh°   ]
+050 NO_S:   (4.2)
+051 S1:     [und DU warst dann AUch immer;]
+052 AN_S1:  [#ADR#3                       ]
+053 S1:     dEnn wurdest du geSCHICKT?
+054         und hast das AUCH?
+055         [für_n PApa gemacht. ]
+056 S3:     [achSO ich dAchte ich] wurde jetzt AUCH verwÖhnt; 
+057         h°[h° ]
+058 S1:       [dU?]
+059         bist AUch verWÖHNT worden[(name).]
+060 AN_S1:  #REP#3#ADR#3
+061 S3:                              [ja?    ]
+062 S1:     (1.1)[(name) ist AUCH verwÖhnt ]worden; 
+063 S2:          [hh°                      ]
+064 AN_S1:       [#ADR#2                   ]
+065 S3:     xxx xxx xxxbin ja mal gespannt ob er heute mal anruft;
+066 S1:     hh°
+067 S3:     (0.3)
+068 S2:     bei euch,
+069 S3:     (0.2)mmh,
+@end

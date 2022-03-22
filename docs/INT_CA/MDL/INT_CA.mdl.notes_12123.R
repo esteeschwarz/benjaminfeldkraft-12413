@@ -2,6 +2,7 @@
 #20220313(15.47)
 #20220315(19.04)
 #20220321(18.21)
+#20220322(20.28)
 
 #######################################
 #file keeping#
@@ -14,16 +15,16 @@
 #34: 20200120 pre lockdown, recording ensemble
 ##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/TP34.wav
 ### annotation delay table ###
-src52<-"~/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/TP52_DEL_imp.csv"
-src44<-"~/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/TP44_DEL_imp.csv"
+src52<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/TP52_DEL_imp.csv"
+src44<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/TP44_DEL_imp.csv"
 ### topic analysis on transkript ###
-srcta34<-"~/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_xpo_topicA_F34.001.md"
-srcta52<-"~/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_xpo_topicA_F52.001.md"
+srcta34<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_xpo_topicA_F34.001.md"
+srcta52<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_xpo_topicA_F52.001.md"
 ### partitur editor files ###
-##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_basisTS_12113_F34_exc-Vmann.002.exb
-##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_basisTS12113_F52_excD.002.basis001.exb
-##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_miniTS_12113_F52_exc-Dupdate.003.exb
-##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_annTS_12104_F44.exb
+##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_basisTS_12113_F34_exc-Vmann.002.exb
+##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_basisTS12113_F52_excD.002.basis001.exb
+##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_miniTS_12113_F52_exc-Dupdate.003.exb
+##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_annTS_12104_F44.exb
 ###############################
 ### TODO ###
 ## annotate topic distance in partitur editor + measure distance in timecode
@@ -158,8 +159,8 @@ wilcox.test(sdis44,sdis52,alternative = "g",correct = F)
 ###12123.topic cont
 #mdl<-scan("xpo002/MDL_xpo_topicA_F52.001.md", what="char")
 #mdl<-scan("MDL_xpo_topicA_F34.001.md", what="char")
-mdlf52<-"xpo002/MDL_xpo_topicA_F52.001.md"
-mdlf34<-"xpo002/MDL_xpo_topicA_F34.001.md"
+mdlf52<-srcta52
+mdlf34<-srcta34
 
 #head (mdl)
 library(stringi)

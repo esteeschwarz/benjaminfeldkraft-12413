@@ -159,8 +159,8 @@ wilcox.test(sdis44,sdis52,alternative = "g",correct = F)
 ###12123.topic cont
 #mdl<-scan("xpo002/MDL_xpo_topicA_F52.001.md", what="char")
 #mdl<-scan("MDL_xpo_topicA_F34.001.md", what="char")
-mdlf52<-"xpo002/MDL_xpo_topicA_F52.001.md"
-mdlf34<-"xpo002/MDL_xpo_topicA_F34.001.md"
+mdlf52<-srcta52
+mdlf34<-srcta34
 
 #head (mdl)
 library(stringi)

@@ -15,11 +15,11 @@
 #34: 20200120 pre lockdown, recording ensemble
 ##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/TP34.wav
 ### annotation delay table ###
-src52<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/TP52_DEL_imp.csv"
-src44<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/TP44_DEL_imp.csv"
+src52<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/TP52_DEL_imp.csv"
+src44<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/TP44_DEL_imp.csv"
 ### topic analysis on transkript ###
-srcta34<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_xpo_topicA_F34.001.md"
-srcta52<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_xpo_topicA_F52.001.md"
+srcta34<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/MDL_xpo_topicA_F34.001.md"
+srcta52<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/MDL_xpo_topicA_F52.001.md"
 ### partitur editor files ###
 ##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_basisTS_12113_F34_exc-Vmann.002.exb
 ##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_basisTS12113_F52_excD.002.basis001.exb

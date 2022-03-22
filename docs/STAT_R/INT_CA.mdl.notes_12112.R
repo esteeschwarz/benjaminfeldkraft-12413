@@ -20,6 +20,7 @@ src44<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/TP44_DEL
 ### topic analysis on transkript ###
 srcta34<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/MDL_xpo_topicA_F34.001.md"
 srcta52<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/MDL_xpo_topicA_F52.001.md"
+srctaexb52<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/MDL_basisTS_12124_F52_excD.topicA.001.exb"
 ### partitur editor files ###
 ##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_basisTS_12113_F34_exc-Vmann.002.exb
 ##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_basisTS12113_F52_excD.002.basis001.exb
@@ -32,9 +33,11 @@ srcta52<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/MDL_xp
 #import table with delay annotation times
 library(readr)
 library(stringi)
+library(xml2)
 
 mdl52 <- read_table2(src52,col_names = FALSE)
 mdl44<-read_table2(src44, col_names = FALSE)
+topic52<-read_xml(srctaexb52)
 #both samples same length
 #mdl44<-sample(mdl44,length(mdl52))
 
@@ -307,4 +310,20 @@ r<-(2*sc-sx*sy)/sqrt(abs((2*sa-sx^2)*(2*sb-sy^2)))
 #sq<-((2*sa-sx^2)*(2*sb-sy^2))
 #sqrt(abs(sq))
 t<-(abs(r)*sqrt(2-1))/(sqrt(1-r^2))
+###12124.############################
+#topic analysis of exb / xml extract essai
+xml_children(topic52)
+ta2<-xml_children(xml_children(xml_children(topic52)))
+xml_attr(ta2[13:150],"id",) # tids with times
+xml_attr(ta2[13:150],"time",) # tids with times
+
+ta2[3]
+dim(ta2)
+xml_text(ta2[301:354]) #newly annotated times in annotation TIE13(S1), TIE4(S2)
+xml_attr(ta2[301:354],"start",) # tids with times
+xml_attr(ta2[2],"id",) # tids with times
+ta3<-unlist(ta2)
+ta3<-unlist(ta2[13:150])
+attr(topic52[10:100],"id")
+dim(topic52)
 

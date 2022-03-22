@@ -2,6 +2,7 @@
 #20220313(15.47)
 #20220315(19.04)
 #20220321(18.21)
+#20220322(20.28)
 
 #######################################
 #file keeping#
@@ -20,10 +21,10 @@ src44<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/TP44_DE
 srcta34<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_xpo_topicA_F34.001.md"
 srcta52<-"https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_xpo_topicA_F52.001.md"
 ### partitur editor files ###
-##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_basisTS_12113_F34_exc-Vmann.002.exb
-##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_basisTS12113_F52_excD.002.basis001.exb
-##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_miniTS_12113_F52_exc-Dupdate.003.exb
-##/Users/lion/boxHKW/21S/SPUND/lanwer/MDL/xpo002/MDL_annTS_12104_F44.exb
+##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_basisTS_12113_F34_exc-Vmann.002.exb
+##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_basisTS12113_F52_excD.002.basis001.exb
+##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_miniTS_12113_F52_exc-Dupdate.003.exb
+##https://github.com/esteeschwarz/essais/blob/main/docs/INT_CA/MDL/MDL_annTS_12104_F44.exb
 ###############################
 ### TODO ###
 ## annotate topic distance in partitur editor + measure distance in timecode

@@ -100,7 +100,7 @@ library(stringi)
 library(xml2)
 
 #import local destatis credentials. diese sind in einer csv nach dem muster kennung,pwd abgelegt
-destatis_cred <- read_csv("~/Nextcloud/UNI/21S/SPUND/R/destatis_cred.csv")
+destatis_cred <- read_csv("~/boxHKW/21S/SPUND/R/destatis_cred.csv")
 
 ###destatis sample links:
 # src<-"https://www-genesis.destatis.de/genesisWS/web/ExportService_2010?method=AuspraegungInformation&kennung=IHRE_KENNUNG&password=IHR_PASSWORT&name=12612-0002&bereich=Alle&sprache=de"
@@ -367,6 +367,9 @@ apply(a,c(1,2),mean)
 cbind(a[,,1],a[,,2], apply(a,c(1,2),mean))
 sweep(a, c(1,2), apply(a, c(1,2), mean), "-")    
 
+####################
+## §§ 6
+library(abind)
 abind(matrix(1:4, ncol=2), matrix(4:1, ncol=2),along=2.5)
 dim(abind(a, a, along=3.5))                   
 asum<-abind(a,apply(a,c(1,2),sum),along=3) ; dim(asum)

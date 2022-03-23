@@ -31,6 +31,8 @@ src_e<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?user
 
 #wks, spuckt in browser tabelle aus, now read this in R
 
+#src<-lnk8
+
 #############
 #this to remove blanks in copied sample link and substitute kennung/pw in link provided by genesis, link to pdf with sample-links
 #for API requests top of page

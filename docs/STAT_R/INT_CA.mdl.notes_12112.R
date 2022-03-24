@@ -312,6 +312,14 @@ r<-(2*sc-sx*sy)/sqrt(abs((2*sa-sx^2)*(2*sb-sy^2)))
 t<-(abs(r)*sqrt(2-1))/(sqrt(1-r^2))
 ###12124.############################
 #topic analysis of exb / xml extract essai
+# 12126.
+# @ barghoorn: hier habe ich einige probleme, die listen inhalte und attribute korrekt zu adressieren. ich 
+# würde gern die id attribute extrahieren, in denen auf unterschiedlichen ebenen das transkriptsegment
+# T[x] bezeichnet wird, diese bezeichnung dann mit anderen childs derselben liste vergleichen und dort
+# die values für das attribut [start] und [end] dementsprechend extrahieren, damit ich den abstand der
+# segmente bestimmen kann. 
+# bitte für den nachvollzug das source für (topic52) ganz oben laden und (topic52) als read_xml einlesen,
+# dann hier weitermachen.
 xml_children(topic52)
 ta2<-xml_children(xml_children(xml_children(topic52)))
 xml_attr(ta2[13:150],"id",) # tids with times

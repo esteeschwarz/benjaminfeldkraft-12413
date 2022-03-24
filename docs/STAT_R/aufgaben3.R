@@ -1,0 +1,38 @@
+#12126.aufgaben 3
+
+# 0. Bezug auf Frage 15 im Aufgabenset EINS: Ziehen sie wiederum Zufallsstichproben im Umfang 15 aus 15 Zahlen und stellen Sie mit geeigneten Algorithmen fest, ob es Wiederholungen in der Stichprobe gibt. Hierfür kann man auch eine eigene Funktion schreiben, muss aber nicht.
+# 1. Erklären Sie kurz mit eigenen Worten, was eine Kreuztabelle (Pivot) ist. Wie hängen die Klassifikationsvariable und die Dimensionen des Resultats zusammen? Was ist der Data-Cube?
+#   2. Erzeugen Sie bitte einen 4-dimensionalen Data-Cube (DC) mit den BSR-Daten. Zweckmäßigerweise wird der Data.frame zuerst attached (attach(bsr)). Wählen Sie für den Cube die Variable tag, zeit (Umrechnung in Stunden!), bsrkey und P (Anliefer- ort). Aggregiert werden soll als Summe das Abfallgewicht Mg. Kontrollieren Sie die dim(DC) und sum(Mg)==sum(DC,na.rm=T).
+# 3 Schreiben Sie bitte zwei R-Programme für die alphabetische Verschlüsselung nach Caesar, Kodierung und Entkodierung. Dem Programm soll übergeben werden der Normaltext bzw. der kodierte Text und jeweils ein Verschiebeschlüssel als Integerzahl. Führen Sie bitte diese beiden Programme mit einem selbstgewählten Textbeispiel vor.
+# 4. Jemand hat bis heute 8400 Tage gelebt, wie alt ist er in Jahren, Monaten und Tagen und wann genau ist sein Geburtstag? Denken Sie bitte an die Schalttage es sind 6. Verwenden Sie meine Programme encode und decode oder eigene.
+# 5. Ihre Geheimzahl (PIN) für Ihr Konto bei der Studentenbank lautet 3981. Bitte verschlüsseln sie diese mit dem Prim- zahlen-Key c(67,67,67). Man braucht einen dreistelligen Schlüssel, um auch noch die maximal vierstellige Geheimzahl 9999 verschlüsseln zu können. Wie lautet die verschlüsselte Geheimzahl und entschlüsseln Sie diese wieder zur Kontrolle, so dass wieder 3981 rauskommt. Warum wird verschlüsselt?
+#   6. Erzeugen Sie bitte ein zweiseitiges Stamm&Blatt (St&Bl) mit der Körpergröße aus den Umfragedaten nach Geschlecht. Am besten vorher eine Zufallsstichprobe im Umfang 300 ziehen. Bitte auch etwas Interpretation der Ergebnisse.
+# 7. Erzeugen Sie mit IMAGE ein Bild. Zur Auswahl stehen noch die Datei Oliven.txt und Schnee.txt Oder eine
+# eigene Bilddatei. Schnee.txt ist eine Fraktalgraphik, sie wurde aus der Matrix > snow<- matrix(c(1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1), 5,5) mit 4-facher Rekursion erzeugt. Oder erzeugen Sie mit dem Package spt ein Sierpinski-Dreieck. Bitte auch unten den Exkurs beachten: Herstellung einer Bitmap aus einem Foto.
+# 8. Erzeugen Sie bitte eine Landkartengraphik mit R
+# 9. Verbinden Sie sich über ODBC mit der Bibliotheks-Datenbank
+# books.xls (Informatik) und erforschen Sie die
+# Entwicklung der Programmiersprache BASIC, so wie sie in den Buchtiteln vorkommt, indem Sie eine SQL-Abfrage (query) machen, in der LIKE '%_____%' vorkommt. Wenn ODBC nicht geht, den R-Befehl grep nehmen. Bitte auch Graphik und Interpretation anfertigen.
+# Ich wünsche Euch Gutes Gelingen und Freude an der Bearbeitung der Aufgaben! Für Fragen und Erläuterungen stehe ich gerne zur Verfügung. Spätester Abgabetermin für Block DREI ist der 3.4.2022. Nach Abgabe aller Aufgaben und meiner zeitnaher Korrektur wird Eure bestandene ABV-Prüfungsleistung im Campus-Management verbucht werden.
+# Exkurs: Herstellung einer IMAGE Graphik in R aus einem eigenen Bild (Foto)
+# 1. Öffnen eines nicht zu komplizierten Bildes mit einem Bildbearbeitungsprogramm, ich verwende IrfanView.
+# 2. Reduktion des Bildes auf nicht mehr 1000 x 1000 Bildpunkte (Pixel)
+# 3. Umwandlung in Graustufen, Farben kommen später
+# 4. Speichern des Bildes im Format Portable Gray Map PGM, rechts
+# in dem Optionskasten Ascii Encoding auswählen
+# 5. Es entsteht eine Textdatei, in der hauptsächlich Zahlen stehen, die SW-Graustufen-Nummern. In den ersten Zeilen
+# Dieser Datei steht etwa das: # Created by IrfanView
+#   600
+# 255
+# Vor
+# Zahlen in der Datei
+533 # Größe des Bildes in Pixeln # 255 Graustufen
+dem R-Import diese Zeilen löschen, danach sind nur noch
+6. Im R soll das in meinem Beispiel eine Bild-Matrix mit 600 x 533 Pixeln geben, Import in R mit scan (Vektor)
+7. mond <- scan("D:/Bilder/Bilder_TOP/mond2.pgm")
+> length(mond) # der Graustufenvektor, der Maimond [1] 319800
+> m1<-matrix(mond, nrow=533) > image(m1)
+> image(t(m1)) # Transponieren, das Bild wird gekippt
+> m2<-as.matrix(rev(as.data.frame(m1)))
+# Bild waagerecht spiegeln
+> image(m2,col = rainbow(256)) # mit 256 Regenbogenfarben

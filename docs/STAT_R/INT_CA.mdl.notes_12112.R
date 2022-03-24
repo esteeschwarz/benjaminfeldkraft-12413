@@ -320,8 +320,15 @@ t<-(abs(r)*sqrt(2-1))/(sqrt(1-r^2))
 # segmente bestimmen kann. 
 # bitte für den nachvollzug das source für (topic52) ganz oben laden und (topic52) als read_xml einlesen,
 # dann hier weitermachen.
+topic52<-read_xml(srctaexb52)
 xml_children(topic52)
 ta2<-xml_children(xml_children(xml_children(topic52)))
+print(ta2) #356 nodes, zu viel, müssen 138 children sein
+ta2<-xml_children(xml_children(xml_children(xml_children(xml_children(topic52)))))
+# 5 zu tief, nodes 0, in oxygen see at level 4
+ta2<-xml_children(xml_children(xml_children(xml_children(topic52))))
+match(attr(ta2,"id"=="T99"),ta2)
+ta2[[20]][20][2]
 xml_attr(ta2[13:150],"id",) # tids with times
 xml_attr(ta2[13:150],"time",) # tids with times
 

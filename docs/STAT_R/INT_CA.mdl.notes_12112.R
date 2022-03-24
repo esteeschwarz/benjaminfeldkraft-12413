@@ -360,10 +360,10 @@ ta_id[32] # at T102
 times<-as.double(xml_attr(ta_ties,"time",)) # tids with times
 #wks.
 times[45]-times[32] #wks. 8.58s topic distance 7.0 > 7.1
-
-ta_ties
-ta3<-unlist(ta2)
-ta3<-unlist(ta2[13:150])
-attr(topic52[10:100],"id")
-dim(topic52)
-
+# 
+# ta_ties
+# ta3<-unlist(ta2)
+# ta3<-unlist(ta2[13:150])
+# attr(topic52[10:100],"id")
+# dim(topic52)
+# 

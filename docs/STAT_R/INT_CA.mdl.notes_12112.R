@@ -347,9 +347,20 @@ ta_event<-xml_attr(ta_events,"start",);ta_event # tids with times
 #xml_attr(ta2[2],"id",) # tids with times
 #now match ta_event start id with corresponding ta_id attribut
 match(ta_event,ta_id)
+match(ta_event[12],ta_id)
+ta_id[45] # at T28 in times
+xml_text(ta_events[12]) #find occurence 7.1, now search for 7.0
+match("7.0",xml_text(ta_events)) # auf pos 23, now same as above
+match(ta_event[23],ta_id)
+ta_id[32] # at T102
+
+
+# now
 #corresponding time in array
-xml_attr(ta_ties[12],"time",) # tids with times
+times<-as.double(xml_attr(ta_ties,"time",)) # tids with times
 #wks.
+times[45]-times[32] #wks. 8.58s topic distance 7.0 > 7.1
+
 ta_ties
 ta3<-unlist(ta2)
 ta3<-unlist(ta2[13:150])

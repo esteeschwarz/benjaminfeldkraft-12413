@@ -334,14 +334,23 @@ ta2<-xml_children(xml_children(xml_children(topic52)))
 ta4<-xml_children(xml_children(xml_children(xml_children(topic52))))
 match(attr(ta2,"id"=="T99"),ta2)
 ta2[[20]][20][2]
-xml_attr(ta2[13:150],"id",) # tids with times
-xml_attr(ta2[13:150],"time",) # tids with times
+ta_ties<-ta2[13:150]
+#ta_times<-ta2[13:150]
+ta_id<-xml_attr(ta_ties,"id",);ta_id # tids with times
+ta_time<-xml_attr(ta_ties,"time",);ta_time # tids with times
 
-ta2[3]
+ta2[[3]]
 dim(ta2)
-xml_text(ta2[301:354]) #newly annotated times in annotation TIE13(S1), TIE4(S2)
-xml_attr(ta2[301:354],"start",) # tids with times
-xml_attr(ta2[2],"id",) # tids with times
+ta_events<-ta2[313:354]
+ta_text<-xml_text(ta_events);ta_text #newly annotated times in annotation TIE13(S1), TIE4(S2)
+ta_event<-xml_attr(ta_events,"start",);ta_event # tids with times
+#xml_attr(ta2[2],"id",) # tids with times
+#now match ta_event start id with corresponding ta_id attribut
+match(ta_event,ta_id)
+#corresponding time in array
+xml_attr(ta_ties[12],"time",) # tids with times
+#wks.
+ta_ties
 ta3<-unlist(ta2)
 ta3<-unlist(ta2[13:150])
 attr(topic52[10:100],"id")

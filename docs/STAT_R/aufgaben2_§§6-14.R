@@ -67,8 +67,12 @@ mat<-matrix(1:20,4)
 #  l2<-list(rep(mat[k-k+dm1*k,],k))
 #}
 #l2
+# give up.
 l3<-list(mat[1,],mat[2,],mat[3,],mat[4,])
 l3[2]
+#or easy (bh script)
+l4<-split(mat,row(mat))
+l4
 #######################
 # 5. Finden Sie mit der Funktion match eine einzelne Zeile der
 # Matrix in dieser Liste. Achtung, diese Zeile muss vorher mit
@@ -152,7 +156,6 @@ asum
 bula<-unlist(strsplit("BW BY BE BB HB HH HE MV NI NW RP SL SN ST SH TH", " "))                  
 geburt<-read.csv2(geb_bh)
 head(geburt)
-#geil. export als utf-8 wäre schön gewesen. fk sonderzeichen.
 dim(geburt)
 is.numeric(as.matrix(geburt[,3:31]))
 num<-geburt[,3:31]

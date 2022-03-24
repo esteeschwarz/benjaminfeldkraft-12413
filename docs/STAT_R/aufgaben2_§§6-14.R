@@ -73,6 +73,9 @@ l3[2]
 #or easy (bh script)
 l4<-split(mat,row(mat))
 l4
+#proof xml:
+write_xml(l4,"matlist.xml") #no write
+write_csv2(l4,"matlist.csv")
 #######################
 # 5. Finden Sie mit der Funktion match eine einzelne Zeile der
 # Matrix in dieser Liste. Achtung, diese Zeile muss vorher mit

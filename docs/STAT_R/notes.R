@@ -344,5 +344,14 @@ o2<-subset(dt8,dt8$X2_Auspraegung_Code=="GESW"&as.double(dt8$Zeit)>=2006&as.doub
 #ar1[81:160]<-o2
 abind(matrix(o1$BEV001__Lebendgeborene__Anzahl,ncol=5),matrix(o2$BEV001__Lebendgeborene__Anzahl,ncol=5),along=2.5)
 #wks.
+#12126.aufgaben 3
+tapply(Mg,list(tag, stunde, bsrkey, ort))
+zn<-ceiling(505/100)
+s1<-sample(15,15,T)
+unsplit(10,c(1,1,1))
 
+library(abind)
+arr <- abind(matrix(1:14, ncol=3), matrix(20:34, ncol=3), along=3)
+arr <- list(matrix(1:14, ncol=3), matrix(20:34, ncol=3), along=2.5)
+arr[,,2][,1][3]
 

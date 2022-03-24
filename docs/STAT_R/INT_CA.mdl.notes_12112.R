@@ -320,6 +320,7 @@ t<-(abs(r)*sqrt(2-1))/(sqrt(1-r^2))
 # segmente bestimmen kann. 
 # bitte für den nachvollzug das source für (topic52) ganz oben laden und (topic52) als read_xml einlesen,
 # dann hier weitermachen.
+# upd: quellen hier direkt laden.
 srctaexb52<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/MDL_basisTS_12124_F52_excD.topicA.001.exb"
 library(xml2)
 topic52<-read_xml(srctaexb52)

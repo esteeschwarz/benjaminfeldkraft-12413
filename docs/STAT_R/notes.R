@@ -355,3 +355,15 @@ arr <- abind(matrix(1:14, ncol=3), matrix(20:34, ncol=3), along=3)
 arr <- list(matrix(1:14, ncol=3), matrix(20:34, ncol=3), along=2.5)
 arr[,,2][,1][3]
 
+mat<-matrix(1:30,ncol=3)
+a1<-function(x,y,z){x+mat[,2]+mat[,3]}
+apply(mat,1,a1)
+mat[,3]
+
+x<-1:10
+cave <- function(x, c1, c2) c(mean(x[c1]), mean(x[c2]))
+apply(x, 1, cave,  c1 = "x1", c2 = c("x1","x2"))
+get("*")
+5%*%5
+5*5
+math

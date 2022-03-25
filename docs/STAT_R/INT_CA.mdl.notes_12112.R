@@ -322,7 +322,9 @@ t<-(abs(r)*sqrt(2-1))/(sqrt(1-r^2))
 # dann hier weitermachen.
 # upd: quellen hier direkt laden.
 srctaexb52<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/MDL_basisTS_12124_F52_excD.topicA.001.exb"
+srcta52<-"https://github.com/esteeschwarz/essais/raw/main/docs/INT_CA/MDL/MDL_basisTS_12124_F52_excD.topicA.001.xml"
 library(xml2)
+library(xml)
 topic52<-read_xml(srctaexb52)
 xml_children(topic52)
 ta2<-xml_children(xml_children(xml_children(topic52)))
@@ -367,3 +369,7 @@ times[45]-times[32] #wks. 8.58s topic distance 7.0 > 7.1
 # attr(topic52[10:100],"id")
 # dim(topic52)
 # 
+xmlParse("MDL_basisTS_12124_F52_excD.topicA.001.xml")
+xmlParse()
+xmlAttrs( topic52["//basic-body/tier"][5][1])
+topic52[]

@@ -103,7 +103,7 @@ asum
 ####§6.7,stundenaufgaben:
 library(readr)
 library(stringi)
-destatis_cred <- read_csv("~/boxHKW/21S/SPUND/R/destatis_cred.csv")
+#destatis_cred <- read_csv("~/boxHKW/21S/SPUND/R/destatis_cred.csv")
 lnk8<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12612-0100&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
 geb_gen<-("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/geburten_genesis.csv")
 geb_bh<-("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/geburt_land.csv")
@@ -174,7 +174,38 @@ bev.cube[,,1]
 # 9. Verbindung von R mit Datenbank durch ODBC, das R-package
 # heißt RODBC. Machen Sie eine Auswertung am besten mit oder, wenn es bei Euch nicht gehen sollte, auch ohne ODBC. RODBC ist ein extra package. Ersatzweise kann man auch die Funktion grep im R anstelle von LIKE verwenden und die Abfragen bzw. Auswertung analog mit R ohne ODBC machen.
 # 10. Vergleichender Boxplot mit BSR-Daten Gewicht in Mg mit HM (Hausmüll), APC (Abfallpresscontainer) und AC (Abfallcontainer) + kurze Interpretation der Graphik
+bsr<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/bsrorg.csv",header=T)
+dat<-bsr
+dim(dat)
+
+
+class(dat)                                     # ein Data.frame
+dat[1,]
+dat$bsrkey
+attach(dat)
+bsrhm<-subset(dat,bsrkey=="HM");bsrhm
+bsrapc<-subset(dat,bsrkey=="APC");bsrapc
+bsrac<-subset(dat,bsrkey=="AC");bsrac
+bsrbox<-cbind("HM"=bsrhm$Mg,"APC"=bsrapc$Mg,"AC"=bsrac$Mg)
+boxplot(bsrbox,main="Müllentsorgung in Megatonnen")
+#interpretation:
+#mir ist nicht ganz klar, was ein boxplot hier darstellen soll, da die abhängigkeit der
+#müllmengen/tag/stunde mir jdfs. keine aussage zuläszt, solange man das nicht näher analysiert
+#und der mean als gegenüberstellung hier doch besser geeignet ist als der median?
+barplot(bsrbox)
+mnbsr<-c("HM"=mean(bsrbox[,1]),"APC"=mean(bsrbox[,2]),"AC"=mean(bsrbox[,3]))
+barplot(mnbsr)
+##############################
+
 # 11. Korrelationsmatrix der Eierdaten (ohne Hof) + Regression + Interpretation
+eier<-read.csv2("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/eier.csv",sep=";",header=T)
+dat<-eier
+dim(dat)
+summary(eier)
+class(eier)
+corl<-cor(eier$Gewicht,eier$Laenge*eier$Breite)
+corb<-cor(eier$Gewicht,eier$Breite)
+
 # 12. Was ist der Unterschied zwischen Pixelgraphik und Vektorgraphik, erzeugen Sie bitte eine Vektorgraphik z.B. einen schönen Stern zum Fest oder Schmetterling oder eine Vektorgraphik Eurer Wahl.
 # 13. Wie ist das Haushaltseinkommen in Deutschland verteilt? Auswertung, Graphik, Interpretation!
 #   Spätester Abgabetermin ist der 20.3.
@@ -184,13 +215,7 @@ x <- list(a = 1:10, beta = exp(-3:3), logic = c(TRUE,FALSE,FALSE,TRUE))
 # compute the list mean for each list element
 lapply(x, mean)
 unlist(lapply(x, mean))
-bsr<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/bsrorg.csv",header=T)
-dat<-bsr
-dim(dat)
-     
 
-class(dat)                                     # ein Data.frame
-dat[1,]
 e1<-rep(NULL,7)
 e1[sapply(bsr[1,], is.character)]<-"character"
 e1[sapply(bsr[1,], is.numeric)]<-"numerisch"

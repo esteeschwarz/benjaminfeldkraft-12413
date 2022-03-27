@@ -111,7 +111,7 @@ src_x<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?meth
 # #wks: ausprägungen merkmal, xml_children: 6
 # src<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=MerkmalTabellenKata log&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&name=GES&auswahl=12*&bereich=Alle&listenLaenge= 15&sprache=de"
 ###for csv data request
-src_d<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-9004&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+src_d<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-0300&area=all&compress=false&transpose=false&startyear=1950&endyear=2022&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
 
 
 #this to remove blanks in copied sample link and substitute kennung/pw in link provided by genesis, link to pdf with sample-links
@@ -140,7 +140,7 @@ riplx<-function(src){
 riplx() #produces clean link with credentials in it
  dt3<-read_xml(riplx(src_x)) #for request of xml sheets, catalogue requests...
 #export sheet to read in editor
- write_xml(dt3,"data/erwerbstaetige_genesis_q.xml")
+ write_xml(dt3,"~/boxHKW/21S/essais/gith/12057/essais/docs/STAT_R/data/haushaltseinkommen_genesis_q.xml")
 #get:<kurztext>Bevölkerung, Erwerbstätige, Erwerbslose, Erwerbspersonen,
 # Nichterwerbspersonen: Bundesländer, Jahre (bis 2019)</kurztext>12211-9004
   # dt4<-read_csv2(riplx()) #no
@@ -150,7 +150,7 @@ riplx() #produces clean link with credentials in it
  
  dt5<- read.csv2(riplx(src_d), 
                 sep = ";", na = c("-",".","...")) #this important to remove [...] NAs
- write.csv2(dt5,"data/erwerbstaetige_genesis.csv")
+ write.csv2(dt5,"~/boxHKW/21S/essais/gith/12057/essais/docs/STAT_R/data/haushaltseinkommen_genesis.csv")
  #import as csv wks. now what was the task again?
  #3.9.entwicklung im zeitverlauf nach bundesländern
  #col X1auspr.label=bundesland, ERW002=erwerbstätige

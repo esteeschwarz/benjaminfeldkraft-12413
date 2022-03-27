@@ -286,6 +286,33 @@ polygon(d[,1], d[,2], type="l",col = "orange", lwd = 4, border = "green")
 
 
 # 13. Wie ist das Haushaltseinkommen in Deutschland verteilt? Auswertung, Graphik, Interpretation!
+src_x<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Haushaltseinkommen&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
+src_d<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-9004&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+
+attach(dt5)#local
+um2<-mean(um[with(um, um$GESCHL=="MAENNLICH"),]$NETTO,na.rm = T)
+
+ha500<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="unter 500 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha1000<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="500 bis unter 1000 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha1250<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="1000 bis unter 1250 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha1500<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="1250 bis unter 1500 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha2000<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="1500 bis unter 2000 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha2500<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="2000 bis unter 2500 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha3000<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="2500 bis unter 3000 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha3500<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="3000 bis unter 3500 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha4000<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="3500 bis unter 4000 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha5000<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="4000 bis unter 5000 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+ha5000plus<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="5000 EUR und mehr"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+haka<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="Ohne Angabe"),]$HSH020__Hauptwohnsitzhaushalte__1000)
+
+hacpt<-rbind(ha500,ha1000,ha1250,ha1500,ha2000,ha2500,ha3000,ha3500,ha4000,ha5000,ha5000plus,haka)
+hans<-rbind(500,1000,1250,1500,2000,2500,3000,3500,4000,5000,5001,NA)
+hatbl<-cbind(hans,hacpt)
+colnames(hatbl)<-c("Einkommen","Anzahl Tsd. Haushalte")
+barplot(hatbl[,2]~hatbl[,1])
+
+
+#########################################################
 #   Spätester Abgabetermin ist der 20.3.
 #########################################
 #grep

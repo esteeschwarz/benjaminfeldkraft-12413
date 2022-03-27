@@ -367,3 +367,89 @@ get("*")
 5%*%5
 5*5
 math
+#12132.
+require(stats)
+
+(ii <- order(x <- c(1,1,3:1,1:4,3), y <- c(9,9:1), z <- c(2,1:9)))
+## 6  5  2  1  7  4 10  8  3  9
+rbind(x, y, z)[,ii] # shows the reordering (ties via 2nd & 3rd arg)
+
+## Suppose we wanted descending order on y.
+## A simple solution for numeric 'y' is
+rbind(x, y, z)[, order(x, -y, z)]
+## More generally we can make use of xtfrm
+cy <- as.character(y)
+rbind(x, y, z)[, order(x, -xtfrm(cy), z)]
+## The radix sort supports multiple 'decreasing' values:
+rbind(x, y, z)[, order(x, cy, z, decreasing = c(FALSE, TRUE, FALSE),
+                       method="radix")]
+
+## Sorting data frames:
+dd <- transform(data.frame(x, y, z),
+                z = factor(z, labels = LETTERS[9:1]))
+## Either as above {for factor 'z' : using internal coding}:
+dd[ order(x, -y, z), ]
+## or along 1st column, ties along 2nd, ... *arbitrary* no.{columns}:
+dd[ do.call(order, dd), ]
+library(tidyverse)
+gdf <- iris %>% group_by(Sepal.Length)
+gdf %>% select(group_cols())
+iris
+
+df <- tibble(x = c(1,1,2,2))
+group_vars(df)
+group_rows(df)
+group_data(df)
+group_indices(df)
+
+gf <- group_by(df, x)
+group_vars(gf)
+group_rows(gf)
+group_data(gf)
+group_indices(gf)
+
+mtcars[with(mtcars, order(cyl, disp)), ]
+umw<-um[with(um, order(GESCHL)),]
+
+###
+data <- tibble(a = 1:3, b = letters[c(1:2, NA)], c = 0.5 + 0:2)
+data
+
+# Insert
+rows_insert(data, tibble(a = 4, b = "z"))
+try(rows_insert(data, tibble(a = 3, b = "z")))
+
+# Update
+rows_update(data, tibble(a = 2:3, b = "z"))
+rows_update(data, tibble(b = "z", a = 2:3), by = "a")
+
+# Variants: patch and upsert
+rows_patch(data, tibble(a = 2:3, b = "z"))
+rows_upsert(data, tibble(a = 2:4, b = "z"))
+
+# Delete and truncate
+rows_delete(data, tibble(a = 2:3))
+rows_delete(data, tibble(a = 2:3, b = "b"))
+try(rows_delete(data, tibble(a = 2:3, b = "b"), by = c("a", "b")))
+
+###
+(ii <- order(x <- c(1,1,3:1,1:4,3), y <- c(9,9:1), z <- c(2,1:9)))
+## 6  5  2  1  7  4 10  8  3  9
+rbind(x, y, z)[,ii] # shows the reordering (ties via 2nd & 3rd arg)
+
+## Suppose we wanted descending order on y.
+## A simple solution for numeric 'y' is
+rbind(x, y, z)[, order(x, -y, z)]
+
+order(x <- c(1:5,1:3,10:14))
+x      
+
+###
+# Multiple observations per row
+anscombe
+anscombe %>%
+  pivot_longer(everything(),
+               names_to = c(".value", "set"),
+               names_pattern = "(.)(.)"
+  )
+

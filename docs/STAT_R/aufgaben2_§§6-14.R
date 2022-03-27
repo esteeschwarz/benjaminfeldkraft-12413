@@ -2,6 +2,7 @@
 #20220308(13.52)
 # Die folgenden Aufgaben behandeln den Skript Seite 40 bis 107 §§6-14
 # 1. Nennen Sie Unterschiede zwischen Matrix und Data.frame
+#matrix elemente direkt adressierbar, s. 6.
 ##########
 # 2. Was versteht man unter selektiver Zuweisung
 # (selective assignment) im R? Zeigen Sie ein Beispiel
@@ -84,6 +85,12 @@ match(l3,list(mat[1,]))
 #match in listenpunkt 1
 #######################
 # 6. Wofür benötigt man arrays?
+#zusammenfassung von daten gleichen typs (homogen) auch in mehreren dimensionen, die zb. dann auch mathematisch
+#angesprochen werden können.
+a1<-c(10:20)
+x<-1
+y<-2
+a1[x+y] #das würde in einem data.frame nicht funktionieren
 ###############################
 #   7. Erzeugen sie aus 2 Matrizen, welche mindestens in einer
 # Dimension übereinstimmen, mit Hilfe der Funktion abind einen
@@ -173,6 +180,57 @@ bev.cube[,,1]
 
 # 9. Verbindung von R mit Datenbank durch ODBC, das R-package
 # heißt RODBC. Machen Sie eine Auswertung am besten mit oder, wenn es bei Euch nicht gehen sollte, auch ohne ODBC. RODBC ist ein extra package. Ersatzweise kann man auch die Funktion grep im R anstelle von LIKE verwenden und die Abfragen bzw. Auswertung analog mit R ohne ODBC machen.
+um<-read.csv2("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/Umfrage.csv",sep=";",header=T)
+um10000<-subset(um,um$NETTO>10000)
+mean(um10000$NETTO)
+mean(um$NETTO,na.rm = T)
+median(um$NETTO,na.rm = T)
+mean(um$ARBEITSSTD,na.rm = T)
+median(um$ARBEITSSTD,na.rm = T)
+mean(um$ZUFR,na.rm = T)
+#note: mich würde interessieren, wo die zahlen herkommen:
+#1300/40h/7.5 erscheint mir reichlich unrealistisch, es sei denn es handelt sich um 90% selbständige,
+#wo die definition von arbeitszeit etwas unsicher wird...
+#menschen, die bei 1500 netto 90 stunden arbeiten mit einer zufriedenheit von 9?
+#menschen mit hochschulabschlusz, die für 1350! 84h arbeiten? wie wurde hier "arbeitszeit" definiert?
+#gruppierung
+umw<-subset(um,um$GESCHL=="WEIBLICH")
+umm<-subset(um,um$GESCHL=="MAENNLICH")
+mean(umm$NETTO,na.rm = T)
+attach(um)
+um1<-um[with(um, order(GESCHL,GEBJAHR)),]
+um2<-mean(um[with(um, um$GESCHL=="MAENNLICH"),]$NETTO,na.rm = T)
+#um2<-mean(um[with(um, um$GESCHL=="MAENNLICH"),]$NETTO,na.rm = T) #wks.
+um2<-mean(um[with(um, um$GESCHL=="MAENNLICH"),]$NETTO,na.rm = T)
+um3<-mean(um[with(um, um$GESCHL=="WEIBLICH"),]$NETTO,na.rm = T)
+y<-unique(um$GEBJAHR)
+um0<-cbind("year"=NA,"netto"=NA)
+
+ummean<-function(set,y){
+  um0<-cbind("year"=NA,"netto"=NA)
+  for(k in y){
+
+      um4<-((mean(set[with(set,set$GEBJAHR==k),]$NETTO,na.rm = T)))
+print(k)
+print(um4)
+um5<-cbind("year"=k,"netto"=um4)
+um0<-rbind(um0,um5)
+  }
+#  um0<-um0[2:length(um0[,1])]
+  return(um0)
+}
+
+um8<-ummean(umw,y)
+um10<-ummean(umm,y)
+um11<-sort(um8)
+um11
+um12<-um8[2:length(um8[,1])]
+um8[150]
+dim(um8)
+cbind(um8,um10[,2])
+um13<-ordered(um8)#no
+
+
 # 10. Vergleichender Boxplot mit BSR-Daten Gewicht in Mg mit HM (Hausmüll), APC (Abfallpresscontainer) und AC (Abfallcontainer) + kurze Interpretation der Graphik
 bsr<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/bsrorg.csv",header=T)
 dat<-bsr
@@ -203,9 +261,13 @@ dat<-eier
 dim(dat)
 summary(eier)
 class(eier)
+attach(eier)
 corl<-cor(eier$Gewicht,eier$Laenge*eier$Breite)
 corb<-cor(eier$Gewicht,eier$Breite)
-
+product<-function(Gewicht,y,z){Gewicht/y*z}
+coreier<-apply(eier,1,prod)/10000
+median(coreier)
+plot(Gewicht,coreier)
 # 12. Was ist der Unterschied zwischen Pixelgraphik und Vektorgraphik, erzeugen Sie bitte eine Vektorgraphik z.B. einen schönen Stern zum Fest oder Schmetterling oder eine Vektorgraphik Eurer Wahl.
 # 13. Wie ist das Haushaltseinkommen in Deutschland verteilt? Auswertung, Graphik, Interpretation!
 #   Spätester Abgabetermin ist der 20.3.

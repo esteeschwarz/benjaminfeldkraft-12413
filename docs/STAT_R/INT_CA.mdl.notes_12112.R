@@ -372,4 +372,5 @@ times[45]-times[32] #wks. 8.58s topic distance 7.0 > 7.1
 xmlParse("MDL_basisTS_12124_F52_excD.topicA.001.xml")
 xmlParse()
 xmlAttrs( topic52["//basic-body/tier"][5][1])
-topic52[]
+topic52
+#no.

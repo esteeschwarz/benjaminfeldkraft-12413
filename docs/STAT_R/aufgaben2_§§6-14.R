@@ -222,30 +222,14 @@ um0<-rbind(um0,um5)
 
 um8<-ummean(umw,y)
 um10<-ummean(umm,y)
-um11<-sort(um8)
-um11
-um12<-um8[2:length(um8[,1])]
-um8[150]
-dim(um8)
-cbind(um8,um10[,2])
-um13<-ordered(um8)#no
-ifelse(um10[,1]==um8[,1],T,F)#fits
 um13<-cbind(um8,um10[,2])
 colnames(um13)<-c("year","netto W","netto M")
 #sortieren
-sort(um13)
-rbind(um13)[,order(rank,x,y)]
-(ii <- order(x <- um13[,1], y <- um13[,2], z <-um13[,3]))
-## 6  5  2  1  7  4 10  8  3  9
-rbind(x, y, z)[,ii] # shows the reordering (ties via 2nd & 3rd arg)
+um14<-as.data.frame(um13)
+arrange(um14,-desc(um14$year))#yes
+plot(um14$`netto W`~um14$year)
 
-## Suppose we wanted descending order on y.
-## A simple solution for numeric 'y' is
-um14<-rbind(x, y, z)[, order(x, -y, z)]
-pivot_longer()
-um14 %>%
-  pivot_longer(everything()
-  )
+
 # 10. Vergleichender Boxplot mit BSR-Daten Gewicht in Mg mit HM (Hausmüll), APC (Abfallpresscontainer) und AC (Abfallcontainer) + kurze Interpretation der Graphik
 bsr<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/bsrorg.csv",header=T)
 dat<-bsr
@@ -283,7 +267,24 @@ product<-function(Gewicht,y,z){Gewicht/y*z}
 coreier<-apply(eier,1,prod)/10000
 median(coreier)
 plot(Gewicht,coreier)
+#############################################
+#############################################
+
 # 12. Was ist der Unterschied zwischen Pixelgraphik und Vektorgraphik, erzeugen Sie bitte eine Vektorgraphik z.B. einen schönen Stern zum Fest oder Schmetterling oder eine Vektorgraphik Eurer Wahl.
+load("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/vektor.RData")
+tmp<-tempfile()
+  download.file("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/vektor.RData",tmp)
+load(tmp)
+d<-stern
+
+matplot(d[,1], d[,2], type="l", xlab="", ylab="", col="green")
+par(new=TRUE)
+matplot(0.3*d[,1], 0.3*d[,2], type="l", xlab="", xlim=c(0,90), ylim=c(0,70), col="blue")
+title("Zwei simulierte Sterne")
+
+polygon(d[,1], d[,2], type="l",col = "orange", lwd = 4, border = "green")
+
+
 # 13. Wie ist das Haushaltseinkommen in Deutschland verteilt? Auswertung, Graphik, Interpretation!
 #   Spätester Abgabetermin ist der 20.3.
 #########################################
@@ -330,7 +331,6 @@ liste[1]
 liste[1][1][2] #no
 liste[1][[1]]
 liste[[1]]
-liste[[[1]]] #no
 liste[[1]][3] #yes
 
 mat<-matrix(1:25, ncol=5)

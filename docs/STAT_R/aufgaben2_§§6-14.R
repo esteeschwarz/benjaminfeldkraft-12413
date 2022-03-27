@@ -288,7 +288,9 @@ polygon(d[,1], d[,2], type="l",col = "orange", lwd = 4, border = "green")
 # 13. Wie ist das Haushaltseinkommen in Deutschland verteilt? Auswertung, Graphik, Interpretation!
 src_x<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Haushaltseinkommen&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
 src_d<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-9004&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+src_ha<-("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/haushaltseinkommen_genesis.csv")
 
+dt5<- read.csv2(src_ha,sep = ";", na = c("-",".","..."))
 attach(dt5)#local
 um2<-mean(um[with(um, um$GESCHL=="MAENNLICH"),]$NETTO,na.rm = T)
 

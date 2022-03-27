@@ -229,8 +229,23 @@ um8[150]
 dim(um8)
 cbind(um8,um10[,2])
 um13<-ordered(um8)#no
+ifelse(um10[,1]==um8[,1],T,F)#fits
+um13<-cbind(um8,um10[,2])
+colnames(um13)<-c("year","netto W","netto M")
+#sortieren
+sort(um13)
+rbind(um13)[,order(rank,x,y)]
+(ii <- order(x <- um13[,1], y <- um13[,2], z <-um13[,3]))
+## 6  5  2  1  7  4 10  8  3  9
+rbind(x, y, z)[,ii] # shows the reordering (ties via 2nd & 3rd arg)
 
-
+## Suppose we wanted descending order on y.
+## A simple solution for numeric 'y' is
+um14<-rbind(x, y, z)[, order(x, -y, z)]
+pivot_longer()
+um14 %>%
+  pivot_longer(everything()
+  )
 # 10. Vergleichender Boxplot mit BSR-Daten Gewicht in Mg mit HM (Hausmüll), APC (Abfallpresscontainer) und AC (Abfallcontainer) + kurze Interpretation der Graphik
 bsr<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/bsrorg.csv",header=T)
 dat<-bsr

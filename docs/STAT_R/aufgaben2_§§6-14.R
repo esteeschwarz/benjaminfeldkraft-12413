@@ -1,5 +1,7 @@
 #12104.aufgaben 2, script s.40-107
 #20220308(13.52)
+#20220328(08.56) abgabe; ich werde das nur noch etwas aufräumen...
+#script source: "https://github.com/esteeschwarz/essais/blob/main/docs/STAT_R/aufgaben2_§§6-14.R"
 # Die folgenden Aufgaben behandeln den Skript Seite 40 bis 107 §§6-14
 # 1. Nennen Sie Unterschiede zwischen Matrix und Data.frame
 #matrix elemente direkt adressierbar, s. 6.

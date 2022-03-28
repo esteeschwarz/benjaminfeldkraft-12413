@@ -552,3 +552,25 @@ mean(sum2[[1]],na.rm = T)
 dim(drei)
 drei
 Mg
+###lotto:
+
+pool<-c(1:49)
+a<-sample(pool,6)
+b<-sample(pool,6)
+
+proof2<-function(wh,k){
+  a<-c(1:49)
+  a1<-sample(a,6)
+  a3<-sample(a,6)
+  ma<-match(a1,a3)
+  #a2<-unique(a1)
+  print(a1,a3)
+  mac<-c(NA,NA,NA,NA,NA,NA)
+#  ifelse(match(ma,mac)==T,map<-1,map<-0)
+    stopifnot(ma==mac)
+  cat("keine wiederholungen in",k, "durchläufen\n")
+
+}
+for (k in 1:1000000){
+  proof2(T,k) 
+}

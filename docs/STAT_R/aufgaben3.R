@@ -11,19 +11,31 @@ a2<-unique(a1)
 stopifnot(length(a2)==length(a1))
 cat("keine wiederholungen")
 }
-proof(F) #hier F oder T für ziehung mit zurücklegen anpassen, bei TRUE ist eine fehlermeldung sehr wahrscheinlich, aber nicht zwingend.
+proof(F) #hier F oder T für ziehung mit zurücklegen anpassen, 
+#bei TRUE ist eine fehlermeldung sehr wahrscheinlich, aber nicht notwendig.
 
 #dasselbe invers um oben angedeutete wahrscheinlichkeit zu eruieren:
+#ein abbruch der funktion bedeutet eine zahlenreihe, die auch mit
+#zurücklegen keine doppelten ziehungen einer zahl aufweist.
+#bei 
 proof2<-function(wh,k){
-  a<-c(1:15)
+  m<-0
+  a<-c(1:49)
   a1<-sample(a,15,replace=wh);a1
   match(a,a1)
   a2<-unique(a1)
-  stopifnot(length(a2)!=length(a1))
-  cat("keine wiederholungen in",k, "durchläufen\n")
-}
+  ifelse(length(a2)==length(a1),m<-1,m<-0)
+  
+ifelse(m==1,text<-c("wiederholung nach",k,"durchläufen\n"),text<-c("keine wiederholungen in",k, "durchläufen\n"))
+cat(text)
+run1<-k-1
+stopifnot(m==0)
+#ifelse(m==1,return(k),F)
+
+    }
 for (k in 1:1000000){
-  proof2(T,k) 
+run1<-proof2(T,k) 
+
 }
 
 ############################
@@ -81,7 +93,12 @@ sum1<-list(tg1[2:length(tg1)],zt1[2:length(zt1)],p1[2:length(p1)],key1[2:length(
 sum1<-sums()
 
 
-# 3 Schreiben Sie bitte zwei R-Programme für die alphabetische Verschlüsselung nach Caesar, Kodierung und Entkodierung. Dem Programm soll übergeben werden der Normaltext bzw. der kodierte Text und jeweils ein Verschiebeschlüssel als Integerzahl. Führen Sie bitte diese beiden Programme mit einem selbstgewählten Textbeispiel vor.
+# 3 Schreiben Sie bitte zwei R-Programme für die alphabetische Verschlüsselung nach Caesar, Kodierung und Entkodierung. 
+#Dem Programm soll übergeben werden der Normaltext bzw. der kodierte Text 
+#und jeweils ein Verschiebeschlüssel als Integerzahl. 
+#Führen Sie bitte diese beiden Programme mit einem selbstgewählten Textbeispiel vor.
+
+
 # 4. Jemand hat bis heute 8400 Tage gelebt, wie alt ist er in Jahren, Monaten und Tagen und wann genau ist sein Geburtstag? Denken Sie bitte an die Schalttage es sind 6. Verwenden Sie meine Programme encode und decode oder eigene.
 # 5. Ihre Geheimzahl (PIN) für Ihr Konto bei der Studentenbank lautet 3981. Bitte verschlüsseln sie diese mit dem Prim- zahlen-Key c(67,67,67). Man braucht einen dreistelligen Schlüssel, um auch noch die maximal vierstellige Geheimzahl 9999 verschlüsseln zu können. Wie lautet die verschlüsselte Geheimzahl und entschlüsseln Sie diese wieder zur Kontrolle, so dass wieder 3981 rauskommt. Warum wird verschlüsselt?
 #   6. Erzeugen Sie bitte ein zweiseitiges Stamm&Blatt (St&Bl) mit der Körpergröße aus den Umfragedaten nach Geschlecht. Am besten vorher eine Zufallsstichprobe im Umfang 300 ziehen. Bitte auch etwas Interpretation der Ergebnisse.

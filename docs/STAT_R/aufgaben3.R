@@ -28,11 +28,59 @@ for (k in 1:1000000){
 
 ############################
 # 1. Erklären Sie kurz mit eigenen Worten, was eine Kreuztabelle (Pivot) ist. Wie hängen die Klassifikationsvariable und die Dimensionen des Resultats zusammen? Was ist der Data-Cube?
+#im grunde eine tabelle zweiter ordnung, die eine zusammenfassung, auswertung einer anderen tabelle darstellt,
+#um zb. signifikanzen feststellen zu können. die daten selber werden nicht verändert,
+#aber wenn sich die daten der tabelle erster ordnung ändern, hat das auswirkungen auf die
+#tabelle 2. ordnung und die damit zusammenhängenden erkenntnisse. es werden nur
+#zb. mittelwerte gegenübergestellt und daraus aussagen abgeleitet
+############################
+
+#   2. Erzeugen Sie bitte einen 4-dimensionalen Data-Cube (DC) mit den BSR-Daten. 
+#Zweckmäßigerweise wird der Data.frame zuerst attached (attach(bsr)). 
+#Wählen Sie für den Cube die Variable tag, zeit (Umrechnung in Stunden!), 
+#bsrkey und P (Anliefer- ort). Aggregiert werden soll als Summe das Abfallgewicht Mg. 
+#Kontrollieren Sie die dim(DC) und sum(Mg)==sum(DC,na.rm=T).
+
+bsr<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/bsrorg.csv",header=T)
+
+attach(bsr)
+dim(bsr)
+zt<-ceiling(zeit/100)
+drei<-table(tg,zt,Mg,bsrkey,P)
+ein<-tapply(Mg, ceiling(Mg), sum)     # nur Gewichtsklasse 1
+length(ein)
+key<-unique(bsrkey)
+ort<-unique(P)
+zt<-unique(zt)
+tg<-unique(tag)
+#um4<-((mean(set[with(set,set$GEBJAHR==k),]$NETTO,na.rm = T)))
+sums<-function(){
+tg1<-0
+for (k in 1:length(tg)){
+tg1<-append(tg1,(sum(bsr[with(bsr,tag==tg[k]),]$Mg)),after = T)
+
+}
+zt1<-0
+for (k in 1:length(zt)){
+  zt1<-append(zt1,(sum(bsr[with(bsr,ceiling(zeit/100)==zt[k]),]$Mg)),after = T)
+  
+}
+p1<-0
+for (k in 1:length(ort)){
+  p1<-append(p1,(sum(bsr[with(bsr,P==ort[k]),]$Mg)),after = T)
+  
+}
+key1<-0
+for (k in 1:length(key)){
+  key1<-append(key1,(sum(bsr[with(bsr,bsrkey==key[k]),]$Mg)),after = T)
+
+}
+sum1<-list(tg1[2:length(tg1)],zt1[2:length(zt1)],p1[2:length(p1)],key1[2:length(key1)])
+#return(sum1<-list(tg1,zt1,p1,key1))
+}
+sum1<-sums()
 
 
-
-
-#   2. Erzeugen Sie bitte einen 4-dimensionalen Data-Cube (DC) mit den BSR-Daten. Zweckmäßigerweise wird der Data.frame zuerst attached (attach(bsr)). Wählen Sie für den Cube die Variable tag, zeit (Umrechnung in Stunden!), bsrkey und P (Anliefer- ort). Aggregiert werden soll als Summe das Abfallgewicht Mg. Kontrollieren Sie die dim(DC) und sum(Mg)==sum(DC,na.rm=T).
 # 3 Schreiben Sie bitte zwei R-Programme für die alphabetische Verschlüsselung nach Caesar, Kodierung und Entkodierung. Dem Programm soll übergeben werden der Normaltext bzw. der kodierte Text und jeweils ein Verschiebeschlüssel als Integerzahl. Führen Sie bitte diese beiden Programme mit einem selbstgewählten Textbeispiel vor.
 # 4. Jemand hat bis heute 8400 Tage gelebt, wie alt ist er in Jahren, Monaten und Tagen und wann genau ist sein Geburtstag? Denken Sie bitte an die Schalttage es sind 6. Verwenden Sie meine Programme encode und decode oder eigene.
 # 5. Ihre Geheimzahl (PIN) für Ihr Konto bei der Studentenbank lautet 3981. Bitte verschlüsseln sie diese mit dem Prim- zahlen-Key c(67,67,67). Man braucht einen dreistelligen Schlüssel, um auch noch die maximal vierstellige Geheimzahl 9999 verschlüsseln zu können. Wie lautet die verschlüsselte Geheimzahl und entschlüsseln Sie diese wieder zur Kontrolle, so dass wieder 3981 rauskommt. Warum wird verschlüsselt?

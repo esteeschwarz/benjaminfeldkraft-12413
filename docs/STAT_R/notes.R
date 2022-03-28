@@ -529,3 +529,26 @@ liste[1,]
 dim(liste)
 
 
+#12133.aufgaben 3
+sum1[,1]<-NA
+sum1
+dplyr_col_modify(sum1,cols = 0)
+
+
+sum2<-  na.omit(sum1)
+for (k in 1:length(sum1)){
+  ifelse(match(sum1[[k]],0),"k.a",F)
+  
+  cat("NA at",k)
+}
+nas<-ifelse(match(sum1[[2]],0),5)
+sum1[[2]][1]<-NA
+getElement(sum1[[2]],match(sum1[[2]],0)) 
+zt1
+na.omit(sum1)
+sum2<-list(sum1[1,],sum1[2,],sum1[3,],sum1[4,])
+sum1[3,]
+mean(sum2[[1]],na.rm = T)
+dim(drei)
+drei
+Mg

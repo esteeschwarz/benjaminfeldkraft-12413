@@ -452,4 +452,80 @@ anscombe %>%
                names_to = c(".value", "set"),
                names_pattern = "(.)(.)"
   )
+#NT
+#grep
+x <- list(a = 1:10, beta = exp(-3:3), logic = c(TRUE,FALSE,FALSE,TRUE))
+# compute the list mean for each list element
+lapply(x, mean)
+unlist(lapply(x, mean))
+
+e1<-rep(NULL,7)
+e1[sapply(bsr[1,], is.character)]<-"character"
+e1[sapply(bsr[1,], is.numeric)]<-"numerisch"
+e1[sapply(bsr[1,], is.logical)]<-"logisch"
+e1[sapply(bsr[1,], is.factor)]<-"faktor"
+e1
+mode(bsr[1,])
+mode(bsr[,2])
+dat[dim(dat)[1],4]
+length(dat)
+dim(dat)[1]
+rev<-rev(dat[4]) #reverse   hä?
+rev
+rev<-rev(order(dat[2]))
+d1<-c(1:10)
+rev(d1)
+d2<-(dat[4])
+rev<-rev(d2) #no. läszt sich nicht umkehren die reihenfolge einer liste.
+#d4<-c(d2[1:length(d2)])
+d4[1]
+#d5<-rev(unlist(d2))
+d5<-rev(unlist(dat[[4]]))
+###wks
+##########
+#zuweisungen
+d1<-unlist(dat[2][dat[2]>2000])
+d1
+###
+liste<-split (1:10, c(1,1,1,2,2,2,3,3,3,4))
+liste
+lapply(liste,length)
+names(liste)<-c("eins","zwei","drei","vier")
+unlist(lapply(liste,mean)) 
+liste[1]
+liste[1][1][2] #no
+liste[1][[1]]
+liste[[1]]
+liste[[1]][3] #yes
+
+mat<-matrix(1:25, ncol=5)
+mat
+split(mat, col(mat)) 
+mat1<-split(mat, col(mat)) 
+mat1$`1`
+mat1$`2`
+mat2<-lapply(mat1,mean)
+mat2
+library(abind)
+mat3<-abind(mat2)
+mat3
+mat3[4]<-6
+mat3[4]
+mat4<-split(mat,row(mat))
+mat4
+mat5<-abind(lapply(mat4,mean))
+mat5
+liste[[1]]==4:6
+(liste[[1]][1:5])
+attributes(liste)
+liste
+match(liste[[1]],2)# nur so findet die 2
+match(liste[[1:4]],2)#fail
+match(unlist(liste[[1:3]]),2)
+l1<-unlist(liste,recursive=T)
+l1
+as.list(l1)
+liste[1,]
+dim(liste)
+
 

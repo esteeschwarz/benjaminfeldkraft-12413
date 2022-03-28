@@ -1,7 +1,37 @@
 #12126.aufgaben 3
-
+#20220328.(09.40)
+#script source: "https://github.com/esteeschwarz/essais/blob/main/docs/STAT_R/aufgaben3.R"
+###############
 # 0. Bezug auf Frage 15 im Aufgabenset EINS: Ziehen sie wiederum Zufallsstichproben im Umfang 15 aus 15 Zahlen und stellen Sie mit geeigneten Algorithmen fest, ob es Wiederholungen in der Stichprobe gibt. Hierfür kann man auch eine eigene Funktion schreiben, muss aber nicht.
+proof<-function(wh){
+a<-c(1:15)
+a1<-sample(a,15,replace=wh);a1
+match(a,a1)
+a2<-unique(a1)
+stopifnot(length(a2)==length(a1))
+cat("keine wiederholungen")
+}
+proof(F) #hier F oder T für ziehung mit zurücklegen anpassen, bei TRUE ist eine fehlermeldung sehr wahrscheinlich, aber nicht zwingend.
+
+#dasselbe invers um oben angedeutete wahrscheinlichkeit zu eruieren:
+proof2<-function(wh,k){
+  a<-c(1:15)
+  a1<-sample(a,15,replace=wh);a1
+  match(a,a1)
+  a2<-unique(a1)
+  stopifnot(length(a2)!=length(a1))
+  cat("keine wiederholungen in",k, "durchläufen\n")
+}
+for (k in 1:1000000){
+  proof2(T,k) 
+}
+
+############################
 # 1. Erklären Sie kurz mit eigenen Worten, was eine Kreuztabelle (Pivot) ist. Wie hängen die Klassifikationsvariable und die Dimensionen des Resultats zusammen? Was ist der Data-Cube?
+
+
+
+
 #   2. Erzeugen Sie bitte einen 4-dimensionalen Data-Cube (DC) mit den BSR-Daten. Zweckmäßigerweise wird der Data.frame zuerst attached (attach(bsr)). Wählen Sie für den Cube die Variable tag, zeit (Umrechnung in Stunden!), bsrkey und P (Anliefer- ort). Aggregiert werden soll als Summe das Abfallgewicht Mg. Kontrollieren Sie die dim(DC) und sum(Mg)==sum(DC,na.rm=T).
 # 3 Schreiben Sie bitte zwei R-Programme für die alphabetische Verschlüsselung nach Caesar, Kodierung und Entkodierung. Dem Programm soll übergeben werden der Normaltext bzw. der kodierte Text und jeweils ein Verschiebeschlüssel als Integerzahl. Führen Sie bitte diese beiden Programme mit einem selbstgewählten Textbeispiel vor.
 # 4. Jemand hat bis heute 8400 Tage gelebt, wie alt ist er in Jahren, Monaten und Tagen und wann genau ist sein Geburtstag? Denken Sie bitte an die Schalttage es sind 6. Verwenden Sie meine Programme encode und decode oder eigene.

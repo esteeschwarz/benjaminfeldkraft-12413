@@ -271,7 +271,7 @@ plot(Gewicht,coreier)
 #############################################
 
 # 12. Was ist der Unterschied zwischen Pixelgraphik und Vektorgraphik, erzeugen Sie bitte eine Vektorgraphik z.B. einen schönen Stern zum Fest oder Schmetterling oder eine Vektorgraphik Eurer Wahl.
-load("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/vektor.RData")
+#load("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/vektor.RData")
 tmp<-tempfile()
   download.file("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/vektor.RData",tmp)
 load(tmp)
@@ -286,13 +286,14 @@ polygon(d[,1], d[,2], type="l",col = "orange", lwd = 4, border = "green")
 
 
 # 13. Wie ist das Haushaltseinkommen in Deutschland verteilt? Auswertung, Graphik, Interpretation!
-src_x<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Haushaltseinkommen&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
-src_d<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-9004&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
+#src_x<-"https://www-genesis.destatis.de/genesisWS/web/RechercheService_2010?method=Recherche&luceneString=Haushaltseinkommen&kennung=IHRE_KENNUNG&passwort=IHR_PASSWORT&listenLaenge=100&sprache=de&kategorie=tabellen"
+#src_d<-"https://www- genesis.destatis.de/genesisWS/rest/2020/data/tablefile?username=IHRE_ KENNUNG&password=IHR_PASSWORT&name=12211-9004&area=all&compress=false&transpose=false&startyear=1950&endyear=2021&tim eslices=&regionalvariable=&regionalkey=&classifyingvariable1=&classifyingk ey1=&classifyingvariable2=&classifyingkey2=&classifyingvariable3=&classifyi ngkey3=&format=ffcsv&job=false&stand=01.01.1970&language=de"
 src_ha<-("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/haushaltseinkommen_genesis.csv")
 
 dt5<- read.csv2(src_ha,sep = ";", na = c("-",".","..."))
 attach(dt5)#local
-um2<-mean(um[with(um, um$GESCHL=="MAENNLICH"),]$NETTO,na.rm = T)
+#bsp
+#um2<-mean(um[with(um, um$GESCHL=="MAENNLICH"),]$NETTO,na.rm = T)
 
 ha500<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="unter 500 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
 ha1000<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="500 bis unter 1000 EUR"),]$HSH020__Hauptwohnsitzhaushalte__1000)
@@ -307,87 +308,15 @@ ha5000<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="4000 bis unter 5000 EUR"),]$
 ha5000plus<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="5000 EUR und mehr"),]$HSH020__Hauptwohnsitzhaushalte__1000)
 haka<-sum(dt5[with(dt5,dt5$X3_Auspraegung_Label=="Ohne Angabe"),]$HSH020__Hauptwohnsitzhaushalte__1000)
 
-hacpt<-rbind(ha500,ha1000,ha1250,ha1500,ha2000,ha2500,ha3000,ha3500,ha4000,ha5000,ha5000plus,haka)
-hans<-rbind(500,1000,1250,1500,2000,2500,3000,3500,4000,5000,5001,NA)
-hatbl<-cbind(hans,hacpt)
-colnames(hatbl)<-c("Einkommen","Anzahl Tsd. Haushalte")
-barplot(hatbl[,2]~hatbl[,1])
+hacpt<-cbind(ha500,ha1000,ha1250,ha1500,ha2000,ha2500,ha3000,ha3500,ha4000,ha5000,ha5000plus,haka)
+colnames(hacpt)<-c("<500","<1000","<1250","<1500","<2000","<2500","<3000","<3500","<4000","<5000",">5000","k.A")
+#hans<-rbind(500,1000,1250,1500,2000,2500,3000,3500,4000,5000,5001,NA)
+#hatbl<-cbind(hans,hacpt)
+#colnames(hatbl)<-c("Einkommen","Anzahl Tsd. Haushalte")
+#barplot(hatbl[,2]~hatbl[,1],xlab = "Einkommen",ylab = "Anzahl Tsd. Haushalte",main="haushaltseinkommen 2020")
+barplot(hacpt,ylab = "Anzahl Tsd. Haushalte",main="haushaltseinkommen 2020",las=3)
 
 
 #########################################################
 #   Spätester Abgabetermin ist der 20.3.
 #########################################
-#grep
-x <- list(a = 1:10, beta = exp(-3:3), logic = c(TRUE,FALSE,FALSE,TRUE))
-# compute the list mean for each list element
-lapply(x, mean)
-unlist(lapply(x, mean))
-
-e1<-rep(NULL,7)
-e1[sapply(bsr[1,], is.character)]<-"character"
-e1[sapply(bsr[1,], is.numeric)]<-"numerisch"
-e1[sapply(bsr[1,], is.logical)]<-"logisch"
-e1[sapply(bsr[1,], is.factor)]<-"faktor"
-e1
-mode(bsr[1,])
-mode(bsr[,2])
-dat[dim(dat)[1],4]
-length(dat)
-dim(dat)[1]
-rev<-rev(dat[4]) #reverse   hä?
-rev
-rev<-rev(order(dat[2]))
-d1<-c(1:10)
-rev(d1)
-d2<-(dat[4])
-rev<-rev(d2) #no. läszt sich nicht umkehren die reihenfolge einer liste.
-#d4<-c(d2[1:length(d2)])
-d4[1]
-#d5<-rev(unlist(d2))
-d5<-rev(unlist(dat[[4]]))
-###wks
-##########
-#zuweisungen
-d1<-unlist(dat[2][dat[2]>2000])
-d1
-###
-liste<-split (1:10, c(1,1,1,2,2,2,3,3,3,4))
-liste
-lapply(liste,length)
-names(liste)<-c("eins","zwei","drei","vier")
-unlist(lapply(liste,mean)) 
-liste[1]
-liste[1][1][2] #no
-liste[1][[1]]
-liste[[1]]
-liste[[1]][3] #yes
-
-mat<-matrix(1:25, ncol=5)
-mat
-split(mat, col(mat)) 
-mat1<-split(mat, col(mat)) 
-mat1$`1`
-mat1$`2`
-mat2<-lapply(mat1,mean)
-mat2
-library(abind)
-mat3<-abind(mat2)
-mat3
-mat3[4]<-6
-mat3[4]
-mat4<-split(mat,row(mat))
-mat4
-mat5<-abind(lapply(mat4,mean))
-mat5
-liste[[1]]==4:6
-(liste[[1]][1:5])
-attributes(liste)
-liste
-match(liste[[1]],2)# nur so findet die 2
-match(liste[[1:4]],2)#fail
-match(unlist(liste[[1:3]]),2)
-l1<-unlist(liste,recursive=T)
-l1
-as.list(l1)
-liste[1,]
-dim(liste)

@@ -647,3 +647,8 @@ for (k in 1:1000){
 
 }
 #}
+
+#12135.###
+attach(bsr)
+drei<-tapply(!is.na(Mg), list(tag, Laga, P), sum)
+drei

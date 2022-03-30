@@ -93,13 +93,84 @@ sum1<-list(tg1[2:length(tg1)],zt1[2:length(zt1)],p1[2:length(p1)],key1[2:length(
 sum1<-sums()
 
 
-# 3 Schreiben Sie bitte zwei R-Programme für die alphabetische Verschlüsselung nach Caesar, Kodierung und Entkodierung. 
+# 3 Schreiben Sie bitte zwei R-Programme für die alphabetische Verschlüsselung 
+#nach Caesar, Kodierung und Entkodierung. 
 #Dem Programm soll übergeben werden der Normaltext bzw. der kodierte Text 
 #und jeweils ein Verschiebeschlüssel als Integerzahl. 
 #Führen Sie bitte diese beiden Programme mit einem selbstgewählten Textbeispiel vor.
+text<-"Unser Zeit-Datum Zahlensystem ist abhaengig vom Kalendersystem (Sonne und Mond)"
+ind<-utf8ToInt(text)  ; ind
+ind.k<-ind+3
+send<-intToUtf8(ind.k) ;  send
+dec<-intToUtf8(utf8ToInt(send)-3) ; dec
+text==dec
+#########
+encode<-function (dat, code) 
+{
+  # dat: mit decode entcodierte Zahlen       # geschrieben 1993
+  tmpcode <- rev(c(1, (cumprod(rev(code[-1])))))  # modify cod
+  R <- NULL
+  for(i in 1:length(code)) {
+    R <- c(R, (dat %/% tmpcode[i])) # integer division
+    dat <- dat %% tmpcode[i]        # modulo dat[i]
+  }
+  R <- as.vector(R)
+  R 
+}
 
+decode<-function (dat, code) 
+{
+  # Daten als Vector                      Programm geschrieben 1993
+  tmpcode <- rev(c(1, (cumprod(rev(code[-1])))))  # modify code
+  R <- as.vector(tmpcode %*% (dat))       # Inner product
+  R
+}
 
-# 4. Jemand hat bis heute 8400 Tage gelebt, wie alt ist er in Jahren, Monaten und Tagen und wann genau ist sein Geburtstag? Denken Sie bitte an die Schalttage es sind 6. Verwenden Sie meine Programme encode und decode oder eigene.
+decode(c(3,2,15,30) ,c(365,24,60,60))
+decode(c(12,13,5) ,c(365,53,7))
+encode(8400,c(24,60,60))
+8130/60/60/24
+2*365+20*24
+8400/365*12
+y<-8400/365
+y2<-8400%/%365
+y1<-abs(y-y2)
+y3<-y1*365
+y4<-floor(y3)
+y5<-abs(y3-y4)
+m<-y5/12
+ifelse(m<1,mx<-0,mx<-floor(m))
+m2<-y5%/%12
+m2<-abs(m-mx)
+m3<-m2*12
+m4<-floor(m3)
+m5<-abs(m3-m4)
+#m1<-m1*12
+#m1<-floor(m1)
+d<-m5/30
+ifelse(d<1,dx<-0,dx<-floor(m))
+d2<-m5%/%30
+d2<-abs(d-dx)
+d3<-d2*30
+d4<-floor(d3)
+d5<-abs(d3-d4)
+
+h<-d5/24
+
+#ds<-ceiling(y2/4)
+h1<-d1*24
+d1<-floor(d1)
+d1<-d1-ds
+h<-d1/60
+h2<-d1%/%60
+h1<-abs(h-h2)
+h1<-h1*60
+h1<-floor(h1)
+decode(c(y2,y4,d4),c(365,12,30))
+encode(8400,c(c(365,12,30)))
+decode(c(23,4,0),c(365,12,30))
+# 4. Jemand hat bis heute 8400 Tage gelebt, wie alt ist er in Jahren, Monaten und Tagen und wann genau ist sein Geburtstag? 
+#Denken Sie bitte an die Schalttage es sind 6. Verwenden Sie meine Programme encode und decode oder eigene.
 # 5. Ihre Geheimzahl (PIN) für Ihr Konto bei der Studentenbank lautet 3981. Bitte verschlüsseln sie diese mit dem Prim- zahlen-Key c(67,67,67). Man braucht einen dreistelligen Schlüssel, um auch noch die maximal vierstellige Geheimzahl 9999 verschlüsseln zu können. Wie lautet die verschlüsselte Geheimzahl und entschlüsseln Sie diese wieder zur Kontrolle, so dass wieder 3981 rauskommt. Warum wird verschlüsselt?
 #   6. Erzeugen Sie bitte ein zweiseitiges Stamm&Blatt (St&Bl) mit der Körpergröße aus den Umfragedaten nach Geschlecht. Am besten vorher eine Zufallsstichprobe im Umfang 300 ziehen. Bitte auch etwas Interpretation der Ergebnisse.
 # 7. Erzeugen Sie mit IMAGE ein Bild. Zur Auswahl stehen noch die Datei Oliven.txt und Schnee.txt Oder eine

@@ -560,17 +560,25 @@ b<-sample(pool,6)
 
 proof2<-function(wh,k){
   a<-c(1:49)
-  a1<-sample(a,6)
-  a3<-sample(a,6)
+  a1<-sample(a,6);a1
+  a3<-sample(a,6);a3
   ma<-match(a1,a3)
   #a2<-unique(a1)
-  print(a1,a3)
+  print(ma)
   mac<-c(NA,NA,NA,NA,NA,NA)
-#  ifelse(match(ma,mac)==T,map<-1,map<-0)
-    stopifnot(ma==mac)
+  macsum<-sum(!is.na(match(a1,a3)))
+print(macsum)
+    ifelse(macsum>=4,macsum,macsum)
+    stopifnot(macsum<=4)
   cat("keine wiederholungen in",k, "durchläufen\n")
-
+#sum(match(ma,mac),na.rm = T)
 }
-for (k in 1:1000000){
+for (k in 1:100000){
   proof2(T,k) 
 }
+
+b<-c(1:10)
+b1<-c(4:10)
+sum(match(b,b1),na.rm = T)
+!is.na(match(b,b1))<-1
+sum(!is.na(match(b,b1)))

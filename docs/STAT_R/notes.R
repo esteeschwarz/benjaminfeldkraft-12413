@@ -652,3 +652,15 @@ for (k in 1:1000){
 attach(bsr)
 drei<-tapply(!is.na(Mg), list(tag, Laga, P), sum)
 drei
+###12136.
+unsplit(dec,c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23))
+strReverse <- function(x)
+  sapply(lapply(strsplit(x, NULL), rev), paste, collapse = "")
+strReverse(c("abc", "Statistics"))
+(nth <- paste0(1:12, c("st", "nd", "rd", rep("th", 9))))
+stri_join_list(stri_extract_all(send))
+library(stringi)
+stri_join(c('abc', '123', 'xyz'),'###', 1:6, sep=',')
+stri_join(dec)
+stri_join(1:13, letters, collapse='; ')
+stri_join(c(dec[1:79]),collapse = "")

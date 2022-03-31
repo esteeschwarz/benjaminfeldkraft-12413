@@ -58,7 +58,7 @@ bsr<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/dat
 attach(bsr)
 dim(bsr)
 zt<-ceiling(zeit/100)
-drei<-table(tg,zt,Mg,bsrkey,P)
+#drei<-table(tg,zt,Mg,bsrkey,P)
 ein<-tapply(Mg, ceiling(Mg), sum)     # nur Gewichtsklasse 1
 length(ein)
 key<-unique(bsrkey)
@@ -100,9 +100,34 @@ sum1<-sums()
 #Führen Sie bitte diese beiden Programme mit einem selbstgewählten Textbeispiel vor.
 text<-"Unser Zeit-Datum Zahlensystem ist abhaengig vom Kalendersystem (Sonne und Mond)"
 ind<-utf8ToInt(text)  ; ind
-ind.k<-ind+3
-send<-intToUtf8(ind.k) ;  send
-dec<-intToUtf8(utf8ToInt(send)-3) ; dec
+ind[2]
+s<-c(1:length(ind))
+for(s2 in s){
+#for (k in 1:10){
+  alg<-c(s)*2
+ind.k[s2]<-ind[s2]+s[s2]
+print(ind.k)
+send<-intToUtf8(ind.k) 
+print(send)
+#}
+}
+send<-stri_join(c(send[1:79]),collapse = "")
+
+ind<-utf8ToInt(send)  ; ind
+ind[2]
+s<-c(1:length(ind))
+ind.k1<-utf8ToInt(send)-s
+#for(s2 in s){
+#  for (k in 1:10){
+ #   alg<-c(3,6,9,12,15,18,21,24,27,30)
+ind.k[s2]<-ind[s2]-s[s2]
+ind.k1<-utf8ToInt(send)-s
+ind.k2<-(utf8ToInt(send)+ind.k) 
+dec<-intToUtf8(ind.k2)
+print(dec)
+ # }
+}
+unsplit(dec)
 text==dec
 #########
 encode<-function (dat, code) 
@@ -194,7 +219,10 @@ decode(c(23,4,0),c(365,12,30))
 # 8. Erzeugen Sie bitte eine Landkartengraphik mit R
 # 9. Verbinden Sie sich über ODBC mit der Bibliotheks-Datenbank
 # books.xls (Informatik) und erforschen Sie die
-# Entwicklung der Programmiersprache BASIC, so wie sie in den Buchtiteln vorkommt, indem Sie eine SQL-Abfrage (query) machen, in der LIKE '%_____%' vorkommt. Wenn ODBC nicht geht, den R-Befehl grep nehmen. Bitte auch Graphik und Interpretation anfertigen.
+# Entwicklung der Programmiersprache BASIC, so wie sie in den Buchtiteln vorkommt, 
+#indem Sie eine SQL-Abfrage (query) machen, in der LIKE '%_____%' vorkommt. 
+#Wenn ODBC nicht geht, den R-Befehl grep nehmen. 
+#Bitte auch Graphik und Interpretation anfertigen.
 # Ich wünsche Euch Gutes Gelingen und Freude an der Bearbeitung der Aufgaben! Für Fragen und Erläuterungen stehe ich gerne zur Verfügung. Spätester Abgabetermin für Block DREI ist der 3.4.2022. Nach Abgabe aller Aufgaben und meiner zeitnaher Korrektur wird Eure bestandene ABV-Prüfungsleistung im Campus-Management verbucht werden.
 # Exkurs: Herstellung einer IMAGE Graphik in R aus einem eigenen Bild (Foto)
 # 1. Öffnen eines nicht zu komplizierten Bildes mit einem Bildbearbeitungsprogramm, ich verwende IrfanView.

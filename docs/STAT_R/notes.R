@@ -664,3 +664,55 @@ stri_join(c('abc', '123', 'xyz'),'###', 1:6, sep=',')
 stri_join(dec)
 stri_join(1:13, letters, collapse='; ')
 stri_join(c(dec[1:79]),collapse = "")
+###12141.bh 3/6
+#stammblatt stem&leaf
+bsr<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/bsrorg.csv",header=T)
+
+stich<-sample(15401, 500)
+d1<-bsr$Mg[stich]    ; length(d1)
+
+d2<-bsr$bsrkey[stich]    ; length(d2)
+
+stem(d1[d2=="HM"])
+stem(d1[d2=="IND"])
+attach(bsr)
+length(zeit[tag==110])
+stem(zeit[tag==110])
+
+
+umfr<-read.csv2("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/Umfrage.csv",header=T)
+stich<-sample(3471, 250)
+
+reduct<-umfr[stich,]
+
+attach(reduct)
+library(aplpack) #benötigt X11
+stem.leaf.backback(NETTO[GESCHL=="WEIBLICH"], NETTO[GESCHL=="MAENNLICH"], m=1)
+#what is that?
+x<-stem.leaf.backback(NETTO[GESCHL=="WEIBLICH"], NETTO[GESCHL=="MAENNLICH"], m=1)
+x
+plot(as.double(x[[10]]))
+as.double(x[[10]])
+library(stringi)
+x1<-strsplit(x[[10]],"")
+plot(x1$`2233333444555566666666677777888888999`)
+par(new=TRUE)
+plot(x1$`0011111111222222223333444445555555679`, add=T,col=2)
+par(new=TRUE)
+
+plot(x1$`00000012233455                       `,col=3)
+x2<-strsplit(x[[11]],"")
+plot(x2[[1]])
+par(new=TRUE)
+
+plot(x2[[2]],col=2)
+
+par(new=TRUE)
+plot(x2[[3]],col=3)
+par(new=TRUE)
+plot(x2[[4]],col=4)
+par(new=TRUE)
+plot(x2[[5]],col=5)
+
+title("eee")
+x1

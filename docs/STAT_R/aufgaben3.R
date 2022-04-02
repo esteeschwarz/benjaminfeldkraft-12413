@@ -2,7 +2,9 @@
 #20220328.(09.40)
 #script source: "https://github.com/esteeschwarz/essais/blob/main/docs/STAT_R/aufgaben3.R"
 ###############
-# 0. Bezug auf Frage 15 im Aufgabenset EINS: Ziehen sie wiederum Zufallsstichproben im Umfang 15 aus 15 Zahlen und stellen Sie mit geeigneten Algorithmen fest, ob es Wiederholungen in der Stichprobe gibt. Hierfür kann man auch eine eigene Funktion schreiben, muss aber nicht.
+# 0. Bezug auf Frage 15 im Aufgabenset EINS: Ziehen sie wiederum Zufallsstichproben im Umfang 15 aus 15 Zahlen 
+#und stellen Sie mit geeigneten Algorithmen fest, ob es Wiederholungen in der Stichprobe gibt. 
+#Hierfür kann man auch eine eigene Funktion schreiben, muss aber nicht.
 proof<-function(wh){
 a<-c(1:15)
 a1<-sample(a,15,replace=wh);a1
@@ -39,7 +41,8 @@ run1<-proof2(T,k)
 }
 
 ############################
-# 1. Erklären Sie kurz mit eigenen Worten, was eine Kreuztabelle (Pivot) ist. Wie hängen die Klassifikationsvariable und die Dimensionen des Resultats zusammen? Was ist der Data-Cube?
+# 1. Erklären Sie kurz mit eigenen Worten, was eine Kreuztabelle (Pivot) ist. 
+#Wie hängen die Klassifikationsvariable und die Dimensionen des Resultats zusammen? Was ist der Data-Cube?
 #im grunde eine tabelle zweiter ordnung, die eine zusammenfassung, auswertung einer anderen tabelle darstellt,
 #um zb. signifikanzen feststellen zu können. die daten selber werden nicht verändert,
 #aber wenn sich die daten der tabelle erster ordnung ändern, hat das auswirkungen auf die
@@ -210,10 +213,17 @@ h1<-floor(h1)
 decode(c(y2,y4,d4),c(365,12,30))
 encode(8400,c(c(365,12,30)))
 decode(c(23,4,0),c(365,12,30))
-# 4. Jemand hat bis heute 8400 Tage gelebt, wie alt ist er in Jahren, Monaten und Tagen und wann genau ist sein Geburtstag? 
+# 4. Jemand hat bis heute 8400 Tage gelebt, wie alt ist er in Jahren, Monaten und Tagen 
+#und wann genau ist sein Geburtstag? 
 #Denken Sie bitte an die Schalttage es sind 6. Verwenden Sie meine Programme encode und decode oder eigene.
-# 5. Ihre Geheimzahl (PIN) für Ihr Konto bei der Studentenbank lautet 3981. Bitte verschlüsseln sie diese mit dem Prim- zahlen-Key c(67,67,67). Man braucht einen dreistelligen Schlüssel, um auch noch die maximal vierstellige Geheimzahl 9999 verschlüsseln zu können. Wie lautet die verschlüsselte Geheimzahl und entschlüsseln Sie diese wieder zur Kontrolle, so dass wieder 3981 rauskommt. Warum wird verschlüsselt?
-#   6. Erzeugen Sie bitte ein zweiseitiges Stamm&Blatt (St&Bl) mit der Körpergröße aus den Umfragedaten nach Geschlecht. Am besten vorher eine Zufallsstichprobe im Umfang 300 ziehen. Bitte auch etwas Interpretation der Ergebnisse.
+# 5. Ihre Geheimzahl (PIN) für Ihr Konto bei der Studentenbank lautet 3981. Bitte verschlüsseln sie 
+#diese mit dem Prim- zahlen-Key c(67,67,67). Man braucht einen dreistelligen Schlüssel, um auch 
+#noch die maximal vierstellige Geheimzahl 9999 verschlüsseln zu können. Wie lautet die verschlüsselte 
+#Geheimzahl und entschlüsseln Sie diese wieder zur Kontrolle, so dass wieder 3981 rauskommt. 
+#Warum wird verschlüsselt?
+#   6. Erzeugen Sie bitte ein zweiseitiges Stamm&Blatt (St&Bl) mit der Körpergröße aus den 
+#Umfragedaten nach Geschlecht. Am besten vorher eine Zufallsstichprobe im Umfang 300 ziehen. 
+#Bitte auch etwas Interpretation der Ergebnisse.
 # 7. Erzeugen Sie mit IMAGE ein Bild. Zur Auswahl stehen noch die Datei Oliven.txt und Schnee.txt Oder eine
 # eigene Bilddatei. Schnee.txt ist eine Fraktalgraphik, sie wurde aus der Matrix > snow<- matrix(c(1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1), 5,5) mit 4-facher Rekursion erzeugt. Oder erzeugen Sie mit dem Package spt ein Sierpinski-Dreieck. Bitte auch unten den Exkurs beachten: Herstellung einer Bitmap aus einem Foto.
 # 8. Erzeugen Sie bitte eine Landkartengraphik mit R

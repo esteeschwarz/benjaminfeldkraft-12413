@@ -695,13 +695,16 @@ plot(as.double(x[[10]]))
 as.double(x[[10]])
 library(stringi)
 x1<-strsplit(x[[10]],"")
+x2<-strsplit(x[[11]],"")
+
 plot(x1$`2233333444555566666666677777888888999`)
 par(new=TRUE)
 plot(x1$`0011111111222222223333444445555555679`, add=T,col=2)
 par(new=TRUE)
 
 plot(x1$`00000012233455                       `,col=3)
-x2<-strsplit(x[[11]],"")
+par(new=TRUE)
+
 plot(x2[[1]])
 par(new=TRUE)
 

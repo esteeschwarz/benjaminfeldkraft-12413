@@ -153,7 +153,10 @@ decode<-function (dat, code)
   R <- as.vector(tmpcode %*% (dat))       # Inner product
   R
 }
-
+####
+#wieviel monate + tage
+encode(450, c(12, 365/12))
+#14,24
 decode(c(3,2,15,30) ,c(365,24,60,60))
 decode(c(12,13,5) ,c(365,53,7))
 encode(8400,c(24,60,60))
@@ -224,6 +227,55 @@ decode(c(23,4,0),c(365,12,30))
 #   6. Erzeugen Sie bitte ein zweiseitiges Stamm&Blatt (St&Bl) mit der Körpergröße aus den 
 #Umfragedaten nach Geschlecht. Am besten vorher eine Zufallsstichprobe im Umfang 300 ziehen. 
 #Bitte auch etwas Interpretation der Ergebnisse.
+umfr<-read.csv2("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/Umfrage.csv",header=T)
+stich<-sample(3471, 250)
+
+reduct<-umfr[stich,]
+
+attach(reduct)
+library(aplpack) #benötigt X11
+stem.leaf.backback(NETTO[GESCHL=="WEIBLICH"], NETTO[GESCHL=="MAENNLICH"], m=1)
+#what is that?
+x<-stem.leaf.backback(NETTO[GESCHL=="WEIBLICH"], NETTO[GESCHL=="MAENNLICH"], m=1)
+y<-stem.leaf.backback(GRO[GESCHL=="WEIBLICH"], GRO[GESCHL=="MAENNLICH"], m=1)
+detach(reduct)
+stich<-sample(3471, 300)
+reduct<-umfr[stich,]
+attach(reduct)
+y<-stem.leaf.backback(GRO[GESCHL=="WEIBLICH"], GRO[GESCHL=="MAENNLICH"], m=1)
+
+x
+plot(as.double(x[[10]]))
+as.double(x[[10]])
+library(stringi)
+x1<-strsplit(x[[10]],"")
+x2<-strsplit(x[[11]],"")
+x11<-as.double(x1[[2]])*-1
+plot(x11,x1[[1]])
+plot(x1[[1]],x2[[1]])
+plot(x1[[1]])
+par(new=TRUE)
+plot(x1[[2]],col=2)
+par(new=TRUE)
+
+plot(x1[[3]],col=3)
+par(new=TRUE)
+
+plot(x2[[1]])
+par(new=TRUE)
+
+plot(x2[[2]],col=2)
+
+par(new=TRUE)
+plot(x2[[3]],col=3)
+par(new=TRUE)
+plot(x2[[4]],col=4)
+par(new=TRUE)
+plot(x2[[5]],col=5)
+
+#####################
+#####################
+
 # 7. Erzeugen Sie mit IMAGE ein Bild. Zur Auswahl stehen noch die Datei Oliven.txt und Schnee.txt Oder eine
 # eigene Bilddatei. Schnee.txt ist eine Fraktalgraphik, sie wurde aus der Matrix > snow<- matrix(c(1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1), 5,5) mit 4-facher Rekursion erzeugt. Oder erzeugen Sie mit dem Package spt ein Sierpinski-Dreieck. Bitte auch unten den Exkurs beachten: Herstellung einer Bitmap aus einem Foto.
 # 8. Erzeugen Sie bitte eine Landkartengraphik mit R

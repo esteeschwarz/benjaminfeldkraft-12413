@@ -1,5 +1,6 @@
 #12126.aufgaben 3
-#20220328.(09.40)
+#20220328(09.40)
+#20220403(14.59)
 #script source: "https://github.com/esteeschwarz/essais/blob/main/docs/STAT_R/aufgaben3.R"
 ###############
 # 0. Bezug auf Frage 15 im Aufgabenset EINS: Ziehen sie wiederum Zufallsstichproben im Umfang 15 aus 15 Zahlen 
@@ -102,36 +103,9 @@ sum1<-sums()
 #und jeweils ein Verschiebeschlüssel als Integerzahl. 
 #Führen Sie bitte diese beiden Programme mit einem selbstgewählten Textbeispiel vor.
 text<-"Unser Zeit-Datum Zahlensystem ist abhaengig vom Kalendersystem (Sonne und Mond)"
-ind<-utf8ToInt(text)  ; ind
-ind[2]
-s<-c(1:length(ind))
-for(s2 in s){
-#for (k in 1:10){
-  alg<-c(s)*2
-ind.k[s2]<-ind[s2]+s[s2]
-print(ind.k)
-send<-intToUtf8(ind.k) 
-print(send)
-#}
-}
-send<-stri_join(c(send[1:79]),collapse = "")
+i###########
+#die codierungs/encodierungs übungen sind in dem zweiten script, damit sie nicht in meinem githubfolder landen sollen...
 
-ind<-utf8ToInt(send)  ; ind
-ind[2]
-s<-c(1:length(ind))
-ind.k1<-utf8ToInt(send)-s
-#for(s2 in s){
-#  for (k in 1:10){
- #   alg<-c(3,6,9,12,15,18,21,24,27,30)
-ind.k[s2]<-ind[s2]-s[s2]
-ind.k1<-utf8ToInt(send)-s
-ind.k2<-(utf8ToInt(send)+ind.k) 
-dec<-intToUtf8(ind.k2)
-print(dec)
- # }
-#}
-unsplit(dec)
-text==dec
 #########
 encode<-function (dat, code) 
 {
@@ -224,6 +198,7 @@ decode(c(23,4,0),c(365,12,30))
 #noch die maximal vierstellige Geheimzahl 9999 verschlüsseln zu können. Wie lautet die verschlüsselte 
 #Geheimzahl und entschlüsseln Sie diese wieder zur Kontrolle, so dass wieder 3981 rauskommt. 
 #Warum wird verschlüsselt?
+
 #   6. Erzeugen Sie bitte ein zweiseitiges Stamm&Blatt (St&Bl) mit der Körpergröße aus den 
 #Umfragedaten nach Geschlecht. Am besten vorher eine Zufallsstichprobe im Umfang 300 ziehen. 
 #Bitte auch etwas Interpretation der Ergebnisse.
@@ -272,7 +247,8 @@ par(new=TRUE)
 plot(x2[[4]],col=4)
 par(new=TRUE)
 plot(x2[[5]],col=5)
-
+#####################
+#habe versucht, das zu visualisieren, was wohl das ziel sein sollte, also ähnlich einer schmetterlingsgrafik dann..., schaff ich nicht
 #####################
 #####################
 
@@ -316,32 +292,24 @@ ay[k]<-sum(JAHR==by[k],na.rm = T)
 }
 by
 basicy<-cbind(by,ay)
-ay2<-cbind(ay)
-row.names(ay2)<-by
-barplot(ay,xlab=by,las=3)
-#a[1]
-as.double(JAHR["1976"])
-JAHR=="1976"
-# Ich wünsche Euch Gutes Gelingen und Freude an der Bearbeitung der Aufgaben! Für Fragen und Erläuterungen stehe ich gerne zur Verfügung. Spätester Abgabetermin für Block DREI ist der 3.4.2022. Nach Abgabe aller Aufgaben und meiner zeitnaher Korrektur wird Eure bestandene ABV-Prüfungsleistung im Campus-Management verbucht werden.
-# Exkurs: Herstellung einer IMAGE Graphik in R aus einem eigenen Bild (Foto)
-# 1. Öffnen eines nicht zu komplizierten Bildes mit einem Bildbearbeitungsprogramm, ich verwende IrfanView.
-# 2. Reduktion des Bildes auf nicht mehr 1000 x 1000 Bildpunkte (Pixel)
-# 3. Umwandlung in Graustufen, Farben kommen später
-# 4. Speichern des Bildes im Format Portable Gray Map PGM, rechts
-# in dem Optionskasten Ascii Encoding auswählen
-# 5. Es entsteht eine Textdatei, in der hauptsächlich Zahlen stehen, die SW-Graustufen-Nummern. In den ersten Zeilen
-# Dieser Datei steht etwa das: # Created by IrfanView
-#   600
-# 255
-# Vor
-# Zahlen in der Datei
-533 # Größe des Bildes in Pixeln # 255 Graustufen
-dem R-Import diese Zeilen löschen, danach sind nur noch
-6. Im R soll das in meinem Beispiel eine Bild-Matrix mit 600 x 533 Pixeln geben, Import in R mit scan (Vektor)
-7. mond <- scan("D:/Bilder/Bilder_TOP/mond2.pgm")
-> length(mond) # der Graustufenvektor, der Maimond [1] 319800
-> m1<-matrix(mond, nrow=533) > image(m1)
-> image(t(m1)) # Transponieren, das Bild wird gekippt
-> m2<-as.matrix(rev(as.data.frame(m1)))
-# Bild waagerecht spiegeln
-> image(m2,col = rainbow(256)) # mit 256 Regenbogenfarben
+ay2<-rbind(ay)
+colnames (ay2)<-by
+ay3<-sort(ay2)
+ay3
+barplot(ay2,las=3)
+#man müszte das noch sortieren nach jahren, was mir jetzt grad nicht gelingen will...
+########################################
+m<-scan("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/icebmp.pgm")
+m1<-matrix(m,414)
+image(t(m1))
+m2<-as.matrix(rev(as.data.frame(m1)))
+image(m2)
+
+########################################
+#ich breche die bearbeitung hier mal ab und schicke dir dann jetzt den letzten stand. ich werde noch daran arbeiten, denn viele sachen verlangen
+#noch nach verbesserung, die ich da improvisiert habe.
+#ich habe jdfs. sehr viel gelernt in dem kurs und bedanke mich für die ausführlichen vorlagen usw.,
+#ich hoffe, das format, in dem ich das jeweils zur verfügung stelle, ist halbwegs lesbar und durchführbar, daran musz ich noch arbeiten.
+#fokus lag für mich erstmal auf den aufgaben...
+
+

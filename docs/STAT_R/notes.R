@@ -875,4 +875,34 @@ library(mapdata)
 map("worldHires", "Italy")
 map.cities(country="Italy", minpop=1e5, capital=1)
 
+#################
+# Öffnen eines nicht zu komplizierten Bildes mit einem Bildbearbeitungsprogramm, ich verwende IrfanView.
+# 2. Reduktion des Bildes auf nicht mehr 1000 x 1000 Bildpunkte (Pixel)
+# 3. Umwandlung in Graustufen, Farben kommen später
+# 4. Speichern des Bildes im Format Portable Gray Map PGM, rechts
+# in dem Optionskasten Ascii Encoding auswählen
+# 5. Es entsteht eine Textdatei, in der hauptsächlich Zahlen stehen, die SW-Graustufen-Nummern. In den ersten Zeilen
+# Dieser Datei steht etwa das: # Created by IrfanView
+#   600
+# 255
+# Vor
+# Zahlen in der Datei
+# 533 # Größe des Bildes in Pixeln # 255 Graustufen
+# dem R-Import diese Zeilen löschen, danach sind nur noch
+# 6. Im R soll das in meinem Beispiel eine Bild-Matrix mit 600 x 533 Pixeln geben, Import in R mit scan (Vektor)
+7. mond <- scan("D:/Bilder/Bilder_TOP/mond2.pgm")
+length(mond) # der Graustufenvektor, der Maimond [1] 319800
+m1<-matrix(mond, nrow=533) > image(m1)
+image(t(m1)) # Transponieren, das Bild wird gekippt
+m2<-as.matrix(rev(as.data.frame(m1)))
+# Bild waagerecht spiegeln
+image(m2,col = rainbow(256)) # mit 256 Regenbogenfarben
 
+
+#414x430
+m<-scan("data/fadenlogo.pgm",skip=4)
+ml<-length(m)
+m1<-matrix(m,sqrt(ml))
+image(t(m1))
+m2<-as.matrix(rev(as.data.frame(m1)))
+image(m2)

@@ -299,8 +299,9 @@ ay3
 barplot(ay2,las=3)
 #man müszte das noch sortieren nach jahren, was mir jetzt grad nicht gelingen will...
 ########################################
-m<-scan("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/icebmp.pgm")
-m1<-matrix(m,414)
+m<-scan("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/fadenlogo.pgm",skip=4)
+ml<-length(m)
+m1<-matrix(m,sqrt(ml))
 image(t(m1))
 m2<-as.matrix(rev(as.data.frame(m1)))
 image(m2)

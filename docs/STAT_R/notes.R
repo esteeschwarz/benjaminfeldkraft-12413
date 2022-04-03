@@ -690,19 +690,28 @@ library(aplpack) #benötigt X11
 stem.leaf.backback(NETTO[GESCHL=="WEIBLICH"], NETTO[GESCHL=="MAENNLICH"], m=1)
 #what is that?
 x<-stem.leaf.backback(NETTO[GESCHL=="WEIBLICH"], NETTO[GESCHL=="MAENNLICH"], m=1)
+y<-stem.leaf.backback(GRO[GESCHL=="WEIBLICH"], GRO[GESCHL=="MAENNLICH"], m=1)
+detach(reduct)
+stich<-sample(3471, 300)
+reduct<-umfr[stich,]
+attach(reduct)
+y<-stem.leaf.backback(GRO[GESCHL=="WEIBLICH"], GRO[GESCHL=="MAENNLICH"], m=1)
+
 x
 plot(as.double(x[[10]]))
 as.double(x[[10]])
 library(stringi)
 x1<-strsplit(x[[10]],"")
 x2<-strsplit(x[[11]],"")
-
-plot(x1$`2233333444555566666666677777888888999`)
+x11<-as.double(x1[[2]])*-1
+plot(x11,x1[[1]])
+plot(x1[[1]],x2[[1]])
+plot(x1[[1]])
 par(new=TRUE)
-plot(x1$`0011111111222222223333444445555555679`, add=T,col=2)
+plot(x1[[2]],col=2)
 par(new=TRUE)
 
-plot(x1$`00000012233455                       `,col=3)
+plot(x1[[3]],col=3)
 par(new=TRUE)
 
 plot(x2[[1]])
@@ -719,3 +728,151 @@ plot(x2[[5]],col=5)
 
 title("eee")
 x1
+
+butterfl<-function(points) {
+  # Schmetterlingskurve als X-Y Graphik
+  # Points: Anzahl von Punkten
+  theta<-pi*(1:points)/100            
+  r<-x11^(theta)-x11*(4*theta)+(theta/12)^5   # Gleichung
+  print(r)
+  x<-r*(theta)                  # Konvertieren aus Polarkoordinaten
+  y<-r*(theta)                  # Konvertieren aus Polarkoordinaten
+  res<-cbind(x,y)
+  res
+}
+
+d<-butterfl (2000)                   # 2000 Punkte
+d<-d[with(d,!is.na),]
+par(mfrow=c(1,1))
+matplot(d[,1],d[,2], type="l", xlab="", ylab="", col="green")
+title("Gr?ner digitaler Schmetterling mit 2000 Punkten")
+
+#Um den Schmetterling mit Farben zu f?llen, wird das Programm polygon ben?tigt.
+matplot(d[,1], d[,2], xlab="", ylab="", type='l')
+polygon(d[,1], d[,2], col = "orange", lwd = 3, border = "green")
+polygon(d[1:100,1], d[1:100,2], col = "blue", lwd = 3, border = "green")
+title("Bunter digitaler Schmetterling mit 200 Punkten")
+############
+butterfl<-function(points) {
+  # Schmetterlingskurve als X-Y Graphik
+  # Points: Anzahl von Punkten
+  theta<-pi*(0:points)/100            
+  r<-exp(1)^cos(theta)-2*cos(4*theta)+sin(theta/12)^5   # Gleichung
+  x<-r*sin(theta)                  # Konvertieren aus Polarkoordinaten
+  y<-r*cos(theta)                  # Konvertieren aus Polarkoordinaten
+  res<-cbind(x,y)
+  res
+}
+
+d<-butterfl (2000)                   # 2000 Punkte
+par(mfrow=c(1,1))
+matplot(d[,1],d[,2], type="l", xlab="", ylab="", col="green")
+title("Gr?ner digitaler Schmetterling mit 2000 Punkten")
+
+#Um den Schmetterling mit Farben zu f?llen, wird das Programm polygon ben?tigt.
+matplot(d[,1], d[,2], xlab="", ylab="", type='l')
+polygon(d[,1], d[,2], col = "orange", lwd = 3, border = "green")
+polygon(d[1:100,1], d[1:100,2], col = "blue", lwd = 3, border = "green")
+title("Bunter digitaler Schmetterling mit 200 Punkten")
+
+
+x<- c(0, 4, 7.5, 12)
+y<- c(3, 2, -5, 3) 
+#Es handelt sich um die prozentuale Abweichnung der M?lmenge vom Mittelwert, gemessen wurde drei mal, der erste Wert entspricht dem letzten. Gesch?tzt werde soll die sogenannte Jahresganglinie des M?lls.
+#R-Spline-function:
+ # spline(x, y = NULL, n = 3*length(x), method = "fmm",
+  #       xmin = min(x), xmax = max(x), xout, ties = mean)
+
+#Gezeichnet werden sollen die Messpunkte, Nulllinie (y=0), und die ermittelte Spline-Kurve.
+
+#Mit xlim und ylim kann man den Graphikbereich (problemspace) formatieren.
+#Monate
+#[1]  0.0  4.0  7.5 12.0
+#Proz_Abweichung
+#[1]  3  2 -5  3
+
+plot(x, y, ylim=c(-6,6), pch=19,  col="Red")
+lines(a<-0:12,b<-rep(0,13))
+lines(spline(x, y), col="Blue")
+#title("Saisonale Schwankung der M?llmenge, gesch?tzt durch Splines")
+
+#####
+#12142.
+zuf<-matrix(sample(400, 200), ncol=5, nrow=5)
+image(zuf, col=c(1:4))
+title("Rainbow Zufallsmuster")
+
+bitmap<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/ICE.csv",header=T)
+class(bitmap)
+#[1] "data.frame"
+bild<-as.matrix(bitmap)
+dim(bild)
+#[1] 217 216
+bild[1:10,1:20]
+
+unique(c(bild))               # funktion c vektorisiert die Matrix
+#[1]  0  1  3  6  4  2  5  7  8  9 10 11 12 13 14 15  # hexadez
+length(c(bild))               #  alle Datenpunkte
+#[1] 46872
+#Die Matrix bild muss transponiert werden, sonst ist das Bild quer.
+image(t(bild), col=gray.colors(16,rev=T))
+title("Der erste ICE in Michendorf 1993")
+t(c(1,2,3,4,5))
+###
+ice<-scan("data/icebmpcsv.txt",what="character",sep=" ",allowEscapes = F)
+i3<-(ice[1])
+unique(ice)
+i4[1:142]<-utf8ToInt(ice[1:142])
+i5<-matrix(ice[])
+i6<-as.matrix(apply(i5,1,utf8ToInt))
+i6[1]
+i7<-matrix(unlist(i6),ncol = i9)
+i77<-matrix(unlist(i6))
+image(i7,col=gray.colors(16,rev = T))
+i8<-unique(i77)
+i9<-sqrt(length(i77))
+###
+r<-scan("data/rainbmp.txt",what = "character",sep = " ")
+r2<-scan("data/Rplot02.txt",what = "character",sep = " ")
+r2==r
+r5<-matrix(r2)
+utf8ToInt (r5[4])
+mr<-matrix(unlist(r2))
+r6<-as.matrix(apply(r5,1,utf8ToInt))
+r77<-matrix(unlist(r6))
+r3<-matrix(unlist(r6),ncol = i9)
+i77<-matrix(unlist(i6))
+#############
+install.packages("spt")
+library(spt)
+#help(spt)
+(abc = spt(50,60))
+
+#SPT(50,60,70) 
+
+#Dimension =  1.604103   Viewport=( 0 , 0 , 94.13205 , 100 )
+
+##Angles        x   y
+# A     50  0.00000   0
+# B     70 94.13205   0
+# C     60 57.73503 100
+
+plot(abc, iter=7)
+#####
+dreh <- function (dat) {
+  x <- seq(0, pi, length= 30)
+  y<-sin(x)
+  z<-outer(y, y, "*") 
+  for(i in 1:360) {
+    persp(x, x, z, theta = 45, phi = i, expand = 0.5, col = rainbow(10))}
+  for(i in 1:360) {
+    persp(x, x, z, theta = i, phi = 45, expand = 0.5, col = rainbow(10))}
+}
+dreh(c(1:20))
+
+###
+library(mapdata)
+map("worldHires", "Italy")
+map.cities(country="Italy", minpop=1e5, capital=1)
+
+

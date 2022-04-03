@@ -22,7 +22,7 @@ proof(F) #hier F oder T für ziehung mit zurücklegen anpassen,
 #bei 
 proof2<-function(wh,k){
   m<-0
-  a<-c(1:49)
+  a<-c(1:15)
   a1<-sample(a,15,replace=wh);a1
   match(a,a1)
   a2<-unique(a1)
@@ -129,7 +129,7 @@ ind.k2<-(utf8ToInt(send)+ind.k)
 dec<-intToUtf8(ind.k2)
 print(dec)
  # }
-}
+#}
 unsplit(dec)
 text==dec
 #########
@@ -277,14 +277,51 @@ plot(x2[[5]],col=5)
 #####################
 
 # 7. Erzeugen Sie mit IMAGE ein Bild. Zur Auswahl stehen noch die Datei Oliven.txt und Schnee.txt Oder eine
-# eigene Bilddatei. Schnee.txt ist eine Fraktalgraphik, sie wurde aus der Matrix > snow<- matrix(c(1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1), 5,5) mit 4-facher Rekursion erzeugt. Oder erzeugen Sie mit dem Package spt ein Sierpinski-Dreieck. Bitte auch unten den Exkurs beachten: Herstellung einer Bitmap aus einem Foto.
+# eigene Bilddatei. Schnee.txt ist eine Fraktalgraphik, 
+#sie wurde aus der Matrix > snow<- matrix(c(1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1), 5,5) 
+#mit 4-facher Rekursion erzeugt. Oder erzeugen Sie mit dem Package spt ein Sierpinski-Dreieck. 
+#Bitte auch unten den Exkurs beachten: Herstellung einer Bitmap aus einem Foto.
+bitmap<-read.table("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/ICE.csv",header=T)
+bild<-as.matrix(bitmap)
+image(t(bild), col=gray.colors(16,rev=T))
+
+
 # 8. Erzeugen Sie bitte eine Landkartengraphik mit R
+library(mapdata)
+map("worldHires", "Italy")
+map.cities(country="Italy", minpop=1e5, capital=1)
+
 # 9. Verbinden Sie sich über ODBC mit der Bibliotheks-Datenbank
 # books.xls (Informatik) und erforschen Sie die
 # Entwicklung der Programmiersprache BASIC, so wie sie in den Buchtiteln vorkommt, 
 #indem Sie eine SQL-Abfrage (query) machen, in der LIKE '%_____%' vorkommt. 
 #Wenn ODBC nicht geht, den R-Befehl grep nehmen. 
 #Bitte auch Graphik und Interpretation anfertigen.
+library(readxl)
+books <- read_excel("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/books.xls")
+
+basic<-grep("basic[^s]",books$TITEL,ignore.case = T) #REGEX !!!!!!!!!!!
+
+books[basic,]
+
+b1<-books[basic,]
+attach(b1)
+by<-unique(JAHR)
+plot(b1$JAHR)
+match(by[4],JAHR)
+ay<-by
+for (k in 1:length(by)){
+#a<-(JAHR==by[1])
+ay[k]<-sum(JAHR==by[k],na.rm = T)
+}
+by
+basicy<-cbind(by,ay)
+ay2<-cbind(ay)
+row.names(ay2)<-by
+barplot(ay,xlab=by,las=3)
+#a[1]
+as.double(JAHR["1976"])
+JAHR=="1976"
 # Ich wünsche Euch Gutes Gelingen und Freude an der Bearbeitung der Aufgaben! Für Fragen und Erläuterungen stehe ich gerne zur Verfügung. Spätester Abgabetermin für Block DREI ist der 3.4.2022. Nach Abgabe aller Aufgaben und meiner zeitnaher Korrektur wird Eure bestandene ABV-Prüfungsleistung im Campus-Management verbucht werden.
 # Exkurs: Herstellung einer IMAGE Graphik in R aus einem eigenen Bild (Foto)
 # 1. Öffnen eines nicht zu komplizierten Bildes mit einem Bildbearbeitungsprogramm, ich verwende IrfanView.

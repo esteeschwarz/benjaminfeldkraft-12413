@@ -305,6 +305,18 @@ m1<-matrix(m,sqrt(ml))
 image(t(m1))
 m2<-as.matrix(rev(as.data.frame(m1)))
 image(m2)
+#chess
+a<-c(rep(rep(c(130,255),length.out=2),rep(c(255,130),length.out=2),length.out))
+a<-c(rep(rep(c(130,255),4),rep(c(255,130),4),length.out=64))
+a<-rep(c(130,255),4)
+b<-rep(c(255,130),4)
+c<-c(rep(c(a,b),4))
+c
+sqrt(length(a))
+b<-matrix(c,sqrt(length(c)))
+#colnames(b)<-c(letters[1:8])
+#row.names(b)<-c(1:8)
+image(b)
 
 ########################################
 #ich breche die bearbeitung hier mal ab und schicke dir dann jetzt den letzten stand. ich werde noch daran arbeiten, denn viele sachen verlangen

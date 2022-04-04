@@ -900,9 +900,22 @@ image(m2,col = rainbow(256)) # mit 256 Regenbogenfarben
 
 
 #414x430
-m<-scan("data/fadenlogo.pgm",skip=4)
+m<-scan("https://github.com/esteeschwarz/essais/raw/main/docs/STAT_R/data/fadenlogo.pgm",skip=4)
 ml<-length(m)
 m1<-matrix(m,sqrt(ml))
 image(t(m1))
 m2<-as.matrix(rev(as.data.frame(m1)))
 image(m2)
+#########
+#12143.
+a<-c(rep(rep(c(130,255),length.out=2),rep(c(255,130),length.out=2),length.out))
+a<-c(rep(rep(c(130,255),4),rep(c(255,130),4),length.out=64))
+a<-rep(c(130,255),4)
+b<-rep(c(255,130),4)
+c<-c(rep(c(a,b),4))
+c
+sqrt(length(a))
+b<-matrix(c,sqrt(length(c)))
+#colnames(b)<-c(letters[1:8])
+#row.names(b)<-c(1:8)
+image(b)

@@ -49,12 +49,12 @@ dtax<-function(set,t1,t2,t3){
 }
 
 #set flag to targetset (target -1 / target 0 / target 1)
-flag<-c(0,0,0)
+#flag<-c(0,0,0)
 
 #dtax_x<-dtax(dta,0,0,0)
-dtax_x<-(dtax(dta_out1,flag[1],flag[2],flag[3]))
-mean(dtax_x$timeinterval)
-dta0<-outl.fun.ch(dtax(dta_out1,-1,0,0))
+#dtax_x<-(dtax(dta_out1,flag[1],flag[2],flag[3]))
+#mean(dtax_x$timeinterval)
+#dta0<-outl.fun.ch(dtax(dta_out1,-1,0,0))
 
 #remove(dta_x)
 #target==flag[3]
@@ -134,16 +134,17 @@ dta_ch0<- outl.fun.ch(dtax(dta_out1,0,0,0))
 dta_ch01<-outl.fun.ch(dtax(dta_out1,0,1,0))
 dta_ch101<-outl.fun.ch(dtax(dta_out1,-1,0,1))
 #liste ohne outliers, zeichenunabhängig
-dta0<- outl.fun(dtax(dta_out1,0,0,0))
-dta01<-outl.fun(dtax(dta_out1,0,1,0))
+dta0<-  outl.fun(dtax(dta_out1, 0,0,0))
+dta01<- outl.fun(dtax(dta_out1, 0,1,0))
 dta101<-outl.fun(dtax(dta_out1,-1,0,1))
 #wks.
-mnresp1<-cbind(mean(dta_ch0$timeinterval),mean(dta_ch01$timeinterval),mean(dta_ch101$timeinterval))
-mnresp2<-cbind(mean(dta0$timeinterval),mean(dta01$timeinterval),mean(dta101$timeinterval))
-mnresp3<-rbind(mnresp1,mnresp2)
-colnames(mnresp3)<-c("0","0/1","-1/0/1")
-barplot(mnresp3)
-
+mnresp1<-rbind(mean(dta_ch0$timeinterval),mean(dta_ch01$timeinterval),mean(dta_ch101$timeinterval))
+mnresp2<-rbind(mean(dta0$timeinterval),mean(dta01$timeinterval),mean(dta101$timeinterval))
+mnresp3<-cbind(mnresp1,mnresp2)
+colnames(mnresp3)<-c("dep chars","indep chars")
+barplot((mnresp3))
+#difference sig with/without resp to target length:
+chisq.test(mnresp3,correct = F)
 
 #########################
 ##sm-em-lc-mm kategorien in spalte $group
@@ -153,7 +154,9 @@ lc<-"LC"
 mm<-"MM"
 ##hier kategorien x vs y einsetzen comme: (...group==sm|...group==em)
 ##liste<-subset(dtatarget,dtatarget$group==x|dtatarget$group==y)
-dtatarget<-dta2
+dtatarget<-dta0
+
+
 SMvsEM<-subset(dtatarget,group==sm|group==em)
 SMvsLC<-subset(dtatarget,group==sm|group==lc)
 SMvsMM<-subset(dtatarget,group==sm|group==mm)
@@ -163,6 +166,10 @@ LCvsMM<-subset(dtatarget,group==lc|group==mm)
 ##dies hier fuer die auswertung single metaphor vs. other
 X_SMvsO<-dtatarget$category
 
+dta_lmx<-function(set,g1,g2){
+subset(set,group==g1|group==g2)
+}
+dta_lmx(dta0,sm,em)
 
 
 ##Length-corrected RTs were computed by regressing the remaining raw RTs 
@@ -184,6 +191,17 @@ charsD<-stri_count_boundaries(EMvsLC$string,type="character")
 charsE<-stri_count_boundaries(EMvsMM$string,type="character")
 charsF<-stri_count_boundaries(LCvsMM$string,type="character")
 charsG<-stri_count_boundaries(dtatarget$string,type="character")
+###
+
+charslme<-function(set,g1,g2){
+  dta_lmx(dta_out1,g1,g2)$string
+}
+  #charslmx<-stri_count_boundaries(dta_lmx(dta0,sm,em)$string,type="character")
+charslmx<-stri_count_boundaries(charslme,type="character")
+charsG<-stri_count_boundaries(dtax_x$string,type="character")
+
+chars1<-stri_count_boundaries(charslme(dta_out1,em,sm))
+
 
 #s.o.
 lme1<-lme1.formula.1<-(timeinterval ~ charsA + (1|participant)+(1+charsA:participant))
@@ -193,6 +211,8 @@ lme4<-lme1.formula.4<-(timeinterval ~ charsD + (1|participant)+(1+charsD:partici
 lme5<-lme1.formula.5<-(timeinterval ~ charsE + (1|participant)+(1+charsE:participant))
 lme6<-lme1.formula.6<-(timeinterval ~ charsF + (1|participant)+(1+charsF:participant))
 lme7<-lme1.formula.7<-(timeinterval ~ charsG + (1|participant)+(1+charsG:participant))
+###
+lmex<-(timeinterval ~ charslmx +(1|participant)+(1|charslmx:participant))
 
 #choose formula by changing 1 / 2
 #lme1<-lme1.formula.2
@@ -211,6 +231,14 @@ RT_4<-lmer((lme4),EMvsLC)
 RT_5<-lmer((lme5),EMvsMM)
 RT_6<-lmer((lme6),LCvsMM)
 RT_7<-lmer((lme7),dtatarget)
+###
+RT_1<-lmer(lmex,dta_lmx(dta_out1,sm,em))
+RT_2<-lmer(lmex,dta_lmx(dta_out1,sm,lc))
+RT_3<-lmer(lmex,dta_lmx(dta_out1,sm,mm))
+RT_4<-lmer(lmex,dta_lmx(dta_out1,em,lc))
+RT_5<-lmer(lmex,dta_lmx(dta_out1,em,mm))
+RT_6<-lmer(lmex,dta_lmx(dta_out1,lc,mm))
+RT_7<-lmer(lmex,dta_out1)
 
 
 

@@ -27,16 +27,27 @@ sprdatasm<-dta
 ##sprdatasm<-sprdata11342dtaxp ##fuer laden aus dateisystem, importiertes set hier einsetzen
 #dtatargetgilt<-subset(sprdatasm, gilt==1)
 #for complete dataset next
-dtatargetgilt<-sprdatasm
+dtatargetgilt<-dta
 #select filter for target:
 #wenn mit adinterval gerechnet werden soll, musz target==0 ausgewaehlt werden.
+# 
+# dtatarget<-sprdatasm
+# # 970 obs. target 0/1/-1
+# dtacpt<-subset(dtatargetgilt, target==0|target==1|target==-1)
+# dta0<-  subset(dtatargetgilt, target==0)
+# dta1<-  subset(dtatargetgilt, target==-1)
+# dta01<- subset(dtatargetgilt, target==0|target==1) 
 
-dtatarget<-sprdatasm
-# 970 obs. target 0/1/-1
-dtacpt<-subset(dtatargetgilt, target==0|target==1|target==-1)
-dta0<-  subset(dtatargetgilt, target==0)
-dta1<-  subset(dtatargetgilt, target==1)
-dta01<- subset(dtatargetgilt, target==0|target==1) 
+dtax<-function(set,t1,t2,t3){
+  dtax<-  subset(set, target==t1|target==t2|target==t3)
+}
+
+flag<-c(0,0,1)
+#dtax_x<-dtax(dta,0,0,0)
+dtax_x<-(dtax(dta,flag[1],flag[2],flag[3]))
+mean(dtax_x$timeinterval)
+
+#target==flag[3]
 ##########################
 
 ##hier sampleauswahl modifizieren
@@ -57,16 +68,19 @@ subdescr<-dtatarget
 
 #berechne outliers zeichenunabhängig
 #outliers.formula
-outl.form1<-dtatarget$adinterval
-outl.form2.0<-dtatarget$timeinterval
+#outl.form1<-dtatarget$adinterval
+#outl.form2.0<-dtatarget$timeinterval
 #outl.form2.1<-dtatarget1$timeinterval
 
-outl.form0<-outl.form2.0
+#outl.form0<-outl.form2.0
 #outl.form1<-outl.form2.1
 
 ##########
 # targetlisten ohne outliers
 #set<-dta0
+#set minimum response to 319ms
+outbottomfix<-319
+
 outl.fun<-function(set){
   attach(set)
   outl.form<-set
@@ -76,26 +90,41 @@ outl.fun<-function(set){
   sdout<-stdev*2.5
   outtop<-sprmean+sdout
   outbottom<-sprmean-sdout ## negative
-  outbottommod<-319
+#  outbottommod<-319
   #discard outliers according to subset
-  liste<-subset(set,timeinterval<outtop&timeinterval>outbottommod)
+  liste<-subset(set,timeinterval<outtop&timeinterval>outbottomfix)
 }
 #######
 liste0<-outl.fun(dta0)
 liste1<-outl.fun(dta1)
 liste01<-outl.fun(dta01)
+
+mean(outl.fun(dtax(dta,0,1,-1))$timeinterval)
+mean(outl.fun(dta1)$timeinterval)
+mean(outl.fun(dta01)$timeinterval)
+
 ########################
 #berechne outliers zeichenabhängig####
+chars_x<-function(set){
+chars_cpt<-stri_count_boundaries(set$string,type="character")
+}
+mean(chars_x(dtax_x))
+liste_x<-chars_x(dtax_x)
+mean(liste_x)
+mnchar_x<-mean(liste_x)
+listeCH<-dtax_x$timeinterval/chars_x(dtax_x)
+#listeCH<-dtacpt$timeinterval/chars_cpt
 
-mean(outl.fun(dta0)$timeinterval)
-chars_cpt<-stri_count_boundaries(dtacpt$string,type="character")
-listeCH<-dtatarget$timeinterval/chars_cpt
-#outAmean<-mean(listeCH)
-#outAsd<-sd(listeCH)
-#outAsd<-outAsd*2.5
-#outAtop<-outAmean+outAsd
-#outAbottom<-319
-#outAliste<-listeCH[listeCH<outAtop]
+outAmean<-mean(listeCH)
+
+outAsd<-sd(listeCH)
+outAsd<-outAsd*2.5
+outAtop<-outAmean+outAsd
+outAbottom<-outAmean-outAsd
+outAbottom<-outbottomfix/mnchar_x
+##### discard outliers with respect to target length
+outAliste<-subset(dtax_x,dtax_x$timeinterval/chars_x(dtax_x)<outAtop&dtax_x$timeinterval/chars_x(dtax_x)>outAbottom)
+
 
 #discard outliers target 1
 #sprmean<-mean(outl.form1)

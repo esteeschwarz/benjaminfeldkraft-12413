@@ -42,48 +42,10 @@ dtatargetgilt<-dta
 #set minimum response to 319ms
 outbottomfix<-319
 dta_out1<-subset(dta,dta$timeinterval>outbottomfix)
+dtaout<-dta_out1
 #dta<-dta_out1
 
-dtax<-function(set,t1,t2,t3){
-  dtax<-  subset(set, target==t1|target==t2|target==t3)
-}
-
-#set flag to targetset (target -1 / target 0 / target 1)
-#flag<-c(0,0,0)
-
-#dtax_x<-dtax(dta,0,0,0)
-#dtax_x<-(dtax(dta_out1,flag[1],flag[2],flag[3]))
-#mean(dtax_x$timeinterval)
-#dta0<-outl.fun.ch(dtax(dta_out1,-1,0,0))
-
-#remove(dta_x)
-#target==flag[3]
 ##########################
-
-##hier sampleauswahl modifizieren
-#dtatarget<-dtatargetcpt
-#dtatarget<-dtatarget01
-#dtatarget<-dtatarget0
-#choose labeling >
-#boxlabtgt<-", target 0"
-#boxlabtgt<-", target 0+1"
-#----------------------
-#für descriptive analysis denselben filter verwenden
-## hier denselben filter auswaehlen wie oben
-#subdescr<-subset(sprdatasm,target==-1|target==0|target==1)
-#subdescr<-subset(sprdatasm,target==0|target==1)
-#subdescr<-subset(sprdatasm,target==0)
-#subdescr<-dtatarget
-#------------------
-
-#berechne outliers zeichenunabhängig
-#outliers.formula
-#outl.form1<-dtatarget$adinterval
-#outl.form2.0<-dtatarget$timeinterval
-#outl.form2.1<-dtatarget1$timeinterval
-
-#outl.form0<-outl.form2.0
-#outl.form1<-outl.form2.1
 
 ##########
 # targetlisten ohne outliers
@@ -128,15 +90,19 @@ outAtop<-outAmean+outAsd
 outAliste<-subset(set,set$timeinterval/chars_x(dtax_x)<outAtop&dtax_x$timeinterval)
 
 }
+dtatg<-function(set,t1,t2,t3){
+  return(subset(set, target==t1|target==t2|target==t3))
+}
+
 #liste ohne outliers, zeichenabhängig
 #flag<-c(0,0,0)
-dta_ch0<- outl.fun.ch(dtax(dta_out1,0,0,0))
-dta_ch01<-outl.fun.ch(dtax(dta_out1,0,1,0))
-dta_ch101<-outl.fun.ch(dtax(dta_out1,-1,0,1))
+dta_ch0<- outl.fun.ch(dtatg(dta_out1,0,0,0))
+dta_ch01<-outl.fun.ch(dtatg(dta_out1,0,1,0))
+dta_ch101<-outl.fun.ch(dtatg(dta_out1,-1,0,1))
 #liste ohne outliers, zeichenunabhängig
-dta0<-  outl.fun(dtax(dta_out1, 0,0,0))
-dta01<- outl.fun(dtax(dta_out1, 0,1,0))
-dta101<-outl.fun(dtax(dta_out1,-1,0,1))
+dta0<-  outl.fun(dtatg(dta_out1, 0,0,0))
+dta01<- outl.fun(dtatg(dta_out1, 0,1,0))
+dta101<-outl.fun(dtatg(dta_out1,-1,0,1))
 #wks.
 mnresp1<-rbind(mean(dta_ch0$timeinterval),mean(dta_ch01$timeinterval),mean(dta_ch101$timeinterval))
 mnresp2<-rbind(mean(dta0$timeinterval),mean(dta01$timeinterval),mean(dta101$timeinterval))
@@ -165,70 +131,82 @@ EMvsMM<-subset(dtatarget,group==em|group==mm)
 LCvsMM<-subset(dtatarget,group==lc|group==mm)
 ##dies hier fuer die auswertung single metaphor vs. other
 X_SMvsO<-dtatarget$category
+remove(dtax)
 
-dta_lmx<-function(set,g1,g2){
+dtatg<-function(set,t1,t2,t3){
+  return(subset(set, target==t1|target==t2|target==t3))
+}
+
+dta_grx<-function(set,g1,g2){
 subset(set,group==g1|group==g2)
 }
+dtaset<-function(set,t1,t2,t3,sm,g1,g2){
+  ifelse(sm==1,return(dtatg(dta_out1,t1,t2,t3)),
+  return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
 
-d1<-dta_lmx(dta_out1,sm,em)
-d7<-
+  }
+d1<-dtaset(dtaout,-1,1,1,-9,em,lc)
+d2<-dtaset(dtaout,0,1,0,-9,em,lc)
+d3<-dtaset(dtaout,0,0,0,-9,em,mm)
+d4<-dtaset(dtaout,0,0,0,-9,em,sm)
+d5<-dtaset(dtaout,0,0,0,-9,em,sm)
+d6<-dtaset(dtaout,0,0,0,-9,em,sm)
+d7<-dtaset(dtaout,-1,1,0,1,em,sm)
+#wks sets.
 
-##Length-corrected RTs were computed by regressing the remaining raw RTs 
-##onto word length using linear mixed effects regression. 
-##In addition to a single main effect of word length, this model included a 
-##random intercept for subject, and a by-subject random slope for length 
-##(these random effects allow the model to discount mean differences in raw RT across 
-##subjects as well as variable sensitivity to the effect of word length across subjects). 
-##The residuals of this model, length-corrected RTs, served as the dependent variable in 
-##all analyses reported below. 
-##Qualitatively identical results are obtained if raw RTs are used instead. 
-##(Fine, Alex B et al. “Rapid Expectation Adaptation During Syntactic Comprehension.” PloS one 8.10 (2013))
-
-#extract targetlength
-charsA<-stri_count_boundaries(SMvsEM$string,type="character")
-charsB<-stri_count_boundaries(SMvsLC$string,type="character")
-charsC<-stri_count_boundaries(SMvsMM$string,type="character")
-charsD<-stri_count_boundaries(EMvsLC$string,type="character")
-charsE<-stri_count_boundaries(EMvsMM$string,type="character")
-charsF<-stri_count_boundaries(LCvsMM$string,type="character")
-charsG<-stri_count_boundaries(dtatarget$string,type="character")
 ###
+# dta_gr<-function(set,g1,g2){
+#   subset(set,group==g1|group==g2)
+# }
+#d1<-dta_grx(outl.fun(dta,0,0,0),sm,em)
 
-charslme<-function(set,g1,g2){
-  return(stri_count_boundaries(dta_lmx(dta_out1,g1,g2)$string))
+charsx<-function(set,t1,t2,t3,sx,g1,g2){
+  ifelse(sm==T,return(stri_count_boundaries(dtaset(set,t1,t2,t3,T,g1,g2)$string)),
+         return(stri_count_boundaries(dtaset(set,t1,t2,t3,F,g1,g2)$string)))
+  }
+ch1<-charsx(dtaout,-1,1,0,0,sm,em)
+chx<-charsx(set1)
+# chars7<-function(set,t1,t2,t3){
+#   return(stri_count_boundaries(ch(set,t1,t2,t3)))
+# }
+# chars7(dta,0,0,0)
+set1<-as.list(c("set"=dtaout,"t"=c(-1,0,1),"sm"=F,"g"=c(sm,em)))
+
+lmex<-function(set){
+  return(timeinterval ~ charsx(set))
 }
-  #charslmx<-stri_count_boundaries(dta_lmx(dta0,sm,em)$string,type="character")
-charslmx<-stri_count_boundaries(charslme,type="character")
-charsG<-stri_count_boundaries(dtax_x$string,type="character")
+lme1<-lmex(set1)
+lm(lme1,set1)
 
-chars1<-stri_count_boundaries(charslme(dta_out1,em,sm))
-chars1<-charslme(dta_out1,sm,em)
-
-
-#s.o.
-lme1<-lme1.formula.1<-(timeinterval ~ charsA + (1|participant)+(1+charsA:participant))
-lme2<-lme1.formula.2<-(timeinterval ~ charsB + (1|participant)+(1+charsB:participant))
-lme3<-lme1.formula.3<-(timeinterval ~ charsC + (1|participant)+(1+charsC:participant))
-lme4<-lme1.formula.4<-(timeinterval ~ charsD + (1|participant)+(1+charsD:participant))
-lme5<-lme1.formula.5<-(timeinterval ~ charsE + (1|participant)+(1+charsE:participant))
-lme6<-lme1.formula.6<-(timeinterval ~ charsF + (1|participant)+(1+charsF:participant))
-lme7<-lme1.formula.7<-(timeinterval ~ charsG + (1|participant)+(1+charsG:participant))
-###
-#lmex<-(timeinterval ~ charslmx +(1|participant)+(1|charslmx:participant))
-
-lmex<-function(g1,g2){
-  return((timeinterval ~ charslme(dta_out1,em,sm) +(1|participant)+(1|(charslme(dta_out1,em,sm)):participant)))
-}
-lmex<-function(g1,g2){
-  return(timeinterval ~ charslme(dta_out1,g1,g2))
+lmex<-function(set,g1,g2){
+  return(charslme(set,g1,g2))
 }
 
-lme1<-lmex(sm,em)
+lmex(dta_out1,em,sm)
+
+lme1<-lmex(dta_ch0,sm,em)
 lme1
+a<-stri_count_boundaries(dta_gr(dta_ch0,em,sm))
+lm(dta_gr(dta_ch0,em,sm)$timeinterval~stri_count_boundaries(dta_gr(dta_ch0,em,sm)),dta_gr(dta_ch0,em,sm))
+lm()
 s1<-c(sm,em)
 
 charsG<-stri_count_boundaries(dta_out1$string,type="character")
 lme7<-(timeinterval ~ charsG)
+RT_x<-lm(lmex(dta_ch0,sm,em),dta_gr(dta_ch0,sm,em))
+RT_1<-lm(lme1,dta_gr(dta_ch0,sm,em))
+RT_1<-lm(lmex(outl.fun.ch(dtax(dta_out1,0,0,0)),sm,em),dta_gr(outl.fun.ch(dtax(dta_out1,0,0,0)),sm,em))
+
+rtx<-function(set,t1,t2,t3,g1,g2,ch){
+  ifelse(g1==-9,s1<-ch(dtax(set,t1,t2,t3)),s1<-ch(dtax(set,t1,t2,t3),g1,g2))
+  
+    lm(lmex(ch(dtax(dta_out1,0,0,0))),dta_gr(ch(dtax(dta_out1,0,0,0))))
+}
+ch<-outl.fun
+outl.fun(dtax(dta,0,1,0),sm,em)
+RT1<-rtx(dta_out1,0,1,0,sm,em,outl.fun)
+lm(lmex(ch(dtax(dta_out1,0,0,0),em,sm)))
+               ch(dtax(set,t1,t2,t3),g1,g2)
 
 RT_1<-lm(lmex(sm,em),dta_lmx(dta_out1,sm,em))
 RT_2<-lm(lmex(sm,lc),dta_lmx(dta_out1,sm,lc))
@@ -243,13 +221,16 @@ attach(dta_out1)
 
 ##1. lme modeling
 #resixp[x]=um den effekt der zeichenanzahl korrigierte(s.o.) response(timeinterval) for further processing
-resixp1<-residuals(RT_1)
-resixp2<-residuals(RT_2)
-resixp3<-residuals(RT_3)
-resixp4<-residuals(RT_4)
-resixp5<-residuals(RT_5)
-resixp6<-residuals(RT_6)
-resixp7<-residuals(RT_7)
+resixp<-1:7
+resixp[1]<-residuals(rtx(dta_out1,0,1,0,sm,em,outl.fun))
+resixp[2]<-residuals(rtx(dta_out1,0,1,0,sm,lc,outl.fun))
+resixp[3]<-residuals(rtx(dta_out1,0,1,0,sm,mm,outl.fun))
+resixp[4]<-residuals(rtx(dta_out1,0,1,0,em,lc,outl.fun))
+resixp[5]<-residuals(rtx(dta_out1,0,1,0,em,mm,outl.fun))
+resixp[6]<-residuals(rtx(dta_out1,0,1,0,lc,mm,outl.fun))
+resixp[7]<-residuals(rtx(dta_out1,0,1,0,x,x,outl.fun))
+
+resixp[1]<-residuals(rtx(dta_out1,0,1,0,sm,em,outl.fun))
 
 
 #rubio-fernandez:

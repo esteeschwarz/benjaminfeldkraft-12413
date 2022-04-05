@@ -11,22 +11,19 @@ src_d<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation
 src_e<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation/1237b.R")
 ###########################
 ###########################
-##ST.SCHWARZ/12371b12393/HUX20210928(19.22)
 
-##von hier der reihe nach:
-
-##begin
 library(lme4)
 library(lmerTest)
 library(stringi)
+library(readr)
 
+dta<-read.csv2(src_d)
 
-#sprdataprepared <- read.csv("https://common.rotefadenbuecher.de/uni/public/jespr/modified/sprdataprepared.csv", sep=";")
-sprdataprepared <- read.csv("https://common.rotefadenbuecher.de/uni/public/jespr/modified/sprdatamod.csv", sep=";")
+###########################
 
 ##View(sprdataprepared)
 ##top datenframe aus datei, gueltige faelle, target 0+1
-sprdatasm<-sprdataprepared
+sprdatasm<-dta
 ##sprdatasm<-sprdata11342dtaxp ##fuer laden aus dateisystem, importiertes set hier einsetzen
 #dtatargetgilt<-subset(sprdatasm, gilt==1)
 #for complete dataset next
@@ -35,11 +32,13 @@ dtatargetgilt<-sprdatasm
 #wenn mit adinterval gerechnet werden soll, musz target==0 ausgewaehlt werden.
 
 dtatarget<-sprdatasm
-dtatargetcpt<-subset(dtatargetgilt, target==0|target==1|target==-1)
-dtatarget0<-  subset(dtatargetgilt, target==0)
-dtatarget1<-  subset(dtatargetgilt, target==1)
+# 970 obs. target 0/1/-1
+dtacpt<-subset(dtatargetgilt, target==0|target==1|target==-1)
+dta0<-  subset(dtatargetgilt, target==0)
+dta1<-  subset(dtatargetgilt, target==1)
+dta01<- subset(dtatargetgilt, target==0|target==1) 
+##########################
 
-dtatarget01<- subset(dtatargetgilt, target==0|target==1) 
 ##hier sampleauswahl modifizieren
 #dtatarget<-dtatargetcpt
 #dtatarget<-dtatarget01
@@ -65,20 +64,32 @@ outl.form2.0<-dtatarget$timeinterval
 outl.form0<-outl.form2.0
 #outl.form1<-outl.form2.1
 
-outl.form<-outl.form0
-
-sprmean<-mean(outl.form)
-stdev<-sd(outl.form)
-sdout<-stdev*2.5
-outtop<-sprmean+sdout
-outbottom<-sprmean-sdout ## negative
-outbottommod<-319
-#discard outliers according to subset
-liste<-subset(dtatarget,timeinterval<outtop&timeinterval>outbottommod)
-
+##########
+# targetlisten ohne outliers
+#set<-dta0
+outl.fun<-function(set){
+  attach(set)
+  outl.form<-set
+  sprmean<-mean(timeinterval)
+  
+  stdev<-sd(timeinterval)
+  sdout<-stdev*2.5
+  outtop<-sprmean+sdout
+  outbottom<-sprmean-sdout ## negative
+  outbottommod<-319
+  #discard outliers according to subset
+  liste<-subset(set,timeinterval<outtop&timeinterval>outbottommod)
+}
+#######
+liste0<-outl.fun(dta0)
+liste1<-outl.fun(dta1)
+liste01<-outl.fun(dta01)
+########################
 #berechne outliers zeichenabhängig####
-#charsalle<-stri_count_boundaries(dtatarget$string,type="character")
-#listeCH<-dtatarget$timeinterval/charsalle
+
+mean(outl.fun(dta0)$timeinterval)
+chars_cpt<-stri_count_boundaries(dtacpt$string,type="character")
+listeCH<-dtatarget$timeinterval/chars_cpt
 #outAmean<-mean(listeCH)
 #outAsd<-sd(listeCH)
 #outAsd<-outAsd*2.5
@@ -791,3 +802,4 @@ toplab<-paste0("mean Lesezeiten (ms)",boxlabtgt)
 lab1<-paste0("bewertungsgrundlage = durchschnittlich ", round(meanchd), " zeichen")
 boxLZmnd<-cbind(SM=LSAcd,EM=LSBcd,LC=LSCcd,ISM=LSDcd)
 boxplot(boxLZmnd,main=toplab,xlab=lab1)
+################

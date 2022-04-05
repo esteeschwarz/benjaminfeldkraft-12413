@@ -38,24 +38,34 @@ dtatargetgilt<-dta
 # dta1<-  subset(dtatargetgilt, target==-1)
 # dta01<- subset(dtatargetgilt, target==0|target==1) 
 
+# to discard negative outliers
+#set minimum response to 319ms
+outbottomfix<-319
+dta_out1<-subset(dta,dta$timeinterval>outbottomfix)
+#dta<-dta_out1
+
 dtax<-function(set,t1,t2,t3){
   dtax<-  subset(set, target==t1|target==t2|target==t3)
 }
 
-flag<-c(0,0,1)
-#dtax_x<-dtax(dta,0,0,0)
-dtax_x<-(dtax(dta,flag[1],flag[2],flag[3]))
-mean(dtax_x$timeinterval)
+#set flag to targetset (target -1 / target 0 / target 1)
+flag<-c(0,0,0)
 
+#dtax_x<-dtax(dta,0,0,0)
+dtax_x<-(dtax(dta_out1,flag[1],flag[2],flag[3]))
+mean(dtax_x$timeinterval)
+dta0<-outl.fun.ch(dtax(dta_out1,-1,0,0))
+
+#remove(dta_x)
 #target==flag[3]
 ##########################
 
 ##hier sampleauswahl modifizieren
 #dtatarget<-dtatargetcpt
 #dtatarget<-dtatarget01
-dtatarget<-dtatarget0
+#dtatarget<-dtatarget0
 #choose labeling >
-boxlabtgt<-", target 0"
+#boxlabtgt<-", target 0"
 #boxlabtgt<-", target 0+1"
 #----------------------
 #für descriptive analysis denselben filter verwenden
@@ -63,7 +73,7 @@ boxlabtgt<-", target 0"
 #subdescr<-subset(sprdatasm,target==-1|target==0|target==1)
 #subdescr<-subset(sprdatasm,target==0|target==1)
 #subdescr<-subset(sprdatasm,target==0)
-subdescr<-dtatarget
+#subdescr<-dtatarget
 #------------------
 
 #berechne outliers zeichenunabhängig
@@ -78,8 +88,6 @@ subdescr<-dtatarget
 ##########
 # targetlisten ohne outliers
 #set<-dta0
-#set minimum response to 319ms
-outbottomfix<-319
 
 outl.fun<-function(set){
   attach(set)
@@ -89,64 +97,55 @@ outl.fun<-function(set){
   stdev<-sd(timeinterval)
   sdout<-stdev*2.5
   outtop<-sprmean+sdout
-  outbottom<-sprmean-sdout ## negative
+ # outbottom<-sprmean-sdout ## negative
 #  outbottommod<-319
   #discard outliers according to subset
-  liste<-subset(set,timeinterval<outtop&timeinterval>outbottomfix)
+  liste<-subset(set,timeinterval<outtop)
 }
 #######
-liste0<-outl.fun(dta0)
-liste1<-outl.fun(dta1)
-liste01<-outl.fun(dta01)
+#liste0<-outl.fun(dta0)
+#liste1<-outl.fun(dta1)
+#liste01<-outl.fun(dta01)
 
-mean(outl.fun(dtax(dta,0,1,-1))$timeinterval)
-mean(outl.fun(dta1)$timeinterval)
-mean(outl.fun(dta01)$timeinterval)
+#mean(outl.fun(dtax(dta,0,1,-1))$timeinterval)
+#mean(outl.fun(dta1)$timeinterval)
+#mean(outl.fun(dta01)$timeinterval)
 
 ########################
 #berechne outliers zeichenabhängig####
-chars_x<-function(set){
+outl.fun.ch<-function(set){
 chars_cpt<-stri_count_boundaries(set$string,type="character")
-}
-mean(chars_x(dtax_x))
+
 liste_x<-chars_x(dtax_x)
 mean(liste_x)
 mnchar_x<-mean(liste_x)
 listeCH<-dtax_x$timeinterval/chars_x(dtax_x)
-#listeCH<-dtacpt$timeinterval/chars_cpt
-
 outAmean<-mean(listeCH)
-
 outAsd<-sd(listeCH)
 outAsd<-outAsd*2.5
 outAtop<-outAmean+outAsd
-outAbottom<-outAmean-outAsd
-outAbottom<-outbottomfix/mnchar_x
 ##### discard outliers with respect to target length
-outAliste<-subset(dtax_x,dtax_x$timeinterval/chars_x(dtax_x)<outAtop&dtax_x$timeinterval/chars_x(dtax_x)>outAbottom)
+outAliste<-subset(set,set$timeinterval/chars_x(dtax_x)<outAtop&dtax_x$timeinterval)
+
+}
+#liste ohne outliers, zeichenabhängig
+#flag<-c(0,0,0)
+dta_ch0<- outl.fun.ch(dtax(dta_out1,0,0,0))
+dta_ch01<-outl.fun.ch(dtax(dta_out1,0,1,0))
+dta_ch101<-outl.fun.ch(dtax(dta_out1,-1,0,1))
+#liste ohne outliers, zeichenunabhängig
+dta0<- outl.fun(dtax(dta_out1,0,0,0))
+dta01<-outl.fun(dtax(dta_out1,0,1,0))
+dta101<-outl.fun(dtax(dta_out1,-1,0,1))
+#wks.
+mnresp1<-cbind(mean(dta_ch0$timeinterval),mean(dta_ch01$timeinterval),mean(dta_ch101$timeinterval))
+mnresp2<-cbind(mean(dta0$timeinterval),mean(dta01$timeinterval),mean(dta101$timeinterval))
+mnresp3<-rbind(mnresp1,mnresp2)
+colnames(mnresp3)<-c("0","0/1","-1/0/1")
+barplot(mnresp3)
 
 
-#discard outliers target 1
-#sprmean<-mean(outl.form1)
-#stdev<-sd(outl.form1)
-#sdout<-stdev*2.5
-#outtop<-sprmean+sdout
-#outbottom<-sprmean-sdout ## negative
-#outbottommod<-319
-#discard outliers according to subset
-#liste1<-subset(dtatarget1,timeinterval<outtop&timeinterval>outbottommod)
-
-
-#discard outliers according to subset
-liste<-subset(dtatarget,timeinterval<outtop&timeinterval>outbottommod)
-dtatarget<-liste
-
-#count with chars berechnet by R
-tgt0proof<-subset(liste,target==0)
-tgt1proof<-subset(liste,target==1)
-
-
-##sd(dtatarget$wds)
+#########################
 ##sm-em-lc-mm kategorien in spalte $group
 sm<-"SM"
 em<-"EM"
@@ -154,6 +153,7 @@ lc<-"LC"
 mm<-"MM"
 ##hier kategorien x vs y einsetzen comme: (...group==sm|...group==em)
 ##liste<-subset(dtatarget,dtatarget$group==x|dtatarget$group==y)
+dtatarget<-dta2
 SMvsEM<-subset(dtatarget,group==sm|group==em)
 SMvsLC<-subset(dtatarget,group==sm|group==lc)
 SMvsMM<-subset(dtatarget,group==sm|group==mm)

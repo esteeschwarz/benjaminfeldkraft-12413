@@ -154,7 +154,7 @@ lc<-"LC"
 mm<-"MM"
 ##hier kategorien x vs y einsetzen comme: (...group==sm|...group==em)
 ##liste<-subset(dtatarget,dtatarget$group==x|dtatarget$group==y)
-dtatarget<-dta0
+dtatarget<-dta_out1
 
 
 SMvsEM<-subset(dtatarget,group==sm|group==em)
@@ -169,8 +169,9 @@ X_SMvsO<-dtatarget$category
 dta_lmx<-function(set,g1,g2){
 subset(set,group==g1|group==g2)
 }
-dta_lmx(dta0,sm,em)
 
+d1<-dta_lmx(dta_out1,sm,em)
+d7<-
 
 ##Length-corrected RTs were computed by regressing the remaining raw RTs 
 ##onto word length using linear mixed effects regression. 
@@ -194,13 +195,14 @@ charsG<-stri_count_boundaries(dtatarget$string,type="character")
 ###
 
 charslme<-function(set,g1,g2){
-  dta_lmx(dta_out1,g1,g2)$string
+  return(stri_count_boundaries(dta_lmx(dta_out1,g1,g2)$string))
 }
   #charslmx<-stri_count_boundaries(dta_lmx(dta0,sm,em)$string,type="character")
 charslmx<-stri_count_boundaries(charslme,type="character")
 charsG<-stri_count_boundaries(dtax_x$string,type="character")
 
 chars1<-stri_count_boundaries(charslme(dta_out1,em,sm))
+chars1<-charslme(dta_out1,sm,em)
 
 
 #s.o.
@@ -212,34 +214,31 @@ lme5<-lme1.formula.5<-(timeinterval ~ charsE + (1|participant)+(1+charsE:partici
 lme6<-lme1.formula.6<-(timeinterval ~ charsF + (1|participant)+(1+charsF:participant))
 lme7<-lme1.formula.7<-(timeinterval ~ charsG + (1|participant)+(1+charsG:participant))
 ###
-lmex<-(timeinterval ~ charslmx +(1|participant)+(1|charslmx:participant))
+#lmex<-(timeinterval ~ charslmx +(1|participant)+(1|charslmx:participant))
 
-#choose formula by changing 1 / 2
-#lme1<-lme1.formula.2
-#lme1<-lme1.formula.1
-#
+lmex<-function(g1,g2){
+  return((timeinterval ~ charslme(dta_out1,em,sm) +(1|participant)+(1|(charslme(dta_out1,em,sm)):participant)))
+}
+lmex<-function(g1,g2){
+  return(timeinterval ~ charslme(dta_out1,g1,g2))
+}
 
+lme1<-lmex(sm,em)
+lme1
+s1<-c(sm,em)
 
-tgt0proof<-subset(dtatarget,target==0)
-tgt1proof<-subset(dtatarget,target==1)
+charsG<-stri_count_boundaries(dta_out1$string,type="character")
+lme7<-(timeinterval ~ charsG)
 
+RT_1<-lm(lmex(sm,em),dta_lmx(dta_out1,sm,em))
+RT_2<-lm(lmex(sm,lc),dta_lmx(dta_out1,sm,lc))
+RT_3<-lm(lmex(sm,mm),dta_lmx(dta_out1,sm,mm))
+RT_4<-lm(lmex(em,lc),dta_lmx(dta_out1,em,lc))
+RT_5<-lm(lmex(em,mm),dta_lmx(dta_out1,em,mm))
+RT_6<-lm(lmex(lc,mm),dta_lmx(dta_out1,lc,mm))
+RT_7<-lm(lme7,dta_out1)
 
-RT_1<-lmer((lme1),SMvsEM)
-RT_2<-lmer((lme2),SMvsLC)
-RT_3<-lmer((lme3),SMvsMM)
-RT_4<-lmer((lme4),EMvsLC)
-RT_5<-lmer((lme5),EMvsMM)
-RT_6<-lmer((lme6),LCvsMM)
-RT_7<-lmer((lme7),dtatarget)
-###
-RT_1<-lmer(lmex,dta_lmx(dta_out1,sm,em))
-RT_2<-lmer(lmex,dta_lmx(dta_out1,sm,lc))
-RT_3<-lmer(lmex,dta_lmx(dta_out1,sm,mm))
-RT_4<-lmer(lmex,dta_lmx(dta_out1,em,lc))
-RT_5<-lmer(lmex,dta_lmx(dta_out1,em,mm))
-RT_6<-lmer(lmex,dta_lmx(dta_out1,lc,mm))
-RT_7<-lmer(lmex,dta_out1)
-
+attach(dta_out1)
 
 
 ##1. lme modeling

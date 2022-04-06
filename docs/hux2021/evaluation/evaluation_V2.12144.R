@@ -93,7 +93,14 @@ outl.fun.rtc<-function(set){
 #5.1
 #set without outliers with resp to target length
 dtap2<-outl.fun.rtc(dtap1)
-
+#5.2 manuell ausgeschlossene fälle im scheme
+dtap3<-subset(dtap2,gilt==1)
+#dtap2<-dtap3
+d1ns<-colnames(dtap2)
+d1ns[6]<-"grSMvs"
+d1ns
+colnames(dtap2)<-d1ns
+colnames(dtap3)<-d1ns
 
 ########################
 #berechne outliers zeichenabhängig####
@@ -291,20 +298,20 @@ b1<-abind("set"=dtaout,"t"=c(-1,0,1),"sm"=F,"g"=c(sm,em),along = 2.5)
 # attach(dta_out1)
 
 
-##1. lme modeling
-#resixp[x]=um den effekt der zeichenanzahl korrigierte(s.o.) response(timeinterval) for further processing
-resixp<-1:7
-resixp[1]<-residuals(rtx(dta_out1,0,1,0,sm,em,outl.fun))
-resixp[2]<-residuals(rtx(dta_out1,0,1,0,sm,lc,outl.fun))
-resixp[3]<-residuals(rtx(dta_out1,0,1,0,sm,mm,outl.fun))
-resixp[4]<-residuals(rtx(dta_out1,0,1,0,em,lc,outl.fun))
-resixp[5]<-residuals(rtx(dta_out1,0,1,0,em,mm,outl.fun))
-resixp[6]<-residuals(rtx(dta_out1,0,1,0,lc,mm,outl.fun))
-resixp[7]<-residuals(rtx(dta_out1,0,1,0,x,x,outl.fun))
-
-resixp[1]<-residuals(rtx(dta_out1,0,1,0,sm,em,outl.fun))
-
-
+# ##1. lme modeling
+# #resixp[x]=um den effekt der zeichenanzahl korrigierte(s.o.) response(timeinterval) for further processing
+# resixp<-1:7
+# resixp[1]<-residuals(rtx(dta_out1,0,1,0,sm,em,outl.fun))
+# resixp[2]<-residuals(rtx(dta_out1,0,1,0,sm,lc,outl.fun))
+# resixp[3]<-residuals(rtx(dta_out1,0,1,0,sm,mm,outl.fun))
+# resixp[4]<-residuals(rtx(dta_out1,0,1,0,em,lc,outl.fun))
+# resixp[5]<-residuals(rtx(dta_out1,0,1,0,em,mm,outl.fun))
+# resixp[6]<-residuals(rtx(dta_out1,0,1,0,lc,mm,outl.fun))
+# resixp[7]<-residuals(rtx(dta_out1,0,1,0,x,x,outl.fun))
+# 
+# resixp[1]<-residuals(rtx(dta_out1,0,1,0,sm,em,outl.fun))
+# 
+# 
 #rubio-fernandez:
 #"We constructed 3 lists of materials, each containing 7 items of each experimental 
 #condition (Extended Metaphor, Single Metaphor and Literal)"
@@ -323,39 +330,32 @@ lme3.formZ <-paste0("timeinterval~category +(1|itemId)+(1|participant)+(1+catego
 #lme3.formrf<-paste0("timeinterval~group +(1|itemId)+(1|participant)+(1+group|participant)")
 #formel auswählen
 #(fmla1 <- as.formula(paste(lme2.formL, lme2.form1)))
+d1ns<-colnames(d1)
+d1ns[6]<-"grSMvs"
+d1ns
+colnames(dtap2)<-d1ns
 lme2.form<-lme2.form2
-#fmlarf   <-lme3.formrf
-#fmlaZ    <-lme3.formZ
+lme2.form1<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
+lme2.form2<- paste0("grSMvs +(1|item)+(1|participant)+(1+grSMvs|participant)")
 
-(fmla1 <- as.formula(paste("resixp1 ~ ", lme2.form)))
-(fmla2 <- as.formula(paste("resixp2 ~ ", lme2.form)))
-(fmla3 <- as.formula(paste("resixp3 ~ ", lme2.form)))
-(fmla4 <- as.formula(paste("resixp4 ~ ", lme2.form)))
-(fmla5 <- as.formula(paste("resixp5 ~ ", lme2.form)))
-(fmla6 <- as.formula(paste("resixp6 ~ ", lme2.form)))
-(fmla7 <- as.formula(paste("resixp7 ~ ", lme2.formZ)))
+(fmla1 <- as.formula(paste("rtc ~ ", lme2.form1)))
+(fmla2 <- as.formula(paste("rtc ~ ", lme2.form2)))
 
-#(fmla7 <- as.formula(paste("timeinterval ~ ", lme2.formZ)))
-
-
-#(fmla0<-as.formula(paste(lme2.formL,lme2.form)))
-#(fmlaZ<-as.formula(paste(lme2.formL,lme2.formZ)))
-lme2.form2<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
-(fmla1 <- as.formula(paste("rtc ~ ", lme2.form2)))
-
-lmerun<-function(set,t1,t2,t3,sm,g1,g2){
+lmerun<-function(form,set,t1,t2,t3,sm,g1,g2){
 lmeset<-dtaset2(set,t1,t2,t3,sm,g1,g2)
-  (sumSMEM<- lmer(fmla1,lmeset)) 
+  (sumSMEM<- lmer(form,lmeset)) 
 
 }
-lmerun(dtap2,0,0,0,F,sm,em)  
+summary(lmerun(fmla2,dtap2,0,0,0,T,sm,mm))  
+summary(lmerun(fmla2,dtap3,0,0,0,F,sm,mm))  
 
-(sumSMLC<- lmer(fmla2,SMvsLC)) 
-(sumSMMM<- lmer(fmla3,SMvsMM)) 
-(sumEMLC<- lmer(fmla4,EMvsLC)) 
-(sumEMMM<- lmer(fmla5,EMvsMM)) 
-(sumLCMM<- lmer(fmla6,LCvsMM)) 
-(sumSMvsO<-lmer(fmla7,dtatarget)) 
+head(dtaset2(dtap3,0,0,0,F,sm,em))
+# (sumSMLC<- lmer(fmla2,SMvsLC)) 
+# (sumSMMM<- lmer(fmla3,SMvsMM)) 
+# (sumEMLC<- lmer(fmla4,EMvsLC)) 
+# (sumEMMM<- lmer(fmla5,EMvsMM)) 
+# (sumLCMM<- lmer(fmla6,LCvsMM)) 
+# (sumSMvsO<-lmer(fmla7,dtatarget)) 
 
 #ohne berücksichtigung der targetlänge analog r/f
 #nicht sinnvoll siehe C.2/C.3

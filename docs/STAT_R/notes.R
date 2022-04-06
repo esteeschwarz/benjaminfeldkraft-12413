@@ -939,3 +939,34 @@ d[4]
 e<-d+d[4]*-1
 e
 d
+###
+con1<-dta[1,]
+con1$lfd<-length(dta$lfd)+1
+con1$participant<-"admin"
+con1$tnid<-999
+con1$gilt<-2
+con1$group<-"control"
+con1$group14<-"control"
+con1$category<-"control"
+#con1$category<-"control"
+con1$itemId<-"control"
+con1$item<-"control"
+con1$regionId<-"control"
+con1$elapsedTime<-NA
+con1$timeinterval<-300
+con1$target<-0
+con1$string<-"dies ist ein control string durchschnittlicher länge"
+con1$char<-stri_count_boundaries(con1$string,"character")
+con1$rt_corr<-NA
+con1$speed<-NA
+con1$adinterval<-NA
+con1$wds<-stri_count_boundaries(con1$string)
+con1$addwds<-NA
+con1$proctbywd<-NA
+con1$addproct<-NA
+con1$proctbywdavg<-NA
+con1$addproctbywds<-NA
+con1$proctbychar<-NA
+con1$addchar<-NA
+con1$addproctbychar<-NA
+con1$explique<-"control string zur festlegung der minimal RT"

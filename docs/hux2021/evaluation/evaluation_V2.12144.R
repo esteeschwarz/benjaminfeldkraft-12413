@@ -39,6 +39,42 @@ dtatargetgilt<-dta
 # dta1<-  subset(dtatargetgilt, target==-1)
 # dta01<- subset(dtatargetgilt, target==0|target==1) 
 
+###
+#add control observation
+adcontrol<-function(set){
+  con1<-set[1,]
+  con1$lfd<-length(dta$lfd)+1
+  con1$participant<-"admin"
+  con1$tnid<-999
+  con1$gilt<-2
+  con1$group<-"control"
+  con1$group14<-"control"
+  con1$category<-"control"
+  con1$itemId<-"control"
+  con1$item<-"control"
+  con1$regionId<-"control"
+  con1$elapsedTime<-NA
+  con1$timeinterval<-300
+  con1$target<-0
+  con1$string<-"dies ist ein control string durchschnittlicher länge"
+  con1$char<-stri_count_boundaries(con1$string,"character")
+  con1$rt_corr<-NA
+  con1$speed<-NA
+  con1$adinterval<-NA
+  con1$wds<-stri_count_boundaries(con1$string)
+  con1$addwds<-NA
+  con1$proctbywd<-NA
+  con1$addproct<-NA
+  con1$proctbywdavg<-NA
+  con1$addproctbywds<-NA
+  con1$proctbychar<-NA
+  con1$addchar<-NA
+  con1$addproctbychar<-NA
+  con1$explique<-"control string zur festlegung der minimal RT"
+  return(rbind(set,con1))
+}
+
+
 # to discard negative outliers
 #set minimum response to 319ms
 #2.
@@ -50,11 +86,20 @@ dtaout<-subset(dta,dta$timeinterval>outbottomfix)
 ##########################
 #3.
 #add column with length corrected response times
-charscpt<-stri_count_boundaries(dtaout$string,type="character")
-dtares<-residuals(lm(timeinterval~charscpt,dtaout))
+getchars<-function(set){
+charscpt<-stri_count_boundaries(set$string,type="character")
+dtares<-residuals(lm(timeinterval~charscpt,set))
 head(dtares)
-dtap1<-cbind(dtaout,"rtc"=dtares)
-
+dtap1<-cbind(set,"rtc"=dtares)
+}
+dtap4<-getchars(dtac)
+tail (dtap4$rtc)+dtap4$rtc[length(dtap4$rtc)]*-1
+dtap5<-dtap4$rtc+dtap4$rtc[length(dtap4$rtc)]*-1+300
+dtap4$rtc[length(dtap4$rtc)]
+tail(dtap5)
+dtap4$rtc<-dtap5
+tail(dtap4)
+mean(dtap4$rtc)
 ##########
 #4. 
 #targetlisten ohne outliers
@@ -331,14 +376,19 @@ lme3.formZ <-paste0("timeinterval~category +(1|itemId)+(1|participant)+(1+catego
 #formel auswählen
 #(fmla1 <- as.formula(paste(lme2.formL, lme2.form1)))
 d1ns<-colnames(d1)
-d1ns[6]<-"grSMvs"
+d1ns[6]<-"vsGroup"
 d1ns
 colnames(dtap2)<-d1ns
+colnames(dtap4)<-d1ns
+
 lme2.form<-lme2.form2
 lme2.form1<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
-lme2.form2<- paste0("grSMvs +(1|item)+(1|participant)+(1+grSMvs|participant)")
-
-(fmla1 <- as.formula(paste("rtc ~ ", lme2.form1)))
+lme2.form2<- paste0((colnames(dtap4)[6]) +"(1|item)+(1|participant)+(1+grSMvs|participant)")
+lme2.form2.rnd<-paste0("(1|item)+(1|participant)")
+lme2.form2.cat<-paste0(colnames(dtap4)[6])
+#colnames(dtap4)[6]
+lme2.form.cpt<- paste(lme2.form2.cat,"+",lme2.form2.rnd,"+(1+",lme2.form2.cat,"|participant)")
+(fmla1 <- as.formula(paste("rtc ~ ", lme2.form.cpt)))
 (fmla2 <- as.formula(paste("rtc ~ ", lme2.form2)))
 
 lmerun<-function(form,set,t1,t2,t3,sm,g1,g2){
@@ -346,8 +396,8 @@ lmeset<-dtaset2(set,t1,t2,t3,sm,g1,g2)
   (sumSMEM<- lmer(form,lmeset)) 
 
 }
-summary(lmerun(fmla2,dtap2,0,0,0,T,sm,mm))  
-summary(lmerun(fmla2,dtap3,0,0,0,F,sm,mm))  
+summary(lmerun(fmla1,dtap4,0,0,0,T,sm,em))  
+summary(lmerun(fmla2,dtap4,0,0,0,F,em,lc))  
 
 head(dtaset2(dtap3,0,0,0,F,sm,em))
 # (sumSMLC<- lmer(fmla2,SMvsLC)) 

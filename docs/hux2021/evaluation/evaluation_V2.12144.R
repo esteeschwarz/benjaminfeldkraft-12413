@@ -19,6 +19,11 @@ library(readr)
 
 #1
 dta<-read.csv2(src_d)
+d1ns<-colnames(dta)
+d1ns[6]<-"vsGroup"
+d1ns
+colnames(dta)<-d1ns
+#colnames(dta)<-d1ns
 
 ###########################
 
@@ -89,7 +94,7 @@ dtaout<-subset(dta,dta$timeinterval>outbottomfix)
 getchars<-function(set){
 charscpt<-stri_count_boundaries(set$string,type="character")
 dtares<-residuals(lm(timeinterval~charscpt,set))
-head(dtares)
+#head(dtares)
 dtap1<-cbind(set,"rtc"=dtares)
 }
 dtap4<-getchars(dtac)
@@ -107,7 +112,7 @@ min(dtap5)
 #targetlisten ohne outliers
 #set<-dta0
 
-outl.fun<-function(set){
+outl.fun<-function(set,outbottom){
   attach(set)
   outl.form<-set
   sprmean<-mean(timeinterval)
@@ -115,10 +120,10 @@ outl.fun<-function(set){
   stdev<-sd(timeinterval)
   sdout<-stdev*2.5
   outtop<-sprmean+sdout
- # outbottom<-sprmean-sdout ## negative
-#  outbottommod<-319
+  # outbottom<-sprmean-sdout ## negative
+  #  outbottommod<-319
   #discard outliers according to subset
-  liste<-subset(set,timeinterval<outtop)
+  liste<-subset(set,timeinterval<outtop&timeinterval>outbottom)
 }
 ###
 #5.
@@ -136,6 +141,7 @@ outl.fun.rtc<-function(set){
   #discard outliers according to subset
   liste<-subset(set,rtc<outtop&rtc>outbottom)
 }
+outl.fun()
 #######
 #5.1
 #set without outliers with resp to target length
@@ -271,6 +277,7 @@ dta_setx<-function(set,t1,t2,t3,sm,g1,g2){
   
   #wks. creates subsets for lmer test  
 }
+dta4<-dta_setx(dta2,0,0,0,F,sm,em)
 ##############################################################
 #rubio-fernandez:
 #"We constructed 3 lists of materials, each containing 7 items of each experimental 
@@ -282,11 +289,6 @@ dta_setx<-function(set,t1,t2,t3,sm,g1,g2){
 #choose between "item"(R/F) above interpreted as itemset (8) of four conditions ($item) or 
 #item as condition (4x8) of item ($itemId)
 #lme2.form2<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
-d1ns<-colnames(dta)
-d1ns[6]<-"vsGroup"
-d1ns
-colnames(dtap2)<-d1ns
-colnames(dtap4)<-d1ns
 
 #lme2.form1<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
 #lme2.form2<- paste0((colnames(dtap4)[6]) +"(1|item)+(1|participant)+(1+grSMvs|participant)")
@@ -296,7 +298,8 @@ lme2.form2.cat<-paste0(colnames(dtap4)[6])
 lme2.form.cpt<- paste(lme2.form2.cat,"+",lme2.form2.rnd,"+(1+",lme2.form2.cat,"|participant)")
 (fmla1 <- as.formula(paste("rtc ~ ", lme2.form.cpt)))
 (fmla2 <- as.formula(paste("timeinterval ~ ", lme2.form.cpt)))
-
+fmla1
+set1[1]
 ####################################################
 lmerun<-function(form,set,t1,t2,t3,sm,g1,g2){
 lmeset<-dta_setx(set,t1,t2,t3,sm,g1,g2)
@@ -308,6 +311,16 @@ lmerun<-function(form,set,chose){
   (sumSMEM<- lmer(form,lmeset)) 
   
 }
+ch1
+lmerun(fmla1,dta4,ch2)
+tail(dta2)
+lmer(fmla2,dta4)
+lmerun(set1)
+remove(dtatg)
+#################### THIS
+dta4<-getchars(dta2)
+tail(dta4)
+lmerun(fmla1,dta4,ch1)
 
 ####################################################
 ch1<-c(0,0,0,F,sm,em)
@@ -355,14 +368,22 @@ sum2<-(lmerun(set1))
 sum1
 sumcpt<-
 set1<-(as.list(fmla1,dtap4,c(0,0,0),F,sm,em))
-set1<-as.list(1)
-set1[["lme"]]<-as.character(fmla1)
+set1<-as.list(0)
+set1[[1]]<-as.character(fmla1)
 as.character(fmla1)
-lmeform<-stri_join(set1[["lme"]][2],set1[["lme"]][1],set1[["lme"]][3],sep=" ")
+lmeform<-stri_join(set1[[1]][2],set1[[1]][1],set1[[1]][3],sep=" ")
 lmeform
-set1[["lme"]]<-lmeform 
-set1[["data"]]<-dtap4
+set1[[1]]<-lmeform 
+set1[["data"]]<-dta4
 #set1[["target"]][1]<-0
+#set1[[3]]
+set1[["chose"]][1]<-0
+set1[["chose"]][2]<-0
+set1[["chose"]][3]<-0
+set1[["chose"]][4]<-F
+set1[["chose"]][5]<-sm
+set1[["chose"]][6]<-em
+### worked >
 set1[["t1"]]<-0
 set1[["t2"]]<-0
 set1[["t3"]]<-0
@@ -386,7 +407,8 @@ set2$data.X.2[8]<-"MEAN"
 set2$data.X[12]<-"COEF"
 set2$data.X.2[8]<-"MEAN"
 
-
+lmerun(set1)
+set1[4]
 sum2<-summary(lmerun(fmla1,dtap4,0,-1,1,F,sm,mm))
 as.data.frame(sum1)
 dif<-sum2$coefficients[1]-sum2$coefficients[2]
@@ -419,7 +441,28 @@ plot(sumLCMM,type=c(plottype,"smooth"),main=s6)
 plot(sumSMvsO,type=c(plottype,"smooth"),main=s7) ## fitted residuals
 #---------------------------------------------------------------------
 
-
+#####################################################
+getmean<-function(set,t1,t2,t3){
+  dta<-set
+  attach(dta)
+  SM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
+  EM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
+  LC<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
+  MM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
+  means<-rbind(SM,EM,LC,MM)
+  SM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
+  EM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
+  LC<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
+  MM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
+  sds<-rbind(SM,EM,LC,MM)
+  tb1<-cbind(means,sds)
+  colnames(tb1)<-c("mean","sd")
+  tb1<-as.data.frame(tb1)
+  tb2<-tb1   [with(tb1,order(mean)),]
+  print(tb2)
+  return(tb2)
+}
+#####################################################
 #---C---  compare R/F results:-----------------------
 #For these raw data, the mean reading time for the critical segments in the 
 #Literal condition was       1457 ms (SD 727 ms), in the 
@@ -427,63 +470,45 @@ plot(sumSMvsO,type=c(plottype,"smooth"),main=s7) ## fitted residuals
 #Single Metaphor condition   1578 ms (SD 768 ms).
 #LC < EM < SM
 #C.1
+tb1<-getmean(dta,0,0,0) # with RAW dataset
 #here results reading time RAW, target 0
-# mean        sd
+#        mean        sd
 # SM 1623.482  834.4605
 # EM 1761.593 1648.5537
-# LC 1835.347 1304.3131
 # MM 1777.380  958.3569
-#SM < EM < MM < LC
-getmean<-function(set,t1,t2,t3){
-dta<-set
-  attach(dta)
-SM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
-EM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
-LC<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
-MM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
-means<-rbind(SM,EM,LC,MM)
-SM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
-EM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
-LC<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
-MM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
-sds<-rbind(SM,EM,LC,MM)
-tb1<-cbind(means,sds)
-colnames(tb1)<-c("mean","sd")
-tb1
-return(tb1)
-}
-getmean(dta,0,0,0)
-#mean(dta_tgx(dta,0,0,1)[with(dta_tgx(dta,0,0,1),group=="EM"),])$timeinterval)
+# LC 1835.347 1304.3131
+
+##################
 #(without outliers): the mean response times for the critical segments were 
 #1421 ms (SD 650 ms) in the Literal condition, 
 #1498 ms (SD 716 ms) in the Extended Metaphor condition, 
 #1537 ms (SD 716 ms) in the Single Metaphor condition.
 #LC < EM < SM
 #C.2
-#without outliers (2,5sd),
-#      SM       EM       LC      ISM
-#1874.245 1689.975 1838.101 1896.411
-#rank:  3         1       2        4
-#std dev
-#      SM       EM       LC      ISM
-#790.7908 804.7236 817.7403 858.2711
+#without outliers (2,5sd)
+dta1<-outl.fun(dta,250) #discard outliers with bottom cutoff at 250ms
+tb2<-getmean(dta1,0,0,0)
+#      mean        sd
+# EM 1655.608 1033.4464
+# SM 1734.169  761.2755
+# MM 1906.137  879.5549
+# LC 1978.348 1261.6891
 
+#second formula, outliers discarded with respect to target length
+dta2<-outl.fun.rtc(dta)
+tb3<-getmean(dta2,1,0,0)
+#       mean        sd
+# SM 1623.537  839.5955
+# EM 1762.375 1658.9397
+# MM 1778.104  962.3031
+# LC 1835.347 1304.3131
 
-#C.3
-#with respect to target length  > LSAc - LSDc
-#SM: 1874, sd: 790
-#EM: 1689, sd: 804
-#LC: 1838, sd: 817
-#MM: 1896, sd: 858
-#EM < LC < SM < MM
-
-#mean LZ bei target 0+1, without outliers, mean target0+1=54 zeichen
-#      SM       EM       LC      ISM
-# 2111.147 2205.45 2254.458 2319.808
-#rank:   1       2       3         4
-#std dev
-#      SM       EM       LC      ISM
-#965.6856 1052.556 1025.115 1081.137
+#mean RT bei target 0+1, without outliers
+#       mean       sd
+# EM 1947.694 1613.328
+# SM 1990.799 1330.748
+# MM 2172.621 1306.336
+# LC 2180.613 2144.785
 
 
 #----
@@ -493,7 +518,16 @@ getmean(dta,0,0,0)
 #no significant difference between Extended and Single metaphors (coefficient = 38.4, SE = 29.7, t = 1.30, n.s.)
 #here: coef=61.8, SE=96.31, t=0.642, n.s.
 #highly significant differences between each of these and the Literal condition 
-#Literal vs. Extended: coefficient = 75.3, SE = 28.2, t = 2.68, p < 0.01; 
+#Literal vs. Extended: coefficient = 75.3, SE = 28.2, t = 2.68, p < 0.01;
+# rtc ~ vsGroup + (1 | item) + (1 | participant) + (1 + vsGroup | participant)
+dta4<-getchars(dta2)
+#ch[x][n]
+#[x] > 1-smem,2-smlc,3-smmm,4-emlc,5-emmm,6-lcmm,7-smvso > ch1-7
+#[n] > :0,0,0 ; 11:1,0 ; 111:-1,0,1 > ch[x]1-11
+sum1<-summary(lmerun(fmla1,dta4,ch4))
+coef(sum1)
+sum1
+
 #here: coef=33.96, SE=98.24,t=0.346
 #Literal vs. Single:  coefficient = 114.7, SE = 28.6, t = 4.00, p < 0.001).
 #here: coef=11.159,SE=96.514,t=0.116

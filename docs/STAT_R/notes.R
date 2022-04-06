@@ -929,3 +929,13 @@ dim(abind(x,y,along=2))
 dim(abind(x,y,along=3))
 dim(abind(x,y,rev.along=1)) # binds on last dimension
 dim(abind(x,y,rev.along=0))
+####
+#length correction
+a<-c(10,30,10,10)
+b<-c(6,5,4,2)
+c<-cbind(a,b)
+d<-residuals(lm(b~a))
+d[4]
+e<-d+d[4]*-1
+e
+d

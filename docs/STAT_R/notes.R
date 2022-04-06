@@ -940,7 +940,8 @@ e<-d+d[4]*-1
 e
 d
 ###
-con1<-dta[1,]
+adcontrol<-function(set){
+con1<-set[1,]
 con1$lfd<-length(dta$lfd)+1
 con1$participant<-"admin"
 con1$tnid<-999
@@ -948,7 +949,6 @@ con1$gilt<-2
 con1$group<-"control"
 con1$group14<-"control"
 con1$category<-"control"
-#con1$category<-"control"
 con1$itemId<-"control"
 con1$item<-"control"
 con1$regionId<-"control"
@@ -970,3 +970,8 @@ con1$proctbychar<-NA
 con1$addchar<-NA
 con1$addproctbychar<-NA
 con1$explique<-"control string zur festlegung der minimal RT"
+return(rbind(set,con1))
+}
+
+
+

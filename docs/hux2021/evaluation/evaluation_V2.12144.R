@@ -331,12 +331,14 @@ ch411<-c(-1,0,1,F,em,lc)
 ch511<-c(-1,0,1,F,em,mm)
 ch611<-c(-1,0,1,F,lc,mm)
 
-ch7<-c(0,0,0,T,sm,em)
-ch71<-c(0,0,1,T,sm,em)
-ch711<-c(-1,0,1,T,sm,em)
+ch7<-c(0,0,0,T,NA,NA)
+ch71<-c(0,0,1,T,NA,NA)
+ch711<-c(-1,0,1,T,NA,NA)
 
-chosx<-c(ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch11,ch21,ch31,ch41,ch51,ch61,ch71,ch111,ch211,ch311,ch411,ch511,ch611,ch711)
-
+chosx<-rbind(ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch11,ch21,ch31,ch41,ch51,ch61,ch71,ch111,ch211,ch311,ch411,ch511,ch611,ch711)
+chosx[7:12]
+chosx.ns<-c("target -1","target 0","target +1","SMvsOther","group 1","group 2")
+colnames(chosx)<-chosx.ns
 
 ch8<-c(0,0,0,F,sm,em)
 ch9<-c(0,0,0,F,sm,em)
@@ -346,8 +348,8 @@ ch11<-c(0,0,0,F,sm,em)
 
 summary(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
 summary(lmerun(fmla1,dtap4,0,0,1,F,sm,em))  
-
-sum1<-(lmerun(fmla1,dtap4,set3))  
+x<-2
+sum1<-(lmerun(fmla1,dtap4,chosx[x,]))  
 sum2<-(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
 sum2<-(lmerun(set1))  
 sum1
@@ -375,7 +377,7 @@ set2<-as.data.frame(set1)
 #as.formula(set1)
 #write_delim(set1,"set1.xls")
 write_csv2(set2,"set2.csv")
-
+##############
 set2$data.X.1[9:11]<-mnresp1
 set2$data.X.2[9:11]<-mnresp2
 set2$data.X[7]<-"MEAN"
@@ -426,11 +428,32 @@ plot(sumSMvsO,type=c(plottype,"smooth"),main=s7) ## fitted residuals
 #LC < EM < SM
 #C.1
 #here results reading time RAW, target 0
-#SM: 1623, sd: 834
-#EM: 1761, sd: 1648
-#LC: 1835, sd: 1304
-#MM: 1777, sd: 958
+# mean        sd
+# SM 1623.482  834.4605
+# EM 1761.593 1648.5537
+# LC 1835.347 1304.3131
+# MM 1777.380  958.3569
 #SM < EM < MM < LC
+getmean<-function(set,t1,t2,t3){
+dta<-set
+  attach(dta)
+SM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
+EM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
+LC<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
+MM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
+means<-rbind(SM,EM,LC,MM)
+SM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
+EM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
+LC<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
+MM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
+sds<-rbind(SM,EM,LC,MM)
+tb1<-cbind(means,sds)
+colnames(tb1)<-c("mean","sd")
+tb1
+return(tb1)
+}
+getmean(dta,0,0,0)
+#mean(dta_tgx(dta,0,0,1)[with(dta_tgx(dta,0,0,1),group=="EM"),])$timeinterval)
 #(without outliers): the mean response times for the critical segments were 
 #1421 ms (SD 650 ms) in the Literal condition, 
 #1498 ms (SD 716 ms) in the Extended Metaphor condition, 

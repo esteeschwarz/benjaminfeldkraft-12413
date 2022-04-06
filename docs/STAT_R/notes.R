@@ -919,3 +919,13 @@ b<-matrix(c,sqrt(length(c)))
 #colnames(b)<-c(letters[1:8])
 #row.names(b)<-c(1:8)
 image(b)
+####
+x <- matrix(1:12,3,4)
+y <- x+100
+dim(abind(x,y,along=0))     # binds on new dimension before first
+dim(abind(x,y,along=1))     # binds on first dimension
+dim(abind(x,y,along=1.5))
+dim(abind(x,y,along=2))
+dim(abind(x,y,along=3))
+dim(abind(x,y,rev.along=1)) # binds on last dimension
+dim(abind(x,y,rev.along=0))

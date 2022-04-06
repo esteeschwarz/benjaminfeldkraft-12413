@@ -17,6 +17,7 @@ library(lmerTest)
 library(stringi)
 library(readr)
 
+#1
 dta<-read.csv2(src_d)
 
 ###########################
@@ -40,15 +41,23 @@ dtatargetgilt<-dta
 
 # to discard negative outliers
 #set minimum response to 319ms
+#2.
 outbottomfix<-319
-dta_out1<-subset(dta,dta$timeinterval>outbottomfix)
-dtaout<-dta_out1
+dtaout<-subset(dta,dta$timeinterval>outbottomfix)
+#dtaout<-dta_out1
 #dta<-dta_out1
 
 ##########################
+#3.
+#add column with length corrected response times
+charscpt<-stri_count_boundaries(dtaout$string,type="character")
+dtares<-residuals(lm(timeinterval~charscpt,dtaout))
+head(dtares)
+dtap1<-cbind(dtaout,"rtc"=dtares)
 
 ##########
-# targetlisten ohne outliers
+#4. 
+#targetlisten ohne outliers
 #set<-dta0
 
 outl.fun<-function(set){
@@ -64,46 +73,77 @@ outl.fun<-function(set){
   #discard outliers according to subset
   liste<-subset(set,timeinterval<outtop)
 }
+###
+#5.
+#discard outliers on base of length corrected response time
+outl.fun.rtc<-function(set){
+  attach(set)
+  outl.form<-set
+  sprmean<-mean(rtc)
+  
+  stdev<-sd(rtc)
+  sdout<-stdev*2.5
+  outtop<-sprmean+sdout
+  outbottom<-sprmean-sdout ## negative
+  #  outbottommod<-319
+  #discard outliers according to subset
+  liste<-subset(set,rtc<outtop&rtc>outbottom)
+}
 #######
-#liste0<-outl.fun(dta0)
-#liste1<-outl.fun(dta1)
-#liste01<-outl.fun(dta01)
+#5.1
+#set without outliers with resp to target length
+dtap2<-outl.fun.rtc(dtap1)
 
-#mean(outl.fun(dtax(dta,0,1,-1))$timeinterval)
-#mean(outl.fun(dta1)$timeinterval)
-#mean(outl.fun(dta01)$timeinterval)
 
 ########################
 #berechne outliers zeichenabhängig####
-outl.fun.ch<-function(set){
-chars_cpt<-stri_count_boundaries(set$string,type="character")
+# outl.fun.ch<-function(set){
+# chars_cpt<-stri_count_boundaries(set$string,type="character")
+# 
+# liste_x<-chars_x(dtax_x)
+# mean(liste_x)
+# mnchar_x<-mean(liste_x)
+# listeCH<-dtax_x$timeinterval/chars_x(dtax_x)
+# outAmean<-mean(listeCH)
+# outAsd<-sd(listeCH)
+# outAsd<-outAsd*2.5
+# outAtop<-outAmean+outAsd
+# ##### discard outliers with respect to target length
+# outAliste<-subset(set,set$timeinterval/chars_x(dtax_x)<outAtop&dtax_x$timeinterval)
+# 
+# }
 
-liste_x<-chars_x(dtax_x)
-mean(liste_x)
-mnchar_x<-mean(liste_x)
-listeCH<-dtax_x$timeinterval/chars_x(dtax_x)
-outAmean<-mean(listeCH)
-outAsd<-sd(listeCH)
-outAsd<-outAsd*2.5
-outAtop<-outAmean+outAsd
-##### discard outliers with respect to target length
-outAliste<-subset(set,set$timeinterval/chars_x(dtax_x)<outAtop&dtax_x$timeinterval)
+#6.
+#target specific extraction
 
-}
 dtatg<-function(set,t1,t2,t3){
   return(subset(set, target==t1|target==t2|target==t3))
 }
-
-#liste ohne outliers, zeichenabhängig
+#########################
+#6.1
+#target specific subsets
+l01<-dtatg(dtap2,0,1,0)
+l0<-dtatg(dtap2,0,0,0)
+l101<-dtatg(dtap2,-1,0,1)
+#########################
+mean(dtap1$rtc,na.rm = T)
+head(dtap1$rtc)
+#liste ohne outliers, zeichenabhängig discarded
 #flag<-c(0,0,0)
-dta_ch0<- outl.fun.ch(dtatg(dta_out1,0,0,0))
-dta_ch01<-outl.fun.ch(dtatg(dta_out1,0,1,0))
-dta_ch101<-outl.fun.ch(dtatg(dta_out1,-1,0,1))
-#liste ohne outliers, zeichenunabhängig
+#dta_ch0<- outl.fun.ch(dtatg(dta_out1,0,0,0))
+#dta_ch01<-outl.fun.ch(dtatg(dta_out1,0,1,0))
+#dta_ch101<-outl.fun.ch(dtatg(dta_out1,-1,0,1))
+
+#listen ohne outliers, zeichenunabhängig discarded
+#6.2
 dta0<-  outl.fun(dtatg(dta_out1, 0,0,0))
 dta01<- outl.fun(dtatg(dta_out1, 0,1,0))
 dta101<-outl.fun(dtatg(dta_out1,-1,0,1))
 #wks.
+dta_ch0<-l0
+dta_ch01<-l01
+dta_ch101<-l101
+
 mnresp1<-rbind(mean(dta_ch0$timeinterval),mean(dta_ch01$timeinterval),mean(dta_ch101$timeinterval))
 mnresp2<-rbind(mean(dta0$timeinterval),mean(dta01$timeinterval),mean(dta101$timeinterval))
 mnresp3<-cbind(mnresp1,mnresp2)
@@ -120,31 +160,60 @@ lc<-"LC"
 mm<-"MM"
 ##hier kategorien x vs y einsetzen comme: (...group==sm|...group==em)
 ##liste<-subset(dtatarget,dtatarget$group==x|dtatarget$group==y)
-dtatarget<-dta_out1
-
-
-SMvsEM<-subset(dtatarget,group==sm|group==em)
-SMvsLC<-subset(dtatarget,group==sm|group==lc)
-SMvsMM<-subset(dtatarget,group==sm|group==mm)
-EMvsLC<-subset(dtatarget,group==em|group==lc)
-EMvsMM<-subset(dtatarget,group==em|group==mm)
-LCvsMM<-subset(dtatarget,group==lc|group==mm)
-##dies hier fuer die auswertung single metaphor vs. other
-X_SMvsO<-dtatarget$category
+#dtatarget<-dta_out1
+# 
+# 
+# SMvsEM<-subset(dtatarget,group==sm|group==em)
+# SMvsLC<-subset(dtatarget,group==sm|group==lc)
+# SMvsMM<-subset(dtatarget,group==sm|group==mm)
+# EMvsLC<-subset(dtatarget,group==em|group==lc)
+# EMvsMM<-subset(dtatarget,group==em|group==mm)
+# LCvsMM<-subset(dtatarget,group==lc|group==mm)
+# ##dies hier fuer die auswertung single metaphor vs. other
+# X_SMvsO<-dtatarget$category
 remove(dtax)
 
 dtatg<-function(set,t1,t2,t3){
   return(subset(set, target==t1|target==t2|target==t3))
 }
 
+#7.
+#subsets according to group
 dta_grx<-function(set,g1,g2){
 subset(set,group==g1|group==g2)
 }
+
 dtaset<-function(set,t1,t2,t3,sm,g1,g2){
   ifelse(sm==1,return(dtatg(dta_out1,t1,t2,t3)),
   return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
 
+}
+remove(dtatg)
+############### THIS
+#8.
+dtaset2<-function(set,t1,t2,t3,sm,g1,g2){
+  dtatg<-function(set,t1,t2,t3){
+    return(subset(set, target==t1|target==t2|target==t3))
   }
+  dta_grx<-function(set,g1,g2){
+    subset(set,group==g1|group==g2)
+  }
+    ifelse(sm==1,return(dtatg(set,t1,t2,t3)),
+        return(dta_grx(dtatg(set,t1,t2,t3),g1,g2)))
+        # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
+  
+#wks. creates subsets for lmer test  
+}
+
+d1<-dtaset2(dtap2,0,1,1,-9,em,sm)
+d2<-dtaset2(dtap2,0,1,0,-9,em,sm)
+d3<-dtaset2(dtap2,0,0,0,-9,em,mm)
+d4<-dtaset2(dtap2,0,0,0,-9,em,sm)
+d5<-dtaset2(dtap2,0,0,0,-9,em,sm)
+d6<-dtaset2(dtap2,0,0,0,-9,em,sm)
+d7<-dtaset2(dtap2,-1,1,0,T,em,sm)
+
+
 d1<-dtaset(dtaout,-1,1,1,-9,em,lc)
 d2<-dtaset(dtaout,0,1,0,-9,em,lc)
 d3<-dtaset(dtaout,0,0,0,-9,em,mm)
@@ -159,64 +228,67 @@ d7<-dtaset(dtaout,-1,1,0,1,em,sm)
 #   subset(set,group==g1|group==g2)
 # }
 #d1<-dta_grx(outl.fun(dta,0,0,0),sm,em)
-
-charsx<-function(set,t1,t2,t3,sx,g1,g2){
-  ifelse(sm==T,return(stri_count_boundaries(dtaset(set,t1,t2,t3,T,g1,g2)$string)),
-         return(stri_count_boundaries(dtaset(set,t1,t2,t3,F,g1,g2)$string)))
-  }
-ch1<-charsx(dtaout,-1,1,0,0,sm,em)
-chx<-charsx(set1)
+# 
+# charsx<-function(set,t1,t2,t3,sx,g1,g2){
+#   ifelse(sm==T,return(stri_count_boundaries(dtaset(set,t1,t2,t3,T,g1,g2)$string)),
+#          return(stri_count_boundaries(dtaset(set,t1,t2,t3,F,g1,g2)$string)))
+#   }
+# ch1<-charsx(dtaout,-1,1,0,0,sm,em)
+# chx<-charsx(set1)
 # chars7<-function(set,t1,t2,t3){
 #   return(stri_count_boundaries(ch(set,t1,t2,t3)))
 # }
 # chars7(dta,0,0,0)
 set1<-as.list(c("set"=dtaout,"t"=c(-1,0,1),"sm"=F,"g"=c(sm,em)))
+set1[[35]]
+library(abind)
+b1<-abind("set"=dtaout,"t"=c(-1,0,1),"sm"=F,"g"=c(sm,em),along = 2.5)
 
-lmex<-function(set){
-  return(timeinterval ~ charsx(set))
-}
-lme1<-lmex(set1)
-lm(lme1,set1)
-
-lmex<-function(set,g1,g2){
-  return(charslme(set,g1,g2))
-}
-
-lmex(dta_out1,em,sm)
-
-lme1<-lmex(dta_ch0,sm,em)
-lme1
-a<-stri_count_boundaries(dta_gr(dta_ch0,em,sm))
-lm(dta_gr(dta_ch0,em,sm)$timeinterval~stri_count_boundaries(dta_gr(dta_ch0,em,sm)),dta_gr(dta_ch0,em,sm))
-lm()
-s1<-c(sm,em)
-
-charsG<-stri_count_boundaries(dta_out1$string,type="character")
-lme7<-(timeinterval ~ charsG)
-RT_x<-lm(lmex(dta_ch0,sm,em),dta_gr(dta_ch0,sm,em))
-RT_1<-lm(lme1,dta_gr(dta_ch0,sm,em))
-RT_1<-lm(lmex(outl.fun.ch(dtax(dta_out1,0,0,0)),sm,em),dta_gr(outl.fun.ch(dtax(dta_out1,0,0,0)),sm,em))
-
-rtx<-function(set,t1,t2,t3,g1,g2,ch){
-  ifelse(g1==-9,s1<-ch(dtax(set,t1,t2,t3)),s1<-ch(dtax(set,t1,t2,t3),g1,g2))
-  
-    lm(lmex(ch(dtax(dta_out1,0,0,0))),dta_gr(ch(dtax(dta_out1,0,0,0))))
-}
-ch<-outl.fun
-outl.fun(dtax(dta,0,1,0),sm,em)
-RT1<-rtx(dta_out1,0,1,0,sm,em,outl.fun)
-lm(lmex(ch(dtax(dta_out1,0,0,0),em,sm)))
-               ch(dtax(set,t1,t2,t3),g1,g2)
-
-RT_1<-lm(lmex(sm,em),dta_lmx(dta_out1,sm,em))
-RT_2<-lm(lmex(sm,lc),dta_lmx(dta_out1,sm,lc))
-RT_3<-lm(lmex(sm,mm),dta_lmx(dta_out1,sm,mm))
-RT_4<-lm(lmex(em,lc),dta_lmx(dta_out1,em,lc))
-RT_5<-lm(lmex(em,mm),dta_lmx(dta_out1,em,mm))
-RT_6<-lm(lmex(lc,mm),dta_lmx(dta_out1,lc,mm))
-RT_7<-lm(lme7,dta_out1)
-
-attach(dta_out1)
+# lmex<-function(set){
+#   return(timeinterval ~ charsx(set))
+# 
+# lme1<-lmex(set1)
+# lm(lme1,set1)
+# 
+# lmex<-function(set,g1,g2){
+#   return(charslme(set,g1,g2))
+# }
+# 
+# lmex(dta_out1,em,sm)
+# 
+# lme1<-lmex(dta_ch0,sm,em)
+# lme1
+# a<-stri_count_boundaries(dta_gr(dta_ch0,em,sm))
+# lm(dta_gr(dta_ch0,em,sm)$timeinterval~stri_count_boundaries(dta_gr(dta_ch0,em,sm)),dta_gr(dta_ch0,em,sm))
+# lm()
+# s1<-c(sm,em)
+# 
+# charsG<-stri_count_boundaries(dta_out1$string,type="character")
+# lme7<-(timeinterval ~ charsG)
+# RT_x<-lm(lmex(dta_ch0,sm,em),dta_gr(dta_ch0,sm,em))
+# RT_1<-lm(lme1,dta_gr(dta_ch0,sm,em))
+# RT_1<-lm(lmex(outl.fun.ch(dtax(dta_out1,0,0,0)),sm,em),dta_gr(outl.fun.ch(dtax(dta_out1,0,0,0)),sm,em))
+# 
+# rtx<-function(set,t1,t2,t3,g1,g2,ch){
+#   ifelse(g1==-9,s1<-ch(dtax(set,t1,t2,t3)),s1<-ch(dtax(set,t1,t2,t3),g1,g2))
+#   
+#     lm(lmex(ch(dtax(dta_out1,0,0,0))),dta_gr(ch(dtax(dta_out1,0,0,0))))
+# }
+# ch<-outl.fun
+# outl.fun(dtax(dta,0,1,0),sm,em)
+# RT1<-rtx(dta_out1,0,1,0,sm,em,outl.fun)
+# lm(lmex(ch(dtax(dta_out1,0,0,0),em,sm)))
+#                ch(dtax(set,t1,t2,t3),g1,g2)
+# 
+# RT_1<-lm(lmex(sm,em),dta_lmx(dta_out1,sm,em))
+# RT_2<-lm(lmex(sm,lc),dta_lmx(dta_out1,sm,lc))
+# RT_3<-lm(lmex(sm,mm),dta_lmx(dta_out1,sm,mm))
+# RT_4<-lm(lmex(em,lc),dta_lmx(dta_out1,em,lc))
+# RT_5<-lm(lmex(em,mm),dta_lmx(dta_out1,em,mm))
+# RT_6<-lm(lmex(lc,mm),dta_lmx(dta_out1,lc,mm))
+# RT_7<-lm(lme7,dta_out1)
+# 
+# attach(dta_out1)
 
 
 ##1. lme modeling
@@ -268,9 +340,16 @@ lme2.form<-lme2.form2
 
 #(fmla0<-as.formula(paste(lme2.formL,lme2.form)))
 #(fmlaZ<-as.formula(paste(lme2.formL,lme2.formZ)))
+lme2.form2<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
+(fmla1 <- as.formula(paste("rtc ~ ", lme2.form2)))
 
+lmerun<-function(set,t1,t2,t3,sm,g1,g2){
+lmeset<-dtaset2(set,t1,t2,t3,sm,g1,g2)
+  (sumSMEM<- lmer(fmla1,lmeset)) 
 
-(sumSMEM<- lmer(fmla1,SMvsEM)) 
+}
+lmerun(dtap2,0,0,0,F,sm,em)  
+
 (sumSMLC<- lmer(fmla2,SMvsLC)) 
 (sumSMMM<- lmer(fmla3,SMvsMM)) 
 (sumEMLC<- lmer(fmla4,EMvsLC)) 

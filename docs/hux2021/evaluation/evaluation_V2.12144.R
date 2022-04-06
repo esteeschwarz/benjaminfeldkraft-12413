@@ -100,6 +100,8 @@ tail(dtap5)
 dtap4$rtc<-dtap5
 tail(dtap4)
 mean(dtap4$rtc)
+min(dtap4$rtc)
+min(dtap5)
 ##########
 #4. 
 #targetlisten ohne outliers
@@ -177,6 +179,11 @@ dtatg<-function(set,t1,t2,t3){
 l01<-dtatg(dtap2,0,1,0)
 l0<-dtatg(dtap2,0,0,0)
 l101<-dtatg(dtap2,-1,0,1)
+
+l01<-dtatg(dtap4,0,1,0)
+l0<-dtatg(dtap4,0,0,0)
+l101<-dtatg(dtap4,-1,0,1)
+
 #########################
 mean(dtap1$rtc,na.rm = T)
 head(dtap1$rtc)
@@ -210,24 +217,16 @@ sm<-"SM"
 em<-"EM"
 lc<-"LC"
 mm<-"MM"
-##hier kategorien x vs y einsetzen comme: (...group==sm|...group==em)
-##liste<-subset(dtatarget,dtatarget$group==x|dtatarget$group==y)
-#dtatarget<-dta_out1
 # 
-# 
-# SMvsEM<-subset(dtatarget,group==sm|group==em)
-# SMvsLC<-subset(dtatarget,group==sm|group==lc)
-# SMvsMM<-subset(dtatarget,group==sm|group==mm)
-# EMvsLC<-subset(dtatarget,group==em|group==lc)
-# EMvsMM<-subset(dtatarget,group==em|group==mm)
-# LCvsMM<-subset(dtatarget,group==lc|group==mm)
-# ##dies hier fuer die auswertung single metaphor vs. other
-# X_SMvsO<-dtatarget$category
 remove(dtax)
 
 dtatg<-function(set,t1,t2,t3){
   return(subset(set, target==t1|target==t2|target==t3))
 }
+dta_tgx<-function(set,t1,t2,t3){
+  return(subset(set, target==t1|target==t2|target==t3))
+}
+
 
 #7.
 #subsets according to group
@@ -235,11 +234,11 @@ dta_grx<-function(set,g1,g2){
 subset(set,group==g1|group==g2)
 }
 
-dtaset<-function(set,t1,t2,t3,sm,g1,g2){
-  ifelse(sm==1,return(dtatg(dta_out1,t1,t2,t3)),
-  return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
-
-}
+# dtaset<-function(set,t1,t2,t3,sm,g1,g2){
+#   ifelse(sm==1,return(dtatg(dta_out1,t1,t2,t3)),
+#   return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
+# 
+# }
 remove(dtatg)
 ############### THIS
 #8.
@@ -247,7 +246,8 @@ dtaset2<-function(set,t1,t2,t3,sm,g1,g2){
   dtatg<-function(set,t1,t2,t3){
     return(subset(set, target==t1|target==t2|target==t3))
   }
-  dta_grx<-function(set,g1,g2){
+
+    dta_grx<-function(set,g1,g2){
     subset(set,group==g1|group==g2)
   }
     ifelse(sm==1,return(dtatg(set,t1,t2,t3)),
@@ -256,107 +256,22 @@ dtaset2<-function(set,t1,t2,t3,sm,g1,g2){
   
 #wks. creates subsets for lmer test  
 }
-
-d1<-dtaset2(dtap2,0,1,1,-9,em,sm)
-d2<-dtaset2(dtap2,0,1,0,-9,em,sm)
-d3<-dtaset2(dtap2,0,0,0,-9,em,mm)
-d4<-dtaset2(dtap2,0,0,0,-9,em,sm)
-d5<-dtaset2(dtap2,0,0,0,-9,em,sm)
-d6<-dtaset2(dtap2,0,0,0,-9,em,sm)
-d7<-dtaset2(dtap2,-1,1,0,T,em,sm)
-
-
-d1<-dtaset(dtaout,-1,1,1,-9,em,lc)
-d2<-dtaset(dtaout,0,1,0,-9,em,lc)
-d3<-dtaset(dtaout,0,0,0,-9,em,mm)
-d4<-dtaset(dtaout,0,0,0,-9,em,sm)
-d5<-dtaset(dtaout,0,0,0,-9,em,sm)
-d6<-dtaset(dtaout,0,0,0,-9,em,sm)
-d7<-dtaset(dtaout,-1,1,0,1,em,sm)
-#wks sets.
-
-###
-# dta_gr<-function(set,g1,g2){
-#   subset(set,group==g1|group==g2)
-# }
-#d1<-dta_grx(outl.fun(dta,0,0,0),sm,em)
-# 
-# charsx<-function(set,t1,t2,t3,sx,g1,g2){
-#   ifelse(sm==T,return(stri_count_boundaries(dtaset(set,t1,t2,t3,T,g1,g2)$string)),
-#          return(stri_count_boundaries(dtaset(set,t1,t2,t3,F,g1,g2)$string)))
-#   }
-# ch1<-charsx(dtaout,-1,1,0,0,sm,em)
-# chx<-charsx(set1)
-# chars7<-function(set,t1,t2,t3){
-#   return(stri_count_boundaries(ch(set,t1,t2,t3)))
-# }
-# chars7(dta,0,0,0)
-set1<-as.list(c("set"=dtaout,"t"=c(-1,0,1),"sm"=F,"g"=c(sm,em)))
-set1[[35]]
-library(abind)
-b1<-abind("set"=dtaout,"t"=c(-1,0,1),"sm"=F,"g"=c(sm,em),along = 2.5)
-
-# lmex<-function(set){
-#   return(timeinterval ~ charsx(set))
-# 
-# lme1<-lmex(set1)
-# lm(lme1,set1)
-# 
-# lmex<-function(set,g1,g2){
-#   return(charslme(set,g1,g2))
-# }
-# 
-# lmex(dta_out1,em,sm)
-# 
-# lme1<-lmex(dta_ch0,sm,em)
-# lme1
-# a<-stri_count_boundaries(dta_gr(dta_ch0,em,sm))
-# lm(dta_gr(dta_ch0,em,sm)$timeinterval~stri_count_boundaries(dta_gr(dta_ch0,em,sm)),dta_gr(dta_ch0,em,sm))
-# lm()
-# s1<-c(sm,em)
-# 
-# charsG<-stri_count_boundaries(dta_out1$string,type="character")
-# lme7<-(timeinterval ~ charsG)
-# RT_x<-lm(lmex(dta_ch0,sm,em),dta_gr(dta_ch0,sm,em))
-# RT_1<-lm(lme1,dta_gr(dta_ch0,sm,em))
-# RT_1<-lm(lmex(outl.fun.ch(dtax(dta_out1,0,0,0)),sm,em),dta_gr(outl.fun.ch(dtax(dta_out1,0,0,0)),sm,em))
-# 
-# rtx<-function(set,t1,t2,t3,g1,g2,ch){
-#   ifelse(g1==-9,s1<-ch(dtax(set,t1,t2,t3)),s1<-ch(dtax(set,t1,t2,t3),g1,g2))
-#   
-#     lm(lmex(ch(dtax(dta_out1,0,0,0))),dta_gr(ch(dtax(dta_out1,0,0,0))))
-# }
-# ch<-outl.fun
-# outl.fun(dtax(dta,0,1,0),sm,em)
-# RT1<-rtx(dta_out1,0,1,0,sm,em,outl.fun)
-# lm(lmex(ch(dtax(dta_out1,0,0,0),em,sm)))
-#                ch(dtax(set,t1,t2,t3),g1,g2)
-# 
-# RT_1<-lm(lmex(sm,em),dta_lmx(dta_out1,sm,em))
-# RT_2<-lm(lmex(sm,lc),dta_lmx(dta_out1,sm,lc))
-# RT_3<-lm(lmex(sm,mm),dta_lmx(dta_out1,sm,mm))
-# RT_4<-lm(lmex(em,lc),dta_lmx(dta_out1,em,lc))
-# RT_5<-lm(lmex(em,mm),dta_lmx(dta_out1,em,mm))
-# RT_6<-lm(lmex(lc,mm),dta_lmx(dta_out1,lc,mm))
-# RT_7<-lm(lme7,dta_out1)
-# 
-# attach(dta_out1)
-
-
-# ##1. lme modeling
-# #resixp[x]=um den effekt der zeichenanzahl korrigierte(s.o.) response(timeinterval) for further processing
-# resixp<-1:7
-# resixp[1]<-residuals(rtx(dta_out1,0,1,0,sm,em,outl.fun))
-# resixp[2]<-residuals(rtx(dta_out1,0,1,0,sm,lc,outl.fun))
-# resixp[3]<-residuals(rtx(dta_out1,0,1,0,sm,mm,outl.fun))
-# resixp[4]<-residuals(rtx(dta_out1,0,1,0,em,lc,outl.fun))
-# resixp[5]<-residuals(rtx(dta_out1,0,1,0,em,mm,outl.fun))
-# resixp[6]<-residuals(rtx(dta_out1,0,1,0,lc,mm,outl.fun))
-# resixp[7]<-residuals(rtx(dta_out1,0,1,0,x,x,outl.fun))
-# 
-# resixp[1]<-residuals(rtx(dta_out1,0,1,0,sm,em,outl.fun))
-# 
-# 
+##############################################################
+dta_setx<-function(set,t1,t2,t3,sm,g1,g2){
+  dtatg<-function(set,t1,t2,t3){
+    return(subset(set, target==t1|target==t2|target==t3))
+  }
+  
+  dta_grx<-function(set,g1,g2){
+    subset(set,group==g1|group==g2)
+  }
+  ifelse(sm==1,return(dtatg(set,t1,t2,t3)),
+         return(dta_grx(dtatg(set,t1,t2,t3),g1,g2)))
+  # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
+  
+  #wks. creates subsets for lmer test  
+}
+##############################################################
 #rubio-fernandez:
 #"We constructed 3 lists of materials, each containing 7 items of each experimental 
 #condition (Extended Metaphor, Single Metaphor and Literal)"
@@ -366,80 +281,53 @@ b1<-abind("set"=dtaout,"t"=c(-1,0,1),"sm"=F,"g"=c(sm,em),along = 2.5)
 
 #choose between "item"(R/F) above interpreted as itemset (8) of four conditions ($item) or 
 #item as condition (4x8) of item ($itemId)
-#lme2.form1<- paste0("group +(1|item)+(1|participant)+(1+group|participant)")
-lme2.form2<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
-#lme2.formL<-paste0("(timeinterval/char)~")
-lme2.formZ<-paste0("category +(1|itemId)+(1|participant)+(1+category|participant)")
-#ohne length corrected RTs
-lme3.formZ <-paste0("timeinterval~category +(1|itemId)+(1|participant)+(1+category|participant)")
-#lme3.formrf<-paste0("timeinterval~group +(1|itemId)+(1|participant)+(1+group|participant)")
-#formel auswählen
-#(fmla1 <- as.formula(paste(lme2.formL, lme2.form1)))
-d1ns<-colnames(d1)
+#lme2.form2<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
+d1ns<-colnames(dta)
 d1ns[6]<-"vsGroup"
 d1ns
 colnames(dtap2)<-d1ns
 colnames(dtap4)<-d1ns
 
-lme2.form<-lme2.form2
-lme2.form1<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
-lme2.form2<- paste0((colnames(dtap4)[6]) +"(1|item)+(1|participant)+(1+grSMvs|participant)")
+#lme2.form1<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
+#lme2.form2<- paste0((colnames(dtap4)[6]) +"(1|item)+(1|participant)+(1+grSMvs|participant)")
 lme2.form2.rnd<-paste0("(1|item)+(1|participant)")
 lme2.form2.cat<-paste0(colnames(dtap4)[6])
 #colnames(dtap4)[6]
 lme2.form.cpt<- paste(lme2.form2.cat,"+",lme2.form2.rnd,"+(1+",lme2.form2.cat,"|participant)")
 (fmla1 <- as.formula(paste("rtc ~ ", lme2.form.cpt)))
-(fmla2 <- as.formula(paste("rtc ~ ", lme2.form2)))
+(fmla2 <- as.formula(paste("timeinterval ~ ", lme2.form.cpt)))
 
+####################################################
 lmerun<-function(form,set,t1,t2,t3,sm,g1,g2){
-lmeset<-dtaset2(set,t1,t2,t3,sm,g1,g2)
+lmeset<-dta_setx(set,t1,t2,t3,sm,g1,g2)
   (sumSMEM<- lmer(form,lmeset)) 
 
 }
-summary(lmerun(fmla1,dtap4,0,0,0,T,sm,em))  
-summary(lmerun(fmla2,dtap4,0,0,0,F,em,lc))  
+####################################################
+summary(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
+summary(lmerun(fmla1,dtap4,0,0,1,F,sm,em))  
 
-head(dtaset2(dtap3,0,0,0,F,sm,em))
-# (sumSMLC<- lmer(fmla2,SMvsLC)) 
-# (sumSMMM<- lmer(fmla3,SMvsMM)) 
-# (sumEMLC<- lmer(fmla4,EMvsLC)) 
-# (sumEMMM<- lmer(fmla5,EMvsMM)) 
-# (sumLCMM<- lmer(fmla6,LCvsMM)) 
-# (sumSMvsO<-lmer(fmla7,dtatarget)) 
+sum1<-(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
+sum2<-(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
+sumcpt<-
+set1<-(as.list(fmla1,dtap4,c(0,0,0),F,sm,em))
+set1<-as.list(1)
+set1[["lme"]]<-fmla1
+set1[["data"]]<-dtap4
+set1[["target"]][1]<-0
+set1[["target"]][2]<-0
+set1[["target"]][3]<-0
+set1[["SMvsO"]]<-F
+set1[["group"]][1]<-sm
+set1[["group"]][2]<-em
 
-#ohne berücksichtigung der targetlänge analog r/f
-#nicht sinnvoll siehe C.2/C.3
-#(sumSMEM<- lmer(fmlarf,SMvsEM)) 
-#(sumSMLC<- lmer(fmlarf,SMvsLC)) 
-#(sumSMMM<- lmer(fmlarf,SMvsMM)) 
-#(sumEMLC<- lmer(fmlarf,EMvsLC)) 
-#(sumEMMM<- lmer(fmlarf,EMvsMM)) 
-#(sumLCMM<- lmer(fmlarf,LCvsMM)) 
-#(sumSMvsO<-lmer(fmlaZ,dtatarget)) 
+sum2<-summary(lmerun(fmla1,dtap4,0,-1,1,F,sm,mm))
+as.data.frame(sum1)
+dif<-sum2$coefficients[1]-sum2$coefficients[2]
+dif
 
-
-#(sumSMEM<- lmer(fmla0,SMvsEM)) 
-#(sumSMLC<- lmer(fmla0,SMvsLC)) 
-#(sumSMMM<- lmer(fmla0,SMvsMM)) 
-#(sumEMLC<- lmer(fmla0,EMvsLC)) 
-#(sumEMMM<- lmer(fmla0,EMvsMM)) 
-#(sumLCMM<- lmer(fmla0,LCvsMM)) 
-#(sumSMvsO<-lmer(fmlaZ,dtatarget01)) 
-
-summary(sumSMEM)
-summary(sumSMLC)
-summary(sumSMMM)
-summary(sumEMLC)
-summary(sumEMMM)
-summary(sumLCMM)
-summary(sumSMvsO)
-
-##
-#SPR_X=RT1
-#SPR_X=liste$timeinterval
-#SPR_X=liste$addproct
-#SPR_X=liste$rt_corr
-
+#head(dtaset2(dtap3,0,0,0,F,sm,em))
+#
 s1<-paste0("SMvsEM",boxlabtgt)
 s2<-paste0("SMvsLC",boxlabtgt)
 s3<-paste0("SMvsMM",boxlabtgt)
@@ -454,7 +342,9 @@ s7<-paste0("SMvsOther",boxlabtgt)
 
 plottype<-"h" ## p points,l lines,b both,c ,o,h histogram,s steps
 
-plot(sumSMEM,type=c(plottype,"smooth"),main=s1)
+plot(sum2,type=c(plottype,"smooth"),main=s1)
+plot(sum1,type=c(plottype,"smooth"),main=s1)
+
 plot(sumSMLC,type=c(plottype,"smooth"),main=s2)
 plot(sumSMMM,type=c(plottype,"smooth"),main=s3)
 plot(sumEMLC,type=c(plottype,"smooth"),main=s4)
@@ -535,240 +425,6 @@ plot(sumSMvsO,type=c(plottype,"smooth"),main=s7) ## fitted residuals
 ##---D----------descriptive analysis
 
 
-
-#count characters of target
-chars1<-stri_count_boundaries(SMvsEM$string,type="character")
-chars2<-stri_count_boundaries(SMvsLC$string,type="character")
-chars3<-stri_count_boundaries(SMvsMM$string,type="character")
-chars4<-stri_count_boundaries(EMvsLC$string,type="character")
-chars5<-stri_count_boundaries(EMvsMM$string,type="character")
-chars6<-stri_count_boundaries(LCvsMM$string,type="character")
-chars7<-stri_count_boundaries(liste$string,type="character")
-
-#subsets kategorienvergleich
-SSM<-subset(subdescr,group=="SM")
-SEM<-subset(subdescr,group=="EM")
-SLC<-subset(subdescr,group=="LC")
-SMM<-subset(subdescr,group=="MM")
-
-chars <-stri_count_boundaries(subdescr$string,type="character")
-meanch<-mean(chars)
-sdch<-sd(chars)
-
-charsA<-stri_count_boundaries(SSM$string,type="character")
-charsB<-stri_count_boundaries(SEM$string,type="character")
-charsC<-stri_count_boundaries(SLC$string,type="character")
-charsD<-stri_count_boundaries(SMM$string,type="character")
-
-#anzahl observationen / kategorie
-obsA<-length(SSM$timeinterval)
-obsB<-length(SEM$timeinterval)
-obsC<-length(SLC$timeinterval)
-obsD<-length(SMM$timeinterval)
-
-#R/F der reihe nach > mean response
-meanRTAraw<-mean(SSM$timeinterval)
-meanRTBraw<-mean(SEM$timeinterval)
-meanRTCraw<-mean(SLC$timeinterval)
-meanRTDraw<-mean(SMM$timeinterval)
-#standardabweichung response
-sdRTAraw<-sd(SSM$timeinterval)
-sdRTBraw<-sd(SEM$timeinterval)
-sdRTCraw<-sd(SLC$timeinterval)
-sdRTDraw<-sd(SMM$timeinterval)
-
-LZrawMeanA<-meanRTAraw
-LZrawMeanB<-meanRTBraw
-LZrawMeanC<-meanRTCraw
-LZrawMeanD<-meanRTDraw
-
-LZrawSdA<-sdRTAraw
-LZrawSdB<-sdRTBraw
-LZrawSdC<-sdRTCraw
-LZrawSdD<-sdRTDraw
-
-
-
-#discard outliers zeichenunabhängig
-LZT<-subdescr$timeinterval
-LZTdev<-sd(LZT)
-LZTout<-LZTdev*2.5
-LZTmean<-mean(LZT)
-LZTouttop<-LZTmean+LZTout
-LZToutbottom<-LZTmean-LZTout
-#outbottom manuell 319ms
-LZTbottommod<-319
-LZTliste<-subset(subdescr,timeinterval<LZTouttop&timeinterval>LZTbottommod)
-
-#subsets kategorienvergleich
-SSMo<-subset(LZTliste,group=="SM")
-SEMo<-subset(LZTliste,group=="EM")
-SLCo<-subset(LZTliste,group=="LC")
-SMMo<-subset(LZTliste,group=="MM")
-proofset1<-length(SSMo$lfd)+length(SEMo$lfd)+length(SLCo$lfd)+length(SMMo$lfd)
-
-
-meanRTAout<-mean(SSMo$timeinterval)
-meanRTBout<-mean(SEMo$timeinterval)
-meanRTCout<-mean(SLCo$timeinterval)
-meanRTDout<-mean(SMMo$timeinterval)
-#standardabweichung response
-sdRTAout<-sd(SSMo$timeinterval)
-sdRTBout<-sd(SEMo$timeinterval)
-sdRTCout<-sd(SLCo$timeinterval)
-sdRTDout<-sd(SMMo$timeinterval)
-
-LZoutMeanA<-meanRTAout
-LZoutMeanB<-meanRTBout
-LZoutMeanC<-meanRTCout
-LZoutMeanD<-meanRTDout
-
-LZoutSdA<-sdRTAout
-LZoutSdB<-sdRTBout
-LZoutSdC<-sdRTCout
-LZoutSdE<-sdRTDout
-
-
-#outliers berechnen zeichenabhängig
-LZcpt<-subdescr$timeinterval/chars
-LZdev<-sd(LZcpt)
-LZout<-LZdev*2.5
-LZmean<-mean(LZcpt)
-LZouttop<-LZmean+LZout
-LZoutbottom<-LZmean-LZout
-#outbottom manuell 319ms
-LZbottommod<-319/meanch
-
-#LZSMa<-(LZSM[LZSM<LZouttop&LZSM>LZbottommod])
-#LZEMa<-(LZEM[LZEM<LZouttop&LZEM>LZbottommod])
-#LZLCa<-(LZLC[LZLC<LZouttop&LZLC>LZbottommod])
-#LZMMa<-(LZMM[LZMM<LZouttop&LZMM>LZbottommod])
-#proofset2<-length(LZSMa)+length(LZEMa)+length(LZLCa)+length(LZMMa)
-
-
-#lesezeit
-#LZSM<-(SSM$timeinterval/charsA)/obsA*obsA*meanch
-#LZEM<-(SEM$timeinterval/charsB)/obsB*obsA*meanch
-#LZLC<-(SLC$timeinterval/charsC)/obsC*obsA*meanch
-#LZMM<-(SMM$timeinterval/charsD)/obsD*obsA*meanch
-
-
-
-LZSM<-(SSM$timeinterval/charsA)
-LZEM<-(SEM$timeinterval/charsB)
-LZLC<-(SLC$timeinterval/charsC)
-LZMM<-(SMM$timeinterval/charsD)
-
-#with discard outliers
-LZSM<-(LZSM[LZSM<LZouttop&LZSM>LZbottommod])
-LZEM<-(LZEM[LZEM<LZouttop&LZEM>LZbottommod])
-LZLC<-(LZLC[LZLC<LZouttop&LZLC>LZbottommod])
-LZMM<-(LZMM[LZMM<LZouttop&LZMM>LZbottommod])
-
-#check number obs. after discard outliers
-proofset2<-length(LZSM)+length(LZEM)+length(LZLC)+length(LZMM)
-
-#lesezeit / durchschnittliche targetphrase (zeichenabhängig)
-LZSMc<-LZSM*meanch
-LZEMc<-LZEM*meanch
-LZLCc<-LZLC*meanch
-LZMMc<-LZMM*meanch
-#mean LZ
-LSAc<-mean(LZSMc)
-LSBc<-mean(LZEMc)
-LSCc<-mean(LZLCc)
-LSDc<-mean(LZMMc)
-
-LZcharA<-LSAc
-LZcharB<-LSBc
-LZcharC<-LSCc
-LZcharD<-LSDc
-
-#sd LZ
-LSAsd<-sd(LZSMc)
-LSBsd<-sd(LZEMc)
-LSCsd<-sd(LZLCc)
-LSDsd<-sd(LZMMc)
-boxLZsd<-cbind(SM=LSAsd,EM=LSBsd,LC=LSCsd,ISM=LSDsd)
-
-LZcharSdA<-LSAsd
-LZcharSdB<-LSBsd
-LZcharSdC<-LSCsd
-LZcharSdD<-LSDsd
-#summe LZ abhängig von zeichenanzahl und anzahl observationen
-sum1<-sum(LZSMc)/obsA
-sum2<-sum(LZEMc)/obsB
-sum3<-sum(LZLCc)/obsC
-sum4<-sum(LZMMc)/obsD
-
-#lab1<-paste0("basis durchschnittliche targetlaenge=", round(meanch), " zeichen")
-#boxLZmn<-cbind(SM=LSAc,EM=LSBc,LC=LSCc,ISM=LSDc)
-#boxplot(boxLZmn,main="mean Lesezeit (ms)",xlab=lab1)
-
-#sum1<-sum(LZSM)/obsA
-#sum2<-sum(LZEM)/obsB
-#sum3<-sum(LZLC)/obsC
-#sum4<-sum(LZMM)/obsD
-
-
-#differenz zwischen kategorien
-difsmem<-sum1-sum2
-difsmlc<-sum1-sum3
-difsmmm<-sum1-sum4
-#SM < em < mm < lc
-difemlc<-sum2-sum3
-difemmm<-sum2-sum4
-diflcmm<-sum3-sum4
-dfksmem<-sum1/sum2
-
-#LZSM<-(SSM$timeinterval/SSM$char)
-#LZEM<-(SEM$timeinterval/SEM$char)/72*76
-#LZLC<-(SLC$timeinterval/SLC$char)/66*76
-#LZMM<-(SMM$timeinterval/SMM$char)/73*76
-
-#LZSMd<-(1/(speedSM*meanchar))
-#LZSM<-(1/(charsSMad/SSM$adinterval))*meanchar
-
-
-#adinterval=lesezeiten target(0) + lesezeit target(1) (*1000ms)
-#speedSMd<-(SSM$addchar/SSM$adinterval*1000)
-#speedLCd<-(SLC$addchar/SLC$adinterval*1000)
-#speedEMd<-(SEM$addchar/SEM$adinterval*1000)
-#speedMMd<-(SMM$addchar/SMM$adinterval*1000)
-
-#LZ addierte 0+1 speed * durchschnittliche zeichenanzahl 0+1
-#LZSMd<-(1/(SSM$addchar/SSM$adinterval)*meanadchar)
-#LZLCd<-(1/(SEM$addchar/SEM$adinterval)*meanadchar)
-#LZEMd<-(1/(SLC$addchar/SLC$adinterval)*meanadchar)
-#LZMMd<-(1/(SMM$addchar/SMM$adinterval)*meanadchar)
-
-
-#LZ median added 0+1
-#LSAdmd<-median(LZSMd)
-#LSBdmd<-median(LZEMd)
-#LSCdmd<-median(LZLCd)
-#LSDdmd<-median(LZMMd)
-
-#median speed added 0+1
-#mdLZA<-median(LZSM)
-#mdLZB<-median(LZEM)
-#mdLZC<-median(LZLC)
-#mdLZD<-median(LZMM)
-
-mdLZA<-median(LZSMc)
-mdLZB<-median(LZEMc)
-mdLZC<-median(LZLCc)
-mdLZD<-median(LZMMc)
-
-#differenzen median kategorien
-difsmem<-mdLZA-mdLZB
-difsmlc<-mdLZA-mdLZC
-difsmmm<-mdLZA-mdLZD
-difemlc<-mdLZB-mdLZC
-difemmm<-mdLZB-mdLZD
-diflcmm<-mdLZC-mdLZD
-dfksmem<-sum1/sum2
-
 labx<-paste0("Basis durchschnittliche targetlaenge=", round(meanch), " zeichen")
 toplab<-paste0("Lesezeiten (ms)",boxlabtgt)
 
@@ -826,25 +482,6 @@ sdRTrawBd<-sd(SEM$adinterval)
 sdRTrawCd<-sd(SLC$adinterval)
 sdRTrawDd<-sd(SMM$adinterval)
 
-#discard outliers zeichenunabhängig
-LZTd<-subdescr$adinterval
-LZTdevd<-sd(LZTd)
-LZToutd<-LZTdevd*2.5
-LZTmeand<-mean(LZTd)
-LZTouttopd<-LZTmeand+LZToutd
-LZToutbottomd<-LZTmeand-LZToutd
-#outbottom manuell 319ms
-LZTbottommodd<-519
-LZTlisted<-subset(subdescr,adinterval<LZTouttopd&adinterval>LZTbottommodd)
-
-#subsets kategorienvergleich
-SSMod<-subset(LZTlisted,group=="SM")
-SEMod<-subset(LZTlisted,group=="EM")
-SLCod<-subset(LZTlisted,group=="LC")
-SMMod<-subset(LZTlisted,group=="MM")
-proofset1d<-length(SSMod$lfd)+length(SEMod$lfd)+length(SLCod$lfd)+length(SMMod$lfd)
-
-
 meanRTAd<-mean(SSMod$adinterval)
 meanRTBd<-mean(SEMod$adinterval)
 meanRTCd<-mean(SLCod$adinterval)
@@ -854,17 +491,6 @@ sdRTAd<-sd(SSMod$adinterval)
 sdRTBd<-sd(SEMod$adinterval)
 sdRTCd<-sd(SLCod$adinterval)
 sdRTDd<-sd(SMMod$adinterval)
-
-#outliers berechnen zeichenabhängig
-meanchd<-mean(subdescr$addchar)
-LZcptd<-subdescr$adinterval/subdescr$addchar
-LZdevd<-sd(LZcptd)
-LZoutd<-LZdevd*2.5
-LZmeand<-mean(LZcptd)
-LZouttopd<-LZmeand+LZoutd
-LZoutbottomd<-LZmeand-LZoutd
-#outbottom manuell 519ms
-LZbottommodd<-519/meanchd
 
 charsAd<-SSM$addchar
 charsBd<-SEM$addchar

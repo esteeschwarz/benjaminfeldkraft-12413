@@ -303,7 +303,7 @@ dta_setx<-function(set,t1,t2,t3,xo,g1,g2){
   
 setvsx<-  function(set,gr){
     dta<-set
-    attach(dta)
+  #  attach(dta)
     sublc<-subset(dta,group==gr)
     subnlc<-subset(dta,group!=gr)
     subna<-subset(dta,is.na(group))
@@ -392,9 +392,11 @@ lmerun<-function(form,set,chose){
     dif<-abs(coef(sum2)[1]-coef(sum2)[2])
     print(sum2$coefficients)
     #wenn global&category 
-    ifelse(chose[4]==1&det_cat==T,out<-c("\nRT category intercept greater =",coef(sum2)[1]>coef(sum2)[2],", diff:",dif,"ms\n"),
+    ifelse(chose[4]==1&det_cat==T,out<-c(T,", diff:",dif,"ms"),
            out<-F)
-    cat("global",chose[5],"=",out) #nicht beide TRUE > global = F
+    ifelse(length(sum2$coefficients[,1]<=2),out2<-coef(sum2)[1]>coef(sum2)[2],out2<-"blu")
+
+    cat("global",chose[5],"=",out,"\nIntercept greater =",out2) #nicht beide TRUE > global = F
     # wenn !category | !vsAll >         
     ifelse(out==F,ifelse(det_vs!=T,out<-c("\ndifference category",chose[5]," ~ ",chose[6],dif,"ms\n\n"),
                          ifelse(chose[4]!=1,out<-c(", diff:",dif,"ms\n\n"),out<-"\nkeine berechnung\n")),     
@@ -407,10 +409,16 @@ lmerun<-function(form,set,chose){
 # as.character(fmlRTCgr[3])
 setx[7,4]==T
  (lmerun(fmlRTCvs,smvso,c(0,0,0,1,sm,lc)))
+(lmerun(fmlRTCvs,smvso,c(0,0,0,0,sm,lc)))
+(lmerun(fmlRTCgr,smvso,c(0,0,0,1,sm,lc)))
+(lmerun(fmlRTCgr,smvso,c(0,0,0,0,sm,lc)))
 
-(lmerun(fmlRTCvs,dta,c(0,0,0,0,sm,lc)))
+(lmerun(fmlRTCgr,dta,c(0,0,0,0,sm,em)))
+sum1<-(lmerun(fmlTIgr,dta,c(0,0,0,0,sm,em)))
+sum2<-summary(sum1)
+length(sum2$coefficients[,1])<=2
 #
-
+dtax<-outl.fun(dta,200)
 # lmedataset<-dta_setx(dta2,0,0,0,F,sm,em)
 # form<-fmla2
 # length(lmedataset$vsGroup)

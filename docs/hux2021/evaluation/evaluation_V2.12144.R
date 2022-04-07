@@ -297,7 +297,52 @@ dta_setx<-function(set,t1,t2,t3,xo,g1,g2){
   #wks. creates subsets for lmer test  
 }
 #dtax<-dta_setx(dta,0,0,0,T,sm,em)
-lmerun(fmla4,dtax,setx[1,]) #warum unterschiedliche variablenlängen? rtc
+
+
+dta_setx<-function(set,t1,t2,t3,xo,g1,g2){
+  
+setvsx<-  function(set,gr){
+    dta<-set
+    attach(dta)
+    sublc<-subset(dta,group==gr)
+    subnlc<-subset(dta,group!=gr)
+    subna<-subset(dta,is.na(group))
+    sublc$category<-gr
+    subns<-stri_join(gr,"vsAll")
+    subnlc$category<-subns
+    subna$category<-subns
+    lcvsO<-rbind(sublc,subnlc,subna)
+    length(lcvsO$category==gr)-length(lcvsO$category==subns)
+    set<-get_rtc(lcvsO)
+    return(set)
+  }
+  
+  dtatg<-function(set,t1,t2,t3,g1){
+    setxvso<-setvsx(set,g1)  
+    return(subset(setxvso, target==t1|target==t2|target==t3))
+  
+    }
+  
+  dta_grx<-function(set,g1,g2){
+    subset(set,group==g1|group==g2)
+  }
+  ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1)),
+         return(dta_grx(dtatg(set,t1,t2,t3,g1),g1,g2)))
+  # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
+  
+  #wks. creates subsets for lmer test  
+}
+dtax<-dta_setx(dta,0,0,0,1,lc,em)
+
+
+
+
+
+
+
+
+
+lmerun(fmlRTCvs,dta,setx[7,]) #warum unterschiedliche variablenlängen? rtc
 ##############################################################
 #rubio-fernandez:
 #"We constructed 3 lists of materials, each containing 7 items of each experimental 
@@ -338,8 +383,8 @@ lmerun<-function(form,set,chose){
   lmeset<-dta_setx(set2,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
   det_cat<-stri_detect (as.character(form[3]),regex  = "category")
   det_vs<-stri_detect (as.character(form[3]),regex  = "vs")
-print(det_cat)
-print(det_vs)
+#print(det_cat)
+#print(det_vs)
   #  diflc<-dif
  # diflcsm<-dif
   sum1<-( lmer(form,lmeset)) 
@@ -362,7 +407,10 @@ print(det_vs)
 # as.character(fmlRTCgr[3])
 setx[7,4]==T
  (lmerun(fmlRTCvs,smvso,c(0,0,0,1,sm,lc)))
-# 
+
+(lmerun(fmlRTCgr,dta,c(0,0,0,0,sm,em)))
+#
+
 # lmedataset<-dta_setx(dta2,0,0,0,F,sm,em)
 # form<-fmla2
 # length(lmedataset$vsGroup)

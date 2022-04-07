@@ -413,7 +413,7 @@ setx[7,4]==T
 (lmerun(fmlRTCgr,smvso,c(0,0,0,1,sm,lc)))
 (lmerun(fmlRTCgr,smvso,c(0,0,0,1,sm,lc)))
 
-lmerun(fmlTIgr,dta,setx[11,])
+lmerun(fmlTIvs,dta,setx[9,])
 lmerun(fmlTIgr,dta,c(0,0,1,1,sm,em))
 
 sum1<-(lmerun(fmlTIgr,dta,c(0,0,1,1,sm,em)))
@@ -422,6 +422,9 @@ length(sum2$coefficients[,1])<=2
 #
 setx[17,]<-c(0,0,1,T,sm,vso)
 dtax<-outl.fun(dta,200)
+#wks.
+#TODO 12146: sets XvsOther dependant on setx[x]
+#################################
 # lmedataset<-dta_setx(dta2,0,0,0,F,sm,em)
 # form<-fmla2
 # length(lmedataset$vsGroup)

@@ -16,7 +16,7 @@ library(lme4)
 library(lmerTest)
 library(stringi)
 library(readr)
-
+library(clipr)
 #1
 dta<-read.csv2(src_d)
 d1ns<-colnames(dta)
@@ -533,6 +533,25 @@ getmean<-function(set,t1,t2,t3,smo,g1,g2){
 # t3<-0
 
 #####################################################
+# create set LC vs Other
+attach(dta)
+sublc<-subset(dta,group=="LC")
+subnlc<-subset(dta,group!="LC")
+subna<-subset(dta,is.na(group))
+
+7966+570
+9194-570
+subnlc<-subset(subnnlc,group!="ZFIL"&group!="SM"&group!="EM"&group!="MM")
+sublc$category<-"LC"
+subnlc$category<-"Z-other"
+subna$category<-"Z-other"
+lcvsO<-rbind(sublc,subnlc,subna)
+length(lcvsO$category=="LC")-length(lcvsO$category=="Z-other")
+
+length(dta$group)
+unique(subnlc$group)
+unique(dta$group)
+unique(subnlc$group)
 #---C---  compare R/F results:-----------------------
 #For these raw data, the mean reading time for the critical segments in the 
 #Literal condition was       1457 ms (SD 727 ms), in the 
@@ -585,27 +604,31 @@ tb3<-getmean(dta2,0,0,0,0,0,0)
 #lme4:
 #(R/F): with the Single condition being read slower than the others (coefficient = 77.3, SE = 24.9, t = 3.10, p < 0.01)
 # SMvsOther
+# fmla2: timeinterval ~ vsGroup + (1 | item) + (1 | participant) + (1 + vsGroup | participant)
 #             Estimate    Std. Error  df        t value     Pr(>|t|)
 # (Intercept) 1627.63038   187.2118  16.62067  8.694058 1.378434e-07
 # vsGroup2EM   -53.31639   114.9268  67.23981 -0.463916 6.442063e-01
 # vsGroup3LC   171.50058   118.1121 113.13773  1.452016 1.492647e-01
 # vsGroup4MM   142.07474   112.3709 206.37242  1.264338 2.075349e-01
+
+# fmla3: timeinterval ~ category + (1 | item) + (1 | participant) + (1 + category | participant)
 #             Estimate      Std. Error      df      t value     Pr(>|t|)
 # (Intercept)     1625.76936  189.20567  16.57594 8.5926036 1.653881e-07
 # categoryZ-other   83.48385   93.21381 240.50228 0.8956168 3.713530e-01
 
-#R/F: no significant difference between Extended and Single metaphors (coefficient = 38.4, SE = 29.7, t = 1.30, n.s.)
+# R/F: no significant difference between Extended and Single metaphors (coefficient = 38.4, SE = 29.7, t = 1.30, n.s.)
+# fmla1: rtc ~ vsGroup + (1 | item) + (1 | participant) + (1 + vsGroup | participant)
 #             Estimate   Std. Error       df    t value     Pr(>|t|)
 # (Intercept) 1628.72591   148.5456 21.54982 10.9644857 2.801232e-10
 # vsGroup2EM   -55.76876   118.9061 40.99085 -0.4690151 6.415439e-01
-
+#
 #highly significant differences between each of these and the Literal condition 
 #Literal vs. Extended: coefficient = 75.3, SE = 28.2, t = 2.68, p < 0.01;
 # rtc ~ vsGroup + (1 | item) + (1 | participant) + (1 + vsGroup | participant)
 
-formel<-fmla1 #for rtc ~ groups           (length corrected RTs)
-formel<-fmla2 #for timeinterval ~ groups  (without resp. target length)
-
+formel<-fmla1 #for rtc ~          groups   (length corrected RTs)
+formel<-fmla2 #for timeinterval ~ groups   (without length correction)
+formel<-fmla3 #for timeinterval ~ category (SMvsOther)
 sum1<-summary(lmerun(fmla3,dta2,setx[7,]))
 coef(sum1)
 sum(sum1$coefficients[,1])

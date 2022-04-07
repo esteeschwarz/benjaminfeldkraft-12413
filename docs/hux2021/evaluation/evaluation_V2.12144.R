@@ -241,6 +241,7 @@ sm<-"SM"
 em<-"EM"
 lc<-"LC"
 mm<-"MM"
+vso<-"vsAll"
 # 
 #remove(dtax)
 
@@ -281,7 +282,7 @@ mm<-"MM"
 # #wks. creates subsets for lmer test  
 # }
 ##############################################################
-dta_setx<-function(set,t1,t2,t3,sm,g1,g2){
+dta_setx<-function(set,t1,t2,t3,xo,g1,g2){
   dtatg<-function(set,t1,t2,t3){
     return(subset(set, target==t1|target==t2|target==t3))
   }
@@ -289,14 +290,14 @@ dta_setx<-function(set,t1,t2,t3,sm,g1,g2){
   dta_grx<-function(set,g1,g2){
     subset(set,group==g1|group==g2)
   }
-  ifelse(sm==1,return(dtatg(set,t1,t2,t3)),
+  ifelse(xo==1,return(dtatg(set,t1,t2,t3)),
          return(dta_grx(dtatg(set,t1,t2,t3),g1,g2)))
   # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
   
   #wks. creates subsets for lmer test  
 }
-dtax<-dta_setx(dta2,0,0,0,F,sm,em)
-lmerun(fmla1,dta,setx[1,])
+#dtax<-dta_setx(dta,0,0,0,T,sm,em)
+lmerun(fmla4,dtax,setx[1,]) #warum unterschiedliche variablenlängen? rtc
 ##############################################################
 #rubio-fernandez:
 #"We constructed 3 lists of materials, each containing 7 items of each experimental 
@@ -313,16 +314,18 @@ lmerun(fmla1,dta,setx[1,])
 #lme2.form2<- paste0((colnames(dtap4)[6]) +"(1|item)+(1|participant)+(1+grSMvs|participant)")
 lme2.form2.rnd<-paste0("(1|item)+(1|participant)")
 lme2.form2.cat<-paste0(colnames(lmedataset)[6])
-lme2.form2.SMvsO<-paste0("category")
+lme2.form2.XvsO<-paste0("category")
 #colnames(dtap4)[6]
-colnames(lmedataset)[6]
+#colnames(lmedataset)[6]
 lme2.form.cpt<-    paste(lme2.form2.cat,"+"  ,lme2.form2.rnd,"+(1+",lme2.form2.cat,  "|participant)")
-lme2.form.cpt.SM<- paste(lme2.form2.SMvsO,"+",lme2.form2.rnd,"+(1+",lme2.form2.SMvsO,"|participant)")
+lme2.form.cpt.XvsO<- paste(lme2.form2.XvsO,"+",lme2.form2.rnd,"+(1+",lme2.form2.XvsO,"|participant)")
 
-(fmla1 <- as.formula(paste("rtc ~ ", lme2.form.cpt)))
-(fmla2 <- as.formula(paste("timeinterval ~ ", lme2.form.cpt)))
-(fmla3<-  as.formula(paste("timeinterval ~ ", lme2.form.cpt.SM)))
-fmla3
+(fmlRTCgr <- as.formula(paste("rtc ~ ", lme2.form.cpt)))
+(fmlTIgr <- as.formula(paste("timeinterval ~ ", lme2.form.cpt)))
+(fmlTIvs<-  as.formula(paste("timeinterval ~ ", lme2.form.cpt.XvsO)))
+(fmlRTCvs <- as.formula(paste("rtc ~ ", lme2.form.cpt.XvsO)))
+
+#fmla3
 #set1[1]
 ####################################################
 # lmerun<-function(form,set,t1,t2,t3,sm,g1,g2){
@@ -331,20 +334,39 @@ fmla3
 # 
 # }
 lmerun<-function(form,set,chose){
-  lmeset<-dta_setx(set,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
-  (sumSMEM<- lmer(form,lmeset)) 
+  set2<-get_rtc(set)
+  lmeset<-dta_setx(set2,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
+  det_cat<-stri_detect (as.character(form[3]),regex  = "category")
+  det_vs<-stri_detect (as.character(form[3]),regex  = "vs")
+print(det_cat)
+print(det_vs)
+  #  diflc<-dif
+ # diflcsm<-dif
+  sum1<-( lmer(form,lmeset)) 
+  sum2<-summary(sum1)
+    dif<-abs(coef(sum2)[1]-coef(sum2)[2])
+    print(sum2$coefficients)
+    #wenn global&category 
+    ifelse(chose[4]==1&det_cat==T,out<-c("\nRT category intercept greater =",coef(sum2)[1]>coef(sum2)[2],", diff:",dif,"ms\n"),
+           out<-F)
+    cat("global",chose[5],"=",out) #nicht beide TRUE > global = F
+    # wenn !category | !vsAll >         
+    ifelse(out==F,ifelse(det_vs!=T,out<-c("\ndifference category",chose[5]," ~ ",chose[6],dif,"ms\n\n"),
+                         ifelse(chose[4]!=1,out<-c(", diff:",dif,"ms\n\n"),out<-"\nkeine berechnung\n")),     
+                         out<-"\n---------------\n")
+    cat(out)
+    #(dif)
+  return(sum1)
   
 }
-# lmerun<-function(form,set,chose){
-#   lmeset<-dta_setx(set,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
-#   (sumSMEM<- lmer(form,lmedataset)) 
-#   
-# }
+# as.character(fmlRTCgr[3])
+setx[7,4]==T
+ (lmerun(fmlRTCvs,smvso,c(0,0,0,1,sm,lc)))
 # 
 # lmedataset<-dta_setx(dta2,0,0,0,F,sm,em)
 # form<-fmla2
 # length(lmedataset$vsGroup)
-# lmerun(fmla1,dta2,setx[2,])
+# lmerun(fmla4,dta,setx[2,])
 ####################################################
 #lmer sets
 #formula:
@@ -381,8 +403,9 @@ chosx.ns<-c("target -1","target 0","target +1","SMvsOther","group 1","group 2")
 colnames(chosx)<-chosx.ns
 return(chosx)
 }
+##########################
 setx<-createsets()
-setx[1,]
+setx[7,]
 #wks.
 
 #ch1
@@ -403,109 +426,65 @@ lmerun(fmla1,dta4,ch1)
 # ch11<-c(0,0,0,F,sm,em)
 # 
 
-summary(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
-summary(lmerun(fmla1,dtap4,0,0,1,F,sm,em))  
-x<-2
-sum1<-(lmerun(fmla1,dtap4,chosx[x,]))  
-sum2<-(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
-sum2<-(lmerun(set1))  
-sum1
-sumcpt<-
-set1<-(as.list(fmla1,dtap4,c(0,0,0),F,sm,em))
-set1<-as.list(0)
-set1[[1]]<-as.character(fmla1)
-as.character(fmla1)
-lmeform<-stri_join(set1[[1]][2],set1[[1]][1],set1[[1]][3],sep=" ")
-lmeform
-set1[[1]]<-lmeform 
-set1[["data"]]<-dta4
-#set1[["target"]][1]<-0
-#set1[[3]]
-set1[["chose"]][1]<-0
-set1[["chose"]][2]<-0
-set1[["chose"]][3]<-0
-set1[["chose"]][4]<-F
-set1[["chose"]][5]<-sm
-set1[["chose"]][6]<-em
-### worked >
-set1[["t1"]]<-0
-set1[["t2"]]<-0
-set1[["t3"]]<-0
-#set1[["target"]][2]<-0
-#set1[["target"]][3]<-0
-set1[["SMvsO"]]<-F
-set1[["g1"]]<-sm
-set1[["g2"]]<-em
-#set1[["group"]][1]<-sm
-#set1[["group"]][2]<-em
-set2<-as.data.frame(set1)
-#as.formula(set1)
-#write_delim(set1,"set1.xls")
-write_csv2(set2,"set2.csv")
-##############
-set2$data.X.1[9:11]<-mnresp1
-set2$data.X.2[9:11]<-mnresp2
-set2$data.X[7]<-"MEAN"
-set2$data.X.1[8]<-""
-set2$data.X.2[8]<-"MEAN"
-set2$data.X[12]<-"COEF"
-set2$data.X.2[8]<-"MEAN"
-
-lmerun(set1)
-set1[4]
-sum2<-summary(lmerun(fmla1,dtap4,0,-1,1,F,sm,mm))
-as.data.frame(sum1)
-dif<-sum2$coefficients[1]-sum2$coefficients[2]
-dif
-
-#head(dtaset2(dtap3,0,0,0,F,sm,em))
-#
-# s1<-paste0("SMvsEM",boxlabtgt)
-# s2<-paste0("SMvsLC",boxlabtgt)
-# s3<-paste0("SMvsMM",boxlabtgt)
-# s4<-paste0("EMvsLC",boxlabtgt)
-# s5<-paste0("EMvsMM",boxlabtgt)
-# s6<-paste0("LCvsMM",boxlabtgt)
-# s7<-paste0("SMvsOther",boxlabtgt)
-
-#png(file='sprexpo001.png')
-#plot(sumSMvsO,type=c("p","smooth")) ## fitted vs residual
-#dev.off()
-
-# plottype<-"h" ## p points,l lines,b both,c ,o,h histogram,s steps
+# summary(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
+# summary(lmerun(fmla1,dtap4,0,0,1,F,sm,em))  
+# x<-2
+# sum1<-(lmerun(fmla1,dtap4,chosx[x,]))  
+# sum2<-(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
+# sum2<-(lmerun(set1))  
+# sum1
+# sumcpt<-
+# set1<-(as.list(fmla1,dtap4,c(0,0,0),F,sm,em))
+# set1<-as.list(0)
+# set1[[1]]<-as.character(fmla1)
+# as.character(fmla1)
+# lmeform<-stri_join(set1[[1]][2],set1[[1]][1],set1[[1]][3],sep=" ")
+# lmeform
+# set1[[1]]<-lmeform 
+# set1[["data"]]<-dta4
+# #set1[["target"]][1]<-0
+# #set1[[3]]
+# set1[["chose"]][1]<-0
+# set1[["chose"]][2]<-0
+# set1[["chose"]][3]<-0
+# set1[["chose"]][4]<-F
+# set1[["chose"]][5]<-sm
+# set1[["chose"]][6]<-em
+# ### worked >
+# set1[["t1"]]<-0
+# set1[["t2"]]<-0
+# set1[["t3"]]<-0
+# #set1[["target"]][2]<-0
+# #set1[["target"]][3]<-0
+# set1[["SMvsO"]]<-F
+# set1[["g1"]]<-sm
+# set1[["g2"]]<-em
+# #set1[["group"]][1]<-sm
+# #set1[["group"]][2]<-em
+# set2<-as.data.frame(set1)
+# #as.formula(set1)
+# #write_delim(set1,"set1.xls")
+# write_csv2(set2,"set2.csv")
+# ##############
+# set2$data.X.1[9:11]<-mnresp1
+# set2$data.X.2[9:11]<-mnresp2
+# set2$data.X[7]<-"MEAN"
+# set2$data.X.1[8]<-""
+# set2$data.X.2[8]<-"MEAN"
+# set2$data.X[12]<-"COEF"
+# set2$data.X.2[8]<-"MEAN"
 # 
-# plot(sum2,type=c(plottype,"smooth"),main=s1)
-# plot(sum1,type=c(plottype,"smooth"),main=s1)
-# 
-# plot(sumSMLC,type=c(plottype,"smooth"),main=s2)
-# plot(sumSMMM,type=c(plottype,"smooth"),main=s3)
-# plot(sumEMLC,type=c(plottype,"smooth"),main=s4)
-# plot(sumEMMM,type=c(plottype,"smooth"),main=s5)
-# plot(sumLCMM,type=c(plottype,"smooth"),main=s6)
-# plot(sumSMvsO,type=c(plottype,"smooth"),main=s7) ## fitted residuals
+# lmerun(set1)
+# set1[4]
+# sum2<-summary(lmerun(fmla1,dtap4,0,-1,1,F,sm,mm))
+# as.data.frame(sum1)
+# dif<-sum2$coefficients[1]-sum2$coefficients[2]
+# dif
+
 # #---------------------------------------------------------------------
 
 #####################################################
-# getmean<-function(set,t1,t2,t3,sm){
-#   dta<-set
-#   attach(dta)
-#   SM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
-#   EM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
-#   LC<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
-#   MM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
-#   means<-rbind(SM,EM,LC,MM)
-#   SM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
-#   EM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
-#   LC<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
-#   MM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
-#   sds<-rbind(SM,EM,LC,MM)
-#   tb1<-cbind(means,sds)
-#   colnames(tb1)<-c("mean","sd")
-#   tb1<-as.data.frame(tb1)
-#   tb2<-tb1   [with(tb1,order(mean)),]
-#   print(tb2)
-#   return(tb2)
-# }
+
 getmean<-function(set,t1,t2,t3,smo,g1,g2){
   dta<-set
   attach(dta)
@@ -533,25 +512,25 @@ getmean<-function(set,t1,t2,t3,smo,g1,g2){
 # t3<-0
 
 #####################################################
-# create set LC vs Other
+# create set group vs Other
+setvsx<-function(set,gr){
+  dta<-set
 attach(dta)
-sublc<-subset(dta,group=="LC")
-subnlc<-subset(dta,group!="LC")
+sublc<-subset(dta,group==gr)
+subnlc<-subset(dta,group!=gr)
 subna<-subset(dta,is.na(group))
-
-7966+570
-9194-570
-subnlc<-subset(subnnlc,group!="ZFIL"&group!="SM"&group!="EM"&group!="MM")
-sublc$category<-"LC"
-subnlc$category<-"Z-other"
-subna$category<-"Z-other"
+sublc$category<-gr
+subns<-stri_join(gr,"vsAll")
+subnlc$category<-subns
+subna$category<-subns
 lcvsO<-rbind(sublc,subnlc,subna)
-length(lcvsO$category=="LC")-length(lcvsO$category=="Z-other")
-
-length(dta$group)
-unique(subnlc$group)
-unique(dta$group)
-unique(subnlc$group)
+length(lcvsO$category==gr)-length(lcvsO$category==subns)
+return(lcvsO)
+}
+#wks.
+smvso<-setvsx(dta2,sm)
+#############################################################################
+#############################################################################
 #---C---  compare R/F results:-----------------------
 #For these raw data, the mean reading time for the critical segments in the 
 #Literal condition was       1457 ms (SD 727 ms), in the 
@@ -612,9 +591,9 @@ tb3<-getmean(dta2,0,0,0,0,0,0)
 # vsGroup4MM   142.07474   112.3709 206.37242  1.264338 2.075349e-01
 
 # fmla3: timeinterval ~ category + (1 | item) + (1 | participant) + (1 + category | participant)
-#             Estimate      Std. Error      df      t value     Pr(>|t|)
-# (Intercept)     1625.76936  189.20567  16.57594 8.5926036 1.653881e-07
-# categoryZ-other   83.48385   93.21381 240.50228 0.8956168 3.713530e-01
+#                  Estimate Std. Error        df  t value     Pr(>|t|)
+# (Intercept)     1609.0465   193.5761  17.06412 8.312216 2.099865e-07
+# categorySMvsAll  164.1103   125.8149 158.10744 1.304379 1.940000e-01
 
 # R/F: no significant difference between Extended and Single metaphors (coefficient = 38.4, SE = 29.7, t = 1.30, n.s.)
 # fmla1: rtc ~ vsGroup + (1 | item) + (1 | participant) + (1 + vsGroup | participant)
@@ -623,16 +602,42 @@ tb3<-getmean(dta2,0,0,0,0,0,0)
 # vsGroup2EM   -55.76876   118.9061 40.99085 -0.4690151 6.415439e-01
 #
 #highly significant differences between each of these and the Literal condition 
-#Literal vs. Extended: coefficient = 75.3, SE = 28.2, t = 2.68, p < 0.01;
-# rtc ~ vsGroup + (1 | item) + (1 | participant) + (1 + vsGroup | participant)
+#Literal vs. Extended: coefficient = 75.3, SE = 28.2, t = 2.68, p < 0.01
+# fmla3
+# #                   Estimate Std.Error        df    t value     Pr(>|t|)
+# (Intercept)     1786.69783   208.1213  21.73803  8.5848850 1.976257e-08
+# categoryLCvsAll  -72.24273   128.3764 273.48929 -0.5627417 5.740718e-01
 
+#Literal vs. Single: coefficient = 114.7, SE = 28.6, t = 4.00, p < 0.001)
+#             Estimate Std. Error        df  t value     Pr(>|t|)
+# (Intercept) 1628.8417   201.6062  12.92014 8.079324 2.090719e-06
+# vsGroup3LC   151.2718   127.6845 101.21898 1.184731 2.388981e-01
+#RT category greater = TRUE , difference category LC  ~ all = 1477.57 ms
+#### with length corrected RT:
+#              Estimate Std. Error       df   t value  Pr(>|t|)
+# (Intercept) -310.20431   124.7393 34.67972 -2.486821 0.0178540
+# vsGroup3LC    62.97836   114.9605 92.25119  0.547826 0.5851345
+#RT category greater = FALSE , difference category LC  ~ all = 373.1827 ms
+#############
 formel<-fmla1 #for rtc ~          groups   (length corrected RTs)
 formel<-fmla2 #for timeinterval ~ groups   (without length correction)
-formel<-fmla3 #for timeinterval ~ category (SMvsOther)
-sum1<-summary(lmerun(fmla3,dta2,setx[7,]))
-coef(sum1)
-sum(sum1$coefficients[,1])
-sum1
+formel<-fmla3 #for timeinterval ~ category (XvsOther)
+formel<-fmla4 #for rtc ~          category (XvsOther)
+#create group vs set
+# setx[x,] < x has to be 7,71,711 for global compare sets
+catsingle<-lc
+setsingle<-setvsx(dta2,catsingle)
+sum1<-summary(lmerun(fmla3,setsingle,setx[7,]))
+sum1<-summary(lmerun(fmla1,dta2,setx[2,]))
+
+dif<-abs(coef(sum1)[1]-coef(sum1)[2])
+cat("RT category greater =",coef(sum1)[1]>coef(sum1)[2],", difference category",catsingle," ~ all =",dif,"ms")
+(sum1$coefficients[])
+diflc<-dif
+diflcsm<-dif
+
+
+#sum1
 #with timeinterval fits with means in C.2
 
 #here: coef=33.96, SE=98.24,t=0.346

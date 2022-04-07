@@ -29,11 +29,11 @@ colnames(dta)<-d1ns
 
 ##View(sprdataprepared)
 ##top datenframe aus datei, gueltige faelle, target 0+1
-sprdatasm<-dta
+#sprdatasm<-dta
 ##sprdatasm<-sprdata11342dtaxp ##fuer laden aus dateisystem, importiertes set hier einsetzen
 #dtatargetgilt<-subset(sprdatasm, gilt==1)
 #for complete dataset next
-dtatargetgilt<-dta
+#dtatargetgilt<-dta
 #select filter for target:
 #wenn mit adinterval gerechnet werden soll, musz target==0 ausgewaehlt werden.
 # 
@@ -83,30 +83,43 @@ adcontrol<-function(set){
 # to discard negative outliers
 #set minimum response to 319ms
 #2.
-outbottomfix<-319
-dtaout<-subset(dta,dta$timeinterval>outbottomfix)
+#outbottomfix<-319
+#dtaout<-subset(dta,dta$timeinterval>outbottomfix)
 #dtaout<-dta_out1
 #dta<-dta_out1
 
 ##########################
 #3.
 #add column with length corrected response times
-getchars<-function(set){
+get_rtc<-function(set){
 charscpt<-stri_count_boundaries(set$string,type="character")
 dtares<-residuals(lm(timeinterval~charscpt,set))
 #head(dtares)
-dtap1<-cbind(set,"rtc"=dtares)
+#dtap1<-cbind(set,"rtc"=dtares)
+set<-cbind(set,"rtc"=dtares)
+return(set)
 }
-dtap4<-getchars(dtac)
-tail (dtap4$rtc)+dtap4$rtc[length(dtap4$rtc)]*-1
-dtap5<-dtap4$rtc+dtap4$rtc[length(dtap4$rtc)]*-1+300
-dtap4$rtc[length(dtap4$rtc)]
-tail(dtap5)
-dtap4$rtc<-dtap5
-tail(dtap4)
-mean(dtap4$rtc)
-min(dtap4$rtc)
-min(dtap5)
+
+getchars<-function(set){
+  charscpt<-stri_count_boundaries(set$string,type="character")
+  dtares<-residuals(lm(timeinterval~charscpt,set))
+  #head(dtares)
+  dtap1<-cbind(set,"rtc"=dtares)
+#  set<-cbind(set,"rtc"=dtares)
+ # return(set)
+}
+
+#####################
+# dtap4<-getchars(dtac)
+# tail (dtap4$rtc)+dtap4$rtc[length(dtap4$rtc)]*-1
+# dtap5<-dtap4$rtc+dtap4$rtc[length(dtap4$rtc)]*-1+300
+# dtap4$rtc[length(dtap4$rtc)]
+# tail(dtap5)
+# dtap4$rtc<-dtap5
+# tail(dtap4)
+# mean(dtap4$rtc)
+# min(dtap4$rtc)
+# min(dtap5)
 ##########
 #4. 
 #targetlisten ohne outliers
@@ -128,9 +141,12 @@ outl.fun<-function(set,outbottom){
 ###
 #5.
 #discard outliers on base of length corrected response time
+###################################
 outl.fun.rtc<-function(set){
   attach(set)
-  outl.form<-set
+dtartc<-get_rtc(set)
+  #  outl.form<-set
+rtc<-dtartc$rtc
   sprmean<-mean(rtc)
   
   stdev<-sd(rtc)
@@ -139,16 +155,18 @@ outl.fun.rtc<-function(set){
   outbottom<-sprmean-sdout ## negative
   #  outbottommod<-319
   #discard outliers according to subset
-  liste<-subset(set,rtc<outtop&rtc>outbottom)
-}
-outl.fun()
+  liste<-subset(dtartc,rtc<outtop&rtc>outbottom)
+
+  }
+#dtax<-outl.fun.rtc(dta)
+#outl.fun()
 #######
 #5.1
 #set without outliers with resp to target length
 dtap2<-outl.fun.rtc(dtap1)
 #5.2 manuell ausgeschlossene fälle im scheme
 dtap3<-subset(dtap2,gilt==1)
-#dtap2<-dtap3
+dtap2<-dtap3
 d1ns<-colnames(dtap2)
 d1ns[6]<-"grSMvs"
 d1ns
@@ -176,23 +194,23 @@ colnames(dtap3)<-d1ns
 #6.
 #target specific extraction
 
-dtatg<-function(set,t1,t2,t3){
-  return(subset(set, target==t1|target==t2|target==t3))
-}
+# dtatg<-function(set,t1,t2,t3){
+#   return(subset(set, target==t1|target==t2|target==t3))
+# }
 #########################
 #6.1
 #target specific subsets
-l01<-dtatg(dtap2,0,1,0)
-l0<-dtatg(dtap2,0,0,0)
-l101<-dtatg(dtap2,-1,0,1)
-
-l01<-dtatg(dtap4,0,1,0)
-l0<-dtatg(dtap4,0,0,0)
-l101<-dtatg(dtap4,-1,0,1)
+# l01<-dtatg(dtap2,0,1,0)
+# l0<-dtatg(dtap2,0,0,0)
+# l101<-dtatg(dtap2,-1,0,1)
+# 
+# l01<-dtatg(dtap4,0,1,0)
+# l0<-dtatg(dtap4,0,0,0)
+# l101<-dtatg(dtap4,-1,0,1)
 
 #########################
-mean(dtap1$rtc,na.rm = T)
-head(dtap1$rtc)
+#mean(dtap1$rtc,na.rm = T)
+#head(dtap1$rtc)
 #liste ohne outliers, zeichenabhängig discarded
 #flag<-c(0,0,0)
 #dta_ch0<- outl.fun.ch(dtatg(dta_out1,0,0,0))
@@ -201,21 +219,21 @@ head(dtap1$rtc)
 
 #listen ohne outliers, zeichenunabhängig discarded
 #6.2
-dta0<-  outl.fun(dtatg(dta_out1, 0,0,0))
-dta01<- outl.fun(dtatg(dta_out1, 0,1,0))
-dta101<-outl.fun(dtatg(dta_out1,-1,0,1))
-#wks.
-dta_ch0<-l0
-dta_ch01<-l01
-dta_ch101<-l101
-
-mnresp1<-rbind(mean(dta_ch0$timeinterval),mean(dta_ch01$timeinterval),mean(dta_ch101$timeinterval))
-mnresp2<-rbind(mean(dta0$timeinterval),mean(dta01$timeinterval),mean(dta101$timeinterval))
-mnresp3<-cbind(mnresp1,mnresp2)
-colnames(mnresp3)<-c("dep chars","indep chars")
-barplot((mnresp3))
-#difference sig with/without resp to target length:
-chisq.test(mnresp3,correct = F)
+# dta0<-  outl.fun(dtatg(dta_out1, 0,0,0))
+# dta01<- outl.fun(dtatg(dta_out1, 0,1,0))
+# dta101<-outl.fun(dtatg(dta_out1,-1,0,1))
+# #wks.
+# dta_ch0<-l0
+# dta_ch01<-l01
+# dta_ch101<-l101
+# 
+# mnresp1<-rbind(mean(dta_ch0$timeinterval),mean(dta_ch01$timeinterval),mean(dta_ch101$timeinterval))
+# mnresp2<-rbind(mean(dta0$timeinterval),mean(dta01$timeinterval),mean(dta101$timeinterval))
+# mnresp3<-cbind(mnresp1,mnresp2)
+# colnames(mnresp3)<-c("dep chars","indep chars")
+# barplot((mnresp3))
+# #difference sig with/without resp to target length:
+# chisq.test(mnresp3,correct = F)
 
 #########################
 ##sm-em-lc-mm kategorien in spalte $group
@@ -224,44 +242,44 @@ em<-"EM"
 lc<-"LC"
 mm<-"MM"
 # 
-remove(dtax)
+#remove(dtax)
 
-dtatg<-function(set,t1,t2,t3){
-  return(subset(set, target==t1|target==t2|target==t3))
-}
-dta_tgx<-function(set,t1,t2,t3){
-  return(subset(set, target==t1|target==t2|target==t3))
-}
+# dtatg<-function(set,t1,t2,t3){
+#   return(subset(set, target==t1|target==t2|target==t3))
+# }
+# dta_tgx<-function(set,t1,t2,t3){
+#   return(subset(set, target==t1|target==t2|target==t3))
+# }
 
 
 #7.
 #subsets according to group
-dta_grx<-function(set,g1,g2){
-subset(set,group==g1|group==g2)
-}
+# dta_grx<-function(set,g1,g2){
+# subset(set,group==g1|group==g2)
+# }
 
 # dtaset<-function(set,t1,t2,t3,sm,g1,g2){
 #   ifelse(sm==1,return(dtatg(dta_out1,t1,t2,t3)),
 #   return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
 # 
 # }
-remove(dtatg)
+#remove(dtatg)
 ############### THIS
 #8.
-dtaset2<-function(set,t1,t2,t3,sm,g1,g2){
-  dtatg<-function(set,t1,t2,t3){
-    return(subset(set, target==t1|target==t2|target==t3))
-  }
-
-    dta_grx<-function(set,g1,g2){
-    subset(set,group==g1|group==g2)
-  }
-    ifelse(sm==1,return(dtatg(set,t1,t2,t3)),
-        return(dta_grx(dtatg(set,t1,t2,t3),g1,g2)))
-        # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
-  
-#wks. creates subsets for lmer test  
-}
+# dtaset2<-function(set,t1,t2,t3,sm,g1,g2){
+#   dtatg<-function(set,t1,t2,t3){
+#     return(subset(set, target==t1|target==t2|target==t3))
+#   }
+# 
+#     dta_grx<-function(set,g1,g2){
+#     subset(set,group==g1|group==g2)
+#   }
+#     ifelse(sm==1,return(dtatg(set,t1,t2,t3)),
+#         return(dta_grx(dtatg(set,t1,t2,t3),g1,g2)))
+#         # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
+#   
+# #wks. creates subsets for lmer test  
+# }
 ##############################################################
 dta_setx<-function(set,t1,t2,t3,sm,g1,g2){
   dtatg<-function(set,t1,t2,t3){
@@ -277,7 +295,8 @@ dta_setx<-function(set,t1,t2,t3,sm,g1,g2){
   
   #wks. creates subsets for lmer test  
 }
-dta4<-dta_setx(dta2,0,0,0,F,sm,em)
+dtax<-dta_setx(dta2,0,0,0,F,sm,em)
+lmerun(fmla1,dta,setx[1,])
 ##############################################################
 #rubio-fernandez:
 #"We constructed 3 lists of materials, each containing 7 items of each experimental 
@@ -293,36 +312,44 @@ dta4<-dta_setx(dta2,0,0,0,F,sm,em)
 #lme2.form1<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
 #lme2.form2<- paste0((colnames(dtap4)[6]) +"(1|item)+(1|participant)+(1+grSMvs|participant)")
 lme2.form2.rnd<-paste0("(1|item)+(1|participant)")
-lme2.form2.cat<-paste0(colnames(dtap4)[6])
+lme2.form2.cat<-paste0(colnames(lmedataset)[6])
+lme2.form2.SMvsO<-paste0("category")
 #colnames(dtap4)[6]
-lme2.form.cpt<- paste(lme2.form2.cat,"+",lme2.form2.rnd,"+(1+",lme2.form2.cat,"|participant)")
+colnames(lmedataset)[6]
+lme2.form.cpt<-    paste(lme2.form2.cat,"+"  ,lme2.form2.rnd,"+(1+",lme2.form2.cat,  "|participant)")
+lme2.form.cpt.SM<- paste(lme2.form2.SMvsO,"+",lme2.form2.rnd,"+(1+",lme2.form2.SMvsO,"|participant)")
+
 (fmla1 <- as.formula(paste("rtc ~ ", lme2.form.cpt)))
 (fmla2 <- as.formula(paste("timeinterval ~ ", lme2.form.cpt)))
-fmla1
-set1[1]
+(fmla3<-  as.formula(paste("timeinterval ~ ", lme2.form.cpt.SM)))
+fmla3
+#set1[1]
 ####################################################
-lmerun<-function(form,set,t1,t2,t3,sm,g1,g2){
-lmeset<-dta_setx(set,t1,t2,t3,sm,g1,g2)
-  (sumSMEM<- lmer(form,lmeset)) 
-
-}
+# lmerun<-function(form,set,t1,t2,t3,sm,g1,g2){
+# lmeset<-dta_setx(set,t1,t2,t3,sm,g1,g2)
+#   (sumSMEM<- lmer(form,lmeset)) 
+# 
+# }
 lmerun<-function(form,set,chose){
   lmeset<-dta_setx(set,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
   (sumSMEM<- lmer(form,lmeset)) 
   
 }
-ch1
-lmerun(fmla1,dta4,ch2)
-tail(dta2)
-lmer(fmla2,dta4)
-lmerun(set1)
-remove(dtatg)
-#################### THIS
-dta4<-getchars(dta2)
-tail(dta4)
-lmerun(fmla1,dta4,ch1)
-
+# lmerun<-function(form,set,chose){
+#   lmeset<-dta_setx(set,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
+#   (sumSMEM<- lmer(form,lmedataset)) 
+#   
+# }
+# 
+# lmedataset<-dta_setx(dta2,0,0,0,F,sm,em)
+# form<-fmla2
+# length(lmedataset$vsGroup)
+# lmerun(fmla1,dta2,setx[2,])
 ####################################################
+#lmer sets
+#formula:
+#(target-1,target0,target+1,SMvsO=T/F,group1,group2)
+createsets<-function(){
 ch1<-c(0,0,0,F,sm,em)
 ch2<-c(0,0,0,F,sm,lc)
 ch3<-c(0,0,0,F,sm,mm)
@@ -352,12 +379,29 @@ chosx<-rbind(ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch11,ch21,ch31,ch41,ch51,ch61,ch71,ch11
 chosx[7:12]
 chosx.ns<-c("target -1","target 0","target +1","SMvsOther","group 1","group 2")
 colnames(chosx)<-chosx.ns
+return(chosx)
+}
+setx<-createsets()
+setx[1,]
+#wks.
 
-ch8<-c(0,0,0,F,sm,em)
-ch9<-c(0,0,0,F,sm,em)
-ch10<-c(0,0,0,F,sm,em)
-ch11<-c(0,0,0,F,sm,em)
+#ch1
+lmerun(fmla1,dta,setx[1,])
+tail(dta2)
+lmer(fmla2,dta4)
+lmerun(set1)
+remove(dtatg)
+#################### THIS
+dta4<-getchars(dta2)
+tail(dta4)
+lmerun(fmla1,dta4,ch1)
 
+
+# ch8<-c(0,0,0,F,sm,em)
+# ch9<-c(0,0,0,F,sm,em)
+# ch10<-c(0,0,0,F,sm,em)
+# ch11<-c(0,0,0,F,sm,em)
+# 
 
 summary(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
 summary(lmerun(fmla1,dtap4,0,0,1,F,sm,em))  
@@ -416,44 +460,64 @@ dif
 
 #head(dtaset2(dtap3,0,0,0,F,sm,em))
 #
-s1<-paste0("SMvsEM",boxlabtgt)
-s2<-paste0("SMvsLC",boxlabtgt)
-s3<-paste0("SMvsMM",boxlabtgt)
-s4<-paste0("EMvsLC",boxlabtgt)
-s5<-paste0("EMvsMM",boxlabtgt)
-s6<-paste0("LCvsMM",boxlabtgt)
-s7<-paste0("SMvsOther",boxlabtgt)
+# s1<-paste0("SMvsEM",boxlabtgt)
+# s2<-paste0("SMvsLC",boxlabtgt)
+# s3<-paste0("SMvsMM",boxlabtgt)
+# s4<-paste0("EMvsLC",boxlabtgt)
+# s5<-paste0("EMvsMM",boxlabtgt)
+# s6<-paste0("LCvsMM",boxlabtgt)
+# s7<-paste0("SMvsOther",boxlabtgt)
 
 #png(file='sprexpo001.png')
 #plot(sumSMvsO,type=c("p","smooth")) ## fitted vs residual
 #dev.off()
 
-plottype<-"h" ## p points,l lines,b both,c ,o,h histogram,s steps
-
-plot(sum2,type=c(plottype,"smooth"),main=s1)
-plot(sum1,type=c(plottype,"smooth"),main=s1)
-
-plot(sumSMLC,type=c(plottype,"smooth"),main=s2)
-plot(sumSMMM,type=c(plottype,"smooth"),main=s3)
-plot(sumEMLC,type=c(plottype,"smooth"),main=s4)
-plot(sumEMMM,type=c(plottype,"smooth"),main=s5)
-plot(sumLCMM,type=c(plottype,"smooth"),main=s6)
-plot(sumSMvsO,type=c(plottype,"smooth"),main=s7) ## fitted residuals
-#---------------------------------------------------------------------
+# plottype<-"h" ## p points,l lines,b both,c ,o,h histogram,s steps
+# 
+# plot(sum2,type=c(plottype,"smooth"),main=s1)
+# plot(sum1,type=c(plottype,"smooth"),main=s1)
+# 
+# plot(sumSMLC,type=c(plottype,"smooth"),main=s2)
+# plot(sumSMMM,type=c(plottype,"smooth"),main=s3)
+# plot(sumEMLC,type=c(plottype,"smooth"),main=s4)
+# plot(sumEMMM,type=c(plottype,"smooth"),main=s5)
+# plot(sumLCMM,type=c(plottype,"smooth"),main=s6)
+# plot(sumSMvsO,type=c(plottype,"smooth"),main=s7) ## fitted residuals
+# #---------------------------------------------------------------------
 
 #####################################################
-getmean<-function(set,t1,t2,t3){
+# getmean<-function(set,t1,t2,t3,sm){
+#   dta<-set
+#   attach(dta)
+#   SM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
+#   EM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
+#   LC<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
+#   MM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
+#   means<-rbind(SM,EM,LC,MM)
+#   SM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
+#   EM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
+#   LC<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
+#   MM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
+#   sds<-rbind(SM,EM,LC,MM)
+#   tb1<-cbind(means,sds)
+#   colnames(tb1)<-c("mean","sd")
+#   tb1<-as.data.frame(tb1)
+#   tb2<-tb1   [with(tb1,order(mean)),]
+#   print(tb2)
+#   return(tb2)
+# }
+getmean<-function(set,t1,t2,t3,smo,g1,g2){
   dta<-set
   attach(dta)
-  SM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
-  EM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
-  LC<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
-  MM<-mean(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
+  SM<-mean(dta_setx(dta,t1,t2,t3,F,sm,sm)$timeinterval,na.rm=T)
+  EM<-mean(dta_setx(dta,t1,t2,t3,F,em,em)$timeinterval)
+  LC<-mean(dta_setx(dta,t1,t2,t3,F,lc,lc)$timeinterval)
+  MM<-mean(dta_setx(dta,t1,t2,t3,F,mm,mm)$timeinterval)
   means<-rbind(SM,EM,LC,MM)
-  SM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="SM"),]$timeinterval)
-  EM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="EM"),]$timeinterval)
-  LC<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="LC"),]$timeinterval)
-  MM<-sd(dta_tgx(dta,t1,t2,t3)[with(dta_tgx(dta,t1,t2,t3),group=="MM"),]$timeinterval)
+  SM<-sd(dta_setx  (dta,t1,t2,t3,F,sm,sm)$timeinterval)
+  EM<-sd(dta_setx  (dta,t1,t2,t3,F,em,em)$timeinterval)
+  LC<-sd(dta_setx  (dta,t1,t2,t3,F,lc,lc)$timeinterval)
+  MM<-sd(dta_setx  (dta,t1,t2,t3,F,mm,mm)$timeinterval)
   sds<-rbind(SM,EM,LC,MM)
   tb1<-cbind(means,sds)
   colnames(tb1)<-c("mean","sd")
@@ -462,6 +526,12 @@ getmean<-function(set,t1,t2,t3){
   print(tb2)
   return(tb2)
 }
+# SM<-mean(dta_setx(dta,0,0,0,F,sm,sm)$timeinterval)
+# remove(SM)
+# t1<-0
+# t2<-0
+# t3<-0
+
 #####################################################
 #---C---  compare R/F results:-----------------------
 #For these raw data, the mean reading time for the critical segments in the 
@@ -470,7 +540,7 @@ getmean<-function(set,t1,t2,t3){
 #Single Metaphor condition   1578 ms (SD 768 ms).
 #LC < EM < SM
 #C.1
-tb1<-getmean(dta,0,0,0) # with RAW dataset
+tb1<-getmean(dta,0,0,0,0,0,0) # with RAW dataset
 #here results reading time RAW, target 0
 #        mean        sd
 # SM 1623.482  834.4605
@@ -487,7 +557,7 @@ tb1<-getmean(dta,0,0,0) # with RAW dataset
 #C.2
 #without outliers (2,5sd)
 dta1<-outl.fun(dta,250) #discard outliers with bottom cutoff at 250ms
-tb2<-getmean(dta1,0,0,0)
+tb2<-getmean(dta1,0,0,0,0,0,0)
 #      mean        sd
 # EM 1655.608 1033.4464
 # SM 1734.169  761.2755
@@ -496,37 +566,51 @@ tb2<-getmean(dta1,0,0,0)
 
 #second formula, outliers discarded with respect to target length
 dta2<-outl.fun.rtc(dta)
-tb3<-getmean(dta2,1,0,0)
+tb3<-getmean(dta2,0,0,0,0,0,0)
 #       mean        sd
-# SM 1623.537  839.5955
-# EM 1762.375 1658.9397
-# MM 1778.104  962.3031
+# EM 1563.051 1062.1094
+# SM 1623.482  834.4605
+# MM 1777.380  958.3569
 # LC 1835.347 1304.3131
 
 #mean RT bei target 0+1, without outliers
 #       mean       sd
-# EM 1947.694 1613.328
-# SM 1990.799 1330.748
-# MM 2172.621 1306.336
-# LC 2180.613 2144.785
-
+# EM 1846.250 1355.556
+# SM 1998.554 1329.243
+# MM 2151.842 1299.206
+# LC 2206.770 2147.328
+# 
 
 #----
 #lme4:
 #(R/F): with the Single condition being read slower than the others (coefficient = 77.3, SE = 24.9, t = 3.10, p < 0.01)
-#here: coef=13.89, SE=105.86, t=0.131, n.s. ($itemID)
-#no significant difference between Extended and Single metaphors (coefficient = 38.4, SE = 29.7, t = 1.30, n.s.)
-#here: coef=61.8, SE=96.31, t=0.642, n.s.
+# SMvsOther
+#             Estimate    Std. Error  df        t value     Pr(>|t|)
+# (Intercept) 1627.63038   187.2118  16.62067  8.694058 1.378434e-07
+# vsGroup2EM   -53.31639   114.9268  67.23981 -0.463916 6.442063e-01
+# vsGroup3LC   171.50058   118.1121 113.13773  1.452016 1.492647e-01
+# vsGroup4MM   142.07474   112.3709 206.37242  1.264338 2.075349e-01
+#             Estimate      Std. Error      df      t value     Pr(>|t|)
+# (Intercept)     1625.76936  189.20567  16.57594 8.5926036 1.653881e-07
+# categoryZ-other   83.48385   93.21381 240.50228 0.8956168 3.713530e-01
+
+#R/F: no significant difference between Extended and Single metaphors (coefficient = 38.4, SE = 29.7, t = 1.30, n.s.)
+#             Estimate   Std. Error       df    t value     Pr(>|t|)
+# (Intercept) 1628.72591   148.5456 21.54982 10.9644857 2.801232e-10
+# vsGroup2EM   -55.76876   118.9061 40.99085 -0.4690151 6.415439e-01
+
 #highly significant differences between each of these and the Literal condition 
 #Literal vs. Extended: coefficient = 75.3, SE = 28.2, t = 2.68, p < 0.01;
 # rtc ~ vsGroup + (1 | item) + (1 | participant) + (1 + vsGroup | participant)
-dta4<-getchars(dta2)
-#ch[x][n]
-#[x] > 1-smem,2-smlc,3-smmm,4-emlc,5-emmm,6-lcmm,7-smvso > ch1-7
-#[n] > :0,0,0 ; 11:1,0 ; 111:-1,0,1 > ch[x]1-11
-sum1<-summary(lmerun(fmla1,dta4,ch4))
+
+formel<-fmla1 #for rtc ~ groups           (length corrected RTs)
+formel<-fmla2 #for timeinterval ~ groups  (without resp. target length)
+
+sum1<-summary(lmerun(fmla3,dta2,setx[7,]))
 coef(sum1)
+sum(sum1$coefficients[,1])
 sum1
+#with timeinterval fits with means in C.2
 
 #here: coef=33.96, SE=98.24,t=0.346
 #Literal vs. Single:  coefficient = 114.7, SE = 28.6, t = 4.00, p < 0.001).

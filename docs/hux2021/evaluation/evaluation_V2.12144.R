@@ -441,11 +441,24 @@ ch411<-c(-1,0,1,F,em,lc)
 ch511<-c(-1,0,1,F,em,mm)
 ch611<-c(-1,0,1,F,lc,mm)
 
-ch7<-c(0,0,0,T,NA,NA)
-ch71<-c(0,0,1,T,NA,NA)
-ch711<-c(-1,0,1,T,NA,NA)
+ch7a<-c(0,0,0,T,sm,vso)
+ch7b<-c(0,0,0,T,em,vso)
+ch7c<-c(0,0,0,T,lc,vso)
+ch7d<-c(0,0,0,T,mm,vso)
 
-chosx<-rbind(ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch11,ch21,ch31,ch41,ch51,ch61,ch71,ch111,ch211,ch311,ch411,ch511,ch611,ch711)
+ch71a<-c(0,1,0,T,sm,vso)
+ch71b<-c(0,1,0,T,em,vso)
+ch71c<-c(0,1,0,T,lc,vso)
+ch71d<-c(0,1,0,T,mm,vso)
+
+ch711a<-c(-1,1,0,T,sm,vso)
+ch711b<-c(-1,1,0,T,em,vso)
+ch711c<-c(-1,1,0,T,lc,vso)
+ch711d<-c(-1,1,0,T,mm,vso)
+
+chosx<-rbind(ch1,ch2,ch3,ch4,ch5,ch6,ch7a,ch7b,ch7c,ch7d,
+             ch11,ch21,ch31,ch41,ch51,ch61,ch71a,ch71b,ch71c,ch71d,
+             ch111,ch211,ch311,ch411,ch511,ch611,ch711a,ch711b,ch711c,ch711d)
 chosx[7:12]
 chosx.ns<-c("target -1","target 0","target +1","SMvsOther","group 1","group 2")
 colnames(chosx)<-chosx.ns
@@ -453,9 +466,9 @@ return(chosx)
 }
 ##########################
 setx<-createsets()
-setx[7,]
+setx[11,]
 #wks.
-
+remove(setx)
 #ch1
 lmerun(fmla1,dta,setx[1,])
 tail(dta2)

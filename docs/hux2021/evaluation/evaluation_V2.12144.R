@@ -408,7 +408,7 @@ lmerun<-function(form,set,chose){
 setx[7,4]==T
  (lmerun(fmlRTCvs,smvso,c(0,0,0,1,sm,lc)))
 
-(lmerun(fmlRTCgr,dta,c(0,0,0,0,sm,em)))
+(lmerun(fmlRTCvs,dta,c(0,0,0,0,sm,lc)))
 #
 
 # lmedataset<-dta_setx(dta2,0,0,0,F,sm,em)

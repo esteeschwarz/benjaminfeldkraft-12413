@@ -410,6 +410,8 @@ cat(as.character(lmef[[1]]))
 # XvsGr4MM     1828.215   962.6068 0.007930514  1.899234 0.9706952
 # SM < EM < LC < MM
 (lmerun(lmef[[2]],dta,c(0,0,0,1,em,vso))) #TI
+(lmerun(dta,"rtc",1,c(0,0,0,1,em,vso),1)) #TI
+
 #            Estimate Std. Error           df   t value  Pr(>|t|)
 # (Intercept)  300.000   1140.089 3.058947e-06 0.2631373 0.9999825
 # XvsGr1SM    1318.191   1155.392 3.226513e-06 1.1409043 0.9999769
@@ -429,6 +431,17 @@ length(sum2$coefficients[,1])<=2
 setx[17,]<-c(0,0,1,T,sm,vso)
 dtax<-outl.fun(dta,200)
 #wks.
+#########
+#cross table
+createview<-function(){
+  lmerun(dta,"rtc",1,c(0,0,0,0,sm,em),1)
+  sum1<-lmerun(dta,"rtc",1,c(0,0,0,1,sm,em),1)
+  sum2<-summary(sum1)
+  sum3<-list("rtc,1,0,0,0,1,out"=sum2$coefficients)
+  sum3[[1]][3]
+}
+
+
 #TODO 12146: sets XvsOther dependant on setx[x]
 #################################
 # lmedataset<-dta_setx(dta2,0,0,0,F,sm,em)

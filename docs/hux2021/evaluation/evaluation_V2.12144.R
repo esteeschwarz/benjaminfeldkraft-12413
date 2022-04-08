@@ -156,7 +156,7 @@ outl.fun<-function(set,outbottom){
 #discard outliers on base of length corrected response time
 ###################################
 outl.fun.rtc<-function(set){
-  attach(set)
+ # attach(set)
 dtartc<-get_rtc(set)
   #  outl.form<-set
 rtc<-dtartc$rtc
@@ -314,41 +314,92 @@ vso<-"All"
 # #dtax<-dta_setx(dta,0,0,0,T,sm,em)
 
 
-dta_setx<-function(set,t1,t2,t3,xo,g1,g2){
-  
-setvsx<-  function(set,gr,other){
-    dta<-set
-  #  attach(dta)
-    sublc<-subset(dta,group==gr)
-    subnlc<-subset(dta,group!=gr)
-    subna<-subset(dta,is.na(group))
-    sublc$category<-gr
-    subns<-stri_join(gr,"vs",other)
-    subnlc$category<-subns
-    subna$category<-subns
-    lcvsO<-rbind(sublc,subnlc,subna)
-    length(lcvsO$category==gr)-length(lcvsO$category==subns)
-    set<-get_rtc(lcvsO)
-    return(set)
-  }
-  
-  dtatg<-function(set,t1,t2,t3,g1,g2){
-    setxvso<-setvsx(set,g1,g2)  
-    return(subset(setxvso, target==t1|target==t2|target==t3))
-  
-    }
-  
-  dta_grx<-function(set,g1,g2){
-    subset(set,group==g1|group==g2)
-  }
-  ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1,g2)),
-         return(dta_grx(dtatg(set,t1,t2,t3,g1,g2),g1,g2)))
-  # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
-  
-  #wks. creates subsets for lmer test  
-}
-dtax<-dta_setx(dta,-1,0,1,0,sm,em)
+dta_setx<-function(set,chose,out){
+ 
+  t1<-chose[1]
+  t2<-chose[2]
+  t3<-chose[3]
+  xo<-chose[4]
+  g1<-chose[5]
+  g2<-chose[6]
+   
+  setvsx<-  function(set,gr,other){
+     dta<-set
+   #  attach(dta)
+     sublc<-subset(dta,group==gr)
+     subnlc<-subset(dta,group!=gr)
+     subna<-subset(dta,is.na(group))
+     sublc$category<-gr
+     subns<-stri_join(gr,"vs",other)
+     subnlc$category<-subns
+     subna$category<-subns
+     lcvsO<-rbind(sublc,subnlc,subna)
+     length(lcvsO$category==gr)-length(lcvsO$category==subns)
+     set<-get_rtc(lcvsO)
+     return(set)
+   }
 
+   dtatg<-function(set,t1,t2,t3,g1,g2){
+     setxvso<-setvsx(set,g1,g2)
+     return(subset(setxvso, target==t1|target==t2|target==t3))
+
+     }
+
+   dta_grx<-function(set,g1,g2){
+     subset(set,group==g1|group==g2)
+   }
+   ifelse(out==1,set<-outl.fun.rtc(set),set<-set)
+   
+      ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1,g2)),
+          return(dta_grx(dtatg(set,t1,t2,t3,g1,g2),g1,g2)))
+
+     #wks. creates subsets for lmer test
+}
+dtax<-dta_setx(dta,c(0,0,0,0,sm,sm),1)
+
+########12147.
+# dta_setx<-function(set,chose,out){
+#   t1<-chose[1]
+#   t2<-chose[2]
+#   t3<-chose[3]
+#   xo<-chose[4]
+#   g1<-chose[5]
+#   g2<-chose[6]
+#   setvsx<-  function(set,gr,other){
+#     dta<-set
+#     #  attach(dta)
+#     sublc<-subset(dta,group==gr)
+#     subnlc<-subset(dta,group!=gr)
+#     subna<-subset(dta,is.na(group))
+#     sublc$category<-gr
+#     subns<-stri_join(gr,"vs",other)
+#     subnlc$category<-subns
+#     subna$category<-subns
+#     lcvsO<-rbind(sublc,subnlc,subna)
+#     length(lcvsO$category==gr)-length(lcvsO$category==subns)
+#     set<-get_rtc(lcvsO)
+#     return(set)
+#   }
+#   
+#   dtatg<-function(set,t1,t2,t3,g1,g2){
+#     setxvso<-setvsx(set,g1,g2)  
+#     return(subset(setxvso, target==t1|target==t2|target==t3))
+#     
+#   }
+#   
+#   dta_grx<-function(set,g1,g2){
+#     subset(set,group==g1|group==g2)
+#   }
+#   ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1,g2)),
+#          return(dta_grx(dtatg(set,t1,t2,t3,g1,g2),g1,g2)))
+#   # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
+#   
+#   #wks. creates subsets for lmer test  
+# }
+
+
+dtax<-dta_setx(dta,-1,0,1,0,sm,em)
+dtax<-dta_setx(dta,-1,0,1,0,sm,em)
 ##############
 createsets<-function(){
   ch1<-c(0,0,0,0,sm,em)
@@ -403,27 +454,47 @@ setx[11,]
 #ch1
 ##########################
 #####################################################
-
-getmean<-function(set,t1,t2,t3,smo,g1,g2){
-  dta<-set
-  attach(dta)
-  SM<-mean(dta_setx(dta,t1,t2,t3,F,sm,sm)$timeinterval,na.rm=T)
-  EM<-mean(dta_setx(dta,t1,t2,t3,F,em,em)$timeinterval)
-  LC<-mean(dta_setx(dta,t1,t2,t3,F,lc,lc)$timeinterval)
-  MM<-mean(dta_setx(dta,t1,t2,t3,F,mm,mm)$timeinterval)
-  means<-rbind(SM,EM,LC,MM)
-  SM<-sd(dta_setx  (dta,t1,t2,t3,F,sm,sm)$timeinterval)
-  EM<-sd(dta_setx  (dta,t1,t2,t3,F,em,em)$timeinterval)
-  LC<-sd(dta_setx  (dta,t1,t2,t3,F,lc,lc)$timeinterval)
-  MM<-sd(dta_setx  (dta,t1,t2,t3,F,mm,mm)$timeinterval)
-  sds<-rbind(SM,EM,LC,MM)
-  tb1<-cbind(means,sds)
-  colnames(tb1)<-c("mean","sd")
-  tb1<-as.data.frame(tb1)
-  tb2<-tb1   [with(tb1,order(mean)),]
-  print(tb2)
-  return(tb2)
+lmerun(lmef[[1]],dta,setx[1,],1)
+getmean<-function(set,chose,out){
+ # t1<-chose[1]
+ # t2<-chose[2]
+ # t3<-chose[3]
+ # sxo<-chose[4]
+ # g1<-chose[5]
+ # g2<-chose[6]
+  chose[4]<-0
+  mnset<-dta_setx(set,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
+  
+   dta<-mnset
+ #attach(dta)
+# chose<-c(t1,t2,t3,xo,g1,g2)
+ #chose[1]<-t1
+ #chose[2]<-
+mnx<-mean(mnset$timeinterval,na.rm=T)
+ # SM<-mean(dta_setx(dta,c(t1,t2,t3,F,sm,sm))$timeinterval,na.rm=T)
+ # EM<-mean(dta_setx(dta,c(t1,t2,t3,F,em,em))$timeinterval)
+ # LC<-mean(dta_setx(dta,c(t1,t2,t3,F,lc,lc))$timeinterval)
+ # MM<-mean(dta_setx(dta,c(t1,t2,t3,F,mm,mm))$timeinterval)
+ # means<-rbind(SM,EM,LC,MM)
+ # SM<-sd(dta_setx  (dta,c(t1,t2,t3,F,sm,sm))$timeinterval)
+ # EM<-sd(dta_setx  (dta,c(t1,t2,t3,F,em,em))$timeinterval)
+ # LC<-sd(dta_setx  (dta,c(t1,t2,t3,F,lc,lc))$timeinterval)
+ # MM<-sd(dta_setx  (dta,c(t1,t2,t3,F,mm,mm))$timeinterval)
+ # sds<-rbind(SM,EM,LC,MM)
+ # tb1<-cbind(means,sds)
+ # colnames(tb1)<-c("mean","sd")
+ # tb1<-as.data.frame(tb1)
+ # tb2<-tb1   [with(tb1,order(mean)),]
+ print(mnx)
+ #return(tb2)
 }
+dtax<-dta_setx(dta,0,0,0,0,sm,sm)
+setx[1,]
+getmean(dta,c(1,0,-1,0,em,em),1)
+mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
+lmerun(lmef[[1]],dta,setx[1,],0)
+lmerun(lmef[[1]],dta,c(0,0,0,0,sm,em),0)
+
 # SM<-mean(dta_setx(dta,0,0,0,F,sm,sm)$timeinterval)
 # remove(SM)
 # t1<-0
@@ -432,20 +503,20 @@ getmean<-function(set,t1,t2,t3,smo,g1,g2){
 
 #####################################################
 # create set group vs Other
-setvsx<-function(set,gr){
-  dta<-set
-  attach(dta)
-  sublc<-subset(dta,group==gr)
-  subnlc<-subset(dta,group!=gr)
-  subna<-subset(dta,is.na(group))
-  sublc$category<-gr
-  subns<-stri_join(gr,"vsAll")
-  subnlc$category<-subns
-  subna$category<-subns
-  lcvsO<-rbind(sublc,subnlc,subna)
-  length(lcvsO$category==gr)-length(lcvsO$category==subns)
-  return(lcvsO)
-}
+# setvsx<-function(set,gr){
+#   dta<-set
+#   attach(dta)
+#   sublc<-subset(dta,group==gr)
+#   subnlc<-subset(dta,group!=gr)
+#   subna<-subset(dta,is.na(group))
+#   sublc$category<-gr
+#   subns<-stri_join(gr,"vsAll")
+#   subnlc$category<-subns
+#   subna$category<-subns
+#   lcvsO<-rbind(sublc,subnlc,subna)
+#   length(lcvsO$category==gr)-length(lcvsO$category==subns)
+#   return(lcvsO)
+# }
 #wks.
 smvso<-setvsx(dta2,sm)
 
@@ -488,8 +559,9 @@ lmef
 #   (sumSMEM<- lmer(form,lmeset)) 
 # 
 # }
-lmerun<-function(form,set,chose){
+lmerun<-function(form,set,chose,out){
   set2<-get_rtc(set)
+  ifelse(out==1,set2<-outl.fun.rtc(set2),set2<-set2)
   lmeset<-dta_setx(set2,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
   det_cat<-stri_detect (as.character(form[3]),regex  = "category")
   det_vs<-stri_detect (as.character(form[3]),regex  = "vs")
@@ -517,7 +589,7 @@ lmerun<-function(form,set,chose){
 setx[7,4]==T
 lmef[[1]][3]
 cat(as.character(lmef[[1]]))
-(lmerun(lmef[[1]],dta,c(0,0,0,1,em,vso))) #RTC
+(lmerun(lmef[[1]],dta,c(0,0,0,1,em,vso),1)) #RTC
 #             Estimate Std. Error           df   t value  Pr(>|t|)
 # (Intercept) -2043.817   1149.383 0.0001254110 -1.778186 0.9992778
 # XvsGr1SM     1720.789   1157.860 0.0001291520  1.486180 0.9992813
@@ -525,6 +597,14 @@ cat(as.character(lmef[[1]]))
 # XvsGr3LC     1807.058   1160.266 0.0001302287  1.557451 0.9992698
 # XvsGr4MM     1832.557   1158.211 0.0001293085  1.582230 0.9992724
 # SM < LC <= MM < EM
+# with outliers discarded 2,5sd
+# #             Estimate Std. Error          df   t value  Pr(>|t|)
+# (Intercept) -2043.817   953.2100 0.007625365 -2.144141 0.9707632
+# XvsGr1SM     1727.195   962.4626 0.007925755  1.794558 0.9711459
+# XvsGr2EM     1767.469   964.0069 0.007976722  1.833461 0.9708222
+# XvsGr3LC     1812.692   965.0320 0.008010718  1.878376 0.9705283
+# XvsGr4MM     1828.215   962.6068 0.007930514  1.899234 0.9706952
+# SM < EM < LC < MM
 (lmerun(lmef[[2]],dta,c(0,0,0,1,em,vso))) #TI
 #            Estimate Std. Error           df   t value  Pr(>|t|)
 # (Intercept)  300.000   1140.089 3.058947e-06 0.2631373 0.9999825

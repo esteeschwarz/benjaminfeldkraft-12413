@@ -25,6 +25,18 @@ d1ns
 colnames(dta)<-d1ns
 #colnames(dta)<-d1ns
 
+##sm-em-lc-mm kategorien in spalte $group
+sm<-"SM"
+em<-"EM"
+lc<-"LC"
+mm<-"MM"
+vso<-"All"
+ti<-"ti"
+rtc<-"rtc"
+rtcc<-"rtcc"
+
+# 
+
 ###########################
 
 
@@ -143,13 +155,6 @@ dtap2<-dtap3
 #6.
 
 #########################
-##sm-em-lc-mm kategorien in spalte $group
-sm<-"SM"
-em<-"EM"
-lc<-"LC"
-mm<-"MM"
-vso<-"All"
-# 
 #remove(dtax)
 
 
@@ -393,7 +398,7 @@ lmerun<-function(set,resp,gr,chose,out){
 setx[7,4]==T
 lmef[[1]][3]
 cat(as.character(lmef[[1]]))
-(lmerun(dta,"ti",1,c(0,0,0,1,em,sm),1)) #RTC
+(lmerun(dta,ti,1,c(0,0,0,1,em,sm),1)) #RTC
 #             Estimate Std. Error           df   t value  Pr(>|t|)
 # (Intercept) -2043.817   1149.383 0.0001254110 -1.778186 0.9992778
 # XvsGr1SM     1720.789   1157.860 0.0001291520  1.486180 0.9992813
@@ -433,13 +438,17 @@ dtax<-outl.fun(dta,200)
 #wks.
 #########
 #cross table
+sum3<-list()
 createview<-function(){
   lmerun(dta,"rtc",1,c(0,0,0,0,sm,em),1)
-  sum1<-lmerun(dta,"rtc",1,c(0,0,0,1,sm,em),1)
+  sum1<-lmerun(dta,ti,1,c(0,0,1,1,sm,em),1)
   sum2<-summary(sum1)
-  sum3<-list("rtc,1,0,0,0,1,out"=sum2$coefficients)
-  sum3[[1]][3]
-}
+  sum3$"ti,1,c(0,0,1,1,sm,em),1"=sum2$coefficients
+  sum3[1]
+  sum3$"ti,1,c(0,0,1,1,sm,em),1"-sum3$`ti,1,c(0,0,0,1,sm,em),1`
+  sum3[[4]]-sum3[[3]]
+
+  }
 
 
 #TODO 12146: sets XvsOther dependant on setx[x]

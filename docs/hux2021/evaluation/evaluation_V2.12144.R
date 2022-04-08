@@ -60,7 +60,7 @@ adcontrol<-function(set){
   con1$tnid<-999
   con1$gilt<-2
   con1$group<-"control"
-  con1[,6]<-"control"
+  con1[,6]<-"0Control"
   con1$category<-"control"
   con1$itemId<-"control"
   con1$item<-"control"
@@ -256,7 +256,7 @@ sm<-"SM"
 em<-"EM"
 lc<-"LC"
 mm<-"MM"
-vso<-"vsAll"
+vso<-"All"
 # 
 #remove(dtax)
 
@@ -316,14 +316,14 @@ vso<-"vsAll"
 
 dta_setx<-function(set,t1,t2,t3,xo,g1,g2){
   
-setvsx<-  function(set,gr){
+setvsx<-  function(set,gr,other){
     dta<-set
   #  attach(dta)
     sublc<-subset(dta,group==gr)
     subnlc<-subset(dta,group!=gr)
     subna<-subset(dta,is.na(group))
     sublc$category<-gr
-    subns<-stri_join(gr,"vsAll")
+    subns<-stri_join(gr,"vs",other)
     subnlc$category<-subns
     subna$category<-subns
     lcvsO<-rbind(sublc,subnlc,subna)
@@ -332,8 +332,8 @@ setvsx<-  function(set,gr){
     return(set)
   }
   
-  dtatg<-function(set,t1,t2,t3,g1){
-    setxvso<-setvsx(set,g1)  
+  dtatg<-function(set,t1,t2,t3,g1,g2){
+    setxvso<-setvsx(set,g1,g2)  
     return(subset(setxvso, target==t1|target==t2|target==t3))
   
     }
@@ -341,8 +341,8 @@ setvsx<-  function(set,gr){
   dta_grx<-function(set,g1,g2){
     subset(set,group==g1|group==g2)
   }
-  ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1)),
-         return(dta_grx(dtatg(set,t1,t2,t3,g1),g1,g2)))
+  ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1,g2)),
+         return(dta_grx(dtatg(set,t1,t2,t3,g1,g2),g1,g2)))
   # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
   
   #wks. creates subsets for lmer test  
@@ -493,10 +493,6 @@ lmerun<-function(form,set,chose){
   lmeset<-dta_setx(set2,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
   det_cat<-stri_detect (as.character(form[3]),regex  = "category")
   det_vs<-stri_detect (as.character(form[3]),regex  = "vs")
-#print(det_cat)
-#print(det_vs)
-  #  diflc<-dif
- # diflcsm<-dif
   sum1<-( lmer(form,lmeset)) 
   sum2<-summary(sum1)
     dif<-abs(coef(sum2)[1]-coef(sum2)[2])
@@ -508,22 +504,36 @@ lmerun<-function(form,set,chose){
 
     cat("global",chose[5],"=",out,"\nIntercept greater =",out2) #nicht beide TRUE > global = F
     # wenn !category | !vsAll >         
-    ifelse(out==F,ifelse(det_vs!=T,out<-c("\ndifference category",chose[5]," ~ ",chose[6],dif,"ms\n\n"),
-                         ifelse(chose[4]!=1,out<-c(", diff:",dif,"ms\n\n"),out<-"\nkeine berechnung\n")),     
+    ifelse(out==F,ifelse(det_vs!=T,out<-c("\ndifference category",chose[5]," ~ ",chose[6],dif,"ms\n"),
+                         ifelse(chose[4]!=1,out<-c(", diff:",dif,"ms\n"),out<-"\nkeine berechnung\n")),     
                          out<-"\n---------------\n")
     cat(out)
-    cat(as.character(form))
+    cat(as.character(form),"\n")
     #(dif)
   return(sum1)
   
 }
 # as.character(fmlRTCgr[3])
 setx[7,4]==T
-lmef[1]
-as.formula(lmef[[1]])
-(lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
-(lmerun(lmef[[2]],dta,c(0,0,0,0,sm,lc)))
-(lmerun(lmef[[3]],dta,c(0,0,0,0,sm,lc)))
+lmef[[1]][3]
+cat(as.character(lmef[[1]]))
+(lmerun(lmef[[1]],dta,c(0,0,0,1,em,vso))) #RTC
+#             Estimate Std. Error           df   t value  Pr(>|t|)
+# (Intercept) -2043.817   1149.383 0.0001254110 -1.778186 0.9992778
+# XvsGr1SM     1720.789   1157.860 0.0001291520  1.486180 0.9992813
+# XvsGr2EM     1953.149   1166.471 0.0001330369  1.674408 0.9992458
+# XvsGr3LC     1807.058   1160.266 0.0001302287  1.557451 0.9992698
+# XvsGr4MM     1832.557   1158.211 0.0001293085  1.582230 0.9992724
+# SM < LC <= MM < EM
+(lmerun(lmef[[2]],dta,c(0,0,0,1,em,vso))) #TI
+#            Estimate Std. Error           df   t value  Pr(>|t|)
+# (Intercept)  300.000   1140.089 3.058947e-06 0.2631373 0.9999825
+# XvsGr1SM    1318.191   1155.392 3.226513e-06 1.1409043 0.9999769
+# XvsGr2EM    1460.421   1164.039 3.324189e-06 1.2546154 0.9999760
+# XvsGr3LC    1500.030   1158.029 3.256070e-06 1.2953304 0.9999763
+# XvsGr4MM    1476.138   1155.909 3.232291e-06 1.2770366 0.9999765
+# SM < EM <= MM < LC
+(lmerun(lmef[[3]],dta,c(0,0,0,1,em,vso)))
 (lmerun(lmef[[4]],dta,c(0,0,0,0,sm,lc)))
 (lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
 (lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))

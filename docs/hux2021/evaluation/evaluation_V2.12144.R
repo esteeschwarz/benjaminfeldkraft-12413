@@ -8,7 +8,7 @@ src_o<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation
 # daten prepared
 src_d<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation/sprdataprepared.csv")
 # evaluation script v.1.x
-src_e<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation/1237b.R")
+#src_e<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation/1237b.R")
 ###########################
 ###########################
 
@@ -20,7 +20,7 @@ library(clipr)
 #1
 dta<-read.csv2(src_d)
 d1ns<-colnames(dta)
-d1ns[6]<-"vsGroup"
+d1ns[6]<-"XvsGr"
 d1ns
 colnames(dta)<-d1ns
 #colnames(dta)<-d1ns
@@ -45,15 +45,22 @@ colnames(dta)<-d1ns
 # dta01<- subset(dtatargetgilt, target==0|target==1) 
 
 ###
+#set<-dta
 #add control observation
 adcontrol<-function(set){
+  print(length(set))
+  #setns<-colnames(set)
+  #print(setns)
+  #setns[6]<-"vsGroup"
+  #colnames(set)<-setns
   con1<-set[1,]
+  con1
   con1$lfd<-length(dta$lfd)+1
   con1$participant<-"admin"
   con1$tnid<-999
   con1$gilt<-2
   con1$group<-"control"
-  con1$group14<-"control"
+  con1[,6]<-"control"
   con1$category<-"control"
   con1$itemId<-"control"
   con1$item<-"control"
@@ -76,9 +83,15 @@ adcontrol<-function(set){
   con1$addchar<-NA
   con1$addproctbychar<-NA
   con1$explique<-"control string zur festlegung der minimal RT"
+  
+  print(length(con1))
+  print(colnames(con1))
+  print(length(set))
+  print(colnames(set))
+  
   return(rbind(set,con1))
 }
-
+dta<-adcontrol(dta)
 
 # to discard negative outliers
 #set minimum response to 319ms
@@ -100,14 +113,14 @@ set<-cbind(set,"rtc"=dtares)
 return(set)
 }
 
-getchars<-function(set){
-  charscpt<-stri_count_boundaries(set$string,type="character")
-  dtares<-residuals(lm(timeinterval~charscpt,set))
-  #head(dtares)
-  dtap1<-cbind(set,"rtc"=dtares)
-#  set<-cbind(set,"rtc"=dtares)
- # return(set)
-}
+# getchars<-function(set){
+#   charscpt<-stri_count_boundaries(set$string,type="character")
+#   dtares<-residuals(lm(timeinterval~charscpt,set))
+#   #head(dtares)
+#   dtap1<-cbind(set,"rtc"=dtares)
+# #  set<-cbind(set,"rtc"=dtares)
+#  # return(set)
+# }
 
 #####################
 # dtap4<-getchars(dtac)
@@ -164,15 +177,17 @@ rtc<-dtartc$rtc
 #5.1
 #set without outliers with resp to target length
 dtap2<-outl.fun.rtc(dtap1)
+##########?????????
 #5.2 manuell ausgeschlossene fälle im scheme
 dtap3<-subset(dtap2,gilt==1)
 dtap2<-dtap3
-d1ns<-colnames(dtap2)
-d1ns[6]<-"grSMvs"
-d1ns
-colnames(dtap2)<-d1ns
-colnames(dtap3)<-d1ns
-
+##########????????
+# d1ns<-colnames(dtap2)
+# d1ns[6]<-"grSMvs"
+# d1ns
+# colnames(dtap2)<-d1ns
+# colnames(dtap3)<-d1ns
+# 
 ########################
 #berechne outliers zeichenabhängig####
 # outl.fun.ch<-function(set){
@@ -282,21 +297,21 @@ vso<-"vsAll"
 # #wks. creates subsets for lmer test  
 # }
 ##############################################################
-dta_setx<-function(set,t1,t2,t3,xo,g1,g2){
-  dtatg<-function(set,t1,t2,t3){
-    return(subset(set, target==t1|target==t2|target==t3))
-  }
-  
-  dta_grx<-function(set,g1,g2){
-    subset(set,group==g1|group==g2)
-  }
-  ifelse(xo==1,return(dtatg(set,t1,t2,t3)),
-         return(dta_grx(dtatg(set,t1,t2,t3),g1,g2)))
-  # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
-  
-  #wks. creates subsets for lmer test  
-}
-#dtax<-dta_setx(dta,0,0,0,T,sm,em)
+# dta_setx<-function(set,t1,t2,t3,xo,g1,g2){
+#   dtatg<-function(set,t1,t2,t3){
+#     return(subset(set, target==t1|target==t2|target==t3))
+#   }
+#   
+#   dta_grx<-function(set,g1,g2){
+#     subset(set,group==g1|group==g2)
+#   }
+#   ifelse(xo==1,return(dtatg(set,t1,t2,t3)),
+#          return(dta_grx(dtatg(set,t1,t2,t3),g1,g2)))
+#   # return(dta_grx(dtatg(dta_out1,t1,t2,t3),g1,g2)))
+#   
+#   #wks. creates subsets for lmer test  
+# }
+# #dtax<-dta_setx(dta,0,0,0,T,sm,em)
 
 
 dta_setx<-function(set,t1,t2,t3,xo,g1,g2){
@@ -332,15 +347,107 @@ setvsx<-  function(set,gr){
   
   #wks. creates subsets for lmer test  
 }
-dtax<-dta_setx(dta,0,0,0,1,lc,em)
+dtax<-dta_setx(dta,-1,0,1,0,sm,em)
 
+##############
+createsets<-function(){
+  ch1<-c(0,0,0,0,sm,em)
+  ch2<-c(0,0,0,0,sm,lc)
+  ch3<-c(0,0,0,0,sm,mm)
+  ch4<-c(0,0,0,0,em,lc)
+  ch5<-c(0,0,0,0,em,mm)
+  ch6<-c(0,0,0,0,lc,mm)
+  
+  ch11<-c(0,0,1,0,sm,em)
+  ch21<-c(0,0,1,0,sm,lc)
+  ch31<-c(0,0,1,0,sm,mm)
+  ch41<-c(0,0,1,0,em,lc)
+  ch51<-c(0,0,1,0,em,mm)
+  ch61<-c(0,0,1,0,lc,mm)
+  
+  ch111<-c(-1,0,1,0,sm,em)
+  ch211<-c(-1,0,1,0,sm,lc)
+  ch311<-c(-1,0,1,0,sm,mm)
+  ch411<-c(-1,0,1,0,em,lc)
+  ch511<-c(-1,0,1,0,em,mm)
+  ch611<-c(-1,0,1,0,lc,mm)
+  
+  ch7a<-c(0,0,0,1,sm,vso)
+  ch7b<-c(0,0,0,1,em,vso)
+  ch7c<-c(0,0,0,1,lc,vso)
+  ch7d<-c(0,0,0,1,mm,vso)
+  
+  ch71a<-c(0,1,0,1,sm,vso)
+  ch71b<-c(0,1,0,1,em,vso)
+  ch71c<-c(0,1,0,1,lc,vso)
+  ch71d<-c(0,1,0,1,mm,vso)
+  
+  ch711a<-c(-1,1,0,1,sm,vso)
+  ch711b<-c(-1,1,0,1,em,vso)
+  ch711c<-c(-1,1,0,1,lc,vso)
+  ch711d<-c(-1,1,0,1,mm,vso)
+  
+  chosx<-rbind(ch1,ch2,ch3,ch4,ch5,ch6,ch7a,ch7b,ch7c,ch7d,
+               ch11,ch21,ch31,ch41,ch51,ch61,ch71a,ch71b,ch71c,ch71d,
+               ch111,ch211,ch311,ch411,ch511,ch611,ch711a,ch711b,ch711c,ch711d)
+  chosx[7:12]
+  chosx.ns<-c("target -1","target 0","target +1","SMvsOther","group 1","group 2")
+  colnames(chosx)<-chosx.ns
+  return(chosx)
+}
+##########################
+setx<-createsets()
+setx[11,]
+#wks.
+#remove(setx)
+#ch1
+##########################
+#####################################################
 
+getmean<-function(set,t1,t2,t3,smo,g1,g2){
+  dta<-set
+  attach(dta)
+  SM<-mean(dta_setx(dta,t1,t2,t3,F,sm,sm)$timeinterval,na.rm=T)
+  EM<-mean(dta_setx(dta,t1,t2,t3,F,em,em)$timeinterval)
+  LC<-mean(dta_setx(dta,t1,t2,t3,F,lc,lc)$timeinterval)
+  MM<-mean(dta_setx(dta,t1,t2,t3,F,mm,mm)$timeinterval)
+  means<-rbind(SM,EM,LC,MM)
+  SM<-sd(dta_setx  (dta,t1,t2,t3,F,sm,sm)$timeinterval)
+  EM<-sd(dta_setx  (dta,t1,t2,t3,F,em,em)$timeinterval)
+  LC<-sd(dta_setx  (dta,t1,t2,t3,F,lc,lc)$timeinterval)
+  MM<-sd(dta_setx  (dta,t1,t2,t3,F,mm,mm)$timeinterval)
+  sds<-rbind(SM,EM,LC,MM)
+  tb1<-cbind(means,sds)
+  colnames(tb1)<-c("mean","sd")
+  tb1<-as.data.frame(tb1)
+  tb2<-tb1   [with(tb1,order(mean)),]
+  print(tb2)
+  return(tb2)
+}
+# SM<-mean(dta_setx(dta,0,0,0,F,sm,sm)$timeinterval)
+# remove(SM)
+# t1<-0
+# t2<-0
+# t3<-0
 
-
-
-
-
-
+#####################################################
+# create set group vs Other
+setvsx<-function(set,gr){
+  dta<-set
+  attach(dta)
+  sublc<-subset(dta,group==gr)
+  subnlc<-subset(dta,group!=gr)
+  subna<-subset(dta,is.na(group))
+  sublc$category<-gr
+  subns<-stri_join(gr,"vsAll")
+  subnlc$category<-subns
+  subna$category<-subns
+  lcvsO<-rbind(sublc,subnlc,subna)
+  length(lcvsO$category==gr)-length(lcvsO$category==subns)
+  return(lcvsO)
+}
+#wks.
+smvso<-setvsx(dta2,sm)
 
 lmerun(fmlRTCvs,dta,setx[7,]) #warum unterschiedliche variablenlängen? rtc
 ##############################################################
@@ -351,14 +458,11 @@ lmerun(fmlRTCvs,dta,setx[7,]) #warum unterschiedliche variablenlängen? rtc
 #and random effects of Participant and Item, along with a random slope of Category by Participant"
 #"pairwise comparisons of Condition levels"
 
-#choose between "item"(R/F) above interpreted as itemset (8) of four conditions ($item) or 
-#item as condition (4x8) of item ($itemId)
-#lme2.form2<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
-
-#lme2.form1<- paste0("group +(1|itemId)+(1|participant)+(1+group|participant)")
-#lme2.form2<- paste0((colnames(dtap4)[6]) +"(1|item)+(1|participant)+(1+grSMvs|participant)")
+create_lmeforms<-function(set){
 lme2.form2.rnd<-paste0("(1|item)+(1|participant)")
-lme2.form2.cat<-paste0(colnames(lmedataset)[6])
+########## TD
+lme2.form2.cat<-paste0(colnames(set)[6])
+########## 
 lme2.form2.XvsO<-paste0("category")
 #colnames(dtap4)[6]
 #colnames(lmedataset)[6]
@@ -370,6 +474,12 @@ lme2.form.cpt.XvsO<- paste(lme2.form2.XvsO,"+",lme2.form2.rnd,"+(1+",lme2.form2.
 (fmlTIvs<-  as.formula(paste("timeinterval ~ ", lme2.form.cpt.XvsO)))
 (fmlRTCvs <- as.formula(paste("rtc ~ ", lme2.form.cpt.XvsO)))
 
+lmeforms<-list("RTCgr"=fmlRTCgr,"TIgr"=fmlTIgr,"RTCvs"=fmlRTCvs,"TIvs"=fmlTIvs)
+#lmeforms[1]
+return(lmeforms)
+}
+lmef<-create_lmeforms(dta)
+lmef
 #fmla3
 #set1[1]
 ####################################################
@@ -402,19 +512,21 @@ lmerun<-function(form,set,chose){
                          ifelse(chose[4]!=1,out<-c(", diff:",dif,"ms\n\n"),out<-"\nkeine berechnung\n")),     
                          out<-"\n---------------\n")
     cat(out)
+    cat(as.character(form))
     #(dif)
   return(sum1)
   
 }
 # as.character(fmlRTCgr[3])
 setx[7,4]==T
- (lmerun(fmlRTCvs,smvso,c(0,0,0,1,sm,lc)))
-(lmerun(fmlRTCvs,smvso,c(0,0,0,0,sm,lc)))
-(lmerun(fmlRTCgr,smvso,c(0,0,0,1,sm,lc)))
-(lmerun(fmlRTCgr,smvso,c(0,0,0,1,sm,lc)))
-
-lmerun(fmlTIvs,dta,setx[9,])
-lmerun(fmlTIgr,dta,c(0,0,1,1,sm,em))
+lmef[1]
+as.formula(lmef[[1]])
+(lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
+(lmerun(lmef[[2]],dta,c(0,0,0,0,sm,lc)))
+(lmerun(lmef[[3]],dta,c(0,0,0,0,sm,lc)))
+(lmerun(lmef[[4]],dta,c(0,0,0,0,sm,lc)))
+(lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
+(lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
 
 sum1<-(lmerun(fmlTIgr,dta,c(0,0,1,1,sm,em)))
 sum2<-summary(sum1)
@@ -433,57 +545,6 @@ dtax<-outl.fun(dta,200)
 #lmer sets
 #formula:
 #(target-1,target0,target+1,SMvsO=T/F,group1,group2)
-createsets<-function(){
-ch1<-c(0,0,0,0,sm,em)
-ch2<-c(0,0,0,0,sm,lc)
-ch3<-c(0,0,0,0,sm,mm)
-ch4<-c(0,0,0,0,em,lc)
-ch5<-c(0,0,0,0,em,mm)
-ch6<-c(0,0,0,0,lc,mm)
-
-ch11<-c(0,0,1,0,sm,em)
-ch21<-c(0,0,1,0,sm,lc)
-ch31<-c(0,0,1,0,sm,mm)
-ch41<-c(0,0,1,0,em,lc)
-ch51<-c(0,0,1,0,em,mm)
-ch61<-c(0,0,1,0,lc,mm)
-
-ch111<-c(-1,0,1,0,sm,em)
-ch211<-c(-1,0,1,0,sm,lc)
-ch311<-c(-1,0,1,0,sm,mm)
-ch411<-c(-1,0,1,0,em,lc)
-ch511<-c(-1,0,1,0,em,mm)
-ch611<-c(-1,0,1,0,lc,mm)
-
-ch7a<-c(0,0,0,1,sm,vso)
-ch7b<-c(0,0,0,1,em,vso)
-ch7c<-c(0,0,0,1,lc,vso)
-ch7d<-c(0,0,0,1,mm,vso)
-
-ch71a<-c(0,1,0,1,sm,vso)
-ch71b<-c(0,1,0,1,em,vso)
-ch71c<-c(0,1,0,1,lc,vso)
-ch71d<-c(0,1,0,1,mm,vso)
-
-ch711a<-c(-1,1,0,1,sm,vso)
-ch711b<-c(-1,1,0,1,em,vso)
-ch711c<-c(-1,1,0,1,lc,vso)
-ch711d<-c(-1,1,0,1,mm,vso)
-
-chosx<-rbind(ch1,ch2,ch3,ch4,ch5,ch6,ch7a,ch7b,ch7c,ch7d,
-             ch11,ch21,ch31,ch41,ch51,ch61,ch71a,ch71b,ch71c,ch71d,
-             ch111,ch211,ch311,ch411,ch511,ch611,ch711a,ch711b,ch711c,ch711d)
-chosx[7:12]
-chosx.ns<-c("target -1","target 0","target +1","SMvsOther","group 1","group 2")
-colnames(chosx)<-chosx.ns
-return(chosx)
-}
-##########################
-setx<-createsets()
-setx[11,]
-#wks.
-remove(setx)
-#ch1
 lmerun(fmla1,dta,setx[1,])
 tail(dta2)
 lmer(fmla2,dta4)
@@ -558,52 +619,6 @@ lmerun(fmla1,dta4,ch1)
 
 # #---------------------------------------------------------------------
 
-#####################################################
-
-getmean<-function(set,t1,t2,t3,smo,g1,g2){
-  dta<-set
-  attach(dta)
-  SM<-mean(dta_setx(dta,t1,t2,t3,F,sm,sm)$timeinterval,na.rm=T)
-  EM<-mean(dta_setx(dta,t1,t2,t3,F,em,em)$timeinterval)
-  LC<-mean(dta_setx(dta,t1,t2,t3,F,lc,lc)$timeinterval)
-  MM<-mean(dta_setx(dta,t1,t2,t3,F,mm,mm)$timeinterval)
-  means<-rbind(SM,EM,LC,MM)
-  SM<-sd(dta_setx  (dta,t1,t2,t3,F,sm,sm)$timeinterval)
-  EM<-sd(dta_setx  (dta,t1,t2,t3,F,em,em)$timeinterval)
-  LC<-sd(dta_setx  (dta,t1,t2,t3,F,lc,lc)$timeinterval)
-  MM<-sd(dta_setx  (dta,t1,t2,t3,F,mm,mm)$timeinterval)
-  sds<-rbind(SM,EM,LC,MM)
-  tb1<-cbind(means,sds)
-  colnames(tb1)<-c("mean","sd")
-  tb1<-as.data.frame(tb1)
-  tb2<-tb1   [with(tb1,order(mean)),]
-  print(tb2)
-  return(tb2)
-}
-# SM<-mean(dta_setx(dta,0,0,0,F,sm,sm)$timeinterval)
-# remove(SM)
-# t1<-0
-# t2<-0
-# t3<-0
-
-#####################################################
-# create set group vs Other
-setvsx<-function(set,gr){
-  dta<-set
-attach(dta)
-sublc<-subset(dta,group==gr)
-subnlc<-subset(dta,group!=gr)
-subna<-subset(dta,is.na(group))
-sublc$category<-gr
-subns<-stri_join(gr,"vsAll")
-subnlc$category<-subns
-subna$category<-subns
-lcvsO<-rbind(sublc,subnlc,subna)
-length(lcvsO$category==gr)-length(lcvsO$category==subns)
-return(lcvsO)
-}
-#wks.
-smvso<-setvsx(dta2,sm)
 #############################################################################
 #############################################################################
 #---C---  compare R/F results:-----------------------

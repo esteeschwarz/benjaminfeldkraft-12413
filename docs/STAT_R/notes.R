@@ -973,5 +973,100 @@ con1$explique<-"control string zur festlegung der minimal RT"
 return(rbind(set,con1))
 }
 
+as.function(alist(a = , b = 2, a+b))(1)
+as.function(alist(a = , b = 2, a+b))(2)
+as.function(alist(a = ,b=3,lmerun(a)))()
+
+str2expression(set1)
+print(str2expression("2+3"))
+lmerun(as.expression(set1))
+########################## THIS
+eval(parse(text="2+3"))
+############################
+eval(parse(text=set1))
+lmerun(set2)
+set1
 
 
+
+length(ex1 <- expression("1 + 0:9")) # 1
+ex1
+eval(ex1) 
+set1
+set1<-"dta,ti,1,c(0,0,0,1,em,vso),0"
+paste("lmerun(",)
+#as.formula(paste("lmerun(",set1,")"
+           as.formula(paste("lmerun( ", set1,")"))
+lme2<-    paste0("(",set1,")")
+lmerun(as.formula(set1))
+lme2.form.cpt.XvsO<- paste(lme2.form2.XvsO,"+",lme2.form2.rnd,"+(1+",lme2.form2.XvsO,"|participant)")
+rtc<-"rtc ~ "
+rtcc<-"rtc.1 ~ "
+ti<-"timeinterval ~ "
+ifelse(resp=="rtc",rt<-rtc,ifelse(resp=="rtcc",rt<-rtcc,rt<-ti))
+(fmlRTCgr <- as.formula(paste("rtc ~ ", lme2.form.cpt)))
+(fmlTIgr <- as.formula(paste("timeinterval ~ ", lme2.form.cpt)))
+(fmlTIvs<-  as.formula(paste("timeinterval ~ ", lme2.form.cpt.XvsO)))
+(fmlRTCvs <- as.formula(paste("rtc ~ ", lme2.form.cpt.XvsO)))
+
+fmlRTCgr <- as.formula(paste("lmerun",lme2))
+
+(fmlxgr <- as.formula(paste(rt, lme2.form.cpt)))
+(fmlxvs <- as.formula(paste(rt, lme2.form.cpt.XvsO)))
+
+(nth <- paste0(1:12, c("st", "nd", "rd", rep("th", 9))))
+eval(parse(text="mean(1:10)"))
+##################################
+lme2<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
+lme2
+eval(parse(text=lme2)) #wks.
+##################################
+
+sum3<-data.frame("eins"=1:10,"zwei"=11:20)
+sum3$eins
+w<-"eins"
+v<-"zwei"
+o<-"drei"
+sum(sum3[o])
+sum3[o]<-31:40
+sum3
+
+a<-rbind(c(1:10),c(3:9))
+b<-matrix(1:20,4)
+b
+c<-matrix(1:30,5)
+c
+a<-list()
+a$eins<-b
+a$zwei<-c
+b<-unlist(a)
+b
+a
+xtabs(a)
+as.data.frame(b)
+d<-unlist(saveset)
+e<-as.data.frame(d)
+h<-matrix(d,ncol=1)
+g<-as.data.frame(f)
+g<-round(g,3)
+sumset[[5]]
+  sumset[[2]]
+  
+  240/30
+3120/30
+10
+
+ens<-row.names(e)
+ens1<-stri_count_boundaries(ens2,"character")
+unique(ens1)
+grep(pattern=stri_flatten(  as.character(setx[2,]),collapse=","),ens2)
+ens3<-sub(pattern=stri_flatten(  as.character(setx[1:30,]),collapse=","),replacement=stri_flatten(  as.character(setx[2,]),collapse=","),ens2)
+ens4<-matrix(ens3,ncol=1)
+ens2<-stri_replace(ens,regex=" ",replacement = "")
+
+stri_cmp('number100', 'number2')
+stri_cmp('number100', 'number2', opts_collator=stri_opts_collator(numeric=TRUE))
+c('a', 'b', 'c') %stri>=% 'b'
+stri_coll("number10","2")
+stri_locale_get()
+stri_replace_last("nu1mber10",regex="1",replacement = "")

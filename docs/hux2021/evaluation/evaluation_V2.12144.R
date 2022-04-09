@@ -34,6 +34,15 @@ vso<-"All"
 ti<-"ti"
 rtc<-"rtc"
 rtcc<-"rtcc"
+SM<-"SM"
+EM<-"EM"
+LC<-"LC"
+MM<-"MM"
+VSO<-"All"
+TI<-"ti"
+RTC<-"rtc"
+RTCC<-"rtcc"
+vsAll<-"All"
 
 # 
 
@@ -43,7 +52,7 @@ rtcc<-"rtcc"
 ###
 #set<-dta
 #add control observation
-adcontrol<-function(set){
+adcontrol<-function(set,ticontrol){
   print(length(set))
   #setns<-colnames(set)
   #print(setns)
@@ -51,7 +60,7 @@ adcontrol<-function(set){
   #colnames(set)<-setns
   con1<-set[1,]
   con1
-  con1$lfd<-length(dta$lfd)+1
+  con1$lfd<-length(set$lfd)+1
   con1$participant<-"admin"
   con1$tnid<-999
   con1$gilt<-2
@@ -62,7 +71,7 @@ adcontrol<-function(set){
   con1$item<-"control"
   con1$regionId<-"control"
   con1$elapsedTime<-NA
-  con1$timeinterval<-300
+  con1$timeinterval<-ticontrol
   con1$target<-0
   con1$string<-"dies ist ein control string durchschnittlicher länge"
   con1$char<-stri_count_boundaries(con1$string,"character")
@@ -85,9 +94,91 @@ adcontrol<-function(set){
   print(length(set))
   print(colnames(set))
   
-  return(rbind(set,con1))
+  print(length(set))
+  #setns<-colnames(set)
+  #print(setns)
+  #setns[6]<-"vsGroup"
+  #colnames(set)<-setns
+  con2<-set[1,]
+  con2
+  con2$lfd<-length(set$lfd)+2
+  con2$participant<-"admin"
+  con2$tnid<-999
+  con2$gilt<-2
+  con2$group<-"control"
+  con2[,6]<-"0Control"
+  con2$category<-"control"
+  con2$itemId<-"control"
+  con2$item<-"control"
+  con2$regionId<-"control"
+  con2$elapsedTime<-NA
+  con2$timeinterval<-ticontrol
+  con2$target<-1
+  con2$string<-"dies ist ein control string durchschnittlicher länge"
+  con2$char<-stri_count_boundaries(con2$string,"character")
+  con2$rt_corr<-NA
+  con2$speed<-NA
+  con2$adinterval<-NA
+  con2$wds<-stri_count_boundaries(con2$string)
+  con2$addwds<-NA
+  con2$proctbywd<-NA
+  con2$addproct<-NA
+  con2$proctbywdavg<-NA
+  con2$addproctbywds<-NA
+  con2$proctbychar<-NA
+  con2$addchar<-NA
+  con2$addproctbychar<-NA
+  con2$explique<-"control string zur festlegung der minimal RT"
+  
+  print(length(con2))
+  print(colnames(con2))
+  print(length(set))
+  print(colnames(set))
+  ####################
+  print(length(set))
+  #setns<-colnames(set)
+  #print(setns)
+  #setns[6]<-"vsGroup"
+  #colnames(set)<-setns
+  con3<-set[1,]
+  con3
+  con3$lfd<-length(set$lfd)+3
+  con3$participant<-"admin"
+  con3$tnid<-999
+  con3$gilt<-2
+  con3$group<-"control"
+  con3[,6]<-"0Control"
+  con3$category<-"control"
+  con3$itemId<-"control"
+  con3$item<-"control"
+  con3$regionId<-"control"
+  con3$elapsedTime<-NA
+  con3$timeinterval<-ticontrol
+  con3$target<-1
+  con3$string<-"dies ist ein control string durchschnittlicher länge"
+  con3$char<-stri_count_boundaries(con3$string,"character")
+  con3$rt_corr<-NA
+  con3$speed<-NA
+  con3$adinterval<-NA
+  con3$wds<-stri_count_boundaries(con3$string)
+  con3$addwds<-NA
+  con3$proctbywd<-NA
+  con3$addproct<-NA
+  con3$proctbywdavg<-NA
+  con3$addproctbywds<-NA
+  con3$proctbychar<-NA
+  con3$addchar<-NA
+  con3$addproctbychar<-NA
+  con3$explique<-"control string zur festlegung der minimal RT"
+  
+  print(length(con3))
+  print(colnames(con3))
+  print(length(set))
+  print(colnames(set))
+  
+  return(rbind(set,con1,con2,con3))
 }
-dta<-adcontrol(dta)
+dta2<-adcontrol(dta,300)
 
 
 ##########################
@@ -306,8 +397,8 @@ dtax<-dta_setx(dta,0,0,0,0,sm,sm)
 setx[1,]
 getmean(dta,c(1,0,-1,0,em,em),1)
 mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
-lmerun(lmef[[1]],dta,setx[1,],0)
-lmerun(lmef[[1]],dta,c(0,0,0,0,sm,em),0)
+#lmerun(lmef[[1]],dta,setx[1,],0)
+#lmerun(lmef[[1]],dta,c(0,0,0,0,sm,em),0)
 
 # SM<-mean(dta_setx(dta,0,0,0,F,sm,sm)$timeinterval)
 # remove(SM)
@@ -318,7 +409,7 @@ lmerun(lmef[[1]],dta,c(0,0,0,0,sm,em),0)
 #####################################################
 smvso<-setvsx(dta2,sm)
 
-lmerun(fmlRTCvs,dta,setx[7,]) #warum unterschiedliche variablenlängen? rtc
+#lmerun(fmlRTCvs,dta,setx[7,]) #warum unterschiedliche variablenlängen? rtc
 ##############################################################
 #rubio-fernandez:
 #"We constructed 3 lists of materials, each containing 7 items of each experimental 
@@ -415,7 +506,7 @@ cat(as.character(lmef[[1]]))
 # XvsGr4MM     1828.215   962.6068 0.007930514  1.899234 0.9706952
 # SM < EM < LC < MM
 (lmerun(lmef[[2]],dta,c(0,0,0,1,em,vso))) #TI
-(lmerun(dta,"rtc",1,c(0,0,0,1,em,vso),1)) #TI
+(lmerun(dta,ti,1,c(0,0,0,1,em,vso),1)) #TI
 
 #            Estimate Std. Error           df   t value  Pr(>|t|)
 # (Intercept)  300.000   1140.089 3.058947e-06 0.2631373 0.9999825
@@ -439,15 +530,118 @@ dtax<-outl.fun(dta,200)
 #########
 #cross table
 sum3<-list()
+set1<-"dta,ti,1,c(0,0,0,1,em,vso),0"
+set2<-"dta,ti,1,c(0,0,0,1,em,vso),1"
+
+lme2<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
+lme2
+eval(parse(text=lme2)) #wks.
+sum3<-data.frame("eins"=1:10,"zwei"=11:20)
+sum3$eins
+w<-"eins"
+v<-"zwei"
+o<-"drei"
+sum(sum3[o])
+sum3[o]<-31:40
+sum3
+sumset<-list()
+lme1
+sumset
+######################################
+getviews<-function(set1,set2,sumset){
+  lme1<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
+  lme11<-(eval(parse(text=lme1))) #wks.
+  lme2<-paste0("lmerun(",set2,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
+  lme22<-eval(parse(text=lme2)) #wks.
+  sum1
+  #lmerun(set1)
+  sum1$coefficients
+  sum1<-summary(lme11)
+  sum2<-summary(lme22)
+  sumset[[set1]]<-sum1$coefficients
+  sumset[[set2]]<-sum2$coefficients
+  return(sumset)
+#sumset
+}
+
+#######################################
+getviews_single<-function(set1,sumset){
+  lme1<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
+  lme11<-(eval(parse(text=lme1))) #wks.
+  #lme2<-paste0("lmerun(",set2,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
+  #lme22<-eval(parse(text=lme2)) #wks.
+  #sum1
+  #lmerun(set1)
+  #sum1$coefficients
+  sum1<-summary(lme11)
+  #sum2<-summary(lme22)
+  sumset[[set1]]<-sum1$coefficients
+  #sumset[[set2]]<-sum2$coefficients
+  return(sumset)
+  #sumset
+}
+sum5<-getviews_single(set1,sumset)
+sum5
+#wks
+###### now loop through sets
+length(setx[,1]) #1:length(setx[,1]
+
+for (k in 1:length(setx[,1])){
+  lmerun(dta,ti,1,setx[k,],0)
+  lmerun(dta,rtc,1,setx[k,],0)
+  lmerun(dta,ti,2,setx[k,],0)
+  lmerun(dta,rtc,2,setx[k,],0)
+  lmerun(dta,ti,1,setx[k,],1)
+  lmerun(dta,rtc,1,setx[k,],1)
+  lmerun(dta,ti,2,setx[k,],1)
+  lmerun(dta,rtc,2,setx[k,],1)
+}
+stri_flatten(  as.character(setx[1,]),collapse=",")
+parse(setx[1,])
+form1<-paste("dta,ti,1,",setx[1,],0)
+form1
+sumset<-list()
+for (k in 1:length(setx[,1])){
+  strflat<-stri_flatten(  as.character(setx[k,]),collapse=",")
+  form1<-paste("dta,rtc,2,c(",strflat,"),",1)
+  form1
+  sumset<-getviews_single(form1,sumset)
+  cat("\nwrite set",k)
+}
+  view1
+  (sumset)
+  saveset<-sumset$
+  is.data.frame(sum3)
+save2<-as.data.frame(saveset,make.names=NA)
+    write_csv2(saveset,"save_lmeviews.csv")
+  lmerun(dta,ti,1,setx[k,],0)
+  # lmerun(dta,rtc,1,setx[k,],0)
+  # lmerun(dta,ti,2,setx[k,],0)
+  # lmerun(dta,rtc,2,setx[k,],0)
+  # lmerun(dta,ti,1,setx[k,],1)
+  # lmerun(dta,rtc,1,setx[k,],1)
+  # lmerun(dta,ti,2,setx[k,],1)
+  # lmerun(dta,rtc,2,setx[k,],1)
+}
+
+#####wks.
 createview<-function(){
   lmerun(dta,"rtc",1,c(0,0,0,0,sm,em),1)
-  sum1<-lmerun(dta,ti,1,c(0,0,1,1,sm,em),1)
+   
+   (lmerun(dta,ti,1,c(0,0,0,1,em,vso),1)) #TI
+  sum4<-list()
+  sum1<-lmerun(dta2,ti,1,c(0,0,0,1,sm,sm),1)
   sum2<-summary(sum1)
-  sum3$"ti,1,c(0,0,1,1,sm,em),1"=sum2$coefficients
-  sum3[1]
-  sum3$"ti,1,c(0,0,1,1,sm,em),1"-sum3$`ti,1,c(0,0,0,1,sm,em),1`
+  sum2
+  sum4[[1]]<-sum2$coefficients
+  sum4[1]
+  sum3$"ti,1,c(0,0,1,1,sm,em),1"-sum3$`ti,1,c(0,0,0,1,em,vso),1,+3control`
+  sum3$`ti,1,c(0,0,0,1,sm,em),1`-sum3$`ti,1,c(0,0,0,1,em,vso),1,+3control`
   sum3[[4]]-sum3[[3]]
-
+sum3$`ti,1,c(0,0,0,1,sm,em),1`-sum2$coefficients
+sum4<-as.data.frame(sum4)
+is.data.frame(sum4)
+#write_csv2(sum4,"huxout.csv")
   }
 
 

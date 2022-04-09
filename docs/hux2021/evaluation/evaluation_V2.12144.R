@@ -758,12 +758,16 @@ lmerun(fmla1,dta4,ch1)
 #C.1
 #general means group vs all
 # #
+d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1))
+m1<-mean(d5$timeinterval[group==sm],na.rm=T)
+m2<-mean(d5$timeinterval[group!=sm],na.rm=T)
 # mean at 0,0,0,out
 # #    mean group mean !group
 # sm   1851.040    1662.170 >
 # em   1861.000    1659.711 >
 # lc   1595.667    1683.930 <
 # mm   1661.000    1679.075 <
+
 tb1<-getmean(dta,0,0,0,0,0,0) # with RAW dataset
 #here results reading time RAW, target 0
 #        mean        sd
@@ -790,7 +794,7 @@ tb2<-getmean(dta1,0,0,0,0,0,0)
 
 #second formula, outliers discarded with respect to target length
 dta2<-outl.fun.rtc(dta)
-tb3<-getmean(dta2,0,0,0,0,0,0)
+tb3<-getmean(dta,c(0,0,0,0,sm,vso),1)
 #       mean        sd
 # EM 1563.051 1062.1094
 # SM 1623.482  834.4605

@@ -1070,3 +1070,14 @@ c('a', 'b', 'c') %stri>=% 'b'
 stri_coll("number10","2")
 stri_locale_get()
 stri_replace_last("nu1mber10",regex="1",replacement = "")
+##12151.
+chose<-c(0,0,0,1,sm,vso)
+mnset<-dta_setx(set,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
+
+dta<-mnset
+#attach(dta)
+# chose<-c(t1,t2,t3,xo,g1,g2)
+#chose[1]<-t1
+#chose[2]<-
+mnx<-mean(mnset$timeinterval,na.rm=T)
+

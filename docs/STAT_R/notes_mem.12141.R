@@ -23,3 +23,7 @@ ifelse(resp=="rtc",rt<-rtc,ifelse(resp=="rtcc",rt<-rtcc,rt<-ti))
 (fmlxvs <- as.formula(paste(rt, lme2.form.cpt.XvsO)))
 
 stri_flatten(  as.character(setx[1,]),collapse=",")
+
+##### subs, exclude, include
+mean(dta$timeinterval[group==sm],na.rm=T)
+

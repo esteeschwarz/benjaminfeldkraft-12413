@@ -179,8 +179,8 @@ adcontrol<-function(set,ticontrol){
   return(rbind(set,con1,con2,con3))
 }
 dta2<-adcontrol(dta,300)
-
-
+dta_o<-dta
+dta<-dta2
 ##########################
 #3.
 #add column with length corrected response times
@@ -236,11 +236,11 @@ rtc<-dtartc$rtc
 #######
 #5.1
 #set without outliers with resp to target length
-dtap2<-outl.fun.rtc(dtap1)
+#dtap2<-outl.fun.rtc(dtap1)
 ##########?????????
 #5.2 manuell ausgeschlossene fälle im scheme
-dtap3<-subset(dtap2,gilt==1)
-dtap2<-dtap3
+#dtap3<-subset(dtap2,gilt==1)
+#dtap2<-dtap3
 ##########????????
 
 #6.
@@ -297,13 +297,13 @@ dta_setx<-function(set,chose,out){
 
      #wks. creates subsets for lmer test
 }
-dtax<-dta_setx(dta,c(0,0,0,0,sm,sm),1)
+#dtax<-dta_setx(dta,c(0,0,0,0,sm,sm),1)
 
 ########12147.
 
 
-dtax<-dta_setx(dta,-1,0,1,0,sm,em)
-dtax<-dta_setx(dta,-1,0,1,0,sm,em)
+#dtax<-dta_setx(dta,-1,0,1,0,sm,em)
+#dtax<-dta_setx(dta,-1,0,1,0,sm,em)
 ##############
 createsets<-function(){
   ch1<-c(0,0,0,0,sm,em)
@@ -352,13 +352,13 @@ createsets<-function(){
 }
 ##########################
 setx<-createsets()
-setx[11,]
+#setx[11,]
 #wks.
 #remove(setx)
 #ch1
 ##########################
 #####################################################
-lmerun(lmef[[1]],dta,setx[1,],1)
+#lmerun(lmef[[1]],dta,setx[1,],1)
 
 getmean<-function(set,chose,out){
  # t1<-chose[1]
@@ -393,10 +393,10 @@ mnx<-mean(mnset$timeinterval,na.rm=T)
  print(mnx)
  #return(tb2)
 }
-dtax<-dta_setx(dta,0,0,0,0,sm,sm)
-setx[1,]
-getmean(dta,c(1,0,-1,0,em,em),1)
-mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
+#dtax<-dta_setx(dta,0,0,0,0,sm,sm)
+#setx[1,]
+#getmean(dta,c(1,0,-1,0,em,em),1)
+#mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
 #lmerun(lmef[[1]],dta,setx[1,],0)
 #lmerun(lmef[[1]],dta,c(0,0,0,0,sm,em),0)
 
@@ -407,7 +407,7 @@ mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
 # t3<-0
 
 #####################################################
-smvso<-setvsx(dta2,sm)
+#smvso<-setvsx(dta2,sm)
 
 #lmerun(fmlRTCvs,dta,setx[7,]) #warum unterschiedliche variablenlängen? rtc
 ##############################################################
@@ -444,8 +444,8 @@ lmeforms<-list("RTCgr"=fmlRTCgr,"TIgr"=fmlTIgr,"RTCvs"=fmlRTCvs,"TIvs"=fmlTIvs)
 #lmeforms[1]
 return(lmeforms2)
 }
-lmef2<-create_lmeforms(dta,"ti")
-lmef2
+#lmef2<-create_lmeforms(dta,"ti")
+#lmef2
 #fmla3
 #set1[1]
 ####################################################
@@ -454,9 +454,9 @@ lmef2
 #   (sumSMEM<- lmer(form,lmeset)) 
 # 
 # }
-dtax<-dta_setx(dta,setx[2,],1)
-lmerun(lmef[[1]],dta,setx[2,],1)
-outl.fun.rtc(dta)
+#dtax<-dta_setx(dta,setx[2,],1)
+#lmerun(lmef[[1]],dta,setx[2,],1)
+#outl.fun.rtc(dta)
 
 lmerun<-function(set,resp,gr,chose,out){
   form<-create_lmeforms(set,resp)[[gr]]
@@ -485,11 +485,29 @@ lmerun<-function(set,resp,gr,chose,out){
   return(sum1)
   
 }
+#proof mean vs. lme
+d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1))
+#mean(d5$timeinterval[category==sm],na.rm=T)
+#sum(d5$category==sm)
+m1<-mean(d5$timeinterval[group==sm],na.rm=T)
+m2<-mean(d5$timeinterval[group!=sm],na.rm=T)
+m3<-mean(d5$timeinterval[group==em],na.rm=T)
+m4<-mean(d5$timeinterval[group!=em],na.rm=T)
+m5<-mean(d5$timeinterval[group==lc],na.rm=T)
+m6<-mean(d5$timeinterval[group!=lc],na.rm=T)
+m7<-mean(d5$timeinterval[group==mm],na.rm=T)
+m8<-mean(d5$timeinterval[group!=mm],na.rm=T)
+m9<-rbind(cbind(m1,m2),cbind(m3,m4),cbind(m5,m6),cbind(m7,m8))
+m9
+m9ns<-c("sm","em","lc","mm")
+rownames(m9)<-m9ns
+colnames(m9)<-c("mean group","mean !group")
+
 # as.character(fmlRTCgr[3])
-setx[7,4]==T
-lmef[[1]][3]
-cat(as.character(lmef[[1]]))
-(lmerun(dta,ti,1,c(0,0,0,1,em,sm),1)) #RTC
+#setx[7,4]==T
+#lmef[[1]][3]
+#cat(as.character(lmef[[1]]))
+#(lmerun(dta,ti,1,c(0,0,0,1,em,sm),1)) #RTC
 #             Estimate Std. Error           df   t value  Pr(>|t|)
 # (Intercept) -2043.817   1149.383 0.0001254110 -1.778186 0.9992778
 # XvsGr1SM     1720.789   1157.860 0.0001291520  1.486180 0.9992813
@@ -505,8 +523,8 @@ cat(as.character(lmef[[1]]))
 # XvsGr3LC     1812.692   965.0320 0.008010718  1.878376 0.9705283
 # XvsGr4MM     1828.215   962.6068 0.007930514  1.899234 0.9706952
 # SM < EM < LC < MM
-(lmerun(lmef[[2]],dta,c(0,0,0,1,em,vso))) #TI
-(lmerun(dta,ti,1,c(0,0,0,1,em,vso),1)) #TI
+#(lmerun(lmef[[2]],dta,c(0,0,0,1,em,vso))) #TI
+(lmerun(dta,rtc,2,c(0,0,0,1,mm,vso),1)) #TI
 
 #            Estimate Std. Error           df   t value  Pr(>|t|)
 # (Intercept)  300.000   1140.089 3.058947e-06 0.2631373 0.9999825
@@ -580,7 +598,7 @@ getviews_single<-function(set1,sumset){
   return(sumset)
   #sumset
 }
-sum5<-getviews_single(set1,sumset)
+#sum5<-getviews_single(set1,sumset)
 sum5
 #wks
 ###### now loop through sets
@@ -738,6 +756,14 @@ lmerun(fmla1,dta4,ch1)
 #Single Metaphor condition   1578 ms (SD 768 ms).
 #LC < EM < SM
 #C.1
+#general means group vs all
+# #
+# mean at 0,0,0,out
+# #    mean group mean !group
+# sm   1851.040    1662.170 >
+# em   1861.000    1659.711 >
+# lc   1595.667    1683.930 <
+# mm   1661.000    1679.075 <
 tb1<-getmean(dta,0,0,0,0,0,0) # with RAW dataset
 #here results reading time RAW, target 0
 #        mean        sd

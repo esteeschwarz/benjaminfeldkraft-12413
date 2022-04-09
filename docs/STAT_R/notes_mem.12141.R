@@ -31,4 +31,34 @@ length(dta_setx(dta,c(0,0,0,1,sm,sm),1)[with(dta_setx(dta,c(0,0,0,1,sm,sm),1),ca
 # 0
 c1<-(dta_setx(dta,c(0,0,0,1,em,vso),1)[with(dta_setx(dta,c(0,0,0,1,em,vso),1),category=="EMvsAll"),]$category)
 s
+flag<-em
+flag<-1
+flagno<-0
+flagset<-dta_setx(dta,c(0,0,0,1,em,vso),1)
+set<-dta_setx(dta,c(0,0,0,1,em,vso),1)
+
+checkvsall<-function(set){
+  stri_detect(set$category,regex="vsAll")
+}
+c1<-flagset[with(flagset,category==flag|flagno==1&checkvsall(flagset)),]$category
+c1<-flagset[with(flagset,category==flag&flagno==0|category!=flag&flagno==1|checkvsall(flagset)),]$category
+c1<-flagset[with(flagset,category==flag&flagno==0|category!=flag&flagno==1&checkvsall(flagset)),]$category
+
+c1
+##########
+c1<-flagset[with(flagset,category==flag),]
+length(c1$category)
+mean(c1$timeinterval,na.rm=T)
+#c2<-flagset[with(flagset,checkvsall(flagset)),]
+ifelse(flagall==0,c2<-flagset[with(flagset,group==chose[6]),],
+       c2<-flagset[with(flagset,checkvsall(flagset)),])
+mn2<-mean(c2$timeinterval)
+length(c2$category)
+mean(c2$timeinterval,na.rm=T)
+mn1<-mean(c1$timeinterval,na.rm=T)
+mnx<-cbind(mn1,mn2)
+rownames(mnx)<-"mean"
+ifelse(flagall==1,col2<-"vsAll",col2<-chose[6])
+colnames(mnx)<-c(chose[5],col2)
+print(mnx)
 

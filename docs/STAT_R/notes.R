@@ -1082,14 +1082,39 @@ dta<-mnset
 mnx<-mean(mnset$timeinterval,na.rm=T)
 
 ############ LOGIK
-#wie mit setzung von x variablen, abfrage derselben zwei ergebnisse möglich sind auszugeben
-flag<-10
-#flag<-emvsa
-#flag2<-
-flagno<-10
-flagyes<-em
-c1<-(dta_setx(dta,c(0,0,0,1,em,vso),1)[with(dta_setx(dta,c(0,0,0,1,em,vso),1),category==flag&category!=flagno|category==flagyes),]$category)
-c1
+checkvsall<-function(set){
+  stri_detect(set$category,regex="vs")
+}
 
+#wie mit setzung von x variablen, abfrage derselben zwei ergebnisse möglich sind auszugeben
+#flagno<-1
+chose<-c(0,0,0,0,em,lc)
+flagset<-dta_setx(dta,c(0,0,0,1,em,lc),1)
+flag<-chose[5]
+flagall<-0
+#c1<-flagset[with(flagset,category==flag&flagno==0|category!=flag&flagno==1&checkvsall(flagset)),]
+#length(c1$category)
+#mean(c1$timeinterval,na.rm=T)
+#
+#checkvsall(flagset)
+#ifelse(flagall==0,c1<-flagset[with(flagset,category==flag),]c1<-flagset[with(flagset,category!=flag&flagall==1&checkvsall(flagset)),])
+c1<-flagset[with(flagset,category==flag),]
+length(c1$category)
+mean(c1$timeinterval,na.rm=T)
+#c2<-flagset[with(flagset,checkvsall(flagset)),]
+ifelse(flagall==0,c2<-flagset[with(flagset,group==chose[6]),],
+       c2<-flagset[with(flagset,checkvsall(flagset)),])
+mn2<-mean(c2$timeinterval)
+length(c2$category)
+mean(c2$timeinterval,na.rm=T)
+mn1<-mean(c1$timeinterval,na.rm=T)
+mnx<-cbind(mn1,mn2)
+rownames(mnx)<-"mean"
+ifelse(flagall==1,col2<-"vsAll",col2<-chose[6])
+colnames(mnx)<-c(chose[5],col2)
+print(mnx)
+
+#ausgabe 1
+#ausgabe 2
 
 

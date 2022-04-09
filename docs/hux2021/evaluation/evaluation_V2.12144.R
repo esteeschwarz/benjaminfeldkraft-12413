@@ -43,7 +43,10 @@ TI<-"ti"
 RTC<-"rtc"
 RTCC<-"rtcc"
 vsAll<-"All"
-
+smvsa<-"SMvsAll"
+emvsa<-"EMvsAll"
+lcvsa<-"LCvsAll"
+mmvsa<-"MMvsAll"
 # 
 
 ###########################
@@ -361,21 +364,24 @@ setx<-createsets()
 #lmerun(lmef[[1]],dta,setx[1,],1)
 
 getmean<-function(set,chose,out){
- # t1<-chose[1]
- # t2<-chose[2]
- # t3<-chose[3]
- # sxo<-chose[4]
- # g1<-chose[5]
- # g2<-chose[6]
+  t1<-chose[1]
+  t2<-chose[2]
+  t3<-chose[3]
+  sxo<-chose[4]
+  g1<-chose[5]
+  g2<-chose[6]
   chose[4]<-0
-  mnset<-dta_setx(set,chose[1],chose[2],chose[3],chose[4],chose[5],chose[6])
+  mnset<-dta_setx(set,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),out)
   
    dta<-mnset
  #attach(dta)
 # chose<-c(t1,t2,t3,xo,g1,g2)
  #chose[1]<-t1
  #chose[2]<-
+   ifelse(vsall==1,flag<-)
 mnx<-mean(mnset$timeinterval,na.rm=T)
+c1<-(dta_setx(dta,chose,1)[with(dta_setx(dta,chose,1),category=="EMvsAll"),]$category)
+
  # SM<-mean(dta_setx(dta,c(t1,t2,t3,F,sm,sm))$timeinterval,na.rm=T)
  # EM<-mean(dta_setx(dta,c(t1,t2,t3,F,em,em))$timeinterval)
  # LC<-mean(dta_setx(dta,c(t1,t2,t3,F,lc,lc))$timeinterval)
@@ -393,9 +399,17 @@ mnx<-mean(mnset$timeinterval,na.rm=T)
  print(mnx)
  #return(tb2)
 }
+flag<-10
+#flag<-emvsa
+#flag2<-
+flagno<-10
+flagyes<-em
+c1<-(dta_setx(dta,c(0,0,0,1,em,vso),1)[with(dta_setx(dta,c(0,0,0,1,em,vso),1),category==flag&category!=flagno|category==flagyes),]$category)
+c1
 #dtax<-dta_setx(dta,0,0,0,0,sm,sm)
 #setx[1,]
-#getmean(dta,c(1,0,-1,0,em,em),1)
+getmean(dta,c(0,0,0,0,lc,lc),1)
+m9
 #mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
 #lmerun(lmef[[1]],dta,setx[1,],0)
 #lmerun(lmef[[1]],dta,c(0,0,0,0,sm,em),0)

@@ -26,4 +26,9 @@ stri_flatten(  as.character(setx[1,]),collapse=",")
 
 ##### subs, exclude, include
 mean(dta$timeinterval[group==sm],na.rm=T)
+### this:
+length(dta_setx(dta,c(0,0,0,1,sm,sm),1)[with(dta_setx(dta,c(0,0,0,1,sm,sm),1),category==lc),]$timeinterval)
+# 0
+c1<-(dta_setx(dta,c(0,0,0,1,em,vso),1)[with(dta_setx(dta,c(0,0,0,1,em,vso),1),category=="EMvsAll"),]$category)
+s
 

@@ -1081,3 +1081,15 @@ dta<-mnset
 #chose[2]<-
 mnx<-mean(mnset$timeinterval,na.rm=T)
 
+############ LOGIK
+#wie mit setzung von x variablen, abfrage derselben zwei ergebnisse möglich sind auszugeben
+flag<-10
+#flag<-emvsa
+#flag2<-
+flagno<-10
+flagyes<-em
+c1<-(dta_setx(dta,c(0,0,0,1,em,vso),1)[with(dta_setx(dta,c(0,0,0,1,em,vso),1),category==flag&category!=flagno|category==flagyes),]$category)
+c1
+
+
+

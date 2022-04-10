@@ -363,46 +363,49 @@ setx<-createsets()
 #####################################################
 #lmerun(lmef[[1]],dta,setx[1,],1)
 
-getmean<-function(set,chose,out,flagall){
+getmean<-function(set,chose,out,flagall,rt){
   t1<-chose[1]
   t2<-chose[2]
   t3<-chose[3]
   sxo<-chose[4]
   g1<-chose[5]
   g2<-chose[6]
+    #rtx
   #chose[4]<-0
   mnset<-dta_setx(set,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),out)
-  mnset<-dta_setx(dta,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),1)
+#  mnset<-dta_setx(dta,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),1)
   
  flag<-chose[5]
-  #flag<-vso
-  #flagno<-vso
-#  flagset<-dta_setx(dta,c(0,0,0,1,em,vso),1)
 #  set<-dta_setx(dta,c(0,0,0,1,em,vso),1)
   flagset<-mnset 
   checkvsall<-function(set){
     stri_detect(set$category,regex="vs")
   }
-#   c1<-flagset[with(flagset,category==flag&flagall==0|category!=flag&flagall==1&checkvsall(flagset)),]
-#   ###
-#   c2<-NA
-#   mn2<-NA
-# #  ifelse(flagall==1,mn2<-flagset[with(flagset,category==flag&flagall==0|category!=flag&flagall==1&checkvsall(flagset)),])
-#   ifelse(flagall!=1,mn2<-flagset[with(flagset,category==chose[6]),]$timeinterval,
-#          mn2<-flagset[with(flagset,category==flag&flagall==0|category!=flag&flagall==1&checkvsall(flagset)),]$timeinterval)
-#   mn2<-mean(mn2)
-
-  #######################
+  
+  #flag<-vso
+  #flagno<-vso
+  # flagset<-dta_setx(dta,chose,1)
+  # flagall<-1
+  # flag<-em
+  # rt<-ti
+  # chose<-c(0,0,0,1,sm,vso)
+  # #######################
   c1<-flagset[with(flagset,category==flag),]
   length(c1$category)
-  mean(c1$timeinterval,na.rm=T)
+  ifelse(rt==ti,mn1<-mean(c1$timeinterval),ifelse(rt==rtc,mn1<-mean(c1$rtc),mn1<-mean(c1$rtc.1)))
+  
+#    mean(c1$rtx,na.rm=T)
   #c2<-flagset[with(flagset,checkvsall(flagset)),]
+  checkvsall(flagset)
   ifelse(flagall==0,c2<-flagset[with(flagset,group==chose[6]),],
          c2<-flagset[with(flagset,checkvsall(flagset)),])
-  mn2<-mean(c2$timeinterval)
+  ifelse(rt==ti,mn2<-mean(c2$timeinterval),ifelse(rt==rtc,mn2<-mean(c2$rtc),mn2<-mean(c2$rtc.1)))
   length(c2$category)
-  mean(c2$timeinterval,na.rm=T)
-  mn1<-mean(c1$timeinterval,na.rm=T)
+  c2$cat
+#  mn2<-mean(c2$rtx)
+  #length(c2$category)
+  #mean(c2$rtx,na.rm=T)
+  #mn1<-mean(c1$rtx,na.rm=T)
   mnx<-cbind(mn1,mn2)
   rownames(mnx)<-"mean"
   ifelse(flagall==1,col2<-"vsAll",col2<-chose[6])
@@ -439,15 +442,18 @@ getmean<-function(set,chose,out,flagall){
 }
 #dtax<-dta_setx(dta,0,0,0,0,sm,sm)
 #setx[1,]
-getmean(dta,c(0,0,0,0,em,lc),1,0)
-# m9<-dta_setx(dta,c(0,0,0,0,em,lc),1)[with(dta_setx(dta,c(0,0,0,0,em,lc),1),group!=lc),]
-# mean(m9$timeinterval)
+mean(dta_rtc$rtc.1)
+getmean(dta_rtc,c(0,0,0,1,sm,vso),1,1,rtc.1)
+ m9<-dta_setx(dta_rtc,c(0,0,0,0,em,lc),1)[with(dta_setx(dta_rtc,c(0,0,0,0,em,lc),1),group!=lc),]
+ mean(m9$rtc.1)
 # mean(dta_setx(dta,c(0,0,0,0,em,lc),1)[dta_setx(dta,c(0,0,0,0,em,lc),1)$group==em]$timeinterval)
 # mean(dta_setx(dta,c(0,0,0,0,em,lc),1))$timeinterval
 # #mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
 #lmerun(lmef[[1]],dta,setx[1,],0)
 #lmerun(lmef[[1]],dta,c(0,0,0,0,sm,em),0)
-
+1952-1777
+1847-1663
+1810-1623
 # SM<-mean(dta_setx(dta,0,0,0,F,sm,sm)$timeinterval)
 # remove(SM)
 # t1<-0

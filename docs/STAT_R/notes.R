@@ -1118,3 +1118,55 @@ print(mnx)
 #ausgabe 2
 
 
+for(i in 1:6) { #-- Create objects  'r.1', 'r.2', ... 'r.6' --
+  nam <- paste("r", i, sep = ".")
+  assign(nam, 1:i)
+}
+ls(pattern = "^r..$")
+nam
+
+####
+## Fit sex-specific variances by constructing numeric dummy variables
+## for sex and sex:age; in this case the estimated variance differences
+## between groups in both intercept and slope are zero ...
+data(Orthodont,package="nlme")
+Orthodont$nsex <- as.numeric(Orthodont$Sex=="Male")
+Orthodont$nsexage <- with(Orthodont, nsex*age)
+Orthodont$groose[1:64]<-sample(100:150,64,replace = T)
+Orthodont$groose[65:108]<-c(sample(100:150,64,replace = T))-10
+sum3<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +
+       (0 + nsexage|Subject) + (1+groose) +(0+Sex), data=Orthodont)
+sum6<-lmer(distance ~ age + (age|Subject) + (0+nsex|Subject) +
+             (0 + nsexage|Subject) + (1+groose) +(0+Sex), data=Orthodont)
+
+sum4<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +
+             (0 + nsexage|Subject) +(0+Sex), data=Orthodont)
+sum5<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +
+             (0 + nsexage|Subject) +(0+Sex), data=Orthodont,offset = a2)
+sum1<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +
+             (0 + nsexage|Subject), data=Orthodont)
+sum7<-lmer(timeinterval ~   group  + (1+char) +(0+item) + (1 + tnid) + (0+group | tnid),dtax) 
+
+summary(sum7)
+a1<-lm(distance~groose,Orthodont)
+summary(a1)
+a2<-residuals(a1)
+
+mean(Orthodont$distance)
+# 24*0.662 = estimate < age * fixed effect of age (15.88) near 16.76 (estimate)
+# mean distance = 24.023
+
+24*0.662
+#16/0.66=24.24
+#16.76111/0.66019=25.3883
+
+#"In the model, we posited a main effect of Category (single vs. other) 
+#and random effects of Participant and Item, along with a random slope of Category by Participant"
+getmean(dta,c(0,0,0,1,sm,vso),1,1,ti)
+sum1<-lmer(timeinterval ~  1 + category  + (1|item) + (1 | tnid) + (1 + category : tnid),dtax,offset=rtc) 
+sum1<-lmer(timeinterval ~   category  + (1+char) +(1|item) + (1 | tnid) + (category | tnid),dtax) 
+
+#sum1<-lmer(timeinterval ~  0 + group  + (1| item) + (1 + tnid) + (1 + group | tnid),dtax,offset=rtc) 
+summary(sum1)
+
+

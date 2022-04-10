@@ -515,16 +515,41 @@ lmer(lmef[[1]],dta)
 #   (sumSMEM<- lmer(form,lmeset)) 
 # 
 # }
-dtax<-dta_setx(dta,c(0,0,0,1,sm,sm),1)
+dtax<-dta_setx(dta,c(0,0,0,1,lc,vso),1)
 cat<-"group"
 cat<-"category"
 start<-list()
 start$theta<-50
 start
 tail(flagset$timeinterval)
-sum1<-lmer(timeinterval ~  0 + group  + (1 | item) + (1 | participant) + (0 + group | participant),dtax,offset=rtc) 
+#"In the model, we posited a main effect of Category (single vs. other) 
+#and random effects of Participant and Item, along with a random slope of Category by Participant"
+getmean(dta,c(0,0,0,1,sm,vso),1,1,ti)
+sum1<-lmer(timeinterval ~  1 + category  + (1|item) + (1 | tnid) + (1 + category : tnid),dtax,offset=rtc) 
+sum1<-lmer(timeinterval ~  0 + category  + (1|char) +(1+item) + (1 + tnid) + (0 + category | tnid),dtax) 
+###
+sum7<-lmer(timeinterval ~   group  + (1+char) +(0+item) + (1 + tnid) + (0+group | tnid),dtax) 
+###
+#sum1<-lmer(timeinterval ~  0 + group  + (1| item) + (1 + tnid) + (1 + group | tnid),dtax,offset=rtc) 
 summary(sum1)
+write_clip(summary(sum1)$coefficients)
 lmer(timeinterval ~ XvsGr + (1 | char) + (1 | item) + (1 | participant) + (1 + XvsGr | participant),dta2) 
+
+#hier erwartbare signifikante abweichung an der controlgroup (10ms)
+# #	Estimate	Std. Error	df	t value	Pr(>|t|)
+# (Intercept)	1962.01988337944	769.484155831318	0.0332340108424057	2.5497859423236	0.895556169266178
+# groupEM	-294.885025112871	752.271656440326	0.0303588243992334	-0.391992736384935	0.95436662231607 
+# groupLC	-135.603344231537	751.209417962135	0.0301877089692062	-0.180513370824608	0.973231410078128
+# groupMM	-161.068080681727	751.323604459432	0.0302059794000679	-0.214379103392624	0.969457742403747
+# groupSM	-206.985184742614	751.201649669681	0.0301864634390495	-0.275538778214384	0.96353527594105
+# item11	-234.352827566011	36.9872049893208	252.401241553544	-6.33605128134649	1.07560884011726e-09
+# item12	-171.987207837041	37.6102124340393	194.501489937937	-4.5728858388841	8.54801375910651e-06
+# item18	-144.438814703908	36.4390320376228	236.487767093904	-3.96384883535811	9.77219496693814e-05
+# item2	360.952230131303	37.1858091455239	245.550453948994	9.70671980590078	4.60902898110223e-19   ###
+# item26	64.4055527304593	39.1327963396548	229.809999621154	1.64582035414613	0.101167682280183    #----
+# item5	1094.97275676077	37.1365111151353	197.512448921418	29.4850734191479	2.86060059928377e-74   ###
+# item6	511.834559622824	38.0743238700786	230.337549930118	13.4430373962611	8.46552584220792e-31   ###
+# tnid	0.381720779917168	0.75441015474542	86.8762170406657	0.505985739343583	0.614148208300596
 
 dta1<-dta_setx(dta,c(0,0,0,0,sm,sm),0)
 chose<-c(0,0,0,1,sm,em)

@@ -13,7 +13,7 @@ src_d<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation
 ###########################
 
 library(lme4)
-library(lmerTest)
+#library(lmerTest)
 library(stringi)
 library(readr)
 library(clipr)
@@ -55,7 +55,7 @@ mmvsa<-"MMvsAll"
 ###
 #set<-dta
 #add control observation
-adcontrol<-function(set,ticontrol){
+adcontrol<-function(set,ti0,ticontrol,ti2){
   print(length(set))
   #setns<-colnames(set)
   #print(setns)
@@ -74,7 +74,7 @@ adcontrol<-function(set,ticontrol){
   con1$item<-"control"
   con1$regionId<-"control"
   con1$elapsedTime<-NA
-  con1$timeinterval<-ticontrol
+  con1$timeinterval<-ti0
   con1$target<-0
   con1$string<-"dies ist ein control string durchschnittlicher länge"
   con1$char<-stri_count_boundaries(con1$string,"character")
@@ -156,7 +156,7 @@ adcontrol<-function(set,ticontrol){
   con3$item<-"control"
   con3$regionId<-"control"
   con3$elapsedTime<-NA
-  con3$timeinterval<-ticontrol
+  con3$timeinterval<-ti2
   con3$target<-1
   con3$string<-"dies ist ein control string durchschnittlicher länge"
   con3$char<-stri_count_boundaries(con3$string,"character")
@@ -179,10 +179,10 @@ adcontrol<-function(set,ticontrol){
   print(length(set))
   print(colnames(set))
   
-  return(rbind(set,con1,con2,con3))
+  return(rbind(set,con3,con2,con1))
 }
-dta2<-adcontrol(dta,300)
 dta_o<-dta
+dta2<-adcontrol(dta_o,10,300,600)
 dta<-dta2
 ##########################
 #3.
@@ -440,11 +440,11 @@ getmean<-function(set,chose,out,flagall){
 #dtax<-dta_setx(dta,0,0,0,0,sm,sm)
 #setx[1,]
 getmean(dta,c(0,0,0,0,em,lc),1,0)
-m9<-dta_setx(dta,c(0,0,0,0,em,lc),1)[with(dta_setx(dta,c(0,0,0,0,em,lc),1),group!=lc),]
-mean(m9$timeinterval)
-mean(dta_setx(dta,c(0,0,0,0,em,lc),1)[dta_setx(dta,c(0,0,0,0,em,lc),1)$group==em]$timeinterval)
-mean(dta_setx(dta,c(0,0,0,0,em,lc),1))$timeinterval
-#mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
+# m9<-dta_setx(dta,c(0,0,0,0,em,lc),1)[with(dta_setx(dta,c(0,0,0,0,em,lc),1),group!=lc),]
+# mean(m9$timeinterval)
+# mean(dta_setx(dta,c(0,0,0,0,em,lc),1)[dta_setx(dta,c(0,0,0,0,em,lc),1)$group==em]$timeinterval)
+# mean(dta_setx(dta,c(0,0,0,0,em,lc),1))$timeinterval
+# #mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
 #lmerun(lmef[[1]],dta,setx[1,],0)
 #lmerun(lmef[[1]],dta,c(0,0,0,0,sm,em),0)
 
@@ -574,7 +574,7 @@ colnames(m9)<-c("mean group","mean !group")
 # XvsGr4MM     1828.215   962.6068 0.007930514  1.899234 0.9706952
 # SM < EM < LC < MM
 #(lmerun(lmef[[2]],dta,c(0,0,0,1,em,vso))) #TI
-(lmerun(dta,rtc,2,c(0,0,0,1,mm,vso),1)) #TI
+#(lmerun(dta,rtc,2,c(0,0,0,1,mm,vso),1)) #TI
 
 #            Estimate Std. Error           df   t value  Pr(>|t|)
 # (Intercept)  300.000   1140.089 3.058947e-06 0.2631373 0.9999825
@@ -583,38 +583,38 @@ colnames(m9)<-c("mean group","mean !group")
 # XvsGr3LC    1500.030   1158.029 3.256070e-06 1.2953304 0.9999763
 # XvsGr4MM    1476.138   1155.909 3.232291e-06 1.2770366 0.9999765
 # SM < EM <= MM < LC
-(lmerun(lmef[[3]],dta,c(0,0,0,1,em,vso)))
-(lmerun(lmef[[4]],dta,c(0,0,0,0,sm,lc)))
-(lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
-(lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
-
-sum1<-(lmerun(fmlTIgr,dta,c(0,0,1,1,sm,em)))
-sum2<-summary(sum1)
-length(sum2$coefficients[,1])<=2
-#
-setx[17,]<-c(0,0,1,T,sm,vso)
-dtax<-outl.fun(dta,200)
-#wks.
-#########
-#cross table
-sum3<-list()
-set1<-"dta,ti,1,c(0,0,0,1,em,vso),0"
-set2<-"dta,ti,1,c(0,0,0,1,em,vso),1"
-
-lme2<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
-lme2
-eval(parse(text=lme2)) #wks.
-sum3<-data.frame("eins"=1:10,"zwei"=11:20)
-sum3$eins
-w<-"eins"
-v<-"zwei"
-o<-"drei"
-sum(sum3[o])
-sum3[o]<-31:40
-sum3
-sumset<-list()
-lme1
-sumset
+# (lmerun(lmef[[3]],dta,c(0,0,0,1,em,vso)))
+# (lmerun(lmef[[4]],dta,c(0,0,0,0,sm,lc)))
+# (lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
+# (lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
+# 
+# sum1<-(lmerun(fmlTIgr,dta,c(0,0,1,1,sm,em)))
+# sum2<-summary(sum1)
+# length(sum2$coefficients[,1])<=2
+# #
+# setx[17,]<-c(0,0,1,T,sm,vso)
+# dtax<-outl.fun(dta,200)
+# #wks.
+# #########
+# #cross table
+# sum3<-list()
+# set1<-"dta,ti,1,c(0,0,0,1,em,vso),0"
+# set2<-"dta,ti,1,c(0,0,0,1,em,vso),1"
+# 
+# lme2<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
+# lme2
+# eval(parse(text=lme2)) #wks.
+# sum3<-data.frame("eins"=1:10,"zwei"=11:20)
+# sum3$eins
+# w<-"eins"
+# v<-"zwei"
+# o<-"drei"
+# sum(sum3[o])
+# sum3[o]<-31:40
+# sum3
+# sumset<-list()
+# lme1
+# sumset
 ######################################
 getviews<-function(set1,set2,sumset){
   lme1<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
@@ -631,7 +631,7 @@ getviews<-function(set1,set2,sumset){
   return(sumset)
 #sumset
 }
-
+lmerun(dta_rtc,rtcc,"gr",c(0,0,0,1,sm,vso),1)
 #######################################
 getviews_single<-function(set1,sumset){
   lme1<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
@@ -649,7 +649,7 @@ getviews_single<-function(set1,sumset){
   #sumset
 }
 #sum5<-getviews_single(set1,sumset)
-sum5
+#sum5
 #wks
 ###### now loop through sets
 length(setx[,1]) #1:length(setx[,1]
@@ -723,16 +723,16 @@ is.data.frame(sum4)
 #lmer sets
 #formula:
 #(target-1,target0,target+1,SMvsO=T/F,group1,group2)
-lmerun(fmla1,dta,setx[1,])
-tail(dta2)
-lmer(fmla2,dta4)
-lmerun(set1)
-remove(dtatg)
-#################### THIS
-dta4<-getchars(dta2)
-tail(dta4)
-lmerun(fmla1,dta4,ch1)
-
+# lmerun(fmla1,dta,setx[1,])
+# tail(dta2)
+# lmer(fmla2,dta4)
+# lmerun(set1)
+# remove(dtatg)
+# #################### THIS
+# dta4<-getchars(dta2)
+# tail(dta4)
+# lmerun(fmla1,dta4,ch1)
+# 
 
 # ch8<-c(0,0,0,F,sm,em)
 # ch9<-c(0,0,0,F,sm,em)
@@ -796,7 +796,67 @@ lmerun(fmla1,dta4,ch1)
 # dif
 
 # #---------------------------------------------------------------------
-
+#12152.
+#try relate RTC to timinterval, coefficient
+rtc_0<-get_rtc(dta)
+t1<-tail(rtc_0$rtc)
+t2<-tail(dta$timeinterval)
+tail(dta$timeinterval)
+t1+t1[6]*-1
+t1[6]*-1+t1[4]
+t1
+t2
+t4<-t2-t1
+t1[6]/t1[4]
+tail(dta$char)
+t1[3]/t1[4]
+t2[3]/t2[4]
+t4[3]/t4[4]*t3
+t1[5]/t1[6]
+t2[6]/t2[5]*300
+t1[5]/t1[6]*t4[5]/t4[6]
+t1[4]/t1[5]*t4[4]/t4[5]
+t1[5]/t2[5]*t4[5]
+sqrt(t4[6])*52
+t4
+t2
+t4[5]/t4[6]
+t5<-(t2+t1)
+t6<-t5+t5[6]*-1
+t6<-
+######
+  t8<-tail(t6)/2
+t8-t2
+#######
+rt5<-dta$timeinterval+rtc_0$rtc
+rt6<-rt5+rt5[length(rt5)]*-1
+rt8<-rt6/2
+tail(rt8)
+rtc.1<-rt8
+# t7<-tail(t6)-tail(t2)
+# t7
+# t4
+# t3<-24/52
+# t3
+# # 0 300 600
+# t2<-t1[6]-t1[4]
+# t3<-t2/600
+# t3*300
+# 
+# rtc_root<-sqrt((rtc_coef<-1/rtc_0$rtc)^2)*dta$timeinterval
+# mean(rtc_root)
+# tail(rtc_root)
+# rtc_min<-10000/rtc_0$rtc+dta$timeinterval
+# tail(rtc_min)
+# tail(dta$timeinterval)
+dta_rtc<-cbind(dta,rtc.1)
+sum1<-summary(lmerun(dta_rtc,ti,"gr",c(0,0,0,1,sm,vso),1))
+sum2<-summary(lmerun(dta_rtc,rtc.1,"gr",c(0,0,0,1,sm,vso),1))
+sum2$coefficients-sum1$coefficients
+tail(rtc_0$rtc)
+rtc.1<-dta$timeinterval+rtc_0$rtc
+rtc.1<-rtc_min
+tail(rtc2)
 #############################################################################
 #############################################################################
 #---C---  compare R/F results:-----------------------

@@ -182,7 +182,7 @@ adcontrol<-function(set,ti0,ticontrol,ti2){
   return(rbind(set,con3,con2,con1))
 }
 dta_o<-dta
-dta2<-adcontrol(dta_o,10,300,600)
+dta2<-adcontrol(dta_o,1,300,600)
 dta<-dta2
 ##########################
 #3.
@@ -475,15 +475,17 @@ break()
 #"pairwise comparisons of Condition levels"
 
 create_lmeforms<-function(set,resp){
-lme2.form2.rnd<-paste0("(1|item)+(1|participant)")
+lme2.form2.rnd<-paste0(         "(1|item)+(1|participant)")
+lme2.form3.rnd<-paste0("(1|char)+(1|item)+(1|participant)")
 ########## TD
 lme2.form2.cat<-paste0(colnames(set)[6])
 ########## 
 lme2.form2.XvsO<-paste0("category")
-#colnames(dtap4)[6]
-#colnames(lmedataset)[6]
-lme2.form.cpt<-    paste(lme2.form2.cat,"+"  ,lme2.form2.rnd,"+(1+",lme2.form2.cat,  "|participant)")
+lme2.form.cpt<-      paste(lme2.form2.cat, "+",lme2.form2.rnd,"+(1+",lme2.form2.cat, "|participant)")
 lme2.form.cpt.XvsO<- paste(lme2.form2.XvsO,"+",lme2.form2.rnd,"+(1+",lme2.form2.XvsO,"|participant)")
+lme2.form.pure<-     paste(lme2.form2.cat, "+",lme2.form3.rnd,"+(1+",lme2.form2.cat, "|participant)")
+lme2.form.pure.XvsO<-paste(lme2.form2.XvsO,"+",lme2.form3.rnd,"+(1+",lme2.form2.XvsO,"|participant)")
+
 rtc<-"rtc ~ "
 rtcc<-"rtc.1 ~ "
 ti<-"timeinterval ~ "
@@ -495,13 +497,16 @@ ifelse(resp=="rtc",rt<-rtc,ifelse(resp=="rtcc",rt<-rtcc,rt<-ti))
 
 (fmlxgr <- as.formula(paste(rt, lme2.form.cpt)))
 (fmlxvs <- as.formula(paste(rt, lme2.form.cpt.XvsO)))
-lmeforms2<-list("gr"=fmlxgr,"vs"=fmlxvs)
+(fmlpgr<-  as.formula(paste(ti, lme2.form.pure)))
+(fmlpvs<-  as.formula(paste(ti, lme2.form.pure.XvsO)))
+lmeforms2<-list("gr"=fmlpgr,"vs"=fmlpvs,"old"=c(fmlRTCgr,fmlTIgr,fmlRTCvs,fmlTIvs))
 lmeforms<-list("RTCgr"=fmlRTCgr,"TIgr"=fmlTIgr,"RTCvs"=fmlRTCvs,"TIvs"=fmlTIvs)
 #lmeforms[1]
 return(lmeforms2)
 }
-#lmef2<-create_lmeforms(dta,"ti")
-#lmef2
+lmef<-create_lmeforms(dta,"ti")
+lmef$
+lmer(lmef[[1]],dta)
 #fmla3
 #set1[1]
 ####################################################
@@ -511,11 +516,13 @@ return(lmeforms2)
 # 
 # }
 #dtax<-dta_setx(dta,setx[2,],1)
-#lmerun(lmef[[1]],dta,setx[2,],1)
+chose<-c(0,0,0,1,sm,em)
+lmerun(dta,ti,"gr",chose,1)
 #outl.fun.rtc(dta)
-
+form<-create_lmeforms(dta,rtc)$vs
+form
 lmerun<-function(set,resp,gr,chose,out){
-  form<-create_lmeforms(set,resp)[[gr]]
+  form<-create_lmeforms(set,resp)$gr
     set2<-get_rtc(set)
   ifelse(out==1,set2<-outl.fun.rtc(set2),set2<-set2)
   lmeset<-dta_setx(set2,chose,out)
@@ -526,14 +533,14 @@ lmerun<-function(set,resp,gr,chose,out){
     dif<-abs(coef(sum2)[1]-coef(sum2)[2])
     print(sum2$coefficients)
     #wenn global&category 
-    ifelse(chose[4]==1&det_cat==T,out<-c(T,", diff:",dif,"ms"),
+    ifelse(chose[4]==1&det_cat==T,out<-c(T,", abs:",dif,"ms"),
            out<-F)
     ifelse(length(sum2$coefficients[,1]<=2),out2<-coef(sum2)[1]>coef(sum2)[2],out2<-"blu")
 
     cat("global",chose[5],"=",out,"\nIntercept greater =",out2) #nicht beide TRUE > global = F
     # wenn !category | !vsAll >         
-    ifelse(out==F,ifelse(det_vs!=T,out<-c("\ndifference category",chose[5]," ~ ",chose[6],dif,"ms\n"),
-                         ifelse(chose[4]!=1,out<-c(", diff:",dif,"ms\n"),out<-"\nkeine berechnung\n")),     
+    ifelse(out==F,ifelse(det_vs!=T,out<-c("\nabs category",chose[5]," ~ ",chose[6],dif,"ms\n"),
+                         ifelse(chose[4]!=1,out<-c(", abs:",dif,"ms\n"),out<-"\nkeine berechnung\n")),     
                          out<-"\n---------------\n")
     cat(out)
     cat(as.character(form),"\n")
@@ -805,9 +812,22 @@ is.data.frame(sum4)
 #12152.
 #try relate RTC to timinterval, coefficient
 rtc_0<-get_rtc(dta)
-t1<-tail(rtc_0$rtc)
-t2<-tail(dta$timeinterval)
+t1<-(rtc_0$rtc)
+t2<-(dta$timeinterval)
 tail(dta$timeinterval)
+t1;t2
+lm1<-lm(t2~t1,dta)
+summary(lm1)
+lmer(dta_rtc$timeinterval)
+dta1<-dta_setx(dta,c(0,0,0,1,sm,vso),1)
+lmeform_basic<-("timeinterval~group + (1|item)+(1|participant)+(1+group|participant)")
+sum2<-lmer(timeinterval ~ group + (1|char)+(1|item)+(1|participant)+(1+group|participant),dta1)
+sum1<-lmer(timeinterval ~ group + (1|item)+(1|participant)+(1+group|participant),dta1)
+
+summary(sum2)$coefficients-summary(sum1)$coefficients
+
+t8<-t1/t1[6]*t2
+(1/t1)*t2
 t1+t1[6]*-1
 t1[6]*-1+t1[4]
 t1
@@ -831,34 +851,27 @@ t5<-(t2+t1)
 t6<-t5+t5[6]*-1
 t6<-
 ######
-  t8<-tail(t6)/2
+
+  rt8<-(rtc_0$rtc)/rtc_0$rtc[length(rtc_0$rtc)]*rtc_0$timeinterval
+####
+tail(rt8)
 t8-t2
+t8<-t1/t1[6]*t2
+t8<-dta_rtc$rtc
 #######
 rt5<-dta$timeinterval+rtc_0$rtc
 rt6<-rt5+rt5[length(rt5)]*-1
 rt8<-rt6/2
 tail(rt8)
+
 rtc.1<-rt8
-# t7<-tail(t6)-tail(t2)
-# t7
-# t4
-# t3<-24/52
-# t3
-# # 0 300 600
-# t2<-t1[6]-t1[4]
-# t3<-t2/600
-# t3*300
-# 
-# rtc_root<-sqrt((rtc_coef<-1/rtc_0$rtc)^2)*dta$timeinterval
-# mean(rtc_root)
-# tail(rtc_root)
-# rtc_min<-10000/rtc_0$rtc+dta$timeinterval
-# tail(rtc_min)
-# tail(dta$timeinterval)
+
 dta_rtc<-cbind(dta,rtc.1)
+tail(dta_rtc$rtc.1)
+
 sum1<-summary(lmerun(dta_rtc,ti,"gr",c(0,0,0,1,sm,vso),1))
-sum2<-summary(lmerun(dta_rtc,rtc.1,"gr",c(0,0,0,1,sm,vso),1))
-sum2$coefficients-sum1$coefficients
+sum2<-summary(lmerun(dta_rtc,rtcc,"gr",c(0,0,0,1,sm,vso),1))
+sum1$coefficients-sum2$coefficients
 tail(rtc_0$rtc)
 rtc.1<-dta$timeinterval+rtc_0$rtc
 rtc.1<-rtc_min

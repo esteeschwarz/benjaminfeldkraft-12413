@@ -515,9 +515,20 @@ lmer(lmef[[1]],dta)
 #   (sumSMEM<- lmer(form,lmeset)) 
 # 
 # }
-#dtax<-dta_setx(dta,setx[2,],1)
+dtax<-dta_setx(dta,c(0,0,0,1,sm,sm),1)
+cat<-"group"
+cat<-"category"
+start<-list()
+start$theta<-50
+start
+tail(flagset$timeinterval)
+sum1<-lmer(timeinterval ~  0 + group  + (1 | item) + (1 | participant) + (0 + group | participant),dtax,offset=rtc) 
+summary(sum1)
+lmer(timeinterval ~ XvsGr + (1 | char) + (1 | item) + (1 | participant) + (1 + XvsGr | participant),dta2) 
+
+dta1<-dta_setx(dta,c(0,0,0,0,sm,sm),0)
 chose<-c(0,0,0,1,sm,em)
-lmerun(dta,ti,"gr",chose,1)
+lmerun(dta,ti,"vs",chose,1)
 #outl.fun.rtc(dta)
 form<-create_lmeforms(dta,rtc)$vs
 form

@@ -567,11 +567,12 @@ lmerun(dta,ti,"vs",chose,1)
 #outl.fun.rtc(dta)
 form<-create_lmeforms(dta,rtc)$vs
 form
-lmerun<-function(set,resp,gr,chose,out){
+#lmerun_func
+lmerun<-function(set,resp,gr,chose,out,glt){
   form<-create_lmeforms(set,resp)$gr
-    set2<-get_rtc(set)
+  set2<-get_rtc(set)
   ifelse(out==1,set2<-outl.fun.rtc(set2),set2<-set2)
-  lmeset<-dta_setx(set2,chose,out)
+  lmeset<-dta_setx(set2,chose,out,glt)
   det_cat<-stri_detect (as.character(form[3]),regex  = "category")
   det_vs<-stri_detect (as.character(form[3]),regex  = "vs")
   sum1<-( lmer(form,lmeset)) 
@@ -642,6 +643,8 @@ colnames(m9)<-c("mean group","mean !group")
 # XvsGr3LC    1500.030   1158.029 3.256070e-06 1.2953304 0.9999763
 # XvsGr4MM    1476.138   1155.909 3.232291e-06 1.2770366 0.9999765
 # SM < EM <= MM < LC
+lmerun(dta,rtc,2,c(0,1,-1,sm,vso),1)
+lmerun()
 # (lmerun(lmef[[3]],dta,c(0,0,0,1,em,vso)))
 # (lmerun(lmef[[4]],dta,c(0,0,0,0,sm,lc)))
 # (lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))

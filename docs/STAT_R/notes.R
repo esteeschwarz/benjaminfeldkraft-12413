@@ -1137,11 +1137,67 @@ Orthodont$nsexage <- with(Orthodont, nsex*age)
 o1$groose[1:64]<-c(21:84)
 o1$groose[65:108]<-o1$groose[1:(108-64)]-20 #-x
 fix(o1)
+o1s<-o1$nsex*-1
+o1s<-o1s+1
+cor(o1s,o1$distance)
+#frauen = 1, -cor: wenn frau, dann sinkt distance 
+#männer =1, +cor
+o1s
 length(dta_o$lfd)+1
 #wenn -x gröszer wird:
 #fixed estimate:
 #
 dtax<-dta_setx(dta_o,c(-1,1,0,1,sm,vso),1,1)
+vsa<-c()
+vsa[which(dtax$group!="MM")]<-0
+vsa[which(dtax$group=="MM")]<-1
+cor(dtax$timeinterval,vsa)
+lz<-dtax$timeinterval/dtax$char #ms/char? verweildauer/zeichen
+lspeed<-dtax$char/dtax$timeinterval
+cor(lz,vsa)
+
+#SM=1, wenn SM, dann sinkt TI, -0.032
+#EM=1,                         -0.081
+#LC=1,                         +0.089
+#MM=1,                         +0.036
+#SM=1,cor LZ=   -0.003
+#EM=1,          -0.007
+#LC=1,           0.015
+#MM=1,           0.011
+
+ati<-c(-0.032,-0.081,0.089,0.036)
+alz<-c(-0.003,-0.007,0.015,0.011)
+ar<-cbind(ati,alz)
+chisq.test(ar)
+chisq.test(ati,alz,correct = F)
+stem(lz,scale=1, width = 0)
+lzsm<-lz[which(dtax$group=="SM")]
+lzem<-lz[which(dtax$group=="EM")]
+lzlc<-lz[which(dtax$group=="LC")]
+lzmm<-lz[which(dtax$group=="MM")]
+lzcpt<-cbind(lzsm,lzem,lzlc,lzmm)
+plot(lzsm,lzem)
+library(aplpack)
+stem.leaf.backback(lzsm,lzem,m=1)
+#LZ means:
+#summe timeinterval/summe chars/obs?
+sm1<-sum(dtax$timeinterval[which(dtax$group=="SM")])
+em1<-sum(dtax$timeinterval[which(dtax$group=="EM")])
+lc1<-sum(dtax$timeinterval[which(dtax$group=="LC")])
+mm1<-sum(dtax$timeinterval[which(dtax$group=="MM")])
+ticpt<-dtax$timeinterval
+charcpt<-stri_count_boundaries(dtax$string,"character")
+sum(ticpt[which(dtax$group=="SM")])/sum(charcpt[which(dtax$group=="SM")]) #gesamtLZ
+sum(ticpt[which(dtax$group=="EM")])/sum(charcpt[which(dtax$group=="EM")]) #gesamtLZ
+sum(ticpt[which(dtax$group=="LC")])/sum(charcpt[which(dtax$group=="LC")]) #gesamtLZ
+sum(ticpt[which(dtax$group=="MM")])/sum(charcpt[which(dtax$group=="MM")]) #gesamtLZ
+# 38.366 
+# 40.96849 
+# 41.749 
+# 41.498
+# SM < EM < MM < LC
+lmerun(dta,rtc,2,c(0,1,-1,1,sm,vso),1,1)
+
 o1$age<-rep(c(8,10,12,14),length.out=108)
 #beispiel: lmer(distance ~ age + (age|Subject) + (0+nsex|Subject) + (0 + nsexage|Subject), data=Orthodont)
 ### formula: 1| = random effect, 1+ = fixed effect 1: keine berechnung, nsex:subject = fixed effect nsex über subjects bei nsex=1
@@ -1154,26 +1210,111 @@ sum5<-lmer(distance ~ age + (age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subje
 sum4<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subject) +(0+Sex), data=Orthodont)
 sum5<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subject) +(0+Sex), data=Orthodont,offset = a2)
 sum1<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subject), data=Orthodont)
-sum7<-lmer(timeinterval ~   group  + (1+char) +(0+item) + (1 + tnid) + (1+item:group)+ (0+group | tnid),dtax) 
-sum8<-lmer(timeinterval ~   group  + (0+char) +(0+item) + (0 + tnid) + (0+item:group)+ (0+itemId:target)+(0+group | tnid),dtax) 
-sum9<-lmer(timeinterval ~   group  + (0+item) + (0 + tnid) + (0+item:category)+ (0+itemId:target)+(0+group | tnid),
+sum7 <-lmer(rtc ~            group  +           (0+item) + (0 + tnid) + (0+item:group)+ (0+itemId:target)+(0+group | tnid),dtax) 
+sum8 <-lmer(timeinterval ~   group  + (0+char) +(0+item) + (0 + tnid) + (0+item:group)+ (0+itemId:target)+(0+group | tnid),dtax) 
+sum9 <-lmer(timeinterval ~   group  +           (0+item) + (0 + tnid) + (0+item:vsa)+ (0+itemId:target)+(0+vsa | tnid),
            dtax,offset=dtax$rtc) # LC12/LC18:target > mit target+ (+char) est+, mit target/char- > est-
+sum81<-lmer(timeinterval ~   (0+XvsGr)  + (0+char) +(1|item) + (0+1| tnid) +(0+XvsGr | tnid),dtax) 
+sum71 <-lmer(rtc ~           group  +           (0+item) + (0 + tnid) +(0+vsa | tnid),dtax) 
+sum91 <-lmer(timeinterval ~   (0+XvsGr)  +           (1|item) + (1| tnid) +(0+XvsGr | tnid),
+            dtax,offset=dtax$rtc) # LC12/LC18:target > mit target+ (+char) est+, mit target/char- > est-
+sum81<-lmer(timeinterval ~   (XvsGr)  + (1+char) +(1|item) + (1| tnid) +(0+XvsGr | tnid),dtax) 
+
 # sum9<-lmer(timeinterval ~   group  + (0+item) + (0 + tnid) + (0+item:group)+ (0+itemId:target)+(0+group | tnid),
 #            dtax,offset=dtax$rtc) # LC12/LC18:target > mit target+ (+char) est+, mit target/char- > est-
 # dieser effekt läszt sich mit (timeinterval ~   group  + (0+char) +(0+item) + (0 + tnid) + (0+item:group)+ (0+itemId:target)+(0+group | tnid),dtax)
 # nicht beobachten. also offset of rtc durchaus sinnvoll.
 
-s7<-summary(sum7)
-s8<-summary(sum8)
-s9<-summary(sum9)
+s71<-summary(sum71)
+s81<-summary(sum81)
+s91<-summary(sum91)
 s6<-summary(sum6)
 s5<-summary(sum5)
-s7
-s8
-s9
+s71
+s81
+s91
 s5
+write_clip(s91$coefficients[1:5])
+  s81$coefficients[1:5]
+tmod<-dtax$rtc
+tmod[828]<-0
+#offset, 1,-1,0,
+#s9 item:vsa   EM < SM <= LC <  MM  --= 826
+#s9 item:group LC < EM <  MM <  SM  --= 1020
+#s8 item:group, 0+char, ohne offset: 
+#              EM < LC << MM <= SM  --= 643
+#s7 item:group EM < LC << SM <= MM, --= 583
+#s81 char,pure SM < EM <  LC <  MM  --= 202 range 525-727
+#s71,rtc, pure SM < EM <  LC <  MM  --= 202 group
+#s71,rtc, vsa  SM < EM <  MM <= LC  --= 222
+212+371   #s7 group
+1230-587  #s8 char
+3111-2091 #s9 vsa
+2920-2094 #s9 group
+3+199
+188+34
+727-525 #s81, wesentlich kleinere werte, weit weg vom mean which is TI pure for LC < SM < MM < EM and --= 1186
+1941.35593220339
+2980.14035087719-1794
+1794.85416666667
+2426.63461538462
+### rtc: LC < SM < MM < EM, samesame, --= 1207
+-692.693389830508
+287.298701754386 + 920
+-920.325895833333
+-134.820769230769
+#######################################################
+########## s81 char, TI, group, SM << EM < LC <= MM
+#timeinterval ~ group + (1 + char) + (1 | item) + (1 | tnid) +      (0 + group | tnid)
+# 1558.37333354958
+# 1706.23194742961
+# 1742.07917362007
+# 1762.47215719154
+#1558-1706=148
+##sum81<-lmer(timeinterval ~   (0+XvsGr)  + (0+char) +(1|item) + (0+1| tnid) +(0+XvsGr | tnid),dtax) 
+# 278.382015559558  SM << EM < LC <= MM
+# 426.239085577046
+# 462.086904504042
+# 482.478930617386
+#278-426=148 #s.o. nur anderer schnittpunkt, bei 0, oben realistischere werte 
+#mnp-s81$coefficients[2:5] # dif zu mean pure ti
+# 382.982598653811 # 0.021 # 2 # 3 rank char|group  
+# 1273.90840344758 # 0.010 # 4 # 1
+# 52.7749930465918 # 0.022 # 1 # 4
+# 664.162458193075 # 0.020 # 3 # 2
+################################################################
+# 2097.957, ctr,sm,em,lc,mm,timeinterval ~ (0 + XvsGr) + (1 | item) + (1 | tnid) + (0 + XvsGr |      tnid), offset= rtc
+# 2767.89005229294  EM < MM <= SM < LC, near mean
+# 2386.87305334566
+# 2801.58843519248
+# 2727.54102728616
 sumx<-s7$coefficients-s8$coefficients
 sumx
+#write_clip(
+  mnp<-c(
+
+  mean(dtax$timeinterval[which(dta$group=="SM")],na.rm=T),
+mean(dtax$timeinterval[which(dta$group=="EM")],na.rm=T),
+mean(dtax$timeinterval[which(dta$group=="LC")],na.rm=T),
+mean(dtax$timeinterval[which(dta$group=="MM")],na.rm=T)
+)
+write_clip(mnp-s81$coefficients[2:5])
+mnp-s81$coefficients[2:5]
+write_clip(s81$coefficients[2:5])
+mnp
+cor(s81$coefficients[2:5],mnp)
+s91  
+s81
+s91$coefficients[2:5]
+write_clip(c(
+  mean(dtax$rtc[which(dta$group=="SM")],na.rm=T),
+  mean(dtax$rtc[which(dta$group=="EM")],na.rm=T),
+  mean(dtax$rtc[which(dta$group=="LC")],na.rm=T),
+  mean(dtax$rtc[which(dta$group=="MM")],na.rm=T)
+))
+write_clip(s81$coefficients[2:5])
+s81$coefficients[2:5]-
+
 #s9
 s8
 round(1.235,2)

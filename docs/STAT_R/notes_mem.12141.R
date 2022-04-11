@@ -61,4 +61,6 @@ rownames(mnx)<-"mean"
 ifelse(flagall==1,col2<-"vsAll",col2<-chose[6])
 colnames(mnx)<-c(chose[5],col2)
 print(mnx)
+############## sequences, steps, schritte, reihe, abfolge, sequenzierte reihe
+a1<-seq(1,10,0.5);a1
 

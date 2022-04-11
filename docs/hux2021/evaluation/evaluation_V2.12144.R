@@ -47,6 +47,9 @@ smvsa<-"SMvsAll"
 emvsa<-"EMvsAll"
 lcvsa<-"LCvsAll"
 mmvsa<-"MMvsAll"
+ti0<-100
+ticontrol<-100
+ti2<-100
 # 
 
 ###########################
@@ -56,7 +59,7 @@ mmvsa<-"MMvsAll"
 #set<-dta
 #add control observation
 adcontrol<-function(set,ti0,ticontrol,ti2){
-  print(length(set))
+ # print(length(set))
   #setns<-colnames(set)
   #print(setns)
   #setns[6]<-"vsGroup"
@@ -66,17 +69,17 @@ adcontrol<-function(set,ti0,ticontrol,ti2){
   con1$lfd<-length(set$lfd)+1
   con1$participant<-"admin"
   con1$tnid<-999
-  con1$gilt<-2
+  con1$gilt<-1
   con1$group<-"control"
   con1[,6]<-"0Control"
   con1$category<-"control"
   con1$itemId<-"control"
   con1$item<-"control"
-  con1$regionId<-"control"
+  con1$regionId<-"control1"
   con1$elapsedTime<-NA
   con1$timeinterval<-ti0
-  con1$target<-0
-  con1$string<-"dies ist ein control string durchschnittlicher länge"
+  con1$target<--1
+  con1$string<-"dies ist ein control string medium length"
   con1$char<-stri_count_boundaries(con1$string,"character")
   con1$rt_corr<-NA
   con1$speed<-NA
@@ -92,12 +95,12 @@ adcontrol<-function(set,ti0,ticontrol,ti2){
   con1$addproctbychar<-NA
   con1$explique<-"control string zur festlegung der minimal RT"
   
-  print(length(con1))
-  print(colnames(con1))
-  print(length(set))
-  print(colnames(set))
-  
-  print(length(set))
+  # print(length(con1))
+  # print(colnames(con1))
+  # print(length(set))
+  # print(colnames(set))
+  # 
+#  print(length(set))
   #setns<-colnames(set)
   #print(setns)
   #setns[6]<-"vsGroup"
@@ -107,7 +110,7 @@ adcontrol<-function(set,ti0,ticontrol,ti2){
   con2$lfd<-length(set$lfd)+2
   con2$participant<-"admin"
   con2$tnid<-999
-  con2$gilt<-2
+  con2$gilt<-1
   con2$group<-"control"
   con2[,6]<-"0Control"
   con2$category<-"control"
@@ -116,8 +119,8 @@ adcontrol<-function(set,ti0,ticontrol,ti2){
   con2$regionId<-"control"
   con2$elapsedTime<-NA
   con2$timeinterval<-ticontrol
-  con2$target<-1
-  con2$string<-"dies ist ein control string durchschnittlicher länge"
+  con2$target<-0
+  con2$string<-"dies ist ein control string medium length"
   con2$char<-stri_count_boundaries(con2$string,"character")
   con2$rt_corr<-NA
   con2$speed<-NA
@@ -132,14 +135,14 @@ adcontrol<-function(set,ti0,ticontrol,ti2){
   con2$addchar<-NA
   con2$addproctbychar<-NA
   con2$explique<-"control string zur festlegung der minimal RT"
-  
-  print(length(con2))
-  print(colnames(con2))
-  print(length(set))
-  print(colnames(set))
-  ####################
-  print(length(set))
-  #setns<-colnames(set)
+  # 
+  # print(length(con2))
+  # print(colnames(con2))
+  # print(length(set))
+  # print(colnames(set))
+  # ####################
+  # print(length(set))
+  # #setns<-colnames(set)
   #print(setns)
   #setns[6]<-"vsGroup"
   #colnames(set)<-setns
@@ -148,7 +151,7 @@ adcontrol<-function(set,ti0,ticontrol,ti2){
   con3$lfd<-length(set$lfd)+3
   con3$participant<-"admin"
   con3$tnid<-999
-  con3$gilt<-2
+  con3$gilt<-1
   con3$group<-"control"
   con3[,6]<-"0Control"
   con3$category<-"control"
@@ -158,7 +161,7 @@ adcontrol<-function(set,ti0,ticontrol,ti2){
   con3$elapsedTime<-NA
   con3$timeinterval<-ti2
   con3$target<-1
-  con3$string<-"dies ist ein control string durchschnittlicher länge"
+  con3$string<-"dies ist ein control string medium length"
   con3$char<-stri_count_boundaries(con3$string,"character")
   con3$rt_corr<-NA
   con3$speed<-NA
@@ -173,11 +176,11 @@ adcontrol<-function(set,ti0,ticontrol,ti2){
   con3$addchar<-NA
   con3$addproctbychar<-NA
   con3$explique<-"control string zur festlegung der minimal RT"
-  
-  print(length(con3))
-  print(colnames(con3))
-  print(length(set))
-  print(colnames(set))
+  # 
+  # print(length(con3))
+  # print(colnames(con3))
+  # print(length(set))
+  # print(colnames(set))
   
   return(rbind(set,con3,con2,con1))
 }
@@ -190,6 +193,7 @@ dta<-dta2
 get_rtc<-function(set){
 charscpt<-stri_count_boundaries(set$string,type="character")
 dtares<-residuals(lm(timeinterval~charscpt,set))
+#dtares<-round(dtares,3)
 #head(dtares)
 #dtap1<-cbind(set,"rtc"=dtares)
 set<-cbind(set,"rtc"=dtares)
@@ -293,8 +297,10 @@ dta_setx<-function(set,chose,out,glt){
   dta_grx<-function(set,g1,g2){
     subset(set,group==g1|group==g2)
   }
-  set<-subset(set,gilt==glt)
-  ifelse(out==1,set<-outl.fun.rtc(set),set<-set)
+ # ifelse(ctrl==1,set<-adcontrol(set,ti0,ticontrol,ti2),cat("no control group added")) #add control observation
+  set<-adcontrol(set,ti0,ticontrol,ti2)
+  set<-subset(set,gilt==glt) #subset manuell gefiltert
+  ifelse(out==1,set<-outl.fun.rtc(set),cat("set with outliers included"))
   
   ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1,g2)),
          return(dta_grx(dtatg(set,t1,t2,t3,g1,g2),g1,g2)))

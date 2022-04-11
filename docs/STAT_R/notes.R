@@ -1130,28 +1130,64 @@ nam
 ## for sex and sex:age; in this case the estimated variance differences
 ## between groups in both intercept and slope are zero ...
 data(Orthodont,package="nlme")
+o1<-Orthodont
+
 Orthodont$nsex <- as.numeric(Orthodont$Sex=="Male")
 Orthodont$nsexage <- with(Orthodont, nsex*age)
-Orthodont$groose[1:64]<-sample(100:150,64,replace = T)
-Orthodont$groose[65:108]<-c(sample(100:150,64,replace = T))-10
-sum3<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +
-       (0 + nsexage|Subject) + (1+groose) +(0+Sex), data=Orthodont)
-sum6<-lmer(distance ~ age + (age|Subject) + (0+nsex|Subject) +
-             (0 + nsexage|Subject) + (1+groose) +(0+Sex), data=Orthodont)
+o1$groose[1:64]<-c(21:84)
+o1$groose[65:108]<-o1$groose[1:(108-64)]-20 #-x
+fix(o1)
+length(dta_o$lfd)+1
+#wenn -x gröszer wird:
+#fixed estimate:
+#
+dtax<-dta_setx(dta_o,c(-1,1,0,1,sm,vso),1,1)
+o1$age<-rep(c(8,10,12,14),length.out=108)
+#beispiel: lmer(distance ~ age + (age|Subject) + (0+nsex|Subject) + (0 + nsexage|Subject), data=Orthodont)
+### formula: 1| = random effect, 1+ = fixed effect 1: keine berechnung, nsex:subject = fixed effect nsex über subjects bei nsex=1
+### kein unterschied ob 0+ oder 1+, aber: zwischen 1+nsex|subject und 0+nsex|subject, 0+nsex:groose = nsex ist 0/1, erfolgt eine ausgabe
+### ob group:item == item:group egal, 0+item:group != 1+item:group
+#sum3<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subject) + (1+groose) +(0+Sex), data=o1)
+sum6<-lmer(distance ~ age + (age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subject) + (1+nsex:groose) +(0+Sex), data=o1)
+sum5<-lmer(distance ~ age + (age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subject) + (0+nsex:groose) +(0+Sex), data=o1)
 
-sum4<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +
-             (0 + nsexage|Subject) +(0+Sex), data=Orthodont)
-sum5<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +
-             (0 + nsexage|Subject) +(0+Sex), data=Orthodont,offset = a2)
-sum1<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +
-             (0 + nsexage|Subject), data=Orthodont)
-sum7<-lmer(timeinterval ~   group  + (1+char) +(0+item) + (1 + tnid) + (0+group | tnid),dtax) 
+sum4<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subject) +(0+Sex), data=Orthodont)
+sum5<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subject) +(0+Sex), data=Orthodont,offset = a2)
+sum1<-lmer(distance ~ age + (1|age)+(age|Subject) + (0+nsex|Subject) +(0 + nsexage|Subject), data=Orthodont)
+sum7<-lmer(timeinterval ~   group  + (1+char) +(0+item) + (1 + tnid) + (1+item:group)+ (0+group | tnid),dtax) 
+sum8<-lmer(timeinterval ~   group  + (0+char) +(0+item) + (0 + tnid) + (0+item:group)+ (0+itemId:target)+(0+group | tnid),dtax) 
+sum9<-lmer(timeinterval ~   group  + (0+item) + (0 + tnid) + (0+item:category)+ (0+itemId:target)+(0+group | tnid),
+           dtax,offset=dtax$rtc) # LC12/LC18:target > mit target+ (+char) est+, mit target/char- > est-
+# sum9<-lmer(timeinterval ~   group  + (0+item) + (0 + tnid) + (0+item:group)+ (0+itemId:target)+(0+group | tnid),
+#            dtax,offset=dtax$rtc) # LC12/LC18:target > mit target+ (+char) est+, mit target/char- > est-
+# dieser effekt läszt sich mit (timeinterval ~   group  + (0+char) +(0+item) + (0 + tnid) + (0+item:group)+ (0+itemId:target)+(0+group | tnid),dtax)
+# nicht beobachten. also offset of rtc durchaus sinnvoll.
 
-summary(sum7)
+s7<-summary(sum7)
+s8<-summary(sum8)
+s9<-summary(sum9)
+s6<-summary(sum6)
+s5<-summary(sum5)
+s7
+s8
+s9
+s5
+sumx<-s7$coefficients-s8$coefficients
+sumx
+#s9
+s8
+round(1.235,2)
+dtax$chars[dtax$itemid=="EM18"]
+distancem<-rep(seq(20,30,0.5),length.out=64)
+distancef<-rep(seq(20,30,0.5),length.out=108-64)-2
+agem<-rep(seq(20,40,1),length.out=64)
+agef<-rep(seq(20,40,1),length.out=108-64)
+o1$age<-c(agem,agef)
+o1$distance<-c(distancem,distancef)
 a1<-lm(distance~groose,Orthodont)
 summary(a1)
 a2<-residuals(a1)
-
+a2<-seq(1,10,0.5)
 mean(Orthodont$distance)
 # 24*0.662 = estimate < age * fixed effect of age (15.88) near 16.76 (estimate)
 # mean distance = 24.023

@@ -259,47 +259,51 @@ rtc<-dtartc$rtc
 # }
 ##############################################################
 
-dta_setx<-function(set,chose,out){
- 
+dta_setx<-function(set,chose,out,glt){
+  
   t1<-chose[1]
   t2<-chose[2]
   t3<-chose[3]
   xo<-chose[4]
   g1<-chose[5]
   g2<-chose[6]
-   
+  
   setvsx<-  function(set,gr,other){
-     dta<-set
-   #  attach(dta)
-     sublc<-subset(dta,group==gr)
-     subnlc<-subset(dta,group!=gr)
-     subna<-subset(dta,is.na(group))
-     sublc$category<-gr
-     subns<-stri_join(gr,"vs",other)
-     subnlc$category<-subns
-     subna$category<-subns
-     lcvsO<-rbind(sublc,subnlc,subna)
-     length(lcvsO$category==gr)-length(lcvsO$category==subns)
-     set<-get_rtc(lcvsO)
-     return(set)
-   }
-
-   dtatg<-function(set,t1,t2,t3,g1,g2){
-     setxvso<-setvsx(set,g1,g2)
-     return(subset(setxvso, target==t1|target==t2|target==t3))
-
-     }
-
-   dta_grx<-function(set,g1,g2){
-     subset(set,group==g1|group==g2)
-   }
-   ifelse(out==1,set<-outl.fun.rtc(set),set<-set)
-   
-      ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1,g2)),
-          return(dta_grx(dtatg(set,t1,t2,t3,g1,g2),g1,g2)))
+    dta<-set
+    #  attach(dta)
+    sublc<-subset(dta,group==gr)
+    subnlc<-subset(dta,group!=gr)
+    subna<-subset(dta,is.na(group))
+    sublc$category<-gr
+    subns<-stri_join(gr,"vs",other)
+    subnlc$category<-subns
+    subna$category<-subns
+    lcvsO<-rbind(sublc,subnlc,subna)
+    length(lcvsO$category==gr)-length(lcvsO$category==subns)
+    set<-get_rtc(lcvsO)
+    return(set)
+  }
+  
+  dtatg<-function(set,t1,t2,t3,g1,g2){
+    setxvso<-setvsx(set,g1,g2)
+    return(subset(setxvso, target==t1|target==t2|target==t3))
+    
+  }
+  
+  dta_grx<-function(set,g1,g2){
+    subset(set,group==g1|group==g2)
+  }
+  set<-subset(set,gilt==glt)
+  ifelse(out==1,set<-outl.fun.rtc(set),set<-set)
+  
+  ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1,g2)),
+         return(dta_grx(dtatg(set,t1,t2,t3,g1,g2),g1,g2)))
+  
+  #wks. creates subsets for lmer test
+}
 
      #wks. creates subsets for lmer test
-}
+
 #dtax<-dta_setx(dta,c(0,0,0,0,sm,sm),1)
 
 ########12147.

@@ -2,7 +2,8 @@
 #### info on files:
 12154.
 - evaluation_V2.12144.R: aktuelles auswertungsscript des experiments zum metaphernverständnis
-- spr11351b.R: erstes auswertungscript, base of above, now outdated
+- spr11351b.R: erstes auswertungscript, now outdated
+- 12371b.R: neueres script, base of actual script, now outdated
 - sprdata.csv: raw dataset of experiment
 - sprdataprepared: modified set mit manuellen ergänzungen, raw data unberührt
 

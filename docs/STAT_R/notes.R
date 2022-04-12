@@ -1338,7 +1338,7 @@ mean(Orthodont$distance)
 
 #"In the model, we posited a main effect of Category (single vs. other) 
 #and random effects of Participant and Item, along with a random slope of Category by Participant"
-getmean(dta,c(0,0,0,1,sm,vso),1,1,ti)
+getmean(dta,c(0,0,0,1,sm,vso),1,1,ti,1)
 sum1<-lmer(timeinterval ~  1 + category  + (1|item) + (1 | tnid) + (1 + category : tnid),dtax,offset=rtc) 
 sum1<-lmer(timeinterval ~   category  + (1+char) +(1|item) + (1 | tnid) + (category | tnid),dtax) 
 

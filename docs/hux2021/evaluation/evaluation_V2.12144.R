@@ -238,7 +238,7 @@ rtc<-dtartc$rtc
   liste<-subset(dtartc,rtc<outtop&rtc>outbottom)
 
   }
-#dtax<-outl.fun.rtc(dta)
+dtax<-outl.fun.rtc(dta)
 #outl.fun()
 #######
 #5.1
@@ -263,7 +263,7 @@ rtc<-dtartc$rtc
 # }
 ##############################################################
 
-dta_setx<-function(set,chose,out,glt){
+dta_setx<-function(set,chose,out,glt,ctrl){
   
   t1<-chose[1]
   t2<-chose[2]
@@ -287,28 +287,63 @@ dta_setx<-function(set,chose,out,glt){
     set<-get_rtc(lcvsO)
     return(set)
   }
-  
+#######  
   dtatg<-function(set,t1,t2,t3,g1,g2){
     setxvso<-setvsx(set,g1,g2)
     return(subset(setxvso, target==t1|target==t2|target==t3))
     
   }
-  
+#########  
   dta_grx<-function(set,g1,g2){
     subset(set,group==g1|group==g2)
   }
- # ifelse(ctrl==1,set<-adcontrol(set,ti0,ticontrol,ti2),cat("no control group added")) #add control observation
-  set<-adcontrol(set,ti0,ticontrol,ti2)
-  set<-subset(set,gilt==glt) #subset manuell gefiltert
-  ifelse(out==1,set<-outl.fun.rtc(set),cat("set with outliers included"))
+#######  
+  # ifelse(ctrl==1,set<-adcontrol(set,ti0,ticontrol,ti2),cat("no control group added")) #add control observation
+  #3
+  ifelse(out==1,set1<-outl.fun.rtc(set),set1<-set)
   
-  ifelse(xo==1,return(dtatg(set,t1,t2,t3,g1,g2)),
-         return(dta_grx(dtatg(set,t1,t2,t3,g1,g2),g1,g2)))
+  #1
+  ifelse(ctrl==1,set2<-adcontrol(set1,ti0,ticontrol,ti2),set2<-set1)
+  #2
+  set3<-subset(set2,gilt==glt) #subset manuell gefiltert
   
+  #sx6<-subset(dta,gilt==1)
+  #4,5
+  ifelse(xo==1,return(dtatg(set3,t1,t2,t3,g1,g2)),
+         return(dta_grx(dtatg(set3,t1,t2,t3,g1,g2),g1,g2)))
+  #sx7<-dta_grx(dtatg(dta,0,0,0,sm,em),sm,em)
+  #unique(sx7$category)
   #wks. creates subsets for lmer test
 }
+# ###############
+# #check function dta_Setx
+sx8<-dta_setx(dta_o,chose,1,1,1)
+sx9<-outl.fun.rtc(dta)
+# sx1<- setvsx(dta,sm,em) #wks. 9197 complete + 3xcontrol
+# unique( sx1$group) #alle gruppen vertreten
+# unique(sx1$category)  #sm, smvsem
+# unique(sx1$XvsGr)   #all groups
+# #chk
+# sx2<-dtatg(dta,0,0,0,sm,em) #wks. 
+# unique( sx2$group) #alle gruppen vertreten
+# unique(sx2$category)  #sm, smvsem
+# unique(sx2$XvsGr)   #all groups
+# #chk
+# sx3<-dta_grx(dta,sm,em) #wks.
+# unique( sx3$group) #alle gruppen vertreten
+# unique(sx3$category)  #sm, z-other: ursprüngliche benennung, keine modifikation
+# unique(sx3$XvsGr)   #all groups
+sx5<-adcontrol(dta_o,0,0,0)
+sx10<-subset(sx5,gilt==1)
+unique(sx5$category)
+sx12<-dtatg(sx10,0,0,0,sm,em)
+sx11<-dta_grx(dtatg(sx10,0,0,0,sm,em),sm,em)
 
-     #wks. creates subsets for lmer test
+sx13<-dta_setx(dta_o,chose,0,1)
+
+# #chk
+# sx4<-outl.fun.rtc(dta) #wks
+#############################
 
 #dtax<-dta_setx(dta,c(0,0,0,0,sm,sm),1)
 
@@ -373,7 +408,7 @@ setx<-createsets()
 #####################################################
 #lmerun(lmef[[1]],dta,setx[1,],1)
 
-getmean<-function(set,chose,out,flagall,rt){
+getmean<-function(set,chose,out,flagall,rt,glt){
   t1<-chose[1]
   t2<-chose[2]
   t3<-chose[3]
@@ -382,7 +417,7 @@ getmean<-function(set,chose,out,flagall,rt){
   g2<-chose[6]
     #rtx
   #chose[4]<-0
-  mnset<-dta_setx(set,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),out)
+  mnset<-dta_setx(set,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),out,glt)
 #  mnset<-dta_setx(dta,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),1)
   
  flag<-chose[5]
@@ -477,13 +512,6 @@ break()
 
 #lmerun(fmlRTCvs,dta,setx[7,]) #warum unterschiedliche variablenlängen? rtc
 ##############################################################
-#rubio-fernandez:
-#"We constructed 3 lists of materials, each containing 7 items of each experimental 
-#condition (Extended Metaphor, Single Metaphor and Literal)"
-#"In the model, we posited a main effect of Category (single vs. other) 
-#and random effects of Participant and Item, along with a random slope of Category by Participant"
-#"pairwise comparisons of Condition levels"
-
 create_lmeforms<-function(set,resp){
 lme2.form2.rnd<-paste0(         "(1|item)+(1|participant)")
 lme2.form3.rnd<-paste0("(1|char)+(1|item)+(1|participant)")
@@ -928,25 +956,50 @@ tail(rtc2)
 #############################################################################
 #############################################################################
 #---C---  compare R/F results:-----------------------
+#rubio-fernandez: r/f
+rftargets<-c(
+  "It had sharp claws",
+  "she would apply her scalpel close to your heart",
+  "the grandstand would give him a standing ovation",
+  "the bouquets thrown onto the stage",
+  "there was the occasional power outage"
+)
+rfchars<-stri_count_boundaries(rftargets,"character")
+mean(rfchars) # 36.8
+#"We constructed 3 lists of materials, each containing 7 items of each experimental 
+#condition (Extended Metaphor, Single Metaphor and Literal)"
+#For the self-paced reading task, each passage was divided into 8 segments 
+#(average number of words: 7.4; range: 3--10). One of these segments was the target expression, 
+#which appeared in isolation (average number of words: 5.1; range: 2--9).
+#"In the model, we posited a main effect of Category (single vs. other) 
+#and random effects of Participant and Item, along with a random slope of Category by Participant"
+#"pairwise comparisons of Condition levels"
+
+
 #For these raw data, the mean reading time for the critical segments in the 
 #Literal condition was       1457 ms (SD 727 ms), in the 
 #Extended Metaphor condition 1543 ms (SD 764 ms), and in the 
 #Single Metaphor condition   1578 ms (SD 768 ms).
 #LC < EM < SM
 #C.1
+rftimes<-rbind("SM"=1578,"EM"=1543,"LC"=1457)
 #general means group vs all
 # #
-d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1))
+#extraction: dta_setx(set,c(target-1,target0,target+1,groupvsall?,group1,group2),discard_outliers?,nur-gültige-fälle?) 
+#1=yes,0=no
+d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1,1))
+attach(d5)
 m1<-mean(d5$timeinterval[group==sm],na.rm=T)
 m2<-mean(d5$timeinterval[group!=sm],na.rm=T)
 # mean at 0,0,0,out
-# #    mean group mean !group
+# #    mean group  mean !group  #R/F
 # sm   1851.040    1662.170 >
 # em   1861.000    1659.711 >
 # lc   1595.667    1683.930 <
 # mm   1661.000    1679.075 <
+# rank: 
 
-tb1<-getmean(dta,0,0,0,0,0,0) # with RAW dataset
+tb1<-getmean(dta,c(0,0,0,1,sm,em),1,1,ti,1) # with RAW dataset
 #here results reading time RAW, target 0
 #        mean        sd
 # SM 1623.482  834.4605

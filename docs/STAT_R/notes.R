@@ -1238,7 +1238,7 @@ write_clip(s91$coefficients[1:5])
   s81$coefficients[1:5]
 tmod<-dtax$rtc
 tmod[828]<-0
-#offset, 1,-1,0,
+#offset, 1,-1,0                     # weitester abstand zwischen werten
 #s9 item:vsa   EM < SM <= LC <  MM  --= 826
 #s9 item:group LC < EM <  MM <  SM  --= 1020
 #s8 item:group, 0+char, ohne offset: 
@@ -1253,7 +1253,7 @@ tmod[828]<-0
 2920-2094 #s9 group
 3+199
 188+34
-727-525 #s81, wesentlich kleinere werte, weit weg vom mean which is TI pure for LC < SM < MM < EM and --= 1186
+727-525 #s81, wesentlich kleinere werte, weit weg vom mean which is TI pure as: LC < SM < MM < EM and --= 1186
 1941.35593220339
 2980.14035087719-1794
 1794.85416666667
@@ -1279,7 +1279,7 @@ tmod[828]<-0
 #278-426=148 #s.o. nur anderer schnittpunkt, bei 0, oben realistischere werte 
 #mnp-s81$coefficients[2:5] # dif zu mean pure ti
 # 382.982598653811 # 0.021 # 2 # 3 rank char|group  
-# 1273.90840344758 # 0.010 # 4 # 1
+# 1273.90840344758 # 0.010 # 4 # 1 cor(char|group)
 # 52.7749930465918 # 0.022 # 1 # 4
 # 664.162458193075 # 0.020 # 3 # 2
 ################################################################
@@ -1292,8 +1292,7 @@ sumx<-s7$coefficients-s8$coefficients
 sumx
 #write_clip(
   mnp<-c(
-
-  mean(dtax$timeinterval[which(dta$group=="SM")],na.rm=T),
+mean(dtax$timeinterval[which(dta$group=="SM")],na.rm=T),
 mean(dtax$timeinterval[which(dta$group=="EM")],na.rm=T),
 mean(dtax$timeinterval[which(dta$group=="LC")],na.rm=T),
 mean(dtax$timeinterval[which(dta$group=="MM")],na.rm=T)
@@ -1313,7 +1312,7 @@ write_clip(c(
   mean(dtax$rtc[which(dta$group=="MM")],na.rm=T)
 ))
 write_clip(s81$coefficients[2:5])
-s81$coefficients[2:5]-
+s81$coefficients[2:5]
 
 #s9
 s8
@@ -1345,5 +1344,7 @@ sum1<-lmer(timeinterval ~   category  + (1+char) +(1|item) + (1 | tnid) + (categ
 
 #sum1<-lmer(timeinterval ~  0 + group  + (1| item) + (1 + tnid) + (1 + group | tnid),dtax,offset=rtc) 
 summary(sum1)
+chose<-c(0,0,0,1,sm,em)
+mnset<-dta_setx(dta,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),1,1)
 
 

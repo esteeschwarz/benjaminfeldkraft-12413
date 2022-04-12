@@ -408,7 +408,7 @@ setx<-createsets()
 #####################################################
 #lmerun(lmef[[1]],dta,setx[1,],1)
 
-getmean<-function(set,chose,out,flagall,rt,glt){
+getmean<-function(set,chose,out,glt,ctrl,flagall,rt){
   t1<-chose[1]
   t2<-chose[2]
   t3<-chose[3]
@@ -417,7 +417,7 @@ getmean<-function(set,chose,out,flagall,rt,glt){
   g2<-chose[6]
     #rtx
   #chose[4]<-0
-  mnset<-dta_setx(set,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),out,glt)
+  mnset<-dta_setx(set,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),out,glt,ctrl)
 #  mnset<-dta_setx(dta,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),1)
   
  flag<-chose[5]
@@ -488,7 +488,7 @@ getmean<-function(set,chose,out,flagall,rt,glt){
 #dtax<-dta_setx(dta,0,0,0,0,sm,sm)
 #setx[1,]
 mean(dta_rtc$rtc.1)
-getmean(dta_rtc,c(0,0,0,1,sm,vso),1,1,rtc.1)
+getmean(dta_rtc,c(0,0,0,1,sm,lc),1,1,0,1,ti)
  m9<-dta_setx(dta_rtc,c(0,0,0,0,em,lc),1)[with(dta_setx(dta_rtc,c(0,0,0,0,em,lc),1),group!=lc),]
  mean(m9$rtc.1)
 # mean(dta_setx(dta,c(0,0,0,0,em,lc),1)[dta_setx(dta,c(0,0,0,0,em,lc),1)$group==em]$timeinterval)

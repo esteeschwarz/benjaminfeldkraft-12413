@@ -5,3 +5,5 @@
 - files moved to subfolder in /docs
 - /corpusLX: for SPUND R essais
 - /hux2022: for XML scheme essais on survey integration
+- /STAT_R: general R essais
+- /hux2021: evaluation psycholinguistisches experiment zum metaphernverständnis, HU 2021

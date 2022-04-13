@@ -1346,5 +1346,20 @@ sum1<-lmer(timeinterval ~   category  + (1+char) +(1|item) + (1 | tnid) + (categ
 summary(sum1)
 chose<-c(0,0,0,1,sm,em)
 mnset<-dta_setx(dta,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),1,1)
+###########12155.
+library(stringi)
+src<-"https://github.com/esteeschwarz/essais/raw/main/docs/corpusLX/data/11302.benjaminbuch5.txt"
 
-
+ben5<-scan(src," ") 
+#ben1: #35247 #9491
+#ben2: #13461 #4733
+#ben3: #36545 #9017
+#ben4: #38129 #9828
+#ben5: #37310 #9754
+s5<-unique(ben5)
+head(s1)
+9491/35247
+4733/13461
+9017/36545
+9828/38129
+9754/§/§!=

@@ -26,3 +26,5 @@ write_clip(s21)
 s14<-s13
 s13<-s12
 s12<-s11
+
+#next: stri_join fliesztext of creations, write file, split view compare (gith) of different versions.

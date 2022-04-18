@@ -1,0 +1,21 @@
+MAXQDA erlaubt Ihnen, eine RTF- oder DOC/X-Datei beim Import automatisch in mehrere Text-Dokumente aufzusplitten. Die Texte lassen sich dabei automatisch vorcodieren.
+Für den Import müssen Sie in der importierten Datei folgende Steuerbefehle integrieren:
+         #TEXT <Textname>     für den Beginn eines neuen Textes
+         #CODE <Code\Subcode && zweiter Code>     für den Beginn einer Codierung mit einem Code
+         #ENDCODE     für das Ende einer Codierung
+         #SPEAKER <Sprechername>     für den Beginn eines Sprechbeitrags in einer Fokusgruppe
+         #ENDSPEAKER     für das Ende des Sprechbeitrags
+Eine Verschachtelung von Codierungen ist nicht möglich.
+Die Steuerbefehle müssen am Ende einer Zeile stehen, das heißt, ihnen muss eine Absatzmarke folgen. Die Steuerbefehl können auch innerhalb eines Textes stehen, wenn man ein # am Ende des Befehls ergänzt (mit Ausnahme von #TEXT).
+Subcodes lassen sich durch Backslashs "\" zuordnen. Für die gleichzeitige Zuordnung mehrerer Codes können diese mit && verbunden werden.
+
+Beispiel:
+   #TEXT Name des 1. Textes
+   #CODE Code 1
+   Dieser Inhalt wird mit "Code 1" codiert.
+   #ENDCODE
+   #CODE Code 2\Untercode
+   Dieser Inhalt wird bis hier #ENDCODE# mit dem Subcode "Untercode" von Code 2 codiert.
+
+   #TEXTName des 2. Textes
+   Hier folgt der Inhalt des zweiten Textes.

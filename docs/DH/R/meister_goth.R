@@ -16,25 +16,25 @@ src8<-"https://gutenberg.org/ebooks/2342.txt.utf-8"
 
 
 
-dta<-scan(src2,"")
-dta[1400:2200]
-end<-which(dta==".")
-dta3<-dta[end[length(end)]:length(dta)]
-tail(dta3)
-start<-which(dta=="PRINT!")
-dta[1898:2000]
-dta[start[1]:start[1]+20]
-start2<-start[1]+20
-startbook<-which(dta[start[1]:start2]=="Wilhelm")
-start1<-startbook-1
-dta4<-dta[start[1]+start1:length(dta)]
-dta5<-dta4[!is.na(dta4)]
-tail(dta5)
-dta4[16000:16100]
-#write(dta1,"meister_bd1.txt")
-dta2<-scan(src,"",sep="\n")
-write(dta2,"meister_p_bd1.txt")
-dt5<-unique(dta4)
+# dta<-scan(src2,"")
+# dta[1400:2200]
+# end<-which(dta==".")
+# dta3<-dta[end[length(end)]:length(dta)]
+# tail(dta3)
+# start<-which(dta=="PRINT!")
+# dta[1898:2000]
+# dta[start[1]:start[1]+20]
+# start2<-start[1]+20
+# startbook<-which(dta[start[1]:start2]=="Wilhelm")
+# start1<-startbook-1
+# dta4<-dta[start[1]+start1:length(dta)]
+# dta5<-dta4[!is.na(dta4)]
+# tail(dta5)
+# dta4[16000:16100]
+# #write(dta1,"meister_bd1.txt")
+# dta2<-scan(src,"",sep="\n")
+# write(dta2,"meister_p_bd1.txt")
+# dt5<-unique(dta4)
 
 ext<-function(src){
   dta<-scan(src,"")
@@ -69,4 +69,17 @@ bd8<-ext(src8)
                unique(bd7),
                unique(bd8))
 
-  }
+#uni2<-match(bduni[,1],bduni[,2])
+#sum(uni2,na.rm = T)
+#bduni[,1][uni2]
+#type/token ratio, lexical density
+barplot(cbind(
+"I"=ttr1<-length(bduni[,1])/length(bd1),
+"II"=ttr2<-length(bduni[,2])/length(bd2),
+"III"=ttr3<-length(bduni[,3])/length(bd3),
+"IV"=ttr4<-length(bduni[,4])/length(bd4),
+"V"=ttr5<-length(bduni[,5])/length(bd5),
+"VI"=ttr6<-length(bduni[,6])/length(bd6),
+"VII"=ttr7<-length(bduni[,7])/length(bd7),
+"VIII"=ttr8<-length(bduni[,8])/length(bd8)
+),main="type-token ratio Lehrjahre 1-8")

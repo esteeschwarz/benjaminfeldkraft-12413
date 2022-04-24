@@ -49,6 +49,7 @@ src8<-"https://gutenberg.org/ebooks/2342.txt.utf-8"
 ext<-function(src){
   dta<-scan(src,"")
   start<-which(dta=="PRINT!")
+  start2<-start[1]+20
   startbook<-which(dta[start[1]:start2]=="Wilhelm")
   start1<-startbook-1
   dta4<-dta[start[1]+start1:length(dta)]
@@ -86,7 +87,7 @@ barplot(cbind(
 "VIII"=ttr8<-length(bduni[,8])/length(bd8)
 ),main="type-token ratio Lehrjahre 1-8")
 
-#nice comes >
+# nice comes...
 ```
 vvv
 ![output](https://github.com/esteeschwarz/essais/raw/main/docs/DH/R/meister001.png)

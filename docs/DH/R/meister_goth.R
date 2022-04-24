@@ -15,6 +15,7 @@ src8<-"https://gutenberg.org/ebooks/2342.txt.utf-8"
 ext<-function(src){
   dta<-scan(src,"")
   start<-which(dta=="PRINT!")
+  start2<-start[1]+20
   startbook<-which(dta[start[1]:start2]=="Wilhelm")
   start1<-startbook-1
   dta4<-dta[start[1]+start1:length(dta)]

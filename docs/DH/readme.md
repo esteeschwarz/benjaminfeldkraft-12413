@@ -1,2 +1,2 @@
 # 12172.
-[short introduction](https://skuul.rotefadenbuecher.de/public/dh/12172/gutenberg.html) to gutenberg-de
+[short introduction](https://ada-sub.rotefadenbuecher.de/skool/public/dh/gutenberg/) to gutenberg-de

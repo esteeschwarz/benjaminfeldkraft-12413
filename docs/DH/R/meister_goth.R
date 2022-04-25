@@ -51,6 +51,6 @@ barplot(cbind(
 "VI"=ttr6<-length(bduni[,6])/length(bd6),
 "VII"=ttr7<-length(bduni[,7])/length(bd7),
 "VIII"=ttr8<-length(bduni[,8])/length(bd8)
-),main="type-token ratio Lehrjahre 1-8")
+),main="type-token ratio Wilhelm Meister 1-8")
 
 # nice comes...

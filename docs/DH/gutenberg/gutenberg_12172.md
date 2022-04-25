@@ -1,5 +1,5 @@
-##### 12172.DH
-###### 20220424(10.56) stephan schwarz
+##### 12172.DH.fischer
+###### 20220427 / stephan schwarz
 ## gutenberg-DE
 ###### <https://www.projekt-gutenberg.org>
 hhh

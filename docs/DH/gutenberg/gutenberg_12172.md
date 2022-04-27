@@ -25,8 +25,7 @@ hhh
 - arbeit weitgehend nicht finanziert, hier auch anbetracht der langen existenz verhältnismäszig geringes spektrum an möglichkeiten der nutzung von inhalten >>>
 hhh
 ### luft nach oben...
-- format der verkauften edition wahrscheinlich nicht plain txt sondern pdf/epub, dh auch keine einfache analyse dieses materials möglich
-- darin unterscheidet sich das vorhaben deutlich von durch forschungsgelder finanzierte sammlungen
+- format der verkauften edition wird als html angegeben, frage bleibt nach analysemöglichkeiten, also wie das material aufbereitet ist
 - keine API abfrage möglich zur automatisierten analyse des materials
 
 hhh

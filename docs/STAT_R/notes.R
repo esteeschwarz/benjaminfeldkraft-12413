@@ -1376,3 +1376,10 @@ s13<-s12
 s12<-s11
 
 #12161.tk
+uni1<-unique(bd1)
+ttr1<-length(uni1)/length(bd1)
+tail(bd1)
+
+dta<-scan(src1,"character", " ")
+library(clipr)
+write_clip(dta)

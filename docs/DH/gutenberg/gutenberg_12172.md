@@ -89,10 +89,12 @@ barplot(cbind(
 
 # nice comes...
 ```
+script source: 
+<https://github.com/esteeschwarz/essais/tree/main/docs/DH/R/meister_goth.R>
 vvv
 ![output](https://github.com/esteeschwarz/essais/raw/main/docs/DH/R/meister001.png)
 hhh
 ##### fin
 hhh
-achso: <https://www.gaga.net/pgdp/default.php> 
-:ich werde das improvisieren:
+- achso: <https://www.gaga.net/pgdp/default.php> 
+- ich werde das improvisieren

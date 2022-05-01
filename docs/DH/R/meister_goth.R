@@ -13,7 +13,7 @@ src8<-"https://gutenberg.org/ebooks/2342.txt.utf-8"
 
 #get text
 ext<-function(src){
-  dta<-scan(src,"")
+  dta<-scan(src,"character",quote = c("\'","\""),na.strings = c(",",".",";","-"))
   start<-which(dta=="PRINT!")
   start2<-start[1]+20
   startbook<-which(dta[start[1]:start2]=="Wilhelm")
@@ -54,3 +54,17 @@ barplot(cbind(
 ),main="type-token ratio Wilhelm Meister 1-8")
 
 # nice comes...
+#12175.big fail: double checking the ttr with https://voyant-tools.org
+#gives different results. the scan method here gets not the correct number of words.
+
+#dta1<-scan(src1,"character", quote = c("\'","\""))
+#wks.
+bd1<-ext(src1)
+uni1<-unique(bd1) #type count still differs due to ,.;- types
+write_clip(bd1)
+library(stringi)
+bd11<-stri_replace(bd11,regex=c(","),replacement = "")
+head(bd11)
+bd12<-scan(bd11,"")
+bd13<-stri_split_boundaries(bd11,"word")
+unique(bd12)

@@ -13,7 +13,7 @@ hhh
 hhh
 ### in use
 - ansichten lassen sich speichern, aber nicht exportieren
-- die trendansicht könnte spannend sein, ein trendverlauf über das dokument hinweg, verteilt auf zb. 10 segmente
+- die trendansicht könnte spannend sein, ein trendverlauf über das dokument hinweg, verteilt auf zb. 10 segmente > [ansicht](https://voyant-tools.org/?corpus=1baea42d9dd66c349fd5fa27700489ad&query=die&view=DocumentTerms)
 - die ansichten lassen sich nach export immer wieder aufrufen, weiterverarbeitung NO
 hhh
 ### comment

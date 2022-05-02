@@ -19,9 +19,9 @@ hhh
 ### comment
 - das ist für unterwegs ganz sinnvoll, aber zum arbeiten eher ungeeignet       
     - import umständlich 
-    - export nicht mörlich
+    - export nicht möglich
     - ansichten, auswertungen sehr simpel
-    - > besser: [MAXQDA](https://www.maxqda.de), sofware [über die uni](https://www.zedat.fu-berlin.de/Benutzerservice/MAXQDA)
+    - besser: [MAXQDA](https://www.maxqda.de), software [über die uni](https://www.zedat.fu-berlin.de/Benutzerservice/MAXQDA)
 
 hhh
 fin

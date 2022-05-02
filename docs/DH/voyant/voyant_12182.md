@@ -7,14 +7,14 @@ hhh
 - einfache analyse nach 
     - worthäufigkeiten
     - verbindungen (netzwerk)
+    - kollokationen!
     - KWIC kontext
-    - trends
+    - trends!
 - sehr simple, ein feature zur anzeige von korrelationen bleibt schleierhaft
 hhh
 ### in use
-- ansichten lassen sich speichern, aber nicht exportieren
+- analysen lassen sich speichern, nicht exportieren, aber immer wieder aufrufen, weiterverarbeitung NO
 - die trendansicht könnte spannend sein, ein trendverlauf über das dokument hinweg, verteilt auf zb. 10 segmente > [ansicht](https://voyant-tools.org/?corpus=1baea42d9dd66c349fd5fa27700489ad&query=die&view=DocumentTerms)
-- die ansichten lassen sich nach export immer wieder aufrufen, weiterverarbeitung NO
 - seite hängt sich abundzu auf, gerade bei den spannenden korrelationen
 hhh
 ### comment

@@ -10,6 +10,7 @@ hhh
     - kollokationen!
     - KWIC kontext
     - trends!
+    - VELIZA: falls jemandem langweilig ist
 - sehr simple, ein feature zur anzeige von korrelationen bleibt schleierhaft
 hhh
 ### in use

@@ -18,10 +18,10 @@ hhh
 - seite hängt sich abundzu auf, gerade bei den spannenden korrelationen
 hhh
 ### comment
-- das ist für unterwegs ganz sinnvoll, aber zum arbeiten eher ungeeignet       
+- das ist für unterwegs oder schnelle prognosen sinnvoll, aber für tiefergehende analysen weniger geeignet       
     - import umständlich 
     - export nicht möglich
-    - ansichten, auswertungen sehr simpel aber schnelle visualisierung, nur wenig konfigurierbar
+    - ansichten, auswertungen sehr simpel, schnelle visualisierung, kaum konfigurierbar
     - mehr möglichkeiten mit: [MAXQDA](https://www.maxqda.de), software [über die uni](https://www.zedat.fu-berlin.de/Benutzerservice/MAXQDA)
 
 hhh

@@ -8,10 +8,10 @@ hhh
     - worthäufigkeiten
     - verbindungen (netzwerk)
     - kollokationen!
-    - KWIC kontext
+    - KWIC ansicht
     - trends!
     - VELIZA: falls jemandem langweilig ist
-- sehr simple, ein feature zur anzeige von korrelationen bleibt schleierhaft
+    - ein feature zur anzeige von korrelationen bleibt schleierhaft
 hhh
 ### in use
 - analysen lassen sich speichern, nicht exportieren, aber immer wieder aufrufen, weiterverarbeitung NO

@@ -104,6 +104,28 @@ What you should see is a folder corpus inside a folder stylo with the files.
 
 ![The 17 properly labeled files for Stylo](/Users/djw12/Desktop/corpus_folder.png)
 
+#### 12191.mod
+```{r}
+lehrjahre1<-c(2335,2336,2337,2338,2339,2340,2341,2342)
+lehrjahre2<-c("goethe","goethe","goethe","goethe","goethe","goethe","goethe","goethe")
+lehrjahre3<-c("WMeister1","WMeister2","WMeister3","WMeister4","WMeister5","WMeister6","WMeister7","WMeister8")
+lehrjahre4<-c("goethe_WMeister1.txt","goethe_WMeister2.txt","goethe_WMeister3.txt","goethe_WMeister4.txt","goethe_WMeister5.txt","goethe_WMeister6.txt","goethe_WMeister7.txt","goethe_WMeister8.txt")
+PG_WMeister<-cbind(lehrjahre1,lehrjahre2,lehrjahre3,lehrjahre4)
+###
+path = "~/boxHKW/21S/essais/gith/12057/essais/docs/DH/R/stylo"
+dir.create(path, showWarnings = TRUE)
+dir.create(paste0(path, "/corpus"))
+
+path2 <- "~/boxHKW/21S/essais/gith/12057/essais/docs/DH/R/stylo/corpus/"
+
+for (row in 1:nrow(PG_WMeister)){
+  bookname <- PG_WMeister[row,4]
+  stylotext <- gutenberg_download(PG_WMeister[row,1])
+  stylotext <- select(stylotext, text)
+  write.table(stylotext, file = paste0(path2, bookname), sep="", row.names = FALSE)
+}
+
+```
 
 
 

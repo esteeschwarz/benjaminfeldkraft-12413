@@ -20,3 +20,13 @@ write_clip(dta7)
 ## amz rezensionen
 src2<-"https://raw.githubusercontent.com/esteeschwarz/essais/main/docs/DH/data/temp/amz_rez.csv"
 dta<-read.csv2(src2,header = T)
+#row<-2
+path2<-"temp/rez"
+for (row in 1:nrow(dta)){
+  rezkey <- as.character(dta[row,1])
+  dtarez<-dta[row,]
+  text <- select(dtarez,rezension )
+  write.table(text, file = paste0(path2, rezkey), sep="", row.names = FALSE)
+}
+cat(dtarez)
+#wks.

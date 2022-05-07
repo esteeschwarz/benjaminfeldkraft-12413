@@ -100,7 +100,6 @@ for (row in 1:nrow(booklist)){
 
 ```
 
-
 What you should see is a folder corpus inside a folder stylo with the files. 
 
 ![The 17 properly labeled files for Stylo](/Users/djw12/Desktop/corpus_folder.png)

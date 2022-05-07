@@ -26,7 +26,7 @@ for (row in 1:nrow(dta)){
   rezkey <- as.character(dta[row,1])
   dtarez<-dta[row,]
   text <- select(dtarez,rezension )
-  write.table(text, file = paste0(path2, rezkey), sep="", row.names = FALSE)
+  write.table(text, file = paste0(path2, rezkey,".txt"), sep="", row.names = FALSE)
 }
 cat(dtarez)
 #wks.

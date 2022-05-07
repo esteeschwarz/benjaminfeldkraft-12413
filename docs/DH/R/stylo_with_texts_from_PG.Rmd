@@ -127,7 +127,10 @@ for (row in 1:nrow(PG_WMeister)){
 
 ```
 
-
+fetch catalogue:
+```{r}
+PG_cat<-read.csv2("https://gutenberg.org/cache/epub/feeds/pg_catalog.csv",header = T,sep = ",")
+```
 
 ### Step IV: Using the Corpus with Stylo 
 

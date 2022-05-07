@@ -57,3 +57,34 @@ dtm_matrix<-as.matrix(dtm)
 dtm_frequency_sort<-sort(colSums(dtm_matrix),decreasing = T)
 df_frequency<-data.frame(word=names(dtm_frequency_sort),freq=dtm_frequency_sort)
 head(df_frequency)
+wordcloud(words=df_frequency$word,
+          freq=df_frequency$freq,
+          min.freq=50,
+          random.order=F,
+          colors=brewer.pal(6,"Dark2"))
+set.seed(2021)
+train_sample_id<-sample(1:19,6)
+df<-dta
+df_train<-df[train_sample_id,]
+df_test<-df[-train_sample_id,]
+dtm_train<-dtm[train_sample_id,]
+dtm_test<-dtm[-train_sample_id,]
+corpus_clean_train<-corpus_clean[train_sample_id]
+corpus_clean_test<-corpus_clean[-train_sample_id]
+dtm_train<-DocumentTermMatrix(corpus_clean_train,control=list(dictionary="high_freq"))
+dtm_test<-DocumentTermMatrix(corpus_clean_test,control=list(dictionary="high_freq"))
+convert_count<-function(x){
+  y<-ifelse(x>0,1,0)
+  y<-factor(y,levels=c(0,1),labels = c("No","Yes"))
+  y
+}
+dtm_train_final<-apply(dtm_train,2,convert_count)
+dtm_test_final<-apply(dtm_test,2,convert_count)
+train_features<-as.data.frame(dtm_train_final)
+train_sentiments<-as.factor(df_train$sentiment)
+test_features_sentiments<-as.data.frame(dtm_test_final)%>%
+  mutate(sentiment=as.factor(df_test$sentiment))
+model<-naiveBayes(train_features,train_sentiments,laplace=1)
+prediction<-predict(model,newdata=test_features_sentiments)
+dim(test_features_sentiments)
+#stops here working.

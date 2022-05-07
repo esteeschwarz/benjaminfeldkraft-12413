@@ -30,3 +30,30 @@ for (row in 1:nrow(dta)){
 }
 cat(dtarez)
 #wks.
+glimpse(dta)
+table(dta$sentiment)
+prop.table(table(dta$sentiment))
+
+library(dplyr)
+library("readr") 
+library("tm") 
+install.packages("caret")
+library("wordcloud") 
+library("e1071") 
+library("caret")
+
+corpus <- Corpus(VectorSource(dta$rezension))
+inspect(corpus[1:3])
+corpus_clean<-corpus %>% 
+  tm_map(content_transformer(tolower)) %>%
+  tm_map(removePunctuation)%>%
+  tm_map(removeNumbers)%>%
+  tm_map(removeWords,stopwords(kind="de"))%>%
+  tm_map(stripWhitespace)
+
+dtm<-DocumentTermMatrix((corpus_clean))
+inspect(dtm)
+dtm_matrix<-as.matrix(dtm)
+dtm_frequency_sort<-sort(colSums(dtm_matrix),decreasing = T)
+df_frequency<-data.frame(word=names(dtm_frequency_sort),freq=dtm_frequency_sort)
+head(df_frequency)

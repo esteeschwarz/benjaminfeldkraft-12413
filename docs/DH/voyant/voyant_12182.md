@@ -1,5 +1,5 @@
 ##### 12182.DH.fischer
-###### 20220501 / stephan schwarz
+###### 20220504 / stephan schwarz
 ## voyant tools
 ###### <https://www.voyant-tools.org>
 hhh
@@ -8,10 +8,10 @@ hhh
     - worthäufigkeiten
     - verbindungen (netzwerk)
     - kollokationen!
-    - KWIC kontext
+    - KWIC ansicht
     - trends!
     - VELIZA: falls jemandem langweilig ist
-- sehr simple, ein feature zur anzeige von korrelationen bleibt schleierhaft
+    - ein feature zur anzeige von korrelationen bleibt schleierhaft
 hhh
 ### in use
 - analysen lassen sich speichern, nicht exportieren, aber immer wieder aufrufen, weiterverarbeitung NO
@@ -24,6 +24,7 @@ hhh
     - export nicht möglich
     - ansichten, auswertungen sehr simpel, schnelle visualisierung, kaum konfigurierbar
     - mehr möglichkeiten mit: [MAXQDA](https://www.maxqda.de), software [über die uni](https://www.zedat.fu-berlin.de/Benutzerservice/MAXQDA)
+- ein paar auswertungen/visualisierungen müssen noch (entschleiert) werden, eine help function ist nicht vorhanden
 
 hhh
 fin

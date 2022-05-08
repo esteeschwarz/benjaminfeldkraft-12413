@@ -24,7 +24,7 @@ hhh
     - export nicht möglich
     - ansichten, auswertungen sehr simpel, schnelle visualisierung, kaum konfigurierbar
     - mehr möglichkeiten mit: [MAXQDA](https://www.maxqda.de), software [über die uni](https://www.zedat.fu-berlin.de/Benutzerservice/MAXQDA)
-- ein paar auswertungen/visualisierungen müssen noch (entschleiert) werden, ||eine help function ist nicht vorhanden|| > [korrelation entschleiert](https://voyant-tools.org/docs/#!/guide/correlations)
+- ein paar auswertungen/visualisierungen müssen noch (entschleiert) werden, <del>eine help function ist nicht vorhanden</del> > [korrelation entschleiert](https://voyant-tools.org/docs/#!/guide/correlations)
 
 hhh
 fin

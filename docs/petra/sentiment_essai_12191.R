@@ -30,6 +30,10 @@ for (row in 1:nrow(dta)){
 }
 cat(dtarez)
 #wks.
+#ref of next essais: Lei, L., & Liu, D. (2021). Conducting Sentiment Analysis 
+#(Elements in Corpus Linguistics). 
+#Cambridge: Cambridge University Press. doi:10.1017/9781108909679
+#################################################################
 glimpse(dta)
 table(dta$sentiment)
 prop.table(table(dta$sentiment))
@@ -88,3 +92,23 @@ model<-naiveBayes(train_features,train_sentiments,laplace=1)
 prediction<-predict(model,newdata=test_features_sentiments)
 dim(test_features_sentiments)
 #stops here working.
+#####################
+#ref next: https://journal.r-project.org/archive/2016/RJ-2016-007/RJ-2016-007.pdf
+##########
+raw.corpus <- load.corpus(files = "all", corpus.dir = "data/", encoding = "UTF-8")
+data(raw.corpus)
+summary(raw.corpus)
+tokenized.corpus <- txt.to.words.ext(raw.corpus, preserve.case = FALSE)
+summary(tokenized.corpus)
+corpus.no.pronouns <- delete.stop.words(tokenized.corpus, stop.words = stylo.pronouns(corpus.lang = "German"))
+corpus.no.pronouns <- delete.stop.words(corpus.no.pronouns, stop.words = c("ein","einer","eine","der","die","das"))
+
+corpus.char.3.grams <- txt.to.features(corpus.no.pronouns, ngram.size = 3, features = "c")
+frequent.features <- make.frequency.list(corpus.no.pronouns, head = 20)
+freqs <- make.table.of.frequencies(corpus.no.pronouns, features = frequent.features)
+head(freqs)
+stylo(corpus.dir = "data/", mfw.min = 3, mfw.max = 8, analysis.type = "PCR", sampling = "normal.sampling", sample.size = 10, gui = T)
+
+
+
+

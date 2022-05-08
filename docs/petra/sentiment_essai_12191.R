@@ -17,7 +17,8 @@ dta6<-stri_replace_all(dta5,regex ='"',replacement = "")
 dta7<-stri_replace_all(dta6,regex ="\\s{2,}",replacement = " ")
 write_clip(dta7)
 #wks. results in sentences array.
-## amz rezensionen
+## amz rezensionen in .csv table
+## split into seperate files
 src2<-"https://raw.githubusercontent.com/esteeschwarz/essais/main/docs/DH/data/temp/amz_rez.csv"
 dta<-read.csv2(src2,header = T)
 #row<-2

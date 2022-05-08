@@ -96,20 +96,25 @@ dim(test_features_sentiments)
 #####################
 #ref next: https://journal.r-project.org/archive/2016/RJ-2016-007/RJ-2016-007.pdf
 ##########
+library(stylo)
 raw.corpus <- load.corpus(files = "all", corpus.dir = "data/", encoding = "UTF-8")
 data(raw.corpus)
 summary(raw.corpus)
 tokenized.corpus <- txt.to.words.ext(raw.corpus, preserve.case = FALSE)
 summary(tokenized.corpus)
 corpus.no.pronouns <- delete.stop.words(tokenized.corpus, stop.words = stylo.pronouns(corpus.lang = "German"))
-corpus.no.pronouns <- delete.stop.words(corpus.no.pronouns, stop.words = c("ein","einer","eine","der","die","das"))
-
+corpus.clean <- delete.stop.words(corpus.no.pronouns, stop.words = c("ein","einer","eine","der","die","das","den","dem"))
+summary(corpus.clean)
 corpus.char.3.grams <- txt.to.features(corpus.no.pronouns, ngram.size = 3, features = "c")
-frequent.features <- make.frequency.list(corpus.no.pronouns, head = 20)
-freqs <- make.table.of.frequencies(corpus.no.pronouns, features = frequent.features)
+frequent.features <- make.frequency.list(corpus.clean, head = 20)
+freqs <- make.table.of.frequencies(corpus.clean, features = frequent.features)
 head(freqs)
 stylo(corpus.dir = "data/", mfw.min = 3, mfw.max = 8, analysis.type = "PCR", sampling = "normal.sampling", sample.size = 10, gui = T)
-
-
-
+#12192.
+raw.corpus <- load.corpus(files = "all", corpus.dir = "../data/corpora/benjamin", encoding = "UTF-8")
+write.csv2(corpus.matrix,"../data/temp/benjamin_corpus_clean_col.csv")
+corpus.matrix<-cbind(corpus.clean[[1]],corpus.clean[[2]],corpus.clean[[3]],corpus.clean[[4]],corpus.clean[[5]])
+colnames(corpus.matrix)<-c("benjamin1","benjamin2","benjamin3","benjamin4","benjamin5")
+dimnames(corpus.clean)
+corpus.clean
 

@@ -28,7 +28,7 @@ typeof(grimm)
 
 4. Speichert alle Dateinamen in einer neuen Variable "maerchen_dateinamen" und lasst euch das neue Objekt in der Konsole anzeigen. Hinweis: In der ersten Sitzung haben wir gelernt, wie man auf Spalten und Elemente in einem Dataframe zugreifen kann. 
 ```{r}
-grimm.names<-grimm[,1]
+grimm.names<-grimm[,1] #grimm$doc_id
 print(grimm.names)
 ```
 
@@ -56,5 +56,13 @@ maerchen<-read.csv2("data/maerchentable.csv",header=T,sep=",")
 
 ```
 
-
+```{r}
+grepl("Rumpel[a-zA-Z]{,9}",maerchen$dateiname)
+maerchen$titel<-maerchen$dateiname
+maerchen$jahr
+library(stringi)
+grep("18[2-4][0|1-9]",maerchen$dateiname,value = T)
+grep("")
+maerchen$jahr<-gsub(maerchen$dateiname,"\\(|\\)")
+```
 

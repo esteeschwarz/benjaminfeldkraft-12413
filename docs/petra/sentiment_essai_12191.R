@@ -2,7 +2,7 @@
 #petraKIP prepare
 #20220507(08.56)
 ######################
-src1<-"https://raw.githubusercontent.com/esteeschwarz/essais/main/docs/DH/data/guhl_benjaminbuch1.txt"
+src1<-"https://raw.githubusercontent.com/esteeschwarz/essais/main/docs/DH/data/corpora/benjamin/guhl_benjaminbuch1.txt"
 dta<-scan(src1,"character",sep="\n",encoding = "utf-8")
 glimpse(dta)
 write_clip(dta)

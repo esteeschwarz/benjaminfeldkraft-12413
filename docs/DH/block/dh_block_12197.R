@@ -72,7 +72,7 @@ partyns[7]<-"k_A"
 partyns<-cbind("cdu","linke","spd","fdp","gruene","independent","k_a" ,"afd")
 partyns
 ###
-path = wd
+path <- wd
 dir.create(path, showWarnings = TRUE)
 dir.create(paste0(path, "/temp"))
 dir.create(paste0(path, "/data/corpus/BT/temp"))
@@ -90,5 +90,5 @@ cat("files written")
 #write.table(stylotext, file = "data/hegel.txt", sep="", row.names = FALSE)
 
 #corpus[1,1]
-
-
+#snc
+#12202.re

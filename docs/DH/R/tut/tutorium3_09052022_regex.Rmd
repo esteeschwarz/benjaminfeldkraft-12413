@@ -58,8 +58,10 @@ Wir verwenden zunächst die readtext() Funktion zum Einlesen unseres Märchens.
 
 ```{r }
 
-rapunzel_df <- readtext("Rapunzel_(1850).txt") #df ist Standard-Abkürzung für dataframe
+rapunzel_df <- readtext("data/maerchen/Rapunzel_(1850).txt") #df ist Standard-Abkürzung für dataframe
 str(rapunzel_df) #str() gibt einen die Struktur eines R Datenobjekts übersichtlich aus
+typeof(rapunzel_df)
+
 
 ```
 
@@ -67,7 +69,7 @@ Durch Einlesen des Märchens mithilfe der readtext() Funktion haben wir also ein
 
 
 ```{r}
-grep("Rapunzel", rapunzel_df$text, value=F) 
+grep("Rapunzel", rapunzel_df$text, value=F) #mit T gibt den text von rapunzel zurück 
 grepl("Rapunzel", rapunzel_df$text)
 regexpr("Rapunzel", rapunzel_df$text)
 gregexpr("Rapunzel", rapunzel_df$text)
@@ -86,8 +88,10 @@ Die Ausgabe war nicht besonders aussagekräftig. Es gibt zwei Lösungen: Wir kö
 Befehl readLines
 
 ```{r }
-rapunzel <- readLines("Rapunzel_(1850).txt")
+rapunzel <- readLines("data/maerchen/Rapunzel_(1850).txt")
 str(rapunzel)
+typeof(rapunzel)
+head(rapunzel)
 ```
 
 Verständnisfrage: 

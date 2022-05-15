@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 #install.packages("readtext")
 library(readtext)
-grimm<-readtext("data")
+grimm<-readtext("data/maerchen")
 ```
 
 3. Lasst euch den Wert der Variable "maerchen" in der Konsole ausgeben. Was für ein Datentyp hat das erstellte Objekt "maerchen"? Ruft die Hilfeseiten zur Funktion `readtext()` auf und überprüft, ob eure Vermutung stimmt (Abschnitt "Value").

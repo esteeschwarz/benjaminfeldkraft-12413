@@ -90,5 +90,5 @@ cat("files written")
 #write.table(stylotext, file = "data/hegel.txt", sep="", row.names = FALSE)
 
 #corpus[1,1]
-
+#snc
 

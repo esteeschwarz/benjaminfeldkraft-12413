@@ -91,4 +91,3 @@ cat("files written")
 
 #corpus[1,1]
 #snc
-#12202.re

@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="surveyContent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="program"/>
+        <xs:element minOccurs="0" ref="version"/>
+        <xs:element minOccurs="0" ref="timestamp"/>
+        <xs:element minOccurs="0" ref="language"/>
+        <xs:element ref="title"/>
+        <xs:element minOccurs="0" ref="description"/>
+        <xs:element minOccurs="0" ref="language"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="option"/>
+        <xs:element minOccurs="0" ref="attributes.specific"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="section"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="question"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="htmlblock"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="surveyLayout"/>
+        <xs:element minOccurs="0" ref="layoutTexts"/>
+        <xs:element minOccurs="0" ref="identification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="questionnaire"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="file"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.surveyContent"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.surveyContent">
+    <xs:attribute name="type"/>
+    <xs:attribute name="version"/>
+    <xs:attribute name="timestamp"/>
+    <xs:attribute name="program"/>
+    <xs:attribute name="progversion"/>
+  </xs:attributeGroup>
+  <xs:element name="surveyProject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element minOccurs="0" ref="description"/>
+        <xs:element minOccurs="0" ref="dateBegin"/>
+        <xs:element minOccurs="0" ref="dateEnd"/>
+        <xs:element minOccurs="0" ref="attributes.specific"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="section"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="textelement"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="htmlblock"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="surveyLayout"/>
+        <xs:element minOccurs="0" ref="layoutTexts"/>
+        <xs:element minOccurs="0" ref="identification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="questionnaire"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="setting"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="file"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="report"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.surveyProject"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.surveyProject">
+    <xs:attribute name="version"/>
+    <xs:attribute name="timestamp"/>
+    <xs:attribute name="program"/>
+    <xs:attribute name="progversion"/>
+  </xs:attributeGroup>
+  <xs:element name="surveyLayout">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="title"/>
+        <xs:element ref="template"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="defaultStatus"/>
+          <xs:element ref="copyright"/>
+        </xs:choice>
+        <xs:element minOccurs="0" ref="attributes.specific"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="file"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.surveyLayout"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.surveyLayout">
+    <xs:attribute name="version"/>
+    <xs:attribute name="program"/>
+    <xs:attribute name="progversion"/>
+  </xs:attributeGroup>
+  <xs:element name="section">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element minOccurs="0" ref="attributes.specific"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="question"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="question">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description"/>
+        <xs:element ref="class"/>
+        <xs:element ref="title"/>
+        <xs:element minOccurs="0" ref="explanation"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="distinction"/>
+          <xs:element ref="headerText"/>
+          <xs:element ref="headerRepeat"/>
+          <xs:element ref="inputPosition"/>
+          <xs:element ref="itemRotation"/>
+          <xs:element ref="labels"/>
+          <xs:element ref="lead"/>
+          <xs:element ref="residualOptions"/>
+          <xs:element ref="heading.text"/>
+          <xs:element ref="heading.position"/>
+          <xs:element ref="heading.repeat"/>
+          <xs:element ref="lead"/>
+          <xs:element ref="order"/>
+          <xs:element ref="script"/>
+        </xs:choice>
+        <xs:element minOccurs="0" ref="attributes.specific"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="item"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="item">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="text"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="desc"/>
+          <xs:element ref="suffix"/>
+          <xs:element ref="textinput"/>
+          <xs:element ref="required"/>
+          <xs:element ref="fixed"/>
+          <xs:element ref="exclusive"/>
+          <xs:element ref="options"/>
+          <xs:element ref="randomize"/>
+          <xs:element ref="invert"/>
+        </xs:choice>
+        <xs:element minOccurs="0" ref="attributes.specific"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="htmlblock">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="attlist.htmlblock"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.htmlblock">
+    <xs:attribute name="id" use="required" type="xs:NMTOKEN"/>
+  </xs:attributeGroup>
+  <xs:element name="textelement">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="type"/>
+        <xs:element ref="content"/>
+        <xs:element minOccurs="0" ref="label"/>
+        <xs:element minOccurs="0" ref="align"/>
+        <xs:element minOccurs="0" ref="attributes.specific"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content" type="xs:string"/>
+  <xs:element name="align" type="xs:string"/>
+  <xs:element name="type" type="xs:string"/>
+  <xs:element name="layoutTexts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="layoutText"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="layoutText">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="txt"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.layoutText"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.layoutText">
+    <xs:attribute name="id" use="required" type="xs:NMTOKEN"/>
+  </xs:attributeGroup>
+  <xs:element name="identification">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="imprint"/>
+        <xs:element ref="logo"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="questionnaire">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="layout"/>
+          <xs:element ref="lang"/>
+        </xs:choice>
+        <xs:element minOccurs="0" ref="attributes.specific"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setting">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="attlist.setting"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.setting">
+    <xs:attribute name="name" use="required"/>
+    <xs:attribute name="key"/>
+    <xs:attribute name="encoding" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="json"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="file">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="attlist.file"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.file">
+    <xs:attribute name="filename" use="required"/>
+    <xs:attribute name="filesize"/>
+    <xs:attribute name="encoding" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="base64"/>
+          <xs:enumeration value="oversize"/>
+          <xs:enumeration value="missing"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="report">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="content"/>
+        <xs:element ref="desc"/>
+        <xs:element ref="template"/>
+        <xs:element minOccurs="0" ref="attributes.specific"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.report"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.report">
+    <xs:attribute name="version"/>
+    <xs:attribute name="program"/>
+    <xs:attribute name="progversion"/>
+  </xs:attributeGroup>
+  <!-- Generalized content -->
+  <xs:element name="attributes.specific">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="attr"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.attributes.specific"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.attributes.specific">
+    <xs:attribute name="program" use="required"/>
+  </xs:attributeGroup>
+  <!-- <label> was used before <li> -->
+  <xs:element name="attr">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="li"/>
+        <xs:element ref="label"/>
+        <xs:element ref="txt"/>
+      </xs:choice>
+      <xs:attributeGroup ref="attlist.attr"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.attr">
+    <xs:attribute name="id" use="required" type="xs:NMTOKEN"/>
+  </xs:attributeGroup>
+  <xs:element name="txt">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="attlist.txt"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.txt">
+    <xs:attribute name="lng"/>
+  </xs:attributeGroup>
+  <xs:element name="labels">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="li"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="options">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="li"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="residualOptions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="li"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="label">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="attlist.label"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.label">
+    <xs:attribute name="pos"/>
+  </xs:attributeGroup>
+  <xs:element name="li">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="txt"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="attlist.li"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.li">
+    <xs:attribute name="i"/>
+  </xs:attributeGroup>
+  <!-- Single names translateable attributes -->
+  <xs:element name="imprint">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="txt"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="logo">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="txt"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- Single named content attributes -->
+  <xs:element name="class" type="xs:string"/>
+  <xs:element name="copyright" type="xs:string"/>
+  <xs:element name="dateBegin" type="xs:string"/>
+  <xs:element name="dateEnd" type="xs:string"/>
+  <xs:element name="defaultStatus" type="xs:string"/>
+  <xs:element name="description" type="xs:string"/>
+  <xs:element name="desc" type="xs:string"/>
+  <xs:element name="distinction" type="xs:string"/>
+  <xs:element name="exclusive" type="xs:string"/>
+  <xs:element name="explanation">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="txt"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="fixed" type="xs:string"/>
+  <xs:element name="headerText" type="xs:string"/>
+  <xs:element name="headerRepeat" type="xs:string"/>
+  <xs:element name="inputPosition" type="xs:string"/>
+  <xs:element name="invert" type="xs:string"/>
+  <xs:element name="itemRotation" type="xs:string"/>
+  <xs:element name="lang" type="xs:string"/>
+  <xs:element name="language" type="xs:string"/>
+  <xs:element name="layout" type="xs:string"/>
+  <xs:element name="lead">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="txt"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="option" type="xs:string"/>
+  <xs:element name="order" type="xs:string"/>
+  <xs:element name="program" type="xs:string"/>
+  <xs:element name="randomize" type="xs:string"/>
+  <xs:element name="required" type="xs:string"/>
+  <xs:element name="script" type="xs:string"/>
+  <xs:element name="suffix">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="txt"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="template" type="xs:string"/>
+  <xs:element name="text">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="txt"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="textinput" type="xs:string"/>
+  <xs:element name="timestamp" type="xs:string"/>
+  <xs:element name="title">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="txt"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="version" type="xs:string"/>
+  <!-- Legacy attributes -->
+  <xs:element name="heading.text" type="xs:string"/>
+  <xs:element name="heading.position" type="xs:string"/>
+  <xs:element name="heading.repeat" type="xs:string"/>
+</xs:schema>
+<!-- EOF -->

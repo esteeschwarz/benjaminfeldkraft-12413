@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Body>
+    <RechercheResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+      <RechercheReturn>
+        <returncode>(0)</returncode>
+        <trefferListe xmlns:ns1="daten.webservice_2010.genesis" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" soapenc:arrayType="ns1:EinzelTreffer[26]" xsi:type="soapenc:Array">
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Hauptwohnsitzhaushalte: Deutschland, Jahre, Haushaltsgröße,
+Haushaltsnettoeinkommensklassen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0300</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Hauptwohnsitzhaushalte, Haushaltsmitglieder: Deutschland,
+Jahre, Haushaltsnettoeinkommensklassen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-0301</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Privathaushalte: Deutschland, Jahre (bis 2019), Geschlecht
+der Bezugsperson, Haushaltsnettoeinkommensklassen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9025</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>12211</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Privathaushalte: Deutschland, Jahre (bis 2019),
+Haushaltsgröße, Geschlecht der Bezugsperson,
+Haushaltsnettoeinkommensklassen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>12211-9026</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63111</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausstattung privater Haushalte (Laufende
+Wirtschaftsrechnungen): Deutschland, Stichtag,
+Gebrauchsgüter, Haushaltsnettoeinkommensklassen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63111-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63111</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Ausstattung privater Haushalte (Laufende Wirtschaftsrechn.):
+Früheres Bundesgebiet/Neue Länder,Stichtag (bis 01.01.2014),
+Gebrauchsgüter, Haushaltsnettoeinkommensklassen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63111-0012</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63121</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte
+(Laufende Wirtschaftsrechnungen): Deutschland, Jahre,
+Haushaltsgröße</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63121-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63121</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte
+(Laufende Wirtschaftsrechnungen): Deutschland, Jahre,
+Soziale Stellung des Haupteinkommensbeziehers</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63121-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63121</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte
+(Laufende Wirtschaftsrechnungen): Deutschland, Jahre,
+Haushaltsnettoeinkommensklassen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63121-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63121</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte
+(Laufende Wirtschaftsrechnungen): Deutschland, Jahre,
+Haushaltstyp</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63121-0004</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63121</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte
+(Laufende Wirtschaftsrechnungen): Früheres Bundesgebiet /
+Neue Länder, Jahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63121-0005</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63121</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte
+(Laufende Wirtschaftsrechnungen): Früheres Bundesgebiet /
+Neue Länder, Jahre (bis 2012), Haushaltsgröße</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63121-0006</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63121</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte
+(Laufende Wirtschaftsrechnungen): Fr.Bundesgebiet/N.Länder,
+Jahre (bis 2012), Soz. Stellung des Haupteinkommensbeziehers</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63121-0007</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63121</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte
+(Laufende Wirtschaftsrechnungen): Fr.Bundesgebiet/N.Länder,
+Jahre (bis 2012), Haushaltsnettoeinkommensklassen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63121-0008</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63121</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte
+(Laufende Wirtschaftsrechnungen): Früheres Bundesgebiet /
+Neue Länder, Jahre (bis 2012), Haushaltstyp</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63121-0009</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63221</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte (EVS): Deutschland, Jahre, Haushaltsgröße</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63221-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63221</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Einkommen und Einnahmen sowie Ausgaben privater Haushalte (EVS): Früheres Bundesgebiet / Neue Länder, Jahre, Haushaltsgröße</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63221-0003</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63411</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>EU-SILC - Erfasste Personen, Hochgerechnete Personen,
+Nettoäquivalenzeinkommen, Armutsgefährdungsquote:
+Deutschland, Jahre, Geschlecht, Altersgruppen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63411-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63411</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>EU-SILC - Erfasste Personen, Hochgerechnete Personen,
+Nettoäquivalenzeinkommen, Armutsgefährdungsquote:
+Deutschland, Jahre, Haushaltstyp</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63411-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63511</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Beratene Personen (Anteilswerte), Durchschnittliche
+Schulden: Deutschland, Jahre, Monatliches
+Haushaltsnettoeinkommen, Sozioökonomische Merkmale</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63511-0010</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>63931</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Geräte, Anschlüsse und Internetzugang in Privathaushalten:
+Deutschland, Jahre, Haushaltsnettoeinkommensklassen</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>63931-0002</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Verfügbares Einkommen, Sparen der privaten
+Haushalte: Deutschland, Jahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0009</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Verfügbares Einkommen, Sparen der privaten Haushalte: Deutschland, Quartale, Original- und bereinigte Daten</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0010</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>81000</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR des Bundes - Verfügbares Einkommen der privaten
+Haushalte: Deutschland, Jahre, Einkommensarten</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>81000-0125</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>82411</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>VGR der Länder (Umverteilungsrechnung) - Verfügbares
+Einkommen der privaten Haushalte: Bundesländer, Jahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>82411-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+          <trefferListe>
+            <EVAS>91111</EVAS>
+            <gewichtung>100.0</gewichtung>
+            <kostenpflichtig>false</kostenpflichtig>
+            <kurztext>Indikatoren zur nachhaltigen Entwicklung: Deutschland, Jahre</kurztext>
+            <links soapenc:arrayType="ns1:Link[0]" xsi:type="soapenc:Array"/>
+            <name>91111-0001</name>
+            <objektTyp>Tabelle</objektTyp>
+            <strukturTyp>2</strukturTyp>
+          </trefferListe>
+        </trefferListe>
+        <trefferUebersicht xmlns:ns2="daten.webservice_2010.genesis" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" soapenc:arrayType="ns2:ObjektTreffer[1]" xsi:type="soapenc:Array">
+          <trefferUebersicht>
+            <objektTyp>Tabelle</objektTyp>
+            <trefferAnzahl>26</trefferAnzahl>
+          </trefferUebersicht>
+        </trefferUebersicht>
+      </RechercheReturn>
+    </RechercheResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

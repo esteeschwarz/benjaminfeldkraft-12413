@@ -1,0 +1,78 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT surveyContent (program,version,timestamp,title,description,
+                         language,attributes.specific,section)>
+<!ATTLIST surveyContent
+  xmlns CDATA #FIXED ''
+  version CDATA #REQUIRED>
+
+<!ELEMENT program (#PCDATA)>
+<!ATTLIST program
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT version (#PCDATA)>
+<!ATTLIST version
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT timestamp (#PCDATA)>
+<!ATTLIST timestamp
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT language (#PCDATA)>
+<!ATTLIST language
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT section (title,attributes.specific,question+)>
+<!ATTLIST section
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT question (description,class,title,explanation,inputPosition,
+                    lead,order,attributes.specific,item+)>
+<!ATTLIST question
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT class (#PCDATA)>
+<!ATTLIST class
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT explanation (#PCDATA)>
+<!ATTLIST explanation
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT inputPosition (#PCDATA)>
+<!ATTLIST inputPosition
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT lead (#PCDATA)>
+<!ATTLIST lead
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT order (#PCDATA)>
+<!ATTLIST order
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT item (text,attributes.specific)>
+<!ATTLIST item
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT text (#PCDATA)>
+<!ATTLIST text
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT title (#PCDATA)>
+<!ATTLIST title
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT description (#PCDATA)>
+<!ATTLIST description
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT attributes.specific (attr)+>
+<!ATTLIST attributes.specific
+  xmlns CDATA #FIXED ''
+  program NMTOKEN #REQUIRED>
+
+<!ELEMENT attr (#PCDATA)>
+<!ATTLIST attr
+  xmlns CDATA #FIXED ''
+  id NMTOKEN #REQUIRED>

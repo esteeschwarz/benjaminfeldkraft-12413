@@ -1,0 +1,21 @@
+#12056.vs
+
+run = "R -s -f 12057.qscheme_essai.R"
+
+entrypoint = "12057.qscheme_essai.R"
+
+onBoot = """
+[ -d "~/.config/R" ] || mkdir -p ~/.config/R
+"""
+
+[env]
+R_LIBS_USER = "~/.config/R"
+
+[packager]
+language = "rlang"
+
+[packager.features]
+packageSearch = true
+
+# 12043.chi_notes.R
+# 12055.cp_loop_002.R

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questionnaire>
+<!-- the character id s in this section have to always
+be named the same. else the study gives out differen
+variable names in data obtained. dont change the ids in this 
+section.-->
+  <!-- Seite 1 -->
+  <page intID="1">
+    <question id="MT01" intID="2"/>
+  </page>
+  <!-- Seite 2 -->
+  <page intID="3">
+    <question id="MT02" intID="4"/>
+  </page>
+  <!-- Seite 3 -->
+  <page intID="5">
+    <question id="MT03" intID="6"/>
+    <question id="MT04" intID="7"/>
+  </page>
+  <!-- Seite 4 -->
+  <page intID="8">
+    <question id="F401" intID="9"/>
+  </page>
+  <!-- Seite 5 -->
+  <page intID="10">
+    <question id="F402" intID="11"/>
+  </page>
+  <!-- Seite 6 -->
+  <page intID="12">
+    <question id="F403" intID="13"/>
+  </page>
+  <!-- Seite 7 -->
+  <page intID="14">
+    <question id="F404" intID="15"/>
+  </page>
+  <!-- Seite 8 -->
+  <page intID="16">
+    <question id="F405" intID="17"/>
+  </page>
+  <!-- Seite 9 -->
+  <page intID="18">
+    <question id="F406" intID="19"/>
+  </page>
+  <!-- Seite 10 -->
+  <page intID="20">
+    <question id="F407" intID="21"/>
+  </page>
+  <!-- Seite 11 -->
+  <page intID="22">
+    <question id="F408" intID="23"/>
+  </page>
+  <!-- Seite 12 -->
+  <page intID="24">
+    <question id="F409" intID="25"/>
+  </page>
+  <!-- Seite 13 -->
+  <page intID="26">
+    <question id="F410" intID="27"/>
+  </page>
+  <!-- Seite 14 -->
+  <page intID="28">
+    <question id="F411" intID="29"/>
+  </page>
+  <!-- Seite 15 -->
+  <page intID="30">
+    <question id="F412" intID="30"/>
+  </page>
+  <!-- Seite 16 -->
+  <page intID="31">
+    <question id="F413" intID="32"/>
+  </page>
+  <!-- Seite 17 -->
+  <page intID="33">
+    <question id="F414" intID="34"/>
+  </page>
+  <!-- Seite 18 -->
+  <page intID="35">
+    <question id="F415" intID="36"/>
+  </page>
+  <!-- Seite 19 -->
+  <page intID="37">
+    <question id="F416" intID="38"/>
+  </page>
+  <!-- Seite 20 -->
+  <page intID="39">
+    <question id="F417" intID="40"/>
+  </page>
+  <!-- Seite 21 -->
+  <page intID="41">
+    <question id="F418" intID="42"/>
+  </page>
+  <!-- Seite 22 -->
+  <page intID="43">
+    <question id="F419" intID="44"/>
+  </page>
+  <!-- Seite 23 -->
+  <page intID="45">
+    <question id="F420" intID="46"/>
+  </page>
+  <!-- Seite 24 -->
+  <page intID="47">
+    <question id="F421" intID="48"/>
+  </page>
+  <!-- Seite 25 -->
+  <page intID="49">
+    <question id="F422" intID="50"/>
+  </page>
+  <!-- Seite 26 -->
+  <page intID="51">
+    <question id="F423" intID="52"/>
+  </page>
+  <!-- Seite 27 -->
+  <page intID="53">
+    <question id="F424" intID="54"/>
+  </page>
+  <!-- Seite 28 -->
+  <page intID="55">
+    <question id="F425" intID="56"/>
+  </page>
+  <!-- Seite 29 -->
+  <page intID="57">
+    <question id="F426" intID="58"/>
+  </page>
+  <!-- Seite 30 -->
+  <page intID="59">
+    <question id="F427" intID="60"/>
+  </page>
+  <!-- Seite 31 -->
+  <page intID="61">
+    <question id="F428" intID="62"/>
+  </page>
+  <!-- Seite 32 -->
+  <page intID="63">
+    <question id="MT05" intID="64"/>
+  </page>
+</questionnaire>

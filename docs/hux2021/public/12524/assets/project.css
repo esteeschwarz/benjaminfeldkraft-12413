@@ -1,0 +1,1063 @@
+
+@font-face{
+    font-family:'Futura Medium';
+    src:url('fonts/Futura-Medium.ttc');
+    font-weight:normal;
+    font-style:normal;
+}
+@font-face{
+    font-family:'Menlo Regular';
+    src:url('fonts/Menlo-Regular.ttc');
+    font-weight:normal;
+    font-style:normal;
+}
+.char-Normal-Local-75 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:27px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-Normal-Local-74 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:30px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-affiliate-Local-72 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:12px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-affiliate-Local-71 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:9px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-headermeta-Local-73 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:10px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-Normal-Local-102 {
+    font-family:'Menlo-Regular','Menlo Regular','Menlo';
+    font-size:14px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:rgba(132,198,66,0.8);
+}
+.char-blockhd-Local-70 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:18px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-block-Local-69 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:8px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-block-Local-68 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:8px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-blockhd-Local-60-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:360px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1.001);
+    -webkit-transform:scaleX(1.001);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-blockhd-Local-61-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:360px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1.001);
+    -webkit-transform:scaleX(1.001);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-refttl-Local-67 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:12px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-reftxt-Local-66 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:7px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-refnames-Local-65 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:7px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-reftxt-Local-66105 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:7px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-reftxt-Local-63 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:7px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-copyr-Local-62-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:120px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1.002);
+    -webkit-transform:scaleX(1.002);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-copyr-Local-81-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:120px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(0.997);
+    -webkit-transform:scaleX(0.997);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-copyr-Local-82-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:84px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1.427);
+    -webkit-transform:scaleX(1.427);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-copyr-Local-79-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:120px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1);
+    -webkit-transform:scaleX(1);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-copyr-Local-80-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:121px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(0.995);
+    -webkit-transform:scaleX(0.995);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-copyr-Local-77-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:118px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1.021);
+    -webkit-transform:scaleX(1.021);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-copyr-Local-83-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:119px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1.006);
+    -webkit-transform:scaleX(1.006);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-copyr-Local-76-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:118px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1.017);
+    -webkit-transform:scaleX(1.017);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-copyr-Local-59-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:119px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1.011);
+    -webkit-transform:scaleX(1.011);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.char-copyr-Local-78-Wysiwyg {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:117px;
+    font-weight:normal;
+    text-decoration:none;
+    transform-origin:left;
+    -webkit-transform-origin:left;
+    transform:scaleX(1.043);
+    -webkit-transform:scaleX(1.043);
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+.para-NoStyle-98 {
+    font-family:'Menlo-Regular','Menlo Regular','Menlo';
+    font-size:4px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:None;
+    font-kerning:None;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-tabelle-Local-99 {
+    font-family:'Menlo-Regular','Menlo Regular','Menlo';
+    font-size:3px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:None;
+    font-kerning:None;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-Normal {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:36px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-of-headermeta-0 {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:48px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#FFF200;
+}
+.char-NeueStilvorlage {
+    font-family:'Menlo-Regular','Menlo Regular','Menlo';
+    font-size:24px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:rgba(34,32,33,0.8);
+}
+.char-block {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:16px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-blockhd {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:36px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-blockref {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:14px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-refttl {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:24px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-reftxt {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:14px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-refnames {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:14px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-code {
+    font-family:'Menlo-Regular','Menlo Regular','Menlo';
+    font-size:14px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-copyr {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:12px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-headermeta {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:20px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-affiliate {
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:24px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.char-tabelle {
+    font-family:'Menlo-Regular','Menlo Regular','Menlo';
+    font-size:12px;
+    font-weight:normal;
+    text-decoration:none;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.para-Normal-Local-25 {
+    text-align:left;
+    page-break-inside:initial !important;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -ms-hyphens:auto;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal-Local-25 span {
+    line-height:30px;
+}
+.para-Normal-Local-24 {
+    text-align:center;
+    page-break-inside:initial !important;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -ms-hyphens:auto;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal-Local-24 span {
+    line-height:37px;
+}
+.para-Normal-Local-22 {
+    text-align:right;
+    page-break-inside:initial !important;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -ms-hyphens:auto;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal-Local-22 span {
+    line-height:13px;
+}
+.para-Normal-Local-21 {
+    text-align:right;
+    page-break-inside:initial !important;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -ms-hyphens:auto;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal-Local-21 span {
+    line-height:12px;
+}
+.para-Normal-Local-20 {
+    text-align:right;
+    page-break-inside:initial !important;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -ms-hyphens:auto;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal-Local-20 span {
+    line-height:15px;
+}
+.para-Normal-Local-19 {
+    text-align:right;
+    page-break-inside:initial !important;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -ms-hyphens:auto;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal-Local-19 span {
+    line-height:11px;
+}
+.para-headermeta-Local-23 {
+    text-align:left;
+    page-break-inside:initial !important;
+    hyphens:none;
+    -webkit-hyphens:none;
+    -ms-hyphens:none;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-headermeta-Local-23 span {
+    line-height:18px;
+}
+.para-Normal-Local-28 {
+    text-align:left;
+    page-break-inside:initial !important;
+    hyphens:none;
+    -webkit-hyphens:none;
+    -ms-hyphens:none;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal-Local-28 span {
+    line-height:1.2em;
+}
+.para-Normal-Local-29 {
+    text-align:left;
+    page-break-inside:initial !important;
+    hyphens:none;
+    -webkit-hyphens:none;
+    -ms-hyphens:none;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal-Local-29 span {
+    line-height:1.2em;
+}
+.para-Normal {
+    text-align:justify;
+    page-break-inside:initial !important;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -ms-hyphens:auto;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal span {
+    line-height:1.2em;
+}
+.page ul {
+    position:static;
+    list-style-type:none;
+    padding-left:0px;
+    padding-top:0px;
+    margin:0px;
+}
+.para-refer-Local-18 {
+    text-align:left;
+    page-break-inside:initial !important;
+    hyphens:none;
+    -webkit-hyphens:none;
+    -ms-hyphens:none;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-refer-Local-18 span {
+    line-height:9px;
+}
+.para-refer-Local-18::before {
+    content:"▪";
+    font-family:'Futura-Medium','Futura Medium','Futura';
+    font-size:7px;
+    font-weight:normal;
+    text-decoration:none;
+    font-variant-caps:small-caps;
+    -webkit-font-kerning:Normal;
+    font-kerning:Normal;
+    -webkit-font-variant-ligatures:no-common-ligatures;
+    font-variant-ligatures:no-common-ligatures;
+    -webkit-font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    font-feature-settings:"rlig" 0, "liga" 0, "clig" 0, "calt" 0, "locl" 0, "ccmp" 0, "mark" 0, "mkmk" 0;
+    color:#222021;
+}
+.para-NoStyle-27 {
+    text-align:left;
+    page-break-inside:initial !important;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -ms-hyphens:auto;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-NoStyle-27 span {
+    line-height:5px;
+}
+.para-Normal-Local-26 {
+    text-align:justify;
+    page-break-inside:initial !important;
+    hyphens:none;
+    -webkit-hyphens:none;
+    -ms-hyphens:none;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-Normal-Local-26 span {
+    line-height:1.2em;
+}
+.para-list {
+    text-align:left;
+    page-break-inside:initial !important;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -ms-hyphens:auto;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-list span {
+    line-height:1.2em;
+}
+.para-refer {
+    text-align:left;
+    page-break-inside:initial !important;
+    hyphens:none;
+    -webkit-hyphens:none;
+    -ms-hyphens:none;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-refer span {
+    line-height:18px;
+}
+.para-headermeta {
+    text-align:left;
+    page-break-inside:initial !important;
+    hyphens:none;
+    -webkit-hyphens:none;
+    -ms-hyphens:none;
+    line-height:1px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+.para-headermeta span {
+    line-height:35px;
+}
+.table1_1 {
+    border:0px solid;
+     border-spacing:0px;
+    border-collapse:collapse;
+    position:relative;
+    width:100%;
+}
+.td1_1 {
+    border:1px solid #222021;
+     border-spacing:0px;
+    padding:0px;
+    vertical-align:top;
+    height:13px;
+    page-break-inside:avoid;
+    overflow:hidden;
+}
+.td1_21 {
+    border:1px solid #222021;
+     border-spacing:0px;
+    padding:0px;
+    vertical-align:top;
+    height:12px;
+    page-break-inside:avoid;
+    overflow:hidden;
+}
+.QxpSVG {
+    position:inherit;
+}
+.QxpImage {
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+.QxpFlexImage {
+    width:100%;
+    height:100%;
+    vertical-align:top;
+}
+.QxpImgKeepAR {
+    width:100%;
+    height:auto;
+    vertical-align:top;
+}
+.QxpAnchImage {
+    position:static;
+    top:0px;
+    left:0px;
+}
+.QxpSuperscript {
+    line-height:1;
+    font-size:0.6em;
+    vertical-align:baseline;
+}
+.QxpSubscript {
+    line-height:1;
+    font-size:1em;
+    vertical-align:baseline;
+}
+.QxpTextBox {
+    position:absolute;
+    left:0px;
+    top:0px;
+    white-space:nowrap;
+    width:100%;
+    height:100%;
+    line-height:1;
+    transform-origin:0% 0%;
+    -webkit-transform-origin:0% 0%;
+    transform:scale(0.05, 0.05);
+    -webkit-transform:scale(0.05, 0.05);
+}
+.QxpVertTextBox {
+    position:absolute;
+    white-space:nowrap;
+    width:100%;
+    height:100%;
+    top:0px;
+    right:0px;
+    line-height:1;
+    transform-origin:100% 0%;
+    -webkit-transform-origin:100% 0%;
+    transform:scale(0.05, 0.05);
+    -webkit-transform:scale(0.05, 0.05);
+}

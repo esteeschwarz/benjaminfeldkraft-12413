@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.exmaralda.org -->
+<basic-transcription>
+<head>
+<meta-information><project-name>INT CA mdl</project-name><transcription-name>deutschland update</transcription-name><referenced-file url="TP52_exc_Dt-update.wav"/><referenced-file url="TP52_exc_Dt-update.mp3"/><ud-meta-information><ud-information attribute-name="AutoSave">;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_09_10_17.exb at 2022_03_19_09_10_17;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_10_10_17.exb at 2022_03_19_10_10_17;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_11_10_17.exb at 2022_03_19_11_10_17;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_12_10_17.exb at 2022_03_19_12_10_17;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_01_10_17.exb at 2022_03_19_01_10_17;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_02_10_17.exb at 2022_03_19_02_10_17;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_03_10_17.exb at 2022_03_19_03_10_17;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_04_10_17.exb at 2022_03_19_04_10_17;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_05_13_40.exb at 2022_03_19_05_13_40;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_06_13_40.exb at 2022_03_19_06_13_40;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_19_07_13_40.exb at 2022_03_19_07_13_40;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_20_10_44_43.exb at 2022_03_20_10_44_43;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_20_11_44_43.exb at 2022_03_20_11_44_43;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_20_12_44_43.exb at 2022_03_20_12_44_44;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_20_06_25_59.exb at 2022_03_20_06_25_59;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_20_07_25_59.exb at 2022_03_20_07_25_59;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_20_08_25_59.exb at 2022_03_20_08_25_59;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_20_09_25_59.exb at 2022_03_20_09_25_59;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_22_10_31_45.exb at 2022_03_22_10_31_45</ud-information></ud-meta-information><comment></comment><transcription-convention>GAT</transcription-convention></meta-information><speakertable><speaker id="SPK0">
+<abbreviation>S1</abbreviation>
+<sex value="m"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+<speaker id="SPK1">
+<abbreviation>S2</abbreviation>
+<sex value="m"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+<speaker id="SPK2">
+<abbreviation>ann_S1</abbreviation>
+<sex value="m"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+<speaker id="SPK3">
+<abbreviation>ann_S2</abbreviation>
+<sex value="m"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+<speaker id="SPK4">
+<abbreviation>S_X</abbreviation>
+<sex value="u"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+</speakertable></head>
+<basic-body>
+<common-timeline>
+<tli id="T0" time="0.0"/>
+<tli id="T2" time="0.2599966544117647"/>
+<tli id="T93" time="0.35787418282085565" type="intp"/>
+<tli id="T94" time="0.6188809252450981" type="intp"/>
+<tli id="T95" time="0.7493842964572193" type="intp"/>
+<tli id="T96" time="1.3692753097147952" type="intp"/>
+<tli id="T97" time="1.7607854233511588" type="intp"/>
+<tli id="T98" time="2.0544180085784314" type="intp"/>
+<tli id="T99" time="2.250173065396613" type="intp"/>
+<tli id="T4" time="2.4133022794117647"/>
+<tli id="T3" time="2.94662875"/>
+<tli id="T5" time="3.366623345588235"/>
+<tli id="T100" time="3.590817991557734" type="intp"/>
+<tli id="T101" time="4.151304606481482" type="intp"/>
+<tli id="T103" time="4.297031126361656" type="intp"/>
+<tli id="T6" time="4.879937205882353"/>
+<tli id="T7" time="4.973269338235294"/>
+<tli id="T104" time="5.311931647058824" type="intp"/>
+<tli id="T105" time="5.594150237745098" type="intp"/>
+<tli id="T10" time="5.819925110294118"/>
+<tli id="T106" time="6.162777841386554" type="intp"/>
+<tli id="T8" time="6.61991481617647"/>
+<tli id="T12" time="6.699913786764706"/>
+<tli id="T107" time="6.869911599264706" type="intp"/>
+<tli id="T13" time="7.0399094117647065"/>
+<tli id="T108" time="7.5719955882352945" type="intp"/>
+<tli id="T109" time="8.297567647058825" type="intp"/>
+<tli id="T110" time="8.491053529411767" type="intp"/>
+<tli id="T16" time="9.119882647058825"/>
+<tli id="T15" time="9.393212463235296"/>
+<tli id="T14" time="9.986538161764706"/>
+<tli id="T102" time="10.158843636877828" type="intp"/>
+<tli id="T111" time="10.503454587104073" type="intp"/>
+<tli id="T112" time="10.977294643665159" type="intp"/>
+<tli id="T17" time="11.106523750000001"/>
+<tli id="T21" time="11.709849319852943" type="intp"/>
+<tli id="T113" time="12.054606788340337" type="intp"/>
+<tli id="T18" time="12.313174889705882"/>
+<tli id="T22" time="13.446493639705881" type="intp"/>
+<tli id="T20" time="14.57981238970588"/>
+<tli id="T23" time="15.559799779411765"/>
+<tli id="T24" time="16.313123419117645"/>
+<tli id="T1" time="17.059780477941178"/>
+<tli id="T114" time="17.395776154411767" type="intp"/>
+<tli id="T28" time="18.739758860294117"/>
+<tli id="T115" time="19.450337951989617" type="intp"/>
+<tli id="T116" time="19.74641257352941" type="intp"/>
+<tli id="T27" time="20.753066286764703"/>
+<tli id="T29" time="21.113061654411766"/>
+<tli id="T9" time="22.653041838235296" type="intp"/>
+<tli id="T117" time="22.793040036764708" type="intp"/>
+<tli id="T118" time="22.93303823529412" type="intp"/>
+<tli id="T119" time="23.26903391176471" type="intp"/>
+<tli id="T120" time="23.437031750000003" type="intp"/>
+<tli id="T121" time="23.66102886764706" type="intp"/>
+<tli id="T122" time="23.77302742647059" type="intp"/>
+<tli id="T123" time="23.941025264705885" type="intp"/>
+<tli id="T30" time="24.193022022058823"/>
+<tli id="T124" time="24.487920188148788" type="intp"/>
+<tli id="T125" time="24.672231541955018" type="intp"/>
+<tli id="T126" time="24.819680625" type="intp"/>
+<tli id="T127" time="24.967129708044983" type="intp"/>
+<tli id="T128" time="25.151441061851212" type="intp"/>
+<tli id="T31" time="25.446339227941177"/>
+<tli id="T129" time="25.792351035688664" type="intp"/>
+<tli id="T130" time="25.965356939562408" type="intp"/>
+<tli id="T131" time="26.52762612715208" type="intp"/>
+<tli id="T33" time="27.219649742647057"/>
+<tli id="T32" time="27.706310147058822"/>
+<tli id="T132" time="27.911492691993463" type="intp"/>
+<tli id="T133" time="28.167970873161764" type="intp"/>
+<tli id="T11" time="28.629631599264705" type="intp"/>
+<tli id="T134" time="29.217199796122998" type="intp"/>
+<tli id="T34" time="29.552953051470592"/>
+<tli id="T136" time="29.883901173844542" type="intp"/>
+<tli id="T137" time="30.08247004726891" type="intp"/>
+<tli id="T36" time="30.479607794117648" type="intp"/>
+<tli id="T135" time="30.64809047459893" type="intp"/>
+<tli id="T35" time="31.406262536764704"/>
+<tli id="T25" time="32.372916764705884"/>
+<tli id="T37" time="33.146240147058826"/>
+<tli id="T39" time="33.726232683823525" type="intp"/>
+<tli id="T38" time="34.30622522058823"/>
+<tli id="T41" time="34.81288536764706"/>
+<tli id="T64" time="35.559542426470585"/>
+<tli id="T40" time="35.69287404411765"/>
+<tli id="T80" time="36.95519047794117" type="intp"/>
+<tli id="T43" time="37.23952080882353"/>
+<tli id="T42" time="38.092843161764705"/>
+<tli id="T44" time="38.71950176470588"/>
+<tli id="T45" time="39.66615625"/>
+<tli id="T47" time="41.00613900735294"/>
+<tli id="T46" time="41.61946444852941"/>
+<tli id="T48" time="42.71945029411765"/>
+<tli id="T50" time="43.802769687499996" type="intp"/>
+<tli id="T49" time="44.88608908088234"/>
+<tli id="T51" time="46.3394037132353"/>
+<tli id="T52" time="48.20604636029412"/>
+<tli id="T53" time="49.919357647058824"/>
+<tli id="T54" time="51.67266841911764"/>
+<tli id="T71" time="52.08377424019607" type="intp"/>
+<tli id="T72" time="52.4948800612745" type="intp"/>
+<tli id="T55" time="52.90598588235294"/>
+<tli id="T56" time="54.199302573529415"/>
+<tli id="T58" time="55.82594830882353"/>
+<tli id="T57" time="56.44594033088235"/>
+<tli id="T59" time="58.445914595588235"/>
+<tli id="T60" time="59.33256985294118"/>
+<tli id="T61" time="60.97921533088235"/>
+<tli id="T85" time="61.19843126005285"/>
+<tli id="T63" time="61.76548125502643" type="intp"/>
+<tli id="T62" time="62.33253125"/>
+<tli id="T65" time="63.45251683823529"/>
+<tli id="T66" time="64.09917518382353"/>
+<tli id="T26" time="64.372505"/>
+<tli id="T67" time="65.53915665441177"/>
+<tli id="T88" time="65.67915485294118"/>
+<tli id="T68" time="66.6124761764706"/>
+<tli id="T91" time="66.7791406985294"/>
+<tli id="T69" time="67.81912731617646"/>
+<tli id="T70" time="68.53245147058823"/>
+<tli id="T89" time="70.41659389246323"/>
+<tli id="T90" time="71.06116893152574" type="intp"/>
+<tli id="T73" time="71.70574397058824"/>
+<tli id="T92" time="71.78574294117647"/>
+<tli id="T74" time="74.61237323529411"/>
+<tli id="T75" time="76.30568477941176"/>
+<tli id="T76" time="77.45233669117647"/>
+<tli id="T78" time="78.27232613970588"/>
+<tli id="T86" time="79.21231404411765"/>
+<tli id="T77" time="80.05896981617647"/>
+<tli id="T87" time="80.39229886029412"/>
+<tli id="T79" time="81.63894948529412"/>
+<tli id="T81" time="83.09893069852941"/>
+<tli id="T82" time="83.4522594852941"/>
+<tli id="T83" time="84.45224661764706"/>
+<tli id="T84" time="86.93221470588234"/>
+<tli id="T19" time="87.875"/>
+</common-timeline>
+<tier id="TIE0" speaker="SPK0" category="v" type="t" display-name="S1 [v]"><event start="T4" end="T3">ja:.</event>
+<event start="T5" end="T100">GÖNN </event>
+<event start="T100" end="T101">wir </event>
+<event start="T101" end="T103">uns </event>
+<event start="T103" end="T6">mal_n biszchen– </event>
+<event start="T7" end="T104">GÖNN_n</event>
+<event start="T104" end="T105"> wir </event>
+<event start="T105" end="T10">uns </event>
+<event start="T10" end="T106">mal_n </event>
+<event start="T106" end="T8">Update; </event>
+<event start="T12" end="T107">das </event>
+<event start="T107" end="T13">IST </event>
+<event start="T13" end="T108">doch schon </event>
+<event start="T108" end="T109">windows ix PEE </event>
+<event start="T109" end="T110">was </event>
+<event start="T110" end="T16">hier noch läu</event>
+<event start="T16" end="T15">ft; </event>
+<event start="T17" end="T21">hh° </event>
+<event start="T21" end="T113">das </event>
+<event start="T113" end="T18">wi </event>
+<event start="T18" end="T22">drri (.) </event>
+<event start="T22" end="T20">wewewewewe </event>
+<event start="T20" end="T23">(saugendes geräusch) </event>
+<event start="T1" end="T28">ja hh°, </event>
+<event start="T28" end="T115">das RATTert </event>
+<event start="T115" end="T116">noch </event>
+<event start="T116" end="T27">bei jeder Email; </event>
+<event start="T33" end="T32">hh° </event>
+<event start="T32" end="T11">hh° </event>
+<event start="T36" end="T35">h° </event>
+<event start="T35" end="T25">hh° </event>
+<event start="T39" end="T38">h° </event>
+<event start="T41" end="T64">h° </event>
+<event start="T43" end="T42">°h h° </event>
+<event start="T47" end="T46">hh° </event>
+<event start="T46" end="T48">hh° </event>
+<event start="T48" end="T50">und dann </event>
+<event start="T50" end="T49">PLANst du extra n tag dafür ein, </event>
+<event start="T49" end="T51">an dem du_s nicht beNUTZen muszt. </event>
+<event start="T52" end="T53">so das (.) das DEUTSCHland update, </event>
+<event start="T53" end="T54">das KÄMe auf jeden fall irgendwie so; </event>
+<event start="T54" end="T71">zwischen; </event>
+<event start="T71" end="T72">(0.2) </event>
+<event start="T72" end="T55">zwischen; </event>
+<event start="T55" end="T56">(-) ja in dieser TOTen woche; </event>
+<event start="T56" end="T58">zwischen WEIHnachten und sylvEster </event>
+<event start="T58" end="T57">oder so. </event>
+<event start="T60" end="T61">oder in der SOMMerpause irgendwann, </event>
+<event start="T61" end="T85">(.) wenn </event>
+<event start="T85" end="T63">EH alle </event>
+<event start="T63" end="T62">am see sitzen, </event>
+<event start="T62" end="T65">und nicht so viel im internet </event>
+<event start="T65" end="T66">unterWEGS </event>
+<event start="T66" end="T26">sind, </event>
+<event start="T26" end="T67">oder (--) in den ÄMTern, </event>
+<event start="T67" end="T88">(0.1) </event>
+<event start="T88" end="T68">weil_s da zu HEISZ ist; </event>
+<event start="T89" end="T90">h° </event>
+<event start="T76" end="T78">h°  </event>
+<event start="T86" end="T77">°h h°  </event>
+<event start="T77" end="T87">h°  </event>
+</tier><tier id="TIE1" speaker="SPK1" category="v" type="t" display-name="S2 [v]"><event start="T2" end="T93">wir</event>
+<event start="T93" end="T94"> müssen </event>
+<event start="T94" end="T95">uns </event>
+<event start="T95" end="T96">mal_n biszchen den </event>
+<event start="T96" end="T97">FORTschritt </event>
+<event start="T97" end="T98">erlAUben </event>
+<event start="T98" end="T99">glaub </event>
+<event start="T99" end="T4">ich. </event>
+<event start="T4" end="T3">weiszte, </event>
+<event start="T3" end="T5">leute– </event>
+<event start="T5" end="T100">wir </event>
+<event start="T100" end="T101">m xxx xxx </event>
+<event start="T101" end="T6">WEITergehen; </event>
+<event start="T7" end="T10">xxx </event>
+<event start="T8" end="T12">genAU </event>
+<event start="T12" end="T13">man; </event>
+<event start="T16" end="T15">OHne </event>
+<event start="T15" end="T14">schEIsz, </event>
+<event start="T14" end="T102">das </event>
+<event start="T102" end="T111">RATTert </event>
+<event start="T111" end="T112">doch schon </event>
+<event start="T112" end="T17">an </event>
+<event start="T17" end="T21">allen ECKen </event>
+<event start="T21" end="T18">und ENDen. </event>
+<event start="T22" end="T20">hh° </event>
+<event start="T20" end="T23">hh° </event>
+<event start="T23" end="T24">das MODem; </event>
+<event start="T24" end="T1">vierundfünfzig </event>
+<event start="T1" end="T114">KA </event>
+<event start="T114" end="T28">(.) was h°, </event>
+<event start="T27" end="T29">echt h° </event>
+<event start="T29" end="T9">Ohne SCHEIsz (.), </event>
+<event start="T9" end="T117">aber </event>
+<event start="T117" end="T118">wenn </event>
+<event start="T118" end="T119">deutschland </event>
+<event start="T119" end="T120">seine </event>
+<event start="T120" end="T121">SPRACHe </event>
+<event start="T121" end="T122">und </event>
+<event start="T122" end="T123">alles </event>
+<event start="T123" end="T30">updated, </event>
+<event start="T30" end="T124">°h (--) </event>
+<event start="T124" end="T125">dann </event>
+<event start="T125" end="T126">ist </event>
+<event start="T126" end="T127">das </event>
+<event start="T127" end="T128">so_n </event>
+<event start="T128" end="T31">UPdate, </event>
+<event start="T31" end="T129">°h (--) </event>
+<event start="T129" end="T130">das </event>
+<event start="T130" end="T131">irgendwie so </event>
+<event start="T131" end="T33">ne WOCHe dauert </event>
+<event start="T33" end="T32">irgendwie. </event>
+<event start="T32" end="T132">und </event>
+<event start="T132" end="T133">dann </event>
+<event start="T133" end="T11">sich der </event>
+<event start="T11" end="T134">BALKen </event>
+<event start="T134" end="T34">so, </event>
+<event start="T34" end="T136">weil </event>
+<event start="T136" end="T137">es_</event>
+<event start="T137" end="T36">s SO: </event>
+<event start="T36" end="T135">O </event>
+<event start="T135" end="T35">viel is. </event>
+<event start="T35" end="T25">s_is SO: viel </event>
+<event start="T25" end="T37">nAchzuholen, </event>
+<event start="T37" end="T39">°h (---) und </event>
+<event start="T39" end="T38">dann HAST du so, </event>
+<event start="T38" end="T41">(--) KENNst du </event>
+<event start="T41" end="T64">wenn du, </event>
+<event start="T64" end="T40">(0.1)</event>
+<event start="T40" end="T80">wenn du dein PHONe nicht up </event>
+<event start="T80" end="T43"> (0.3)</event>
+<event start="T43" end="T42">updaten willst; </event>
+<event start="T42" end="T44">weil du weiszt, </event>
+<event start="T44" end="T45">oa das dauert Ewig; </event>
+<event start="T45" end="T47">und dann kann ich das n tag nicht beNUTZen </event>
+<event start="T47" end="T46">oder so; </event>
+<event start="T46" end="T48">hh°  </event>
+<event start="T48" end="T50">hh° </event>
+<event start="T51" end="T52">ja h° genAU hh°, </event>
+<event start="T58" end="T57">h° ja h° </event>
+<event start="T57" end="T59">hhh° genau hh° </event>
+<event start="T59" end="T60">das wär_s. </event>
+<event start="T85" end="T63">ja. </event>
+<event start="T65" end="T66">ja. </event>
+<event start="T91" end="T69">OHNe schEIsz ej; </event>
+<event start="T69" end="T70">wie s DEUTSCHland, </event>
+<event start="T70" end="T89">(.) deutschland ist so_n SMARTphone, </event>
+<event start="T89" end="T90">das </event>
+<event start="T90" end="T73">halt wirklich, </event>
+<event start="T73" end="T92">(0.1)</event>
+<event start="T92" end="T74">wo alles mal DRINGend geupdated werden musz. </event>
+<event start="T74" end="T75">s so die EINstellungs (---) °h </event>
+<event start="T75" end="T76">App (.) is schon ph (-); </event>
+<event start="T76" end="T78">alles voller </event>
+<event start="T78" end="T86">ROTer pUnkte und </event>
+<event start="T86" end="T77">benAchrichtigungen, </event>
+<event start="T77" end="T87">UPdate, </event>
+<event start="T87" end="T79">UPdate möglich (-) °h, </event>
+<event start="T79" end="T81">die APP kann schon nicht mehr benutzt werden </event>
+<event start="T81" end="T82">weiszt_e, </event>
+<event start="T82" end="T83">weil sie IMmer noch nicht geupda- </event>
+<event start="T83" end="T84">°h (-) ja ja genAU (.) so Ist das ej (-) dEUtschland; </event>
+</tier><tier id="TIE2" speaker="SPK2" category="v" type="t" display-name="ann_S1 [v]"></tier><tier id="TIE3" speaker="SPK3" category="v" type="t" display-name="ann_S2 [v]"></tier><tier id="TIE13" speaker="SPK0" category="S1TH_cont" type="a" display-name="S1 [S1TH_cont]"><event start="T5" end="T100">3.1</event>
+<event start="T100" end="T101">1.3</event>
+<event start="T101" end="T103">1.4</event>
+<event start="T7" end="T104">3.2</event>
+<event start="T104" end="T105">1.5</event>
+<event start="T105" end="T10">1.6</event>
+<event start="T106" end="T8">2.2</event>
+<event start="T12" end="T107">6.-1</event>
+<event start="T108" end="T109">6.0</event>
+<event start="T109" end="T110">6.1</event>
+<event start="T21" end="T113">6.3</event>
+<event start="T28" end="T115">7.1</event>
+<event start="T116" end="T27">8.1</event>
+</tier><tier id="TIE4" speaker="SPK1" category="S2TH_cont" type="a" display-name=" [TH_cont]"><event start="T2" end="T93">1.0</event>
+<event start="T94" end="T95">1.1</event>
+<event start="T96" end="T97">2.0</event>
+<event start="T97" end="T98">3.0</event>
+<event start="T99" end="T4">4.0</event>
+<event start="T4" end="T3">5.0</event>
+<event start="T5" end="T100">1.2</event>
+<event start="T101" end="T6">2.1</event>
+<event start="T14" end="T102">6.2</event>
+<event start="T102" end="T111">7.0</event>
+<event start="T112" end="T18">8.0</event>
+<event start="T23" end="T24">6.4</event>
+<event start="T24" end="T114">6.5</event>
+<event start="T117" end="T118">9.0</event>
+<event start="T118" end="T119">10.0</event>
+<event start="T119" end="T120">10.1</event>
+<event start="T120" end="T121">11.0</event>
+<event start="T122" end="T123">12.0</event>
+<event start="T123" end="T30">2.3</event>
+<event start="T124" end="T125">9.1</event>
+<event start="T125" end="T126">13.-2</event>
+<event start="T126" end="T127">13.-1</event>
+<event start="T128" end="T31">13.0</event>
+<event start="T129" end="T130">13.1</event>
+<event start="T131" end="T33">14.0</event>
+<event start="T132" end="T133">14.1</event>
+<event start="T11" end="T134">14.2</event>
+<event start="T136" end="T137">12.1</event>
+<event start="T135" end="T35">12.2</event>
+</tier><tier id="TIE5" category="TH_brk" type="d" display-name=" [TH_brk]"></tier><tier id="TIE6" speaker="SPK0" category="rpt" type="a" display-name="S1 [rpt]"></tier><tier id="TIE7" speaker="SPK0" category="rep" type="a" display-name="S1 [rep]"></tier><tier id="TIE8" speaker="SPK0" category="sec" type="a" display-name="S1 [sec]"></tier><tier id="TIE9" speaker="SPK1" category="rpt" type="a" display-name="S2 [rpt]"></tier><tier id="TIE10" speaker="SPK1" category="rep" type="a" display-name="S2 [rep]"></tier><tier id="TIE11" speaker="SPK1" category="sec" type="a" display-name="S2 [sec]"></tier><tier id="TIE12" speaker="SPK4" category="v" type="t" display-name="S_X [v]"><event start="T6" end="T7">(0.2) </event>
+<event start="T68" end="T91">(0.2)</event>
+</tier><tier id="TIE_" category="v" type="t" display-name=""></tier></basic-body>
+</basic-transcription>

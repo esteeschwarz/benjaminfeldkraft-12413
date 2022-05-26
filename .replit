@@ -1,0 +1,24 @@
+#12056.vs
+
+run = "R -s -f 12043.chi_notes.R"
+# run = "R -s -f 12055.cp_loop_002.R"
+
+entrypoint = "12043.chi_notes.R"
+# entrypoint = "12055.cp_loop_002.R"
+
+onBoot = """
+[ -d "~/.config/R" ] || mkdir -p ~/.config/R
+"""
+
+[env]
+R_LIBS_USER = "~/.config/R"
+
+[packager]
+language = "rlang"
+
+[packager.features]
+packageSearch = true
+
+
+# 12043.chi_notes.R
+# 12055.cp_loop_002.R

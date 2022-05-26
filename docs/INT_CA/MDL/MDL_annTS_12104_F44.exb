@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.exmaralda.org -->
+<basic-transcription>
+<head>
+<meta-information><project-name></project-name><transcription-name></transcription-name><referenced-file url="TP44C_excerpts.wav"/><referenced-file url="TP44C_excerpts.mp3"/><ud-meta-information><ud-information attribute-name="AutoSave">;/Users/lion/EXMARaLDA_AutoBackup_2022_03_08_10_19_38.exb at 2022_03_08_10_19_39;/Users/lion/EXMARaLDA_AutoBackup_2022_03_08_11_19_39.exb at 2022_03_08_11_19_39;/Users/lion/EXMARaLDA_AutoBackup_2022_03_08_12_19_39.exb at 2022_03_08_12_19_39;/Users/lion/boxHKW/21S/temp/EXMARaLDA_AutoBackup_2022_03_12_10_28_17.exb at 2022_03_12_10_28_17</ud-information></ud-meta-information><comment></comment><transcription-convention></transcription-convention></meta-information><speakertable><speaker id="SPK0">
+<abbreviation>S1</abbreviation>
+<sex value="m"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+<speaker id="SPK1">
+<abbreviation>S2</abbreviation>
+<sex value="u"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+<speaker id="SPK2">
+<abbreviation>ann_S1</abbreviation>
+<sex value="u"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+<speaker id="SPK3">
+<abbreviation>ann_S2</abbreviation>
+<sex value="u"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+<speaker id="SPK4">
+<abbreviation>NOSPK</abbreviation>
+<sex value="u"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+</speakertable></head>
+<basic-body>
+<common-timeline>
+<tli id="T0" time="0.0"/>
+<tli id="T2" time="0.5533200553401701"/>
+<tli id="T3" time="1.6999592061655828"/>
+<tli id="T4" time="4.473225989557279"/>
+<tli id="T5" time="5.646531167146073"/>
+<tli id="T6" time="6.63984066408204"/>
+<tli id="T7" time="9.779765315470234"/>
+<tli id="T8" time="10.693076732116058"/>
+<tli id="T9" time="12.39303593828164"/>
+<tli id="T12" time="12.579698125625315"/>
+<tli id="T10" time="13.539675089107055"/>
+<tli id="T11" time="15.092971148074037"/>
+<tli id="T13" time="15.259633815345172"/>
+<tli id="T14" time="16.03961509817409"/>
+<tli id="T15" time="16.259609818971985"/>
+<tli id="T16" time="16.986259048274135"/>
+<tli id="T17" time="17.046257608491747"/>
+<tli id="T18" time="18.13289819909955"/>
+<tli id="T19" time="20.49284156765883"/>
+<tli id="T1" time="4016.271"/>
+<tli id="T20" time="4016.3"/>
+</common-timeline>
+<tier id="TIE0" speaker="SPK0" category="v" type="t" display-name="S1 [v]"><event start="T2" end="T3">also erstens (0.3) </event>
+<event start="T3" end="T4">warum steh ich jetzt oberkörper frei vor _ner fotoleinwand </event>
+<event start="T4" end="T5">°h und zweitens °h </event>
+<event start="T5" end="T6">warum zum teufel </event>
+<event start="T6" end="T7">hat eine chirurgin eine fotoleinwand in ihrer praxis </event>
+<event start="T7" end="T8">oben im zimmer h° </event>
+<event start="T8" end="T9">°h das war schon_ biszchen absurd </event>
+<event start="T10" end="T11">kleines side business (.) ja </event>
+<event start="T11" end="T13">(0.2)</event>
+<event start="T13" end="T14">und dann hab_ ich </event>
+<event start="T14" end="T15">(0.2)</event>
+<event start="T15" end="T16">sie gefragt </event>
+<event start="T16" end="T17">(0.1)</event>
+<event start="T17" end="T18">also sie hat mich dann so f:(0.2) </event>
+<event start="T18" end="T19">frontal und von der seite fotografiert </event>
+</tier><tier id="TIE1" speaker="SPK2" category="v" type="t" display-name="ann_S1 [v]"></tier><tier id="TIE3" speaker="SPK1" category="v" type="t" display-name="S2 [v]"><event start="T8" end="T9">h°h° </event>
+<event start="T9" end="T12"></event>
+<event start="T12" end="T10">kleines side business </event>
+</tier><tier id="TIE2" speaker="SPK3" category="v" type="t" display-name="ann_S2 [v]"></tier><tier id="TIE4" speaker="SPK4" category="v" type="t" display-name="NOSPK [v]"><event start="T9" end="T12">(0.2)</event>
+</tier><tier id="TIE_" category="v" type="t" display-name=""><event start="T11" end="T13">(0.2)</event>
+<event start="T14" end="T15">(0.2)</event>
+</tier></basic-body>
+</basic-transcription>

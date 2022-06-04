@@ -1,0 +1,35 @@
+<?php
+$open = $_REQUEST["q"];
+
+else $src = "newfile.html";
+
+echo readfile($src);
+?>
+
+<script crossorigin="anonymous">
+function load(content){
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function(){output(this);}
+    xmlhttp.open("GET", "/assets/frameout.php?q="+content);
+    xmlhttp.send();
+    }
+    function output(q) {
+    var xmldoc = q.responseText;
+    document.getElementById("content").innerHTML = xmldoc;
+    }
+</script>
+
+
+<div id="content">aint see nothing yet</div>
+<script crossorigin="anonymous">
+    function load(content){
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload = function(){output(this);}
+        xmlhttp.open("GET", "https://exit.rotefadenbuecher.de/uni/essais/html/sample.html");
+        xmlhttp.send();
+        }
+        function output(q) {
+        var xmldoc = q.responseText;
+        document.getElementById("content").innerHTML = xmldoc;
+        }
+    </script>

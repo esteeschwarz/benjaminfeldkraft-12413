@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="https://ada-sub.rotefadenbuecher.de/skool/public/pr/assets/style_md.css">
 
 
-<h6><a onclick="printcat()" style="cursor:pointer;">(output keynotes on single page html)</a></h6>
+<h6><a onclick="printcat(20220512)" style="cursor:pointer;">(output keynotes on single page html)</a></h6>
 hhh
 
 ### summary:

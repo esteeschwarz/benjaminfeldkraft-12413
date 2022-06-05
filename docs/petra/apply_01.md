@@ -2,7 +2,7 @@
 ###### 20220507 / stephan schwarz
 ## short work probe
 
-<link rel="stylesheet" type="text/css" href="https://rotefadenbuecher.de/css/style.css">
+<link rel="stylesheet" type="text/css" href="../../pro/revealjs/dist/theme/mod002.css">
 
 
 <a onclick="printcat()" style="cursor:pointer; font-size:0.6em;">(output keynotes on single page html)</a>

@@ -1,7 +1,7 @@
 ##### 12191.DH.petra
 ###### 20220507 / stephan schwarz
 ## short work probe
-<a onclick="printcat()" style="cursor:pointer; font-size:0.6em;">[>> output keynotes on single page html]</a>
+<a onclick="printcat()" style="cursor:pointer; font-size:0.6em;">output keynotes on single page html</a>
 hhh
 
 ### summary:

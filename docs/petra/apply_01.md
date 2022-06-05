@@ -1,7 +1,24 @@
 ##### 12191.DH.petra
 ###### 20220507 / stephan schwarz
 ## short work probe
-<a onclick="printcat()" style="cursor:pointer; font-size:0.6em;">output keynotes on single page html</a>
+<style>
+body {font-size: 12pt;color:#222;background:#fbfbfb;font-family:"courier", Arial, Helvetica, sans-serif;line-height: 1.4;margin: 10%;}
+
+h1, h2, h3, h4, h5, h6 {font-weight:normal;color:#111;}
+
+h1 {font-size:3em;line-height:1;margin-bottom:0.5em;margin-top:2em;}
+
+h2 {font-size:2em;margin-bottom:0.75em;margin-top:1.5em;}
+
+h3 {font-size:1.5em;line-height:1;margin-top:1.5em;}
+
+h4 {font-size:1.2em;line-height:1.25;margin-bottom:1.25em;}
+
+h5 {font-size:1em;font-weight:bold;margin-bottom:1.5em;}
+
+h6 {font-size:1em;font-weight:bold;}
+</style>
+<a onclick="printcat()" style="cursor:pointer; font-size:0.6em;">(output keynotes on single page html)</a>
 hhh
 
 ### summary:

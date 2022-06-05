@@ -35,4 +35,4 @@ hhh
 ###### 3.1.1.1 zum inhalt des tests
 sample md: die items, die in anlehnung an R/F nach obigem muster von uns entworfen wurden, entsprachen im aufbau dem set, das R/F in ihrem test verwendet hatte; vier ihrer im anhang (#ref) zur verfügung gestellten items hatten wir ins deutsche übersetzt und eines davon als item in vier varianten, die restlichen als filler übernommen. die auswahl der verwendeten items wurde gemeinschaftlich nach kriterien wie konsistenz innerhalb der items, stil und kohärenz bestimmt. zum inhalt des tests
 hhh
-fin
+###### fin

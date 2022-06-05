@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="https://rotefadenbuecher.de/frame/css/style.css" />
 ##### 12191.DH.petra
 ###### 20220507 / stephan schwarz
 ## short work probe

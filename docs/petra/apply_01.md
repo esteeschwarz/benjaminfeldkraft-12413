@@ -2,7 +2,7 @@
 ###### 20220507 / stephan schwarz
 ## short work probe
 
-<link rel="stylesheet" type="text/css" href="https://ada-sub.rotefadenbuecher.de/skool/public/pr/css/style_pr.css">
+<link rel="stylesheet" type="text/css" href="https://ada-sub.rotefadenbuecher.de/skool/public/pr/assets/style_md.css">
 
 
 <h6><a onclick="printcat()" style="cursor:pointer;">(output keynotes on single page html)</a></h6>

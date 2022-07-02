@@ -317,7 +317,7 @@ dta_setx<-function(set,chose,out,glt,ctrl){
 }
 # ###############
 # #check function dta_Setx
-sx8<-dta_setx(dta_o,chose,1,1,1)
+#sx8<-dta_setx(dta_o,chose,1,1,1)
 sx9<-outl.fun.rtc(dta)
 # sx1<- setvsx(dta,sm,em) #wks. 9197 complete + 3xcontrol
 # unique( sx1$group) #alle gruppen vertreten
@@ -336,10 +336,10 @@ sx9<-outl.fun.rtc(dta)
 sx5<-adcontrol(dta_o,0,0,0)
 sx10<-subset(sx5,gilt==1)
 unique(sx5$category)
-sx12<-dtatg(sx10,0,0,0,sm,em)
-sx11<-dta_grx(dtatg(sx10,0,0,0,sm,em),sm,em)
+#sx12<-dtatg(sx10,0,0,0,sm,em)
+#sx11<-dta_grx(dtatg(sx10,0,0,0,sm,em),sm,em)
 
-sx13<-dta_setx(dta_o,chose,0,1)
+#sx13<-dta_setx(dta_o,chose,0,1)
 
 # #chk
 # sx4<-outl.fun.rtc(dta) #wks
@@ -487,10 +487,12 @@ getmean<-function(set,chose,out,glt,ctrl,flagall,rt){
 }
 #dtax<-dta_setx(dta,0,0,0,0,sm,sm)
 #setx[1,]
-mean(dta_rtc$rtc.1)
-getmean(dta_rtc,c(0,0,0,1,sm,lc),1,1,0,1,ti)
- m9<-dta_setx(dta_rtc,c(0,0,0,0,em,lc),1)[with(dta_setx(dta_rtc,c(0,0,0,0,em,lc),1),group!=lc),]
- mean(m9$rtc.1)
+#mean(dta_rtc$rtc.1)
+######
+# getmean(dta_rtc,c(0,0,0,1,sm,lc),1,1,0,1,ti)
+#  m9<-dta_setx(dta_rtc,c(0,0,0,0,em,lc),1)[with(dta_setx(dta_rtc,c(0,0,0,0,em,lc),1),group!=lc),]
+#  mean(m9$rtc.1)
+#######
 # mean(dta_setx(dta,c(0,0,0,0,em,lc),1)[dta_setx(dta,c(0,0,0,0,em,lc),1)$group==em]$timeinterval)
 # mean(dta_setx(dta,c(0,0,0,0,em,lc),1))$timeinterval
 # #mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
@@ -504,7 +506,7 @@ getmean(dta_rtc,c(0,0,0,1,sm,lc),1,1,0,1,ti)
 # t1<-0
 # t2<-0
 # t3<-0
-break()
+#break()
 
 
 #####################################################
@@ -543,7 +545,8 @@ lmeforms<-list("RTCgr"=fmlRTCgr,"TIgr"=fmlTIgr,"RTCvs"=fmlRTCvs,"TIvs"=fmlTIvs)
 return(lmeforms2)
 }
 lmef<-create_lmeforms(dta,"ti")
-lmef$
+#lmef$
+lmef
 lmer(lmef[[1]],dta)
 #fmla3
 #set1[1]
@@ -553,25 +556,26 @@ lmer(lmef[[1]],dta)
 #   (sumSMEM<- lmer(form,lmeset)) 
 # 
 # }
-dtax<-dta_setx(dta,c(0,0,0,1,lc,vso),1)
+dtax<-dta_setx(dta,c(0,0,0,1,lc,vso),1,1,1)
 cat<-"group"
 cat<-"category"
 start<-list()
 start$theta<-50
 start
-tail(flagset$timeinterval)
+#############tail(flagset$timeinterval)
 #"In the model, we posited a main effect of Category (single vs. other) 
 #and random effects of Participant and Item, along with a random slope of Category by Participant"
-getmean(dta,c(0,0,0,1,sm,vso),1,1,ti)
-sum1<-lmer(timeinterval ~  1 + category  + (1|item) + (1 | tnid) + (1 + category : tnid),dtax,offset=rtc) 
-sum1<-lmer(timeinterval ~  0 + category  + (1|char) +(1+item) + (1 + tnid) + (0 + category | tnid),dtax) 
+#function(set,chose,out,glt,ctrl,flagall,rt){
+getmean(dta,c(0,0,0,1,sm,em),1,1,1,0,ti)
+sum1<-lmer(timeinterval ~  1 + category  + (1|item) + (1 | tnid) + (1 + category : tnid),dtax,offset=rtc)
+sum1<-lmer(timeinterval ~  0 + category  + (1|char) +(1+item) + (1 + tnid) + (0 + category | tnid),dtax)
 ###
-sum7<-lmer(timeinterval ~   group  + (1+char) +(0+item) + (1 + tnid) + (0+group | tnid),dtax) 
+sum7<-lmer(timeinterval ~   group  + (1+char) +(0+item) + (1 + tnid) + (0+group | tnid),dtax)
 ###
 #sum1<-lmer(timeinterval ~  0 + group  + (1| item) + (1 + tnid) + (1 + group | tnid),dtax,offset=rtc) 
 summary(sum1)
 write_clip(summary(sum1)$coefficients)
-lmer(timeinterval ~ XvsGr + (1 | char) + (1 | item) + (1 | participant) + (1 + XvsGr | participant),dta2) 
+#lmer(timeinterval ~ XvsGr + (1 | char) + (1 | item) + (1 | participant) + (1 + XvsGr | participant),dta2) 
 
 #hier erwartbare signifikante abweichung an der controlgroup (10ms)
 # #	Estimate	Std. Error	df	t value	Pr(>|t|)
@@ -588,19 +592,18 @@ lmer(timeinterval ~ XvsGr + (1 | char) + (1 | item) + (1 | participant) + (1 + X
 # item5	1094.97275676077	37.1365111151353	197.512448921418	29.4850734191479	2.86060059928377e-74   ###
 # item6	511.834559622824	38.0743238700786	230.337549930118	13.4430373962611	8.46552584220792e-31   ###
 # tnid	0.381720779917168	0.75441015474542	86.8762170406657	0.505985739343583	0.614148208300596
-
-dta1<-dta_setx(dta,c(0,0,0,0,sm,sm),0)
+dta1<-dta_setx(dta,c(0,0,0,0,sm,sm),0,1,1)
 chose<-c(0,0,0,1,sm,em)
-lmerun(dta,ti,"vs",chose,1)
+lmerun(dta,ti,"vs",chose,1,1,1)
 #outl.fun.rtc(dta)
 form<-create_lmeforms(dta,rtc)$vs
 form
 #lmerun_func
-lmerun<-function(set,resp,gr,chose,out,glt){
+lmerun<-function(set,resp,gr,chose,out,glt,ctrl){
   form<-create_lmeforms(set,resp)$gr
   set2<-get_rtc(set)
   ifelse(out==1,set2<-outl.fun.rtc(set2),set2<-set2)
-  lmeset<-dta_setx(set2,chose,out,glt)
+  lmeset<-dta_setx(set2,chose,out,glt,ctrl)
   det_cat<-stri_detect (as.character(form[3]),regex  = "category")
   det_vs<-stri_detect (as.character(form[3]),regex  = "vs")
   sum1<-( lmer(form,lmeset)) 
@@ -624,7 +627,9 @@ lmerun<-function(set,resp,gr,chose,out,glt){
   
 }
 #proof mean vs. lme
-d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1))
+d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1,1,1))
+attach(d5)
+
 #mean(d5$timeinterval[category==sm],na.rm=T)
 #sum(d5$category==sm)
 m1<-mean(d5$timeinterval[group==sm],na.rm=T)
@@ -640,7 +645,7 @@ m9
 m9ns<-c("sm","em","lc","mm")
 rownames(m9)<-m9ns
 colnames(m9)<-c("mean group","mean !group")
-
+m9
 # as.character(fmlRTCgr[3])
 #setx[7,4]==T
 #lmef[[1]][3]
@@ -671,8 +676,8 @@ colnames(m9)<-c("mean group","mean !group")
 # XvsGr3LC    1500.030   1158.029 3.256070e-06 1.2953304 0.9999763
 # XvsGr4MM    1476.138   1155.909 3.232291e-06 1.2770366 0.9999765
 # SM < EM <= MM < LC
-lmerun(dta,rtc,2,c(0,1,-1,sm,vso),1)
-lmerun()
+lmerun(dta,rtc,2,c(0,1,-1,1,sm,vso),1,1,1)
+#lmerun()
 # (lmerun(lmef[[3]],dta,c(0,0,0,1,em,vso)))
 # (lmerun(lmef[[4]],dta,c(0,0,0,0,sm,lc)))
 # (lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
@@ -721,7 +726,7 @@ getviews<-function(set1,set2,sumset){
   return(sumset)
 #sumset
 }
-lmerun(dta_rtc,rtcc,"gr",c(0,0,0,1,sm,vso),1)
+########lmerun(dta_rtc,rtcc,"gr",c(0,0,0,1,sm,vso),1)
 #######################################
 getviews_single<-function(set1,sumset){
   lme1<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
@@ -743,36 +748,42 @@ getviews_single<-function(set1,sumset){
 #wks
 ###### now loop through sets
 length(setx[,1]) #1:length(setx[,1]
-
+setx[,1]
+parsethrough<-function(){
 for (k in 1:length(setx[,1])){
-  lmerun(dta,ti,1,setx[k,],0)
-  lmerun(dta,rtc,1,setx[k,],0)
-  lmerun(dta,ti,2,setx[k,],0)
-  lmerun(dta,rtc,2,setx[k,],0)
-  lmerun(dta,ti,1,setx[k,],1)
-  lmerun(dta,rtc,1,setx[k,],1)
-  lmerun(dta,ti,2,setx[k,],1)
-  lmerun(dta,rtc,2,setx[k,],1)
+  out<-1
+  glt<-1
+  ctrl<-1
+  lmerun(dta,ti,1,setx[k,],out,glt,ctrl)
+  lmerun(dta,rtc,1,setx[k,],out,glt,ctrl)
+  lmerun(dta,ti,2,setx[k,],out,glt,ctrl)
+  lmerun(dta,rtc,2,setx[k,],out,glt,ctrl)
+  lmerun(dta,ti,1,setx[k,],out,glt,ctrl)
+  lmerun(dta,rtc,1,setx[k,],out,glt,ctrl)
+  lmerun(dta,ti,2,setx[k,],out,glt,ctrl)
+  lmerun(dta,rtc,2,setx[k,],out,glt,ctrl)
 }
-stri_flatten(  as.character(setx[1,]),collapse=",")
-parse(setx[1,])
-form1<-paste("dta,ti,1,",setx[1,],0)
-form1
-sumset<-list()
-for (k in 1:length(setx[,1])){
-  strflat<-stri_flatten(  as.character(setx[k,]),collapse=",")
-  form1<-paste("dta,rtc,2,c(",strflat,"),",1)
-  form1
-  sumset<-getviews_single(form1,sumset)
-  cat("\nwrite set",k)
 }
-  view1
-  (sumset)
-  saveset<-sumset$
-  is.data.frame(sum3)
-save2<-as.data.frame(saveset,make.names=NA)
-    write_csv2(saveset,"save_lmeviews.csv")
-  lmerun(dta,ti,1,setx[k,],0)
+#parsethrough()
+# stri_flatten(  as.character(setx[1,]),collapse=",")
+# parse(setx[1,])
+# form1<-paste("dta,ti,1,",setx[1,],0)
+# form1
+# sumset<-list()
+# for (k in 1:length(setx[,1])){
+#   strflat<-stri_flatten(  as.character(setx[k,]),collapse=",")
+#   form1<-paste("dta,rtc,2,c(",strflat,")",1,1,1,sep = ",")
+#   form1
+#   sumset<-getviews_single(form1,sumset)
+#   cat("\nwrite set",k)
+# }
+#   view1
+#   (sumset)
+#   saveset<-sumset$
+#   is.data.frame(sum3)
+# save2<-as.data.frame(saveset,make.names=NA)
+#     write_csv2(saveset,"save_lmeviews.csv")
+#   lmerun(dta,ti,1,setx[k,],0)
   # lmerun(dta,rtc,1,setx[k,],0)
   # lmerun(dta,ti,2,setx[k,],0)
   # lmerun(dta,rtc,2,setx[k,],0)
@@ -780,7 +791,7 @@ save2<-as.data.frame(saveset,make.names=NA)
   # lmerun(dta,rtc,1,setx[k,],1)
   # lmerun(dta,ti,2,setx[k,],1)
   # lmerun(dta,rtc,2,setx[k,],1)
-}
+#}
 
 #####wks.
 createview<-function(){
@@ -892,45 +903,50 @@ rtc_0<-get_rtc(dta)
 t1<-(rtc_0$rtc)
 t2<-(dta$timeinterval)
 tail(dta$timeinterval)
-t1;t2
+#t1;t2
 lm1<-lm(t2~t1,dta)
 summary(lm1)
 lmer(dta_rtc$timeinterval)
-dta1<-dta_setx(dta,c(0,0,0,1,sm,vso),1)
+dta1<-dta_setx(dta,c(0,0,0,1,sm,vso),1,1,1)
 lmeform_basic<-("timeinterval~group + (1|item)+(1|participant)+(1+group|participant)")
 sum2<-lmer(timeinterval ~ group + (1|char)+(1|item)+(1|participant)+(1+group|participant),dta1)
 sum1<-lmer(timeinterval ~ group + (1|item)+(1|participant)+(1+group|participant),dta1)
 
 summary(sum2)$coefficients-summary(sum1)$coefficients
 
-t8<-t1/t1[6]*t2
-(1/t1)*t2
-t1+t1[6]*-1
-t1[6]*-1+t1[4]
-t1
-t2
-t4<-t2-t1
-t1[6]/t1[4]
-tail(dta$char)
-t1[3]/t1[4]
-t2[3]/t2[4]
-t4[3]/t4[4]*t3
-t1[5]/t1[6]
-t2[6]/t2[5]*300
-t1[5]/t1[6]*t4[5]/t4[6]
-t1[4]/t1[5]*t4[4]/t4[5]
-t1[5]/t2[5]*t4[5]
-sqrt(t4[6])*52
-t4
-t2
-t4[5]/t4[6]
-t5<-(t2+t1)
-t6<-t5+t5[6]*-1
-t6<-
+# t8<-t1/t1[6]*t2
+# (1/t1)*t2
+# t1+t1[6]*-1
+# t1[6]*-1+t1[4]
+# t1
+# t2
+# t4<-t2-t1
+# t1[6]/t1[4]
+# tail(dta$char)
+# t1[3]/t1[4]
+# t2[3]/t2[4]
+# t4[3]/t4[4]*t3
+# t1[5]/t1[6]
+# t2[6]/t2[5]*300
+# t1[5]/t1[6]*t4[5]/t4[6]
+# t1[4]/t1[5]*t4[4]/t4[5]
+# t1[5]/t2[5]*t4[5]
+# sqrt(t4[6])*52
+# t4
+# t2
+# t4[5]/t4[6]
+# t5<-(t2+t1)
+# t6<-t5+t5[6]*-1
+# t6<-
 ######
 
   rt8<-(rtc_0$rtc)/rtc_0$rtc[length(rtc_0$rtc)]*rtc_0$timeinterval
 ####
+rtc.1<-rt8
+
+dta_rtc<-cbind(dta,rtc.1)
+tail(dta_rtc$rtc.1)
+
 tail(rt8)
 t8-t2
 t8<-t1/t1[6]*t2
@@ -941,18 +957,14 @@ rt6<-rt5+rt5[length(rt5)]*-1
 rt8<-rt6/2
 tail(rt8)
 
-rtc.1<-rt8
 
-dta_rtc<-cbind(dta,rtc.1)
-tail(dta_rtc$rtc.1)
-
-sum1<-summary(lmerun(dta_rtc,ti,"gr",c(0,0,0,1,sm,vso),1))
-sum2<-summary(lmerun(dta_rtc,rtcc,"gr",c(0,0,0,1,sm,vso),1))
+sum1<-summary(lmerun(dta_rtc,ti,"gr",c(0,0,0,1,sm,vso),1,1,1))
+sum2<-summary(lmerun(dta_rtc,rtcc,"gr",c(1,0,0,1,sm,vso),1,1,1))
 sum1$coefficients-sum2$coefficients
 tail(rtc_0$rtc)
 rtc.1<-dta$timeinterval+rtc_0$rtc
-rtc.1<-rtc_min
-tail(rtc2)
+#rtc.1<-rtc_min
+#tail(rtc2)
 #############################################################################
 #############################################################################
 #---C---  compare R/F results:-----------------------
@@ -987,7 +999,7 @@ rftimes<-rbind("SM"=1578,"EM"=1543,"LC"=1457)
 # #
 #extraction: dta_setx(set,c(target-1,target0,target+1,groupvsall?,group1,group2),discard_outliers?,nur-gültige-fälle?) 
 #1=yes,0=no
-d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1,1))
+d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1,1,1))
 attach(d5)
 m1<-mean(d5$timeinterval[group==sm],na.rm=T)
 m2<-mean(d5$timeinterval[group!=sm],na.rm=T)
@@ -999,7 +1011,7 @@ m2<-mean(d5$timeinterval[group!=sm],na.rm=T)
 # mm   1661.000    1679.075 <
 # rank: 
 
-tb1<-getmean(dta,c(0,0,0,1,sm,em),1,1,ti,1) # with RAW dataset
+tb1<-getmean(dta,c(0,0,0,0,sm,em),0,0,0,1,ti) # with RAW dataset
 #here results reading time RAW, target 0
 #        mean        sd
 # SM 1623.482  834.4605
@@ -1016,7 +1028,7 @@ tb1<-getmean(dta,c(0,0,0,1,sm,em),1,1,ti,1) # with RAW dataset
 #C.2
 #without outliers (2,5sd)
 dta1<-outl.fun(dta,250) #discard outliers with bottom cutoff at 250ms
-tb2<-getmean(dta1,0,0,0,0,0,0)
+#tb2<-getmean(dta1,0,0,0,0,0,0)
 #      mean        sd
 # EM 1655.608 1033.4464
 # SM 1734.169  761.2755

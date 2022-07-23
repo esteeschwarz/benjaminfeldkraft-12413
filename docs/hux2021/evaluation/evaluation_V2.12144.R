@@ -17,6 +17,7 @@ library(lme4)
 library(stringi)
 library(readr)
 library(clipr)
+library(ggplot2)
 #1
 dta<-read.csv2(src_d)
 d1ns<-colnames(dta)
@@ -400,7 +401,7 @@ createsets<-function(){
 }
 ##########################
 setx<-createsets()
-#setx[11,]
+setx[1,]
 #wks.
 #remove(setx)
 #ch1
@@ -484,7 +485,8 @@ getmean<-function(set,chose,out,glt,ctrl,flagall,rt){
 #     print(mnx)
 #  #return(tb2)
 
-}
+} ########## end getmean
+
 #dtax<-dta_setx(dta,0,0,0,0,sm,sm)
 #setx[1,]
 #mean(dta_rtc$rtc.1)
@@ -546,8 +548,8 @@ return(lmeforms2)
 }
 lmef<-create_lmeforms(dta,"ti")
 #lmef$
-lmef
-lmer(lmef[[1]],dta)
+lmef[[1]]
+summary(lmer(lmef[[1]],dta))
 #fmla3
 #set1[1]
 ####################################################
@@ -566,7 +568,8 @@ start
 #"In the model, we posited a main effect of Category (single vs. other) 
 #and random effects of Participant and Item, along with a random slope of Category by Participant"
 #function(set,chose,out,glt,ctrl,flagall,rt){
-getmean(dta,c(0,0,0,1,sm,em),1,1,1,0,ti)
+#chose = c(target-1,target0,target1,XvsO,group1,group2)
+getmean(dta,c(0,0,0,1,sm,lc),1,1,1,0,ti)
 sum1<-lmer(timeinterval ~  1 + category  + (1|item) + (1 | tnid) + (1 + category : tnid),dtax,offset=rtc)
 sum1<-lmer(timeinterval ~  0 + category  + (1|char) +(1+item) + (1 + tnid) + (0 + category | tnid),dtax)
 ###
@@ -594,10 +597,10 @@ write_clip(summary(sum1)$coefficients)
 # tnid	0.381720779917168	0.75441015474542	86.8762170406657	0.505985739343583	0.614148208300596
 dta1<-dta_setx(dta,c(0,0,0,0,sm,sm),0,1,1)
 chose<-c(0,0,0,1,sm,em)
-lmerun(dta,ti,"vs",chose,1,1,1)
+#lmerun(dta,ti,"vs",chose,1,1,1)
 #outl.fun.rtc(dta)
-form<-create_lmeforms(dta,rtc)$vs
-form
+form<-create_lmeforms(dta,rtc)
+form[[1]]
 #lmerun_func
 lmerun<-function(set,resp,gr,chose,out,glt,ctrl){
   form<-create_lmeforms(set,resp)$gr
@@ -626,26 +629,7 @@ lmerun<-function(set,resp,gr,chose,out,glt,ctrl){
   return(sum1)
   
 }
-#proof mean vs. lme
-d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1,1,1))
-attach(d5)
-
-#mean(d5$timeinterval[category==sm],na.rm=T)
-#sum(d5$category==sm)
-m1<-mean(d5$timeinterval[group==sm],na.rm=T)
-m2<-mean(d5$timeinterval[group!=sm],na.rm=T)
-m3<-mean(d5$timeinterval[group==em],na.rm=T)
-m4<-mean(d5$timeinterval[group!=em],na.rm=T)
-m5<-mean(d5$timeinterval[group==lc],na.rm=T)
-m6<-mean(d5$timeinterval[group!=lc],na.rm=T)
-m7<-mean(d5$timeinterval[group==mm],na.rm=T)
-m8<-mean(d5$timeinterval[group!=mm],na.rm=T)
-m9<-rbind(cbind(m1,m2),cbind(m3,m4),cbind(m5,m6),cbind(m7,m8))
-m9
-m9ns<-c("sm","em","lc","mm")
-rownames(m9)<-m9ns
-colnames(m9)<-c("mean group","mean !group")
-m9
+lmef$gr
 # as.character(fmlRTCgr[3])
 #setx[7,4]==T
 #lmef[[1]][3]
@@ -676,7 +660,8 @@ m9
 # XvsGr3LC    1500.030   1158.029 3.256070e-06 1.2953304 0.9999763
 # XvsGr4MM    1476.138   1155.909 3.232291e-06 1.2770366 0.9999765
 # SM < EM <= MM < LC
-lmerun(dta,rtc,2,c(0,1,-1,1,sm,vso),1,1,1)
+# function(set,resp,gr,chose,out,glt,ctrl)
+lmerun(dta,rtc,1,c(0,1,-1,1,sm,em),1,1,1)
 #lmerun()
 # (lmerun(lmef[[3]],dta,c(0,0,0,1,em,vso)))
 # (lmerun(lmef[[4]],dta,c(0,0,0,0,sm,lc)))
@@ -693,8 +678,8 @@ lmerun(dta,rtc,2,c(0,1,-1,1,sm,vso),1,1,1)
 # #########
 # #cross table
 # sum3<-list()
-# set1<-"dta,ti,1,c(0,0,0,1,em,vso),0"
-# set2<-"dta,ti,1,c(0,0,0,1,em,vso),1"
+ set1<-"dta,ti,1,c(0,0,0,1,em,vso),0,1"
+ set2<-"dta,ti,1,c(0,0,0,1,em,vso),1,0"
 # 
 # lme2<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
 # lme2
@@ -743,14 +728,15 @@ getviews_single<-function(set1,sumset){
   return(sumset)
   #sumset
 }
-#sum5<-getviews_single(set1,sumset)
+sum5<-getviews_single(set1,sumset)
 #sum5
 #wks
 ###### now loop through sets
 length(setx[,1]) #1:length(setx[,1]
 setx[,1]
 parsethrough<-function(){
-for (k in 1:length(setx[,1])){
+  for (k in 1:3){
+  #for (k in 1:length(setx[,1])){
   out<-1
   glt<-1
   ctrl<-1
@@ -906,14 +892,14 @@ tail(dta$timeinterval)
 #t1;t2
 lm1<-lm(t2~t1,dta)
 summary(lm1)
-lmer(dta_rtc$timeinterval)
+#lmer(dta_rtc$timeinterval)
 dta1<-dta_setx(dta,c(0,0,0,1,sm,vso),1,1,1)
 lmeform_basic<-("timeinterval~group + (1|item)+(1|participant)+(1+group|participant)")
 sum2<-lmer(timeinterval ~ group + (1|char)+(1|item)+(1|participant)+(1+group|participant),dta1)
 sum1<-lmer(timeinterval ~ group + (1|item)+(1|participant)+(1+group|participant),dta1)
-
-summary(sum2)$coefficients-summary(sum1)$coefficients
-
+# DIFF character dependency, largest at group EM and SM
+sum3<-summary(sum2)$coefficients-summary(sum1)$coefficients
+sum3["groupEM","Estimate"]
 # t8<-t1/t1[6]*t2
 # (1/t1)*t2
 # t1+t1[6]*-1
@@ -939,7 +925,7 @@ summary(sum2)$coefficients-summary(sum1)$coefficients
 # t6<-t5+t5[6]*-1
 # t6<-
 ######
-
+sorted_out<-function(x){
   rt8<-(rtc_0$rtc)/rtc_0$rtc[length(rtc_0$rtc)]*rtc_0$timeinterval
 ####
 rtc.1<-rt8
@@ -963,8 +949,10 @@ sum2<-summary(lmerun(dta_rtc,rtcc,"gr",c(1,0,0,1,sm,vso),1,1,1))
 sum1$coefficients-sum2$coefficients
 tail(rtc_0$rtc)
 rtc.1<-dta$timeinterval+rtc_0$rtc
+
 #rtc.1<-rtc_min
 #tail(rtc2)
+} #END aussortierte function
 #############################################################################
 #############################################################################
 #---C---  compare R/F results:-----------------------
@@ -1028,7 +1016,7 @@ tb1<-getmean(dta,c(0,0,0,0,sm,em),0,0,0,1,ti) # with RAW dataset
 #C.2
 #without outliers (2,5sd)
 dta1<-outl.fun(dta,250) #discard outliers with bottom cutoff at 250ms
-#tb2<-getmean(dta1,0,0,0,0,0,0)
+tb2<-getmean(dta1,c(0,0,0,0,sm,em),0,0,0,1,ti)
 #      mean        sd
 # EM 1655.608 1033.4464
 # SM 1734.169  761.2755
@@ -1037,7 +1025,7 @@ dta1<-outl.fun(dta,250) #discard outliers with bottom cutoff at 250ms
 
 #second formula, outliers discarded with respect to target length
 dta2<-outl.fun.rtc(dta)
-tb3<-getmean(dta,c(0,0,0,0,sm,vso),1)
+tb3<-getmean(dta2,c(0,0,0,0,sm,vso),0,0,0,1,ti)
 #       mean        sd
 # EM 1563.051 1062.1094
 # SM 1623.482  834.4605
@@ -1098,16 +1086,17 @@ formel<-fmla3 #for timeinterval ~ category (XvsOther)
 formel<-fmla4 #for rtc ~          category (XvsOther)
 #create group vs set
 # setx[x,] < x has to be 7,71,711 for global compare sets
-catsingle<-lc
-setsingle<-setvsx(dta2,catsingle)
-sum1<-summary(lmerun(fmla3,setsingle,setx[7,]))
-sum1<-summary(lmerun(fmla1,dta2,setx[2,]))
-
-dif<-abs(coef(sum1)[1]-coef(sum1)[2])
-cat("RT category greater =",coef(sum1)[1]>coef(sum1)[2],", difference category",catsingle," ~ all =",dif,"ms")
-(sum1$coefficients[])
-diflc<-dif
-diflcsm<-dif
+# catsingle<-lc
+# 
+# setsingle<-setvsx(dta2,catsingle)
+# sum1<-summary(lmerun(fmla3,setsingle,setx[7,]))
+# sum1<-summary(lmerun(fmla1,dta2,setx[2,]))
+# 
+# dif<-abs(coef(sum1)[1]-coef(sum1)[2])
+# cat("RT category greater =",coef(sum1)[1]>coef(sum1)[2],", difference category",catsingle," ~ all =",dif,"ms")
+# (sum1$coefficients[])
+# diflc<-dif
+# diflcsm<-dif
 
 
 #sum1
@@ -1131,21 +1120,21 @@ diflcsm<-dif
 ##---D----------descriptive analysis
 
 
-labx<-paste0("Basis durchschnittliche targetlaenge=", round(meanch), " zeichen")
-toplab<-paste0("Lesezeiten (ms)",boxlabtgt)
-
-boxLZ<-cbind(SM=LZSMc,EM=LZEMc,LC=LZLCc,ISM=LZMMc)
-#boxplot(boxLZ,main="mean Lesezeiten gesamt in ms/106 zeichen fuer target+1",xlab="106 Zeichen = durchschnittliche Laenge target 0+1")
-boxplot(boxLZ,main=toplab, xlab=labx,notch=TRUE,col=c(1,2,3,4))
-
-toplab<-paste0("median Lesezeiten (ms)",boxlabtgt)
-boxLZmd<-cbind(SM=mdLZA,EM=mdLZB,LC=mdLZC,ISM=mdLZD)
-boxplot(boxLZmd,main=toplab,xlab=labx)
-
-toplab<-paste0("mean Lesezeiten (ms)",boxlabtgt)
-lab1<-paste0("basis durchschnittliche targetlaenge=", round(meanch), " zeichen")
-boxLZmn<-cbind(SM=LSAc,EM=LSBc,LC=LSCc,ISM=LSDc)
-boxplot(boxLZmn,main=toplab,xlab=lab1)
+# labx<-paste0("Basis durchschnittliche targetlaenge=", round(meanch), " zeichen")
+# toplab<-paste0("Lesezeiten (ms)",boxlabtgt)
+# 
+# boxLZ<-cbind(SM=LZSMc,EM=LZEMc,LC=LZLCc,ISM=LZMMc)
+# #boxplot(boxLZ,main="mean Lesezeiten gesamt in ms/106 zeichen fuer target+1",xlab="106 Zeichen = durchschnittliche Laenge target 0+1")
+# boxplot(boxLZ,main=toplab, xlab=labx,notch=TRUE,col=c(1,2,3,4))
+# 
+# toplab<-paste0("median Lesezeiten (ms)",boxlabtgt)
+# boxLZmd<-cbind(SM=mdLZA,EM=mdLZB,LC=mdLZC,ISM=mdLZD)
+# boxplot(boxLZmd,main=toplab,xlab=labx)
+# 
+# toplab<-paste0("mean Lesezeiten (ms)",boxlabtgt)
+# lab1<-paste0("basis durchschnittliche targetlaenge=", round(meanch), " zeichen")
+# boxLZmn<-cbind(SM=LSAc,EM=LSBc,LC=LSCc,ISM=LSDc)
+# boxplot(boxLZmn,main=toplab,xlab=lab1)
 
 
 #boxLZad<-cbind(SM=LZSMd,EM=LZEMd,LC=LZLCd,MM=LZMMd)
@@ -1167,6 +1156,7 @@ boxplot(boxLZmn,main=toplab,xlab=lab1)
 
 #---D---- added LZ -----------
 #R/F der reihe nach > mean response
+subdescr<-dta
 subdescr<-subset(subdescr,subdescr$target==0)
 #subsets kategorienvergleich
 SSM<-subset(subdescr,group=="SM")
@@ -1188,15 +1178,15 @@ sdRTrawBd<-sd(SEM$adinterval)
 sdRTrawCd<-sd(SLC$adinterval)
 sdRTrawDd<-sd(SMM$adinterval)
 
-meanRTAd<-mean(SSMod$adinterval)
-meanRTBd<-mean(SEMod$adinterval)
-meanRTCd<-mean(SLCod$adinterval)
-meanRTDd<-mean(SMMod$adinterval)
+#meanRTAd<-mean(SSMod$adinterval)
+#meanRTBd<-mean(SEMod$adinterval)
+#meanRTCd<-mean(SLCod$adinterval)
+#meanRTDd<-mean(SMMod$adinterval)
 #standardabweichung response
-sdRTAd<-sd(SSMod$adinterval)
-sdRTBd<-sd(SEMod$adinterval)
-sdRTCd<-sd(SLCod$adinterval)
-sdRTDd<-sd(SMMod$adinterval)
+#sdRTAd<-sd(SSMod$adinterval)
+#sdRTBd<-sd(SEMod$adinterval)
+#sdRTCd<-sd(SLCod$adinterval)
+#sdRTDd<-sd(SMMod$adinterval)
 
 charsAd<-SSM$addchar
 charsBd<-SEM$addchar
@@ -1209,32 +1199,32 @@ LZLCd<-(SLC$adinterval/charsCd)
 LZMMd<-(SMM$adinterval/charsDd)
 
 #with discard outliers
-LZSMd<-(LZSMd[LZSMd<LZouttopd&LZSMd>LZbottommodd])
-LZEMd<-(LZEMd[LZEMd<LZouttopd&LZEMd>LZbottommodd])
-LZLCd<-(LZLCd[LZLCd<LZouttopd&LZLCd>LZbottommodd])
-LZMMd<-(LZMMd[LZMMd<LZouttopd&LZMMd>LZbottommodd])
+# LZSMd<-(LZSMd[LZSMd<LZouttopd&LZSMd>LZbottommodd])
+# LZEMd<-(LZEMd[LZEMd<LZouttopd&LZEMd>LZbottommodd])
+# LZLCd<-(LZLCd[LZLCd<LZouttopd&LZLCd>LZbottommodd])
+# LZMMd<-(LZMMd[LZMMd<LZouttopd&LZMMd>LZbottommodd])
 
 #check number obs. after discard outliers
-proofset2d<-length(LZSMd)+length(LZEMd)+length(LZLCd)+length(LZMMd)
+#proofset2d<-length(LZSMd)+length(LZEMd)+length(LZLCd)+length(LZMMd)
 
 #lesezeit / durchschnittliche targetphrase (zeichenabhängig)
-LZSMcd<-LZSMd*meanchd
-LZEMcd<-LZEMd*meanchd
-LZLCcd<-LZLCd*meanchd
-LZMMcd<-LZMMd*meanchd
-#mean LZ
-LSAcd<-mean(LZSMcd)
-LSBcd<-mean(LZEMcd)
-LSCcd<-mean(LZLCcd)
-LSDcd<-mean(LZMMcd)
-
-#sd LZ
-LSAsdd<-sd(LZSMcd)
-LSBsdd<-sd(LZEMcd)
-LSCsdd<-sd(LZLCcd)
-LSDsdd<-sd(LZMMcd)
-boxLZsdd<-cbind(SM=LSAsdd,EM=LSBsdd,LC=LSCsdd,ISM=LSDsdd)
-
+# LZSMcd<-LZSMd*meanchd
+# LZEMcd<-LZEMd*meanchd
+# LZLCcd<-LZLCd*meanchd
+# LZMMcd<-LZMMd*meanchd
+# #mean LZ
+# LSAcd<-mean(LZSMcd)
+# LSBcd<-mean(LZEMcd)
+# LSCcd<-mean(LZLCcd)
+# LSDcd<-mean(LZMMcd)
+# 
+# #sd LZ
+# LSAsdd<-sd(LZSMcd)
+# LSBsdd<-sd(LZEMcd)
+# LSCsdd<-sd(LZLCcd)
+# LSDsdd<-sd(LZMMcd)
+# boxLZsdd<-cbind(SM=LSAsdd,EM=LSBsdd,LC=LSCsdd,ISM=LSDsdd)
+# 
 
 #summe LZ abhängig von zeichenanzahl und anzahl observationen
 
@@ -1245,15 +1235,100 @@ obsDd<-length(SMM$adinterval)
 
 
 
-sum1d<-sum(LZSMcd)/obsAd
-sum2d<-sum(LZEMcd)/obsBd
-sum3d<-sum(LZLCcd)/obsCd
-sum4d<-sum(LZMMcd)/obsDd
+# sum1d<-sum(LZSMcd)/obsAd
+# sum2d<-sum(LZEMcd)/obsBd
+# sum3d<-sum(LZLCcd)/obsCd
+# sum4d<-sum(LZMMcd)/obsDd
+d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1,1,1))
+d5$rtc.2<-d5$timeinterval-d5$rtc
+mean(d5$timeinterval)
+mean(d5$rtc.2)
+########### decriptive proof mean vs. lme
+proof_desc<-function(set){
+d5<-set
+#  d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1,1,1))
+#attach(d5)
 
-#lab1<-paste0("basis durchschnittliche targetlaenge=", round(meanch), " zeichen")
-#boxLZmn<-cbind(SM=LSAc,EM=LSBc,LC=LSCc,ISM=LSDc)
-#boxplot(boxLZmn,main="mean Lesezeit (ms)",xlab=lab1)
+#mean(d5$timeinterval[category==sm],na.rm=T)
+#sum(d5$category==sm)
+bar_df<-data.frame(1:8)
 
+m1<-mean(d5$timeinterval[group==sm],na.rm=T)
+m2<-mean(d5$timeinterval[group!=sm],na.rm=T)
+m3<-mean(d5$timeinterval[group==em],na.rm=T)
+m4<-mean(d5$timeinterval[group!=em],na.rm=T)
+m5<-mean(d5$timeinterval[group==lc],na.rm=T)
+m6<-mean(d5$timeinterval[group!=lc],na.rm=T)
+m7<-mean(d5$timeinterval[group==mm],na.rm=T)
+m8<-mean(d5$timeinterval[group!=mm],na.rm=T)
+m9<-rbind(cbind(m1,m2),cbind(m3,m4),cbind(m5,m6),cbind(m7,m8))
+#m9d<-rbind(cbind(m1,"SM"),cbind(m3,"EM"),cbind(m5,"LC"),cbind(m7,"MM"))
+m9
+m9c<-rbind(m1,m3,m5,m7)
+#m9cns<-c()
+#m9
+bar_df$RT[1:4]<-"timeinterval"
+bar_df$LZ[1:4]<-m9c
+
+m9ns<-c("sm","em","lc","mm")
+bar_df$group[1:4]<-m9ns
+
+#rownames(m9)<-m9ns
+#colnames(m9)<-c("A_mean_Group","A_mean_notGroup")
+#m9a<-m9
+d5$rtc.2<-d5$timeinterval+d5$rtc
+m1e<-mean(d5$rtc.2[group==sm],na.rm=T)
+m2<-mean(d5$rtc.2[group!=sm],na.rm=T)
+m3e<-mean(d5$rtc.2[group==em],na.rm=T)
+m4<-mean(d5$rtc.2[group!=em],na.rm=T)
+m5e<-mean(d5$rtc.2[group==lc],na.rm=T)
+m6<-mean(d5$rtc.2[group!=lc],na.rm=T)
+m7e<-mean(d5$rtc.2[group==mm],na.rm=T)
+m8<-mean(d5$rtc.2[group!=mm],na.rm=T)
+#m9<-rbind(cbind(m1,m2),cbind(m3,m4),cbind(m5,m6),cbind(m7,m8))
+#m9ns<-c("sm","em","lc","mm")
+#rownames(m9)<-m9ns
+#colnames(m9)<-c("B_mean_Group)","B_mean_notGroup")
+#m9b<-m9
+m9e<-rbind(m1e,m3e,m5e,m7e)
+bar_df$RT[5:8]<-"rtc"
+bar_df$LZ[5:8]<-m9e
+bar_df$group[5:8]<-m9ns
+
+# meanch<-mean(dta$char)
+# lab1<-paste0("basis durchschnittliche targetlaenge=", round(meanch), " zeichen\n","sumup")
+# #boxLZmn<-cbind(SM=LSAc,EM=LSBc,LC=LSCc,ISM=LSDc)
+# barplot(m9b[,1],main="mean Lesezeit (ms)",xlab=lab1)
+# barplot(m9[,1],main="mean Lesezeit (ms)",xlab=lab1,add=T,col=2)
+# bardf<-data.frame(m9a,m9b,m9ns)
+
+#bar_df<-data.frame(m9ns)
+#bar_df$group<-m9ns
+#bardf$m9<-m9[,1]
+#bardf$m9b<-m9b[,1]
+#ggplot(data=bardf)
+#bardf$A_mean_Group
+#presi_df$term
+#ggplot(data=bar_df, mapping=aes(group,y=LZ,fill=RT)) 
+print(bar_df)
+print(unique(d5$group))
+p <- ggplot(data=bar_df,mapping=aes(x=group,y=LZ,fill=RT)) 
+p + geom_col(position = "dodge")
+}
+#bardf$m9<-1:10
+#ggplot(data=bardf)
+proof_desc(dta_setx(dta,c(0,1,1,0,em,lc),0,0,0))
+
+bar_df<-data.frame(1:8)
+bar_df[1:2,1:2]<-getmean(dta_rtc,c(0,0,0,1,lc,lc),1,1,0,1,ti)
+bar_df[[1:3]][3:8]<-1000
+bar_df[1:2,1:2]
+remove(bar_df)
+remove(d5)
+remove(m9)
+m10<-getmean(dta_rtc,c(0,0,0,1,lc,lc),1,1,0,1,ti)
+m11<-data.frame(m10)
+m11$LC
 #sum1<-sum(LZSM)/obsA
 #sum2<-sum(LZEM)/obsB
 #sum3<-sum(LZLC)/obsC
@@ -1261,19 +1336,19 @@ sum4d<-sum(LZMMcd)/obsDd
 
 
 #differenz zwischen kategorien
-difsmemd<-sum1d-sum2d
-difsmlcd<-sum1d-sum3d
-difsmmmd<-sum1d-sum4d
-difemlcd<-sum2d-sum3d
-difemmmd<-sum2d-sum4d
-diflcmmd<-sum3d-sum4d
-dfksmemd<-sum1d/sum2d
-
-
-mdLZAd<-median(LZSMcd)
-mdLZBd<-median(LZEMcd)
-mdLZCd<-median(LZLCcd)
-mdLZDd<-median(LZMMcd)
+# difsmemd<-sum1d-sum2d
+# difsmlcd<-sum1d-sum3d
+# difsmmmd<-sum1d-sum4d
+# difemlcd<-sum2d-sum3d
+# difemmmd<-sum2d-sum4d
+# diflcmmd<-sum3d-sum4d
+# dfksmemd<-sum1d/sum2d
+# 
+# 
+# mdLZAd<-median(LZSMcd)
+# mdLZBd<-median(LZEMcd)
+# mdLZCd<-median(LZLCcd)
+# mdLZDd<-median(LZMMcd)
 
 #differenzen median kategorien
 difsmemd<-mdLZAd-mdLZBd

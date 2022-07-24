@@ -1,7 +1,8 @@
 #12144.
 #20220405(08.13)
 # HUX2021 evaluation, v.2.0, on base of script 12371b.R
-###########################
+# v3.0, on base of V2.12144.R
+#############################
 # file keeping:
 # daten original:
 #src_o<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation/sprdata.csv")
@@ -11,13 +12,15 @@ src_d<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation
 #src_e<-("https://github.com/esteeschwarz/essais/raw/main/docs/hux2021/evaluation/1237b.R")
 ###########################
 ###########################
-
 library(lme4)
 #library(lmerTest)
 library(stringi)
 library(readr)
 library(clipr)
 library(ggplot2)
+
+shinydatascript<-function(set,input){
+  
 #1
 dta<-read.csv2(src_d)
 d1ns<-colnames(dta)
@@ -299,60 +302,14 @@ dta_setx<-function(set,chose,out,glt,ctrl){
     subset(set,group==g1|group==g2)
   }
 #######  
-  # ifelse(ctrl==1,set<-adcontrol(set,ti0,ticontrol,ti2),cat("no control group added")) #add control observation
-  #3
   ifelse(out==1,set1<-outl.fun.rtc(set),set1<-set)
-  
-  #1
   ifelse(ctrl==1,set2<-adcontrol(set1,ti0,ticontrol,ti2),set2<-set1)
   #2
   set3<-subset(set2,gilt==glt) #subset manuell gefiltert
-  
-  #sx6<-subset(dta,gilt==1)
-  #4,5
   ifelse(xo==1,return(dtatg(set3,t1,t2,t3,g1,g2)),
          return(dta_grx(dtatg(set3,t1,t2,t3,g1,g2),g1,g2)))
-  #sx7<-dta_grx(dtatg(dta,0,0,0,sm,em),sm,em)
-  #unique(sx7$category)
-  #wks. creates subsets for lmer test
 }
 # ###############
-# #check function dta_Setx
-#sx8<-dta_setx(dta_o,chose,1,1,1)
-sx9<-outl.fun.rtc(dta)
-# sx1<- setvsx(dta,sm,em) #wks. 9197 complete + 3xcontrol
-# unique( sx1$group) #alle gruppen vertreten
-# unique(sx1$category)  #sm, smvsem
-# unique(sx1$XvsGr)   #all groups
-# #chk
-# sx2<-dtatg(dta,0,0,0,sm,em) #wks. 
-# unique( sx2$group) #alle gruppen vertreten
-# unique(sx2$category)  #sm, smvsem
-# unique(sx2$XvsGr)   #all groups
-# #chk
-# sx3<-dta_grx(dta,sm,em) #wks.
-# unique( sx3$group) #alle gruppen vertreten
-# unique(sx3$category)  #sm, z-other: ursprüngliche benennung, keine modifikation
-# unique(sx3$XvsGr)   #all groups
-sx5<-adcontrol(dta_o,0,0,0)
-sx10<-subset(sx5,gilt==1)
-unique(sx5$category)
-#sx12<-dtatg(sx10,0,0,0,sm,em)
-#sx11<-dta_grx(dtatg(sx10,0,0,0,sm,em),sm,em)
-
-#sx13<-dta_setx(dta_o,chose,0,1)
-
-# #chk
-# sx4<-outl.fun.rtc(dta) #wks
-#############################
-
-#dtax<-dta_setx(dta,c(0,0,0,0,sm,sm),1)
-
-########12147.
-
-
-#dtax<-dta_setx(dta,-1,0,1,0,sm,em)
-#dtax<-dta_setx(dta,-1,0,1,0,sm,em)
 ##############
 createsets<-function(){
   ch1<-c(0,0,0,0,sm,em)
@@ -400,8 +357,8 @@ createsets<-function(){
   return(chosx)
 }
 ##########################
-setx<-createsets()
-setx[1,]
+#setx<-createsets()
+#setx[1,]
 #wks.
 #remove(setx)
 #ch1
@@ -416,42 +373,22 @@ getmean<-function(set,chose,out,glt,ctrl,flagall,rt){
   sxo<-chose[4]
   g1<-chose[5]
   g2<-chose[6]
-    #rtx
-  #chose[4]<-0
   mnset<-dta_setx(set,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),out,glt,ctrl)
-#  mnset<-dta_setx(dta,c(chose[1],chose[2],chose[3],chose[4],chose[5],chose[6]),1)
-  
  flag<-chose[5]
-#  set<-dta_setx(dta,c(0,0,0,1,em,vso),1)
   flagset<-mnset 
   checkvsall<-function(set){
     stri_detect(set$category,regex="vs")
   }
-  
-  #flag<-vso
-  #flagno<-vso
-  # flagset<-dta_setx(dta,chose,1)
-  # flagall<-1
-  # flag<-em
-  # rt<-ti
-  # chose<-c(0,0,0,1,sm,vso)
   # #######################
   c1<-flagset[with(flagset,category==flag),]
   length(c1$category)
   ifelse(rt==ti,mn1<-mean(c1$timeinterval),ifelse(rt==rtc,mn1<-mean(c1$rtc),mn1<-mean(c1$rtc.1)))
-  
-#    mean(c1$rtx,na.rm=T)
-  #c2<-flagset[with(flagset,checkvsall(flagset)),]
   checkvsall(flagset)
   ifelse(flagall==0,c2<-flagset[with(flagset,group==chose[6]),],
          c2<-flagset[with(flagset,checkvsall(flagset)),])
   ifelse(rt==ti,mn2<-mean(c2$timeinterval),ifelse(rt==rtc,mn2<-mean(c2$rtc),mn2<-mean(c2$rtc.1)))
   length(c2$category)
   c2$cat
-#  mn2<-mean(c2$rtx)
-  #length(c2$category)
-  #mean(c2$rtx,na.rm=T)
-  #mn1<-mean(c1$rtx,na.rm=T)
   mnx<-cbind(mn1,mn2)
   rownames(mnx)<-"mean"
   ifelse(flagall==1,col2<-"vsAll",col2<-chose[6])
@@ -459,62 +396,10 @@ getmean<-function(set,chose,out,glt,ctrl,flagall,rt){
   print(mnx)
   
   ###########################
-  #c1$category
-  
-  #chose<-c(0,0,0,0,em,vso)
- #flag<-chose[5]
-#flagset<-dta_setx(dta,c(0,0,0,1,em,vso),1)
-# flagno<-0
-# checkvsall(flagset)
-#   vso<-1
-# flagno<-1
-###
-#flag<-em
-#flag<-1
-#flagno<-0
-#flagset<-dta_setx(dta,c(0,0,0,1,em,vso),1)
-
-  
- #  dta<-mnset
-# 
-#    mn1<-mean(c1$timeinterval,na.rm=T)
-#   mnx<-cbind(mn1,mn2)
-#   rownames(mnx)<-"mean"
-#   ifelse(flagall==1,col2<-"vsAll",col2<-chose[6])
-#   colnames(mnx)<-c(chose[5],col2)
-#     print(mnx)
-#  #return(tb2)
 
 } ########## end getmean
 
-#dtax<-dta_setx(dta,0,0,0,0,sm,sm)
-#setx[1,]
-#mean(dta_rtc$rtc.1)
-######
-# getmean(dta_rtc,c(0,0,0,1,sm,lc),1,1,0,1,ti)
-#  m9<-dta_setx(dta_rtc,c(0,0,0,0,em,lc),1)[with(dta_setx(dta_rtc,c(0,0,0,0,em,lc),1),group!=lc),]
-#  mean(m9$rtc.1)
-#######
-# mean(dta_setx(dta,c(0,0,0,0,em,lc),1)[dta_setx(dta,c(0,0,0,0,em,lc),1)$group==em]$timeinterval)
-# mean(dta_setx(dta,c(0,0,0,0,em,lc),1))$timeinterval
-# #mean(dta_setx(dta,0,0,0,0,sm,sm)$timeinterval)
-#lmerun(lmef[[1]],dta,setx[1,],0)
-#lmerun(lmef[[1]],dta,c(0,0,0,0,sm,em),0)
-1952-1777
-1847-1663
-1810-1623
-# SM<-mean(dta_setx(dta,0,0,0,F,sm,sm)$timeinterval)
-# remove(SM)
-# t1<-0
-# t2<-0
-# t3<-0
-#break()
-
-
 #####################################################
-#smvso<-setvsx(dta2,sm)
-
-#lmerun(fmlRTCvs,dta,setx[7,]) #warum unterschiedliche variablenlängen? rtc
 ##############################################################
 create_lmeforms<-function(set,resp){
 lme2.form2.rnd<-paste0(         "(1|item)+(1|participant)")
@@ -549,9 +434,7 @@ return(lmeforms2)
 lmef<-create_lmeforms(dta,"ti")
 #lmef$
 lmef[[1]]
-summary(lmer(lmef[[1]],dta))
-#fmla3
-#set1[1]
+#summary(lmer(lmef[[1]],dta))
 ####################################################
 # lmerun<-function(form,set,t1,t2,t3,sm,g1,g2){
 # lmeset<-dta_setx(set,t1,t2,t3,sm,g1,g2)
@@ -563,21 +446,21 @@ cat<-"group"
 cat<-"category"
 start<-list()
 start$theta<-50
-start
+#start
 #############tail(flagset$timeinterval)
 #"In the model, we posited a main effect of Category (single vs. other) 
 #and random effects of Participant and Item, along with a random slope of Category by Participant"
 #function(set,chose,out,glt,ctrl,flagall,rt){
 #chose = c(target-1,target0,target1,XvsO,group1,group2)
 getmean(dta,c(0,0,0,1,sm,lc),1,1,1,0,ti)
-sum1<-lmer(timeinterval ~  1 + category  + (1|item) + (1 | tnid) + (1 + category : tnid),dtax,offset=rtc)
-sum1<-lmer(timeinterval ~  0 + category  + (1|char) +(1+item) + (1 + tnid) + (0 + category | tnid),dtax)
+#sum1<-lmer(timeinterval ~  1 + category  + (1|item) + (1 | tnid) + (1 + category : tnid),dtax,offset=rtc)
+#sum1<-lmer(timeinterval ~  0 + category  + (1|char) +(1+item) + (1 + tnid) + (0 + category | tnid),dtax)
 ###
-sum7<-lmer(timeinterval ~   group  + (1+char) +(0+item) + (1 + tnid) + (0+group | tnid),dtax)
+#sum7<-lmer(timeinterval ~   group  + (1+char) +(0+item) + (1 + tnid) + (0+group | tnid),dtax)
 ###
 #sum1<-lmer(timeinterval ~  0 + group  + (1| item) + (1 + tnid) + (1 + group | tnid),dtax,offset=rtc) 
-summary(sum1)
-write_clip(summary(sum1)$coefficients)
+#summary(sum1)
+#write_clip(summary(sum1)$coefficients)
 #lmer(timeinterval ~ XvsGr + (1 | char) + (1 | item) + (1 | participant) + (1 + XvsGr | participant),dta2) 
 
 #hier erwartbare signifikante abweichung an der controlgroup (10ms)
@@ -629,7 +512,7 @@ lmerun<-function(set,resp,gr,chose,out,glt,ctrl){
   return(sum1)
   
 }
-lmef$gr
+#lmef$gr
 # as.character(fmlRTCgr[3])
 #setx[7,4]==T
 #lmef[[1]][3]
@@ -660,41 +543,11 @@ lmef$gr
 # XvsGr3LC    1500.030   1158.029 3.256070e-06 1.2953304 0.9999763
 # XvsGr4MM    1476.138   1155.909 3.232291e-06 1.2770366 0.9999765
 # SM < EM <= MM < LC
-# function(set,resp,gr,chose,out,glt,ctrl)
-lmerun(dta,rtc,1,c(0,1,-1,1,sm,em),1,1,1)
-#lmerun()
-# (lmerun(lmef[[3]],dta,c(0,0,0,1,em,vso)))
-# (lmerun(lmef[[4]],dta,c(0,0,0,0,sm,lc)))
-# (lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
-# (lmerun(lmef[[1]],dta,c(0,0,0,0,sm,lc)))
-# 
-# sum1<-(lmerun(fmlTIgr,dta,c(0,0,1,1,sm,em)))
-# sum2<-summary(sum1)
-# length(sum2$coefficients[,1])<=2
-# #
-# setx[17,]<-c(0,0,1,T,sm,vso)
-# dtax<-outl.fun(dta,200)
-# #wks.
 # #########
 # #cross table
 # sum3<-list()
  set1<-"dta,ti,1,c(0,0,0,1,em,vso),0,1"
  set2<-"dta,ti,1,c(0,0,0,1,em,vso),1,0"
-# 
-# lme2<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
-# lme2
-# eval(parse(text=lme2)) #wks.
-# sum3<-data.frame("eins"=1:10,"zwei"=11:20)
-# sum3$eins
-# w<-"eins"
-# v<-"zwei"
-# o<-"drei"
-# sum(sum3[o])
-# sum3[o]<-31:40
-# sum3
-# sumset<-list()
-# lme1
-# sumset
 ######################################
 getviews<-function(set1,set2,sumset){
   lme1<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
@@ -716,11 +569,6 @@ getviews<-function(set1,set2,sumset){
 getviews_single<-function(set1,sumset){
   lme1<-paste0("lmerun(",set1,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
   lme11<-(eval(parse(text=lme1))) #wks.
-  #lme2<-paste0("lmerun(",set2,")") #set1 = "lmerun(dta,ti,1,c(0,0,0,1,em,vso),0)"
-  #lme22<-eval(parse(text=lme2)) #wks.
-  #sum1
-  #lmerun(set1)
-  #sum1$coefficients
   sum1<-summary(lme11)
   #sum2<-summary(lme22)
   sumset[[set1]]<-sum1$coefficients
@@ -728,12 +576,10 @@ getviews_single<-function(set1,sumset){
   return(sumset)
   #sumset
 }
-#sum5<-getviews_single(set1,sumset)
-#sum5
 #wks
 ###### now loop through sets
-length(setx[,1]) #1:length(setx[,1]
-setx[,1]
+#length(setx[,1]) #1:length(setx[,1]
+#setx[,1]
 parsethrough<-function(){
   for (k in 1:3){
   #for (k in 1:length(setx[,1])){
@@ -750,35 +596,6 @@ parsethrough<-function(){
   lmerun(dta,rtc,2,setx[k,],out,glt,ctrl)
 }
 }
-#parsethrough()
-# stri_flatten(  as.character(setx[1,]),collapse=",")
-# parse(setx[1,])
-# form1<-paste("dta,ti,1,",setx[1,],0)
-# form1
-# sumset<-list()
-# for (k in 1:length(setx[,1])){
-#   strflat<-stri_flatten(  as.character(setx[k,]),collapse=",")
-#   form1<-paste("dta,rtc,2,c(",strflat,")",1,1,1,sep = ",")
-#   form1
-#   sumset<-getviews_single(form1,sumset)
-#   cat("\nwrite set",k)
-# }
-#   view1
-#   (sumset)
-#   saveset<-sumset$
-#   is.data.frame(sum3)
-# save2<-as.data.frame(saveset,make.names=NA)
-#     write_csv2(saveset,"save_lmeviews.csv")
-#   lmerun(dta,ti,1,setx[k,],0)
-  # lmerun(dta,rtc,1,setx[k,],0)
-  # lmerun(dta,ti,2,setx[k,],0)
-  # lmerun(dta,rtc,2,setx[k,],0)
-  # lmerun(dta,ti,1,setx[k,],1)
-  # lmerun(dta,rtc,1,setx[k,],1)
-  # lmerun(dta,ti,2,setx[k,],1)
-  # lmerun(dta,rtc,2,setx[k,],1)
-#}
-
 #####wks.
 createview<-function(){
   lmerun(dta,"rtc",1,c(0,0,0,0,sm,em),1)
@@ -810,78 +627,6 @@ is.data.frame(sum4)
 #lmer sets
 #formula:
 #(target-1,target0,target+1,SMvsO=T/F,group1,group2)
-# lmerun(fmla1,dta,setx[1,])
-# tail(dta2)
-# lmer(fmla2,dta4)
-# lmerun(set1)
-# remove(dtatg)
-# #################### THIS
-# dta4<-getchars(dta2)
-# tail(dta4)
-# lmerun(fmla1,dta4,ch1)
-# 
-
-# ch8<-c(0,0,0,F,sm,em)
-# ch9<-c(0,0,0,F,sm,em)
-# ch10<-c(0,0,0,F,sm,em)
-# ch11<-c(0,0,0,F,sm,em)
-# 
-
-# summary(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
-# summary(lmerun(fmla1,dtap4,0,0,1,F,sm,em))  
-# x<-2
-# sum1<-(lmerun(fmla1,dtap4,chosx[x,]))  
-# sum2<-(lmerun(fmla1,dtap4,0,0,0,F,sm,em))  
-# sum2<-(lmerun(set1))  
-# sum1
-# sumcpt<-
-# set1<-(as.list(fmla1,dtap4,c(0,0,0),F,sm,em))
-# set1<-as.list(0)
-# set1[[1]]<-as.character(fmla1)
-# as.character(fmla1)
-# lmeform<-stri_join(set1[[1]][2],set1[[1]][1],set1[[1]][3],sep=" ")
-# lmeform
-# set1[[1]]<-lmeform 
-# set1[["data"]]<-dta4
-# #set1[["target"]][1]<-0
-# #set1[[3]]
-# set1[["chose"]][1]<-0
-# set1[["chose"]][2]<-0
-# set1[["chose"]][3]<-0
-# set1[["chose"]][4]<-F
-# set1[["chose"]][5]<-sm
-# set1[["chose"]][6]<-em
-# ### worked >
-# set1[["t1"]]<-0
-# set1[["t2"]]<-0
-# set1[["t3"]]<-0
-# #set1[["target"]][2]<-0
-# #set1[["target"]][3]<-0
-# set1[["SMvsO"]]<-F
-# set1[["g1"]]<-sm
-# set1[["g2"]]<-em
-# #set1[["group"]][1]<-sm
-# #set1[["group"]][2]<-em
-# set2<-as.data.frame(set1)
-# #as.formula(set1)
-# #write_delim(set1,"set1.xls")
-# write_csv2(set2,"set2.csv")
-# ##############
-# set2$data.X.1[9:11]<-mnresp1
-# set2$data.X.2[9:11]<-mnresp2
-# set2$data.X[7]<-"MEAN"
-# set2$data.X.1[8]<-""
-# set2$data.X.2[8]<-"MEAN"
-# set2$data.X[12]<-"COEF"
-# set2$data.X.2[8]<-"MEAN"
-# 
-# lmerun(set1)
-# set1[4]
-# sum2<-summary(lmerun(fmla1,dtap4,0,-1,1,F,sm,mm))
-# as.data.frame(sum1)
-# dif<-sum2$coefficients[1]-sum2$coefficients[2]
-# dif
-
 # #---------------------------------------------------------------------
 #12152.
 #try relate RTC to timinterval, coefficient
@@ -890,69 +635,17 @@ t1<-(rtc_0$rtc)
 t2<-(dta$timeinterval)
 tail(dta$timeinterval)
 #t1;t2
-lm1<-lm(t2~t1,dta)
-summary(lm1)
+#lm1<-lm(t2~t1,dta)
+#summary(lm1)
 #lmer(dta_rtc$timeinterval)
 dta1<-dta_setx(dta,c(0,0,0,1,sm,vso),1,1,1)
 lmeform_basic<-("timeinterval~group + (1|item)+(1|participant)+(1+group|participant)")
-sum2<-lmer(timeinterval ~ group + (1|char)+(1|item)+(1|participant)+(1+group|participant),dta1)
-sum1<-lmer(timeinterval ~ group + (1|item)+(1|participant)+(1+group|participant),dta1)
+#sum2<-lmer(timeinterval ~ group + (1|char)+(1|item)+(1|participant)+(1+group|participant),dta1)
+#sum1<-lmer(timeinterval ~ group + (1|item)+(1|participant)+(1+group|participant),dta1)
 # DIFF character dependency, largest at group EM and SM
-sum3<-summary(sum2)$coefficients-summary(sum1)$coefficients
-sum3["groupEM","Estimate"]
-# t8<-t1/t1[6]*t2
-# (1/t1)*t2
-# t1+t1[6]*-1
-# t1[6]*-1+t1[4]
-# t1
-# t2
-# t4<-t2-t1
-# t1[6]/t1[4]
-# tail(dta$char)
-# t1[3]/t1[4]
-# t2[3]/t2[4]
-# t4[3]/t4[4]*t3
-# t1[5]/t1[6]
-# t2[6]/t2[5]*300
-# t1[5]/t1[6]*t4[5]/t4[6]
-# t1[4]/t1[5]*t4[4]/t4[5]
-# t1[5]/t2[5]*t4[5]
-# sqrt(t4[6])*52
-# t4
-# t2
-# t4[5]/t4[6]
-# t5<-(t2+t1)
-# t6<-t5+t5[6]*-1
-# t6<-
+#sum3<-summary(sum2)$coefficients-summary(sum1)$coefficients
+#sum3["groupEM","Estimate"]
 ######
-sorted_out<-function(x){
-  rt8<-(rtc_0$rtc)/rtc_0$rtc[length(rtc_0$rtc)]*rtc_0$timeinterval
-####
-rtc.1<-rt8
-
-dta_rtc<-cbind(dta,rtc.1)
-tail(dta_rtc$rtc.1)
-
-tail(rt8)
-t8-t2
-t8<-t1/t1[6]*t2
-t8<-dta_rtc$rtc
-#######
-rt5<-dta$timeinterval+rtc_0$rtc
-rt6<-rt5+rt5[length(rt5)]*-1
-rt8<-rt6/2
-tail(rt8)
-
-
-sum1<-summary(lmerun(dta_rtc,ti,"gr",c(0,0,0,1,sm,vso),1,1,1))
-sum2<-summary(lmerun(dta_rtc,rtcc,"gr",c(1,0,0,1,sm,vso),1,1,1))
-sum1$coefficients-sum2$coefficients
-tail(rtc_0$rtc)
-rtc.1<-dta$timeinterval+rtc_0$rtc
-
-#rtc.1<-rtc_min
-#tail(rtc2)
-} #END aussortierte function
 #############################################################################
 #############################################################################
 #---C---  compare R/F results:-----------------------
@@ -1120,33 +813,6 @@ tb3<-getmean(dta2,c(0,0,0,0,sm,vso),0,0,0,1,ti)
 ##---D----------descriptive analysis
 
 
-# labx<-paste0("Basis durchschnittliche targetlaenge=", round(meanch), " zeichen")
-# toplab<-paste0("Lesezeiten (ms)",boxlabtgt)
-# 
-# boxLZ<-cbind(SM=LZSMc,EM=LZEMc,LC=LZLCc,ISM=LZMMc)
-# #boxplot(boxLZ,main="mean Lesezeiten gesamt in ms/106 zeichen fuer target+1",xlab="106 Zeichen = durchschnittliche Laenge target 0+1")
-# boxplot(boxLZ,main=toplab, xlab=labx,notch=TRUE,col=c(1,2,3,4))
-# 
-# toplab<-paste0("median Lesezeiten (ms)",boxlabtgt)
-# boxLZmd<-cbind(SM=mdLZA,EM=mdLZB,LC=mdLZC,ISM=mdLZD)
-# boxplot(boxLZmd,main=toplab,xlab=labx)
-# 
-# toplab<-paste0("mean Lesezeiten (ms)",boxlabtgt)
-# lab1<-paste0("basis durchschnittliche targetlaenge=", round(meanch), " zeichen")
-# boxLZmn<-cbind(SM=LSAc,EM=LSBc,LC=LSCc,ISM=LSDc)
-# boxplot(boxLZmn,main=toplab,xlab=lab1)
-
-
-#boxLZad<-cbind(SM=LZSMd,EM=LZEMd,LC=LZLCd,MM=LZMMd)
-#boxplot(boxLZad,main="Lesezeiten gesamt in ms/106 zeichen fuer target+1",xlab="106 Zeichen = durchschnittliche Laenge target 0+1",notch=TRUE,col=c(1,2,3,4))
-
-#plot median addierte lesezeiten
-#boxLZmd<-cbind(SM=mdspAd,EM=mdspBd,LC=mdspCd,ISM=mdspDd)
-#boxplot(boxLZmd,main="median Lesezeiten gesamt in ms/106 zeichen fuer target 0+1",xlab="106 Zeichen = durchschnittliche Laenge target 0+1")
-
-#boxspeed <- cbind(SM = speedSM, EM = speedEM,LC = speedLC, MM = speedMM)
-#boxplot(boxspeed,main="lesegeschwindigkeit chars/sec bei target 0+1")
-
 ##---END 2---
 
 #12373.
@@ -1156,93 +822,6 @@ tb3<-getmean(dta2,c(0,0,0,0,sm,vso),0,0,0,1,ti)
 
 #---D---- added LZ -----------
 #R/F der reihe nach > mean response
-# subdescr<-dta
-# subdescr<-subset(subdescr,subdescr$target==0)
-# #subsets kategorienvergleich
-# SSM<-subset(subdescr,group=="SM")
-# SEM<-subset(subdescr,group=="EM")
-# SLC<-subset(subdescr,group=="LC")
-# SMM<-subset(subdescr,group=="MM")
-# proofset1a<-length(SSM$lfd)+length(SEM$lfd)+length(SLC$lfd)+length(SMM$lfd)
-# 
-# 
-# 
-# 
-# meanRTrawAd<-mean(SSM$adinterval)
-# meanRTrawBd<-mean(SEM$adinterval)
-# meanRTrawCd<-mean(SLC$adinterval)
-# meanRTrawDd<-mean(SMM$adinterval)
-# #standardabweichung response
-# sdRTrawAd<-sd(SSM$adinterval)
-# sdRTrawBd<-sd(SEM$adinterval)
-# sdRTrawCd<-sd(SLC$adinterval)
-# sdRTrawDd<-sd(SMM$adinterval)
-
-#meanRTAd<-mean(SSMod$adinterval)
-#meanRTBd<-mean(SEMod$adinterval)
-#meanRTCd<-mean(SLCod$adinterval)
-#meanRTDd<-mean(SMMod$adinterval)
-#standardabweichung response
-#sdRTAd<-sd(SSMod$adinterval)
-#sdRTBd<-sd(SEMod$adinterval)
-#sdRTCd<-sd(SLCod$adinterval)
-#sdRTDd<-sd(SMMod$adinterval)
-
-# charsAd<-SSM$addchar
-# charsBd<-SEM$addchar
-# charsCd<-SLC$addchar
-# charsDd<-SMM$addchar
-
-# LZSMd<-(SSM$adinterval/charsAd)
-# LZEMd<-(SEM$adinterval/charsBd)
-# LZLCd<-(SLC$adinterval/charsCd)
-# LZMMd<-(SMM$adinterval/charsDd)
-
-#with discard outliers
-# LZSMd<-(LZSMd[LZSMd<LZouttopd&LZSMd>LZbottommodd])
-# LZEMd<-(LZEMd[LZEMd<LZouttopd&LZEMd>LZbottommodd])
-# LZLCd<-(LZLCd[LZLCd<LZouttopd&LZLCd>LZbottommodd])
-# LZMMd<-(LZMMd[LZMMd<LZouttopd&LZMMd>LZbottommodd])
-
-#check number obs. after discard outliers
-#proofset2d<-length(LZSMd)+length(LZEMd)+length(LZLCd)+length(LZMMd)
-
-#lesezeit / durchschnittliche targetphrase (zeichenabhängig)
-# LZSMcd<-LZSMd*meanchd
-# LZEMcd<-LZEMd*meanchd
-# LZLCcd<-LZLCd*meanchd
-# LZMMcd<-LZMMd*meanchd
-# #mean LZ
-# LSAcd<-mean(LZSMcd)
-# LSBcd<-mean(LZEMcd)
-# LSCcd<-mean(LZLCcd)
-# LSDcd<-mean(LZMMcd)
-# 
-# #sd LZ
-# LSAsdd<-sd(LZSMcd)
-# LSBsdd<-sd(LZEMcd)
-# LSCsdd<-sd(LZLCcd)
-# LSDsdd<-sd(LZMMcd)
-# boxLZsdd<-cbind(SM=LSAsdd,EM=LSBsdd,LC=LSCsdd,ISM=LSDsdd)
-# 
-
-#summe LZ abhängig von zeichenanzahl und anzahl observationen
-
-# obsAd<-length(SSM$adinterval)
-# obsBd<-length(SEM$adinterval)
-# obsCd<-length(SLC$adinterval)
-# obsDd<-length(SMM$adinterval)
-# 
-
-
-# sum1d<-sum(LZSMcd)/obsAd
-# sum2d<-sum(LZEMcd)/obsBd
-# sum3d<-sum(LZLCcd)/obsCd
-# sum4d<-sum(LZMMcd)/obsDd
-# d5<-(dta_setx(dta,c(0,0,0,1,lc,vso),1,1,1))
-# d5$rtc.2<-d5$timeinterval-d5$rtc
-# mean(d5$timeinterval)
-# mean(d5$rtc.2)
 ########### decriptive proof mean vs. lme
 proof_desc<-function(set){
 d5<-set
@@ -1272,10 +851,6 @@ bar_df$LZ[1:4]<-m9c
 
 m9ns<-c("sm","em","lc","mm")
 bar_df$group[1:4]<-m9ns
-
-#rownames(m9)<-m9ns
-#colnames(m9)<-c("A_mean_Group","A_mean_notGroup")
-#m9a<-m9
 d5$rtc.2<-d5$timeinterval+d5$rtc
 m1e<-mean(d5$rtc.2[group==sm],na.rm=T)
 m2<-mean(d5$rtc.2[group!=sm],na.rm=T)
@@ -1285,11 +860,6 @@ m5e<-mean(d5$rtc.2[group==lc],na.rm=T)
 m6<-mean(d5$rtc.2[group!=lc],na.rm=T)
 m7e<-mean(d5$rtc.2[group==mm],na.rm=T)
 m8<-mean(d5$rtc.2[group!=mm],na.rm=T)
-#m9<-rbind(cbind(m1,m2),cbind(m3,m4),cbind(m5,m6),cbind(m7,m8))
-#m9ns<-c("sm","em","lc","mm")
-#rownames(m9)<-m9ns
-#colnames(m9)<-c("B_mean_Group)","B_mean_notGroup")
-#m9b<-m9
 m9e<-rbind(m1e,m3e,m5e,m7e)
 bar_df$RT[5:8]<-"TI + rtc"
 bar_df$LZ[5:8]<-m9e
@@ -1316,85 +886,18 @@ bar_df$LZ[9:12]<-m9f
 
 m9ns<-c("sm","em","lc","mm")
 bar_df$group[9:12]<-m9ns
-
-
-# lab1<-paste0("basis durchschnittliche targetlaenge=", round(meanch), " zeichen\n","sumup")
-# #boxLZmn<-cbind(SM=LSAc,EM=LSBc,LC=LSCc,ISM=LSDc)
-# barplot(m9b[,1],main="mean Lesezeit (ms)",xlab=lab1)
-# barplot(m9[,1],main="mean Lesezeit (ms)",xlab=lab1,add=T,col=2)
-# bardf<-data.frame(m9a,m9b,m9ns)
-
-#bar_df<-data.frame(m9ns)
-#bar_df$group<-m9ns
-#bardf$m9<-m9[,1]
-#bardf$m9b<-m9b[,1]
-#ggplot(data=bardf)
-#bardf$A_mean_Group
-#presi_df$term
-#ggplot(data=bar_df, mapping=aes(group,y=LZ,fill=RT)) 
 print(bar_df)
 print(unique(d5$group))
 p <- ggplot(data=bar_df,mapping=aes(x=group,y=LZ,fill=RT)) 
 p + geom_col(position = "dodge")
 }
-#bardf$m9<-1:10
-#ggplot(data=bardf)
-proof_desc(dta_setx(dta,c(0,1,-1,1,sm,vso),1,1,1)) #nur mit glt=1 (x,1,x)
 
-bar_df<-data.frame(1:8)
-bar_df[1:2,1:2]<-getmean(dta_rtc,c(0,0,0,1,lc,lc),1,1,0,1,ti)
-bar_df[[1:3]][3:8]<-1000
-bar_df[1:2,1:2]
-remove(bar_df)
-remove(d5)
-remove(m9)
-m10<-getmean(dta_rtc,c(0,0,0,1,lc,lc),1,1,0,1,ti)
-m11<-data.frame(m10)
-m11$LC
-#sum1<-sum(LZSM)/obsA
-#sum2<-sum(LZEM)/obsB
-#sum3<-sum(LZLC)/obsC
-#sum4<-sum(LZMM)/obsD
-
-
-#differenz zwischen kategorien
-# difsmemd<-sum1d-sum2d
-# difsmlcd<-sum1d-sum3d
-# difsmmmd<-sum1d-sum4d
-# difemlcd<-sum2d-sum3d
-# difemmmd<-sum2d-sum4d
-# diflcmmd<-sum3d-sum4d
-# dfksmemd<-sum1d/sum2d
-# 
-# 
-# mdLZAd<-median(LZSMcd)
-# mdLZBd<-median(LZEMcd)
-# mdLZCd<-median(LZLCcd)
-# mdLZDd<-median(LZMMcd)
-
-#differenzen median kategorien
-# difsmemd<-mdLZAd-mdLZBd
-# difsmlcd<-mdLZAd-mdLZCd
-# difsmmmd<-mdLZAd-mdLZDd
-# difemlcd<-mdLZBd-mdLZCd
-# difemmmd<-mdLZBd-mdLZDd
-# diflcmmd<-mdLZCd-mdLZDd
-# dfksmemd<-sum1d/sum2d
-# 
-# boxlabtgt<-" addiert target 0+1"
-# labx<-paste0("bewertungsgrundlage durchschnittlich ", round(meanchd), " zeichen")
-# toplab<-paste0("Lesezeiten (ms)",boxlabtgt)
-# 
-# boxLZd<-cbind(SM=LZSMcd,EM=LZEMcd,LC=LZLCcd,ISM=LZMMcd)
-# #boxplot(boxLZ,main="mean Lesezeiten gesamt in ms/106 zeichen fuer target+1",xlab="106 Zeichen = durchschnittliche Laenge target 0+1")
-# boxplot(boxLZd,main=toplab, xlab=labx,notch=TRUE,col=c(1,2,3,4))
-# 
-# toplab<-paste0("median Lesezeiten (ms)",boxlabtgt)
-# boxLZmdd<-cbind(SM=mdLZAd,EM=mdLZBd,LC=mdLZCd,ISM=mdLZDd)
-# boxplot(boxLZmdd,main=toplab,xlab=labx)
-# 
-# toplab<-paste0("mean Lesezeiten (ms)",boxlabtgt)
-# lab1<-paste0("bewertungsgrundlage = durchschnittlich ", round(meanchd), " zeichen")
-# boxLZmnd<-cbind(SM=LSAcd,EM=LSBcd,LC=LSCcd,ISM=LSDcd)
-# boxplot(boxLZmnd,main=toplab,xlab=lab1)
+proof_desc(dta_setx(dta,c(input[1],input[2],input[3],1,sm,vso),input[4],input[5],input[6])) #nur mit glt=1 (x,1,x)
+}
+#proof_desc(dta_setx(dta,c(1,1,-1,1,sm,vso),1,1,1)) #nur mit glt=1 (x,1,x)
+#t-1,t0,t1,out,gilt,ctrl
+xplotobject<-shinydatascript(src_d,c(0,1,1,1,1,1))
+x
 ################
+
+#wrapped for implement view on shiny, discomment and remove bracket on last line

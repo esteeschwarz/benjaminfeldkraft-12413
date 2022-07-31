@@ -306,7 +306,7 @@ image(t(m1))
 m2<-as.matrix(rev(as.data.frame(m1)))
 image(m2)
 #chess
-a<-c(rep(rep(c(130,255),length.out=2),rep(c(255,130),length.out=2),length.out))
+a<-c(rep(rep(c(130,255),length.out=2),rep(c(255,130),length.out=2),length.out=2))
 a<-c(rep(rep(c(130,255),4),rep(c(255,130),4),length.out=64))
 a<-rep(c(130,255),4)
 b<-rep(c(255,130),4)

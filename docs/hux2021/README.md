@@ -11,4 +11,4 @@ sync essai / develop new stimuli
 #### 12032.public
 poster improvisation
 #### 12047.
-view alternate poster [here.](https://ada-sub.rotefadenbuecher.de/skool/public/poster/hux2021/) 
+view alternate poster [here.](https://school.dh-index.org/public/poster/hux2021/) 

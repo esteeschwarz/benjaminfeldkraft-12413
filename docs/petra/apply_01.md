@@ -2,7 +2,7 @@
 ###### 20220507 / stephan schwarz
 ## short work probe
 
-<link rel="stylesheet" type="text/css" href="https://ada-sub.rotefadenbuecher.de/skool/public/pr/assets/style_md.css">
+<link rel="stylesheet" type="text/css" href="https://school.dh-index.org/public/pr/assets/style_md.css">
 
 
 <h6><a onclick="printcat(20220512)" style="cursor:pointer;">(output keynotes on single page html)</a></h6>
@@ -27,7 +27,7 @@ hhh
 
 ### some findings:
 
-<iframe src="https://ada-sub.rotefadenbuecher.de/skool/public/pr/2022-05-12/petra_codes.html" width="80%" style="border:2px solid black;"></iframe>
+<iframe src="https://school.dh-index.org/public/pr/2022-05-12/petra_codes.html" width="80%" style="border:2px solid black;"></iframe>
 
 ###### Q: MAXQDA, sentiment analysis essai of amazon reviews
 hhh
